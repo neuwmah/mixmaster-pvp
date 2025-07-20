@@ -1,0 +1,36 @@
+:root {
+
+  /* font sizes */
+  --font-size-title: 3.2rem;
+  --font-size-subtitle: 2.4rem;
+  --font-size-big: 1.8rem;
+  --font-size-base: 1.6rem;
+  --font-size-small: 1.4rem;
+  --font-size-min: 1.2rem;
+
+  /* line heights */
+  --line-height-title: 160%;
+  --line-height-subtitle: 160%;
+  --line-height-big: 160%;
+  --line-height-base: 160%;
+  --line-height-small: 160%;
+  --line-height-min: 160%;
+    
+  /* brand colors */
+  --primary-1: #FFB900;
+  --primary-2: #F80A02;
+  --primary-3: #AD2011;
+
+  /* personal colors */
+  --personal: #AE81FF;
+
+  /* default colors */
+  --white: #FFFFFF;
+  --black: #000000;
+  --gray-0: #242424;
+  --gray-1: #363636;
+  --gray-2: #515151;
+  --gray-3: #707070;
+  --gray-4: #CCCCCC;
+  --gray-5: #F1F1F1;
+}

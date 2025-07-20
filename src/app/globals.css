@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@import "./style/variables.css";
+@import "./style/buttons.css";
+@import "./style/base.css";
+@import "./style/carousels.css";
