@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 
 import { useMobile } from '@/app/hooks/checkMobile';
 
-const newsItems = [
+const newsData = [
   { id: 1, title: 'Lorem ipsum dolor sit', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', link: '#' },
   { id: 2, title: 'Consectetur adipiscing', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', link: '#' },
   { id: 3, title: 'Sed do eiusmod tempor', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', link: '#' },
@@ -46,7 +46,7 @@ const News: React.FC = () => {
             pagination={{ clickable: true }}
             navigation
           >
-            {newsItems.map(item => (
+            {newsData.map(item => (
               <SwiperSlide key={item.id}>
                 <Link className="flex flex-col items-center duration-250 text-(--white) hover:no-underline group" href={item.link}>
                   <div className="w-full overflow-hidden rounded-xl flex flex-col items-center bg-(--gray-0)">
