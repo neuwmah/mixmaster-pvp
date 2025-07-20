@@ -19,7 +19,7 @@ const FAQ: React.FC = () => {
       <div className="container flex flex-col items-center">
 
         <h1 className="title text-center">
-          FAQ
+          FAQ 💬
         </h1>
 
         <p className="text text-base text-white text-center mt-6">

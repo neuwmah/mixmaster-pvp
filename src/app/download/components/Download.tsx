@@ -17,12 +17,12 @@ const Download: React.FC = () => {
       <div className="container flex flex-col items-center">
 
         <h1 className="title text-center">
-          Download
+          Download 💻
         </h1>
 
         <p className="text-base text-white text-center mt-6">
           Our server is currently in beta testing. <br/>
-          You can report any bugs you find. <br/>
+          You can report any bugs if you find. <br/>
           <span className="text-(--gray-3)">(we will be looking anyway) 👀</span> <br/>
         </p>
 

@@ -5,8 +5,8 @@ const menusData = [
   { id: 1, title: 'Download 💻', url: '/download' },
   { id: 2, title: 'How to Play 🎮', url: '/how-to-play' },
   { id: 3, title: 'Ranking ⭐', url: '/ranking' },
-  { id: 4, title: 'Siege Affair 🔪', url: '/siege-affair' },
-  { id: 5, title: 'Store ❔', url: '/free' },
+  { id: 4, title: 'Siege Affair 🏰', url: '/siege-affair' },
+  { id: 5, title: 'Store ❔', url: '/shop' },
 ];
 
 const Menus: React.FC = () => {
