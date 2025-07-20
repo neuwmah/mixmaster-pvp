@@ -13,7 +13,7 @@ const menusData = [
 
 const MenuMobile: React.FC<{ active?: boolean; closeMenuMobile?: () => void }> = ({ active, closeMenuMobile }) => {
   return (
-    <div className={`menu-mobile flex h-full gap-12 fixed top-0 left-0 w-full h-full group pointer-events-none [.-active]:pointer-events-auto ${active ? '-active pointer-events-auto' : ''}`}>
+    <div className={`menu-mobile flex h-full gap-12 fixed top-0 left-0 w-full h-full pointer-events-none group [.-active]:pointer-events-auto ${active ? '-active pointer-events-auto' : ''}`}>
       
       <ul className="menu-body bg-black w-full max-w-lg duration-400 -translate-x-full border-r-1 border-r-(--gray-0) z-1 group-[.-active]:translate-x-0 transition-transform">
         <div className="menu-header flex items-center h-[80px] px-[5vw]">
@@ -40,7 +40,10 @@ const MenuMobile: React.FC<{ active?: boolean; closeMenuMobile?: () => void }> =
         </li>
       </ul>
 
-      <div className="menu-overlay absolute top-0 left-0 w-full h-full duration-400 bg-[rgba(0,0,0,.7)] opacity-0 group-[.-active]:opacity-100" onClick={closeMenuMobile}></div>
+      <div
+        className="menu-overlay absolute top-0 left-0 w-full h-full duration-400 bg-[rgba(0,0,0,.7)] opacity-0 group-[.-active]:opacity-100"
+        onClick={closeMenuMobile}
+      ></div>
 
     </div>
   );

@@ -11,13 +11,13 @@ import 'swiper/css/pagination';
 import { useMobile } from '@/app/hooks/checkMobile';
 
 const newsData = [
-  { id: 1, title: 'Lorem ipsum dolor sit', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', link: '#' },
-  { id: 2, title: 'Consectetur adipiscing', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', link: '#' },
-  { id: 3, title: 'Sed do eiusmod tempor', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', link: '#' },
-  { id: 4, title: 'Incididunt ut labore', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', link: '#' },
-  { id: 5, title: 'Ut enim ad minim veniam', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', link: '#' },
-  { id: 6, title: 'Quis nostrud exercitation', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', link: '#' },
-  { id: 7, title: 'Sed do eiusmod tempor', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', link: '#' },
+  { id: 1, title: 'Lorem ipsum dolor sit', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', url: '/changelog/1' },
+  { id: 2, title: 'Consectetur adipiscing', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', url: '/changelog/2' },
+  { id: 3, title: 'Sed do eiusmod tempor', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', url: '/changelog/3' },
+  { id: 4, title: 'Incididunt ut labore', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', url: '/changelog/4' },
+  { id: 5, title: 'Ut enim ad minim veniam', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', url: '/changelog/5' },
+  { id: 6, title: 'Quis nostrud exercitation', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', url: '/changelog/6' },
+  { id: 7, title: 'Sed do eiusmod tempor', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', url: '/changelog/7' },
 ];
 
 const News: React.FC = () => {
@@ -48,7 +48,7 @@ const News: React.FC = () => {
           >
             {newsData.map(item => (
               <SwiperSlide key={item.id}>
-                <Link className="flex flex-col items-center duration-250 text-(--white) hover:no-underline group" href={item.link}>
+                <Link className="flex flex-col items-center duration-250 text-(--white) hover:no-underline group" href={item.url}>
                   <div className="w-full overflow-hidden rounded-xl flex flex-col items-center bg-(--gray-0)">
 
                     {item.image_src && (

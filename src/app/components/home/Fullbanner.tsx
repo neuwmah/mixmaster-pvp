@@ -6,7 +6,9 @@ import Logo from '../header/Logo';
 const Fullbanner: React.FC = () => {
   return (
     <section className="section-fullbanner section relative h-200 m-0 bg-gradient-to-b from-black to-(--gray-0)">
-      <img className="absolute object-cover w-full h-full opacity-16" src="/assets/images/waves.gif"></img>
+      <img 
+        className="absolute object-cover w-full h-full opacity-8" src="/assets/images/waves.gif" 
+      />
       <div className="container relative flex-col items-center justify-center z-1">
         
         <div className="logo-mm mb-6">
