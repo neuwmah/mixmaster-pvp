@@ -26,8 +26,8 @@ const Download: React.FC = () => {
           <span className="text-(--gray-3)">(we will be looking anyway) 👀</span> <br/>
         </p>
 
-        <Link className="button-main mt-12" href={fileData.url}>
-          Click Here!
+        <Link className="button-orange mt-12" href={fileData.url}>
+          Click to Download
         </Link>
 
       </div>

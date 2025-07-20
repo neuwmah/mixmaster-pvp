@@ -21,9 +21,9 @@ const MenuMobile: React.FC<{ active?: boolean; closeMenuMobile?: () => void }> =
         </div>
 
         {menusData.map(item => (
-          <li key={item.id} className="menu-link flex">
+          <li className="menu-link flex" key={item.id}>
             <Link 
-              className="link flex items-center w-full text-white px-[5vw] h-[64px] bg-(--gray-0) border-t-1 border-t-(--gray-1)" 
+              className="link flex items-center w-full text-base text-white px-[5vw] h-[64px] bg-(--gray-0) border-t-1 border-t-(--gray-1)" 
               onClick={closeMenuMobile}
               href={item.url}
             >
@@ -33,7 +33,7 @@ const MenuMobile: React.FC<{ active?: boolean; closeMenuMobile?: () => void }> =
         ))}
         <li className="menu-link flex">
           <Link 
-            className="link flex items-center w-full text-white px-[5vw] h-[64px] border-t-1 border-t-(--gray-1)" 
+            className="link flex items-center w-full text-base text-white px-[5vw] h-[64px] border-t-1 border-t-(--gray-1)" 
             onClick={closeMenuMobile}
             href="/account"
           >

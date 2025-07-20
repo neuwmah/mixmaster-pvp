@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -10,18 +10,18 @@ import 'swiper/css/pagination';
 
 import { useMobile } from '@/app/hooks/checkMobile';
 
-const newsData = [
-  { id: 1, title: 'Lorem ipsum dolor sit', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', url: '/changelog/1' },
-  { id: 2, title: 'Consectetur adipiscing', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', url: '/changelog/2' },
-  { id: 3, title: 'Sed do eiusmod tempor', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', url: '/changelog/3' },
-  { id: 4, title: 'Incididunt ut labore', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', url: '/changelog/4' },
-  { id: 5, title: 'Ut enim ad minim veniam', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', url: '/changelog/5' },
-  { id: 6, title: 'Quis nostrud exercitation', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', url: '/changelog/6' },
-  { id: 7, title: 'Sed do eiusmod tempor', image_src: '/assets/images/devnotes.webp', date: '07/20/2025', url: '/changelog/7' },
-];
+import { changelogData } from '@/app/changelog/data';
 
 const News: React.FC = () => {
   const mobile = useMobile();
+  const [enoughSlides, setEnoughSlides] = useState(false);
+
+  useEffect(() => {
+    setEnoughSlides(mobile
+      ? changelogData.length > 1 
+      : changelogData.length > 4
+    );
+  }, []);
 
   return (
     <section className="section-news section">
@@ -31,11 +31,21 @@ const News: React.FC = () => {
           Changelog
         </h3>
 
-        <p className="text-base text-white text-center max-w-120 mt-8">
+        <p className="text-base text-white text-center max-w-120 mt-6">
           Last updated at 07/20/2025
         </p>
 
-        <div className={`w-full mt-16 relative mb-[54px] ${mobile ? "px-[48px]" : "px-[64px]"}`}>
+        <div className={`
+          w-full mt-12 relative
+          ${enoughSlides 
+            ? "mb-[48px]" 
+            : ""
+          }
+          ${mobile 
+            ? "px-[48px]" 
+            : "px-[64px]"
+          }`
+        }>
           <Swiper
             className="swiper-static swiper-fade-4"
             spaceBetween={mobile ? 16 : 24}
@@ -46,10 +56,10 @@ const News: React.FC = () => {
             pagination={{ clickable: true }}
             navigation
           >
-            {newsData.map(item => (
-              <SwiperSlide key={item.id}>
-                <Link className="flex flex-col items-center duration-250 text-(--white) hover:no-underline group" href={item.url}>
-                  <div className="w-full overflow-hidden rounded-xl flex flex-col items-center bg-(--gray-0)">
+            {changelogData.map(item => (
+              <SwiperSlide key={item.slug}>
+                <Link className="flex flex-col items-center duration-250 text-(--white) hover:no-underline border-1 border-black hover:border-(--gray-2) group" href={`/changelog/${item.slug}`}>
+                  <div className="w-full overflow-hidden flex flex-col items-center bg-(--gray-0)">
 
                     {item.image_src && (
                       <img
@@ -60,7 +70,7 @@ const News: React.FC = () => {
                     )}
 
                     <div className="w-full flex flex-col items-start p-8">
-                      <p className="text-base group-hover:underline">{item.title}</p>
+                      <p className="text-base font-medium">{item.title}</p>
                       <span className="text-xs no-underline mt-2 text-(--gray-4)">{item.date}</span>
                     </div>
 

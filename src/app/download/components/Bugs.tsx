@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const Bugs: React.FC = () => {
   return (
-    <section className="section-bugs section py-[64px] bg-(--gray-0)">
+    <section className="section-bugs section bg-(--gray-0) py-[48px] sm:py-[64px]">
       <div className="container flex flex-col items-center">
 
         <h1 className="title text-center">
@@ -11,7 +11,7 @@ const Bugs: React.FC = () => {
         </h1>
 
         <p className="text-base text-white text-center mt-6">
-          Contact us via <Link className="text-(--personal) hover:underline" href="#">Discord</Link>.
+          Contact us via <Link className="text-(--discord) hover:underline" href="#">Discord</Link>.
         </p>
 
       </div>

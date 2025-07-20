@@ -12,12 +12,12 @@ export default function ShopPage() {
           </h1>
 
           <p className="text-base text-white w-full mt-6">
-            We don't sell anything. <br/>
-            Theres no game advantages you can buy with cash in this server. <br/>
-            But you can still help us with a donate.
+            No! We don't sell anything. <br/>
+            Theres no game advantages you can buy with cash in this server.
           </p>
 
           <p className="text-base text-white w-full mt-6">
+            But you can still help us with a donate. <br/>
             All donates goes to game server host payment. <br/>
             You can see monthly achieve progress below.
           </p>
@@ -38,8 +38,8 @@ export default function ShopPage() {
             When you donate you are just helping the project.
           </strong>
 
-          <Link className="button-main mt-12" href="#">
-            Donate 💕
+          <Link className="button-purple mt-12" href="#">
+            Click to Donate
           </Link>
 
         </div>

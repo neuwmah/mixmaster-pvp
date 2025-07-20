@@ -7,25 +7,9 @@
   --text-base--line-height: var(--line-height-base);
 }
 
-html {
-  font-size: 62.5%;
-}
-
-body {
-  color: var(--gray-1);
-  background: var(--black);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-a,
-button {
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
-}
-
 .title {
-  font-size: var(--font-size-title);
-  line-height: var(--line-height-big);
+  font-size: var(--font-size-subtitle);
+  line-height: var(--line-height-subtitle);
   color: var(--white);
   font-weight: 700;
 }
@@ -49,4 +33,7 @@ button {
   overflow: hidden;
 }
 
-.section:not(.m-0) { margin: 6.4rem 0 }
+.section:not(.m-0) { margin: 4.8rem 0 }
+@media (min-width: 768px) {
+  .section:not(.m-0) { margin: 6.4rem 0 }
+}

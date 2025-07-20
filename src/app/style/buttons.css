@@ -1,5 +1,7 @@
 /* default buttons */
-.button-main,
+.button-red,
+.button-orange,
+.button-purple,
 .button-secondary {
   height: 4.8rem;
   padding: 0 2.4rem;
@@ -14,17 +16,43 @@
   transition: color .25s, border .25s, background-color .25s;
 }
 
-/* main button */
-.button-main {
-  color: var(--personal);
-  border: .1rem solid var(--personal);
-}
-.button-main:hover {
+/* red background button */
+.button-red {
   color: var(--white);
-  background: var(--personal);
+  background: var(--primary-red-1);
+  border: .1rem solid var(--primary-red-1);
+}
+.button-red:hover {
+  color: var(--white);
+  background: var(--primary-red-2);
+  border: .1rem solid var(--primary-red-2);
 }
 
-/* secondary button */
+/* orange background button */
+.button-orange {
+  color: var(--white);
+  background: var(--primary-orange-1);
+  border: .1rem solid var(--primary-orange-1);
+}
+.button-orange:hover {
+  color: var(--white);
+  background: var(--primary-orange-2);
+  border: .1rem solid var(--primary-orange-2);
+}
+
+/* purple background button */
+.button-purple {
+  color: var(--white);
+  background: var(--primary-purple-1);
+  border: .1rem solid var(--primary-purple-1);
+}
+.button-purple:hover {
+  color: var(--white);
+  background: var(--primary-purple-2);
+  border: .1rem solid var(--primary-purple-2);
+}
+
+/* no background white text button */
 .button-secondary {
   color: var(--white);
   border: .1rem solid var(--white);

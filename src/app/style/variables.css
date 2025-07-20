@@ -17,9 +17,13 @@
   --line-height-min: 160%;
     
   /* brand colors */
-  --primary-1: #FFB900;
-  --primary-2: #F80A02;
-  --primary-3: #AD2011;
+  --primary-red-1: #FD1814;
+  --primary-red-2: #bb120f;
+  --primary-orange-1: #EC8926;
+  --primary-orange-2: #ce7721;
+  --primary-purple-1: #AE81FF;
+  --primary-purple-2: #815fbe;
+  --discord: #7289DA;
 
   /* personal colors */
   --personal: #AE81FF;

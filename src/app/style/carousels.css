@@ -12,7 +12,7 @@
   transition: 0 !important;
   bottom: initial !important;
   transform: none !important;
-  top: calc(100% + 5.4rem - 8px) !important;
+  top: calc(100% + 4.8rem - 8px) !important;
 }
 
 /* pagination bullets */
