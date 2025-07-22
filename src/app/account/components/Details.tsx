@@ -21,7 +21,7 @@ export default function Details({ user }: DetailsProps) {
           Check your account details below.
         </p>
 
-        <div className="text-base grid mt-12 w-full max-w-[1000px] gap-4 grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(3,1fr)]">
+        <div className="text-sm grid mt-12 w-full max-w-[1000px] gap-4 grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(3,1fr)]">
           <div className={cardsClass}>
             <p>ACCOUNT ID</p>
             <strong>{user.id}</strong>

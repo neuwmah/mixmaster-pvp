@@ -32,7 +32,7 @@ export const userData = [
       {
         id: 2,
         name: 'Bye',
-        class: 'Diit',
+        class: 'Ditt',
         status: 'off',
         level: 1,
         map: 'Magirita',
