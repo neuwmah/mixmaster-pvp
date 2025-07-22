@@ -6,9 +6,9 @@ const Bugs: React.FC = () => {
     <section className="section-bugs section bg-(--gray-0) py-[48px] sm:py-[64px]">
       <div className="container flex flex-col items-center">
 
-        <h1 className="title text-center">
+        <h2 className="title text-center">
           Having trouble? ⛔
-        </h1>
+        </h2>
 
         <p className="text-base text-white text-center mt-6">
           Contact us via <Link className="text-(--discord) hover:underline" href="#">Discord</Link>.

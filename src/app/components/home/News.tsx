@@ -27,9 +27,9 @@ const News: React.FC = () => {
     <section className="section-news section">
       <div className="container flex-col items-center">
 
-        <h3 className="title">
+        <h2 className="title">
           Changelog
-        </h3>
+        </h2>
 
         <p className="text-base text-white text-center max-w-120 mt-6">
           Last updated at 07/20/2025

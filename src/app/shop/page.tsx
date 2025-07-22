@@ -38,7 +38,7 @@ export default function ShopPage() {
             When you donate you are just helping the project.
           </strong>
 
-          <Link className="button-purple mt-12" href="#">
+          <Link className="button-orange mt-12" href="#">
             Click to Donate
           </Link>
 

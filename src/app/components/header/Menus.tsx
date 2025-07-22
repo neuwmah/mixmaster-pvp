@@ -14,7 +14,7 @@ const Menus: React.FC = () => {
     <ul className="menus flex h-full gap-12 absolute top-[50%] left-[50%] translate-[-50%]">
       {menusData.map(item => (
         <li key={item.id} className="menu flex items-center">
-          <Link className="text-base link duration-250 text-white hover:text-(--personal)" href={item.url}>
+          <Link className={`text-base link duration-250 text-white hover:text-(--primary-1)`} href={item.url}>
             <p>{item.title}</p>
           </Link>
         </li>

@@ -15,9 +15,9 @@ const Fullbanner: React.FC = () => {
           <Logo height={128} />
         </div>
 
-        <h3 className="title text-white mb-6">
+        <h1 className="title text-white mb-6">
           MixMaster PVP
-        </h3>
+        </h1>
 
         <p className="text-base text-white text-center max-w-120">
           No grind. Log in and go fight.
