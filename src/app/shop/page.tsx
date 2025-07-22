@@ -25,7 +25,7 @@ export default function ShopPage() {
           <div className="progress-bar flex flex-col items-center w-full mt-12">
             <div className="bar flex relative w-full max-w-160">
               <div className="background w-full h-[4px] rounded-[1.6rem] bg-(--gray-1)"></div>
-              <div className={`progress absolute top-0 left-0 min-w-[1%] h-[4px] rounded-[1.6rem] bg-(--personal)`}></div>
+              <div className={`progress absolute top-0 left-0 min-w-[1%] h-[4px] rounded-[1.6rem] bg-(--primary-orange-1)`}></div>
             </div>
 
             <p className="text text-xs text-white mt-4">
