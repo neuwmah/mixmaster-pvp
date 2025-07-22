@@ -1,19 +1,21 @@
 import React from 'react';
+import { redirect } from 'next/navigation';
+
+import { User } from './type';
+import { userData } from './data';
+
+import Details from './components/Details';
+import Characters from './components/Characters';
 
 export default function AccountPage() {
+  const user: User | undefined = userData.find((p) => p.id === 833);
+  if (!user)
+    return redirect('/account/signup');
+
   return (
-    <section className="section-account section">
-      <div className="container">
-
-        <h1 className="title">
-          Account
-        </h1>
-
-        <div className="flex">
-          
-        </div>
-
-      </div>
-    </section>
+    <main>
+      <Details user={user} />
+      <Characters user={user} />
+    </main>
   );
 }
