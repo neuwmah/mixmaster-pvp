@@ -8,12 +8,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import { useMobile } from '@/app/hooks/checkMobile';
-
+import { checkMobile } from '@/hooks/mobile';
 import { changelogData } from '@/app/changelog/data';
 
 const News: React.FC = () => {
-  const mobile = useMobile();
+  const mobile = checkMobile();
   const [enoughSlides, setEnoughSlides] = useState(false);
 
   useEffect(() => {
@@ -58,7 +57,7 @@ const News: React.FC = () => {
           >
             {changelogData.map(item => (
               <SwiperSlide key={item.slug}>
-                <Link className="flex flex-col items-center duration-250 text-(--white) hover:no-underline border-1 border-black hover:border-(--gray-2) group" href={`/changelog/${item.slug}`}>
+                <Link className="flex flex-col items-center duration-250 text-(--white) hover:no-underline border-1 border-black hover:border-(--gray-1) group" href={`/changelog/${item.slug}`}>
                   <div className="w-full overflow-hidden flex flex-col items-center bg-(--gray-0)">
 
                     {item.image_src && (

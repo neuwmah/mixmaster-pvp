@@ -9,10 +9,14 @@ import {
   UserIcon
 } from '@heroicons/react/24/outline';
 
-import { useMobile } from '../../hooks/checkMobile';
+import { checkMobile } from '@/hooks/mobile';
 
-const Actions: React.FC<{ openMenuMobile?: () => void }> = ({ openMenuMobile }) => {
-  const mobile = useMobile();
+interface ActionsProps {
+  setMenuMobile: (value: boolean) => void;
+}
+
+const Actions: React.FC<ActionsProps> = ({ setMenuMobile }) => {
+  const mobile = checkMobile();
 
   return (
     <div className="actions flex items-center gap-8">
@@ -23,7 +27,7 @@ const Actions: React.FC<{ openMenuMobile?: () => void }> = ({ openMenuMobile }) 
         ? <button
           className="button cursor-pointer text-white duration-250 hover:text-(--primary-orange-1)"
           type="button"
-          onClick={openMenuMobile}
+          onClick={() => { setMenuMobile(true) }}
         >
           <Bars3Icon className="icon" />
         </button>

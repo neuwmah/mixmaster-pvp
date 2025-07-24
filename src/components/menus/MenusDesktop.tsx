@@ -1,18 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
 
-const menusData = [
-  { id: 1, title: 'Download 💻', url: '/download' },
-  { id: 2, title: 'How to Play 🎮', url: '/how-to-play' },
-  { id: 3, title: 'Ranking ⭐', url: '/ranking' },
-  { id: 4, title: 'Siege Affair 🏰', url: '/siege-affair' },
-  { id: 5, title: 'Store ❔', url: '/shop' },
-];
+import { Menu } from '@/types/menu';
 
-const Menus: React.FC = () => {
+interface MenusDesktopProps {
+  menus: Menu[];
+}
+
+const MenusDesktop: React.FC<MenusDesktopProps> = ({ menus }) => {
   return (
     <ul className="menus flex h-full gap-12 absolute top-[50%] left-[50%] translate-[-50%]">
-      {menusData.map(item => (
+      {menus.map((item: Menu) => (
         <li key={item.id} className="menu flex items-center">
           <Link className={`link text-base duration-250 text-white hover:text-(--primary-orange-1)`} href={item.url}>
             <p>{item.title}</p>
@@ -23,4 +21,4 @@ const Menus: React.FC = () => {
   );
 };
 
-export default Menus;
+export default MenusDesktop;

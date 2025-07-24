@@ -1,5 +1,5 @@
-import Fullbanner from './components/home/Fullbanner';
-import News from './components/home/News';
+import Fullbanner from '@/home/Fullbanner';
+import News from '@/home/News';
 
 export default function HomePage() {
   return (

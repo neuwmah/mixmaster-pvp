@@ -5,14 +5,12 @@
   --font-mono: var(--font-geist-mono);
   
   --text-title: var(--font-size-title);
-  --text-subtitle: var(--font-size-subtitle);
   --text-big: var(--font-size-big);
   --text-base: var(--font-size-base);
   --text-sm: var(--font-size-sm);
   --text-xs: var(--font-size-xs);
   
   --text-title--line-height: var(--line-height-title);
-  --text-subtitle--line-height: var(--line-height-subtitle);
   --text-big--line-height: var(--line-height-big);
   --text-base--line-height: var(--line-height-base);
   --text-sm--line-height: var(--line-height-sm);

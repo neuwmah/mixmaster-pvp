@@ -25,7 +25,7 @@ const FAQ: React.FC = () => {
           {faqData.map((item, i) => (
             <div
               key={item.id}
-              className={`faq w-full overflow-hidden flex flex-col border-1 border-(--gray-2) duration-250 hover:border-(--primary-orange-1) group ${active == i ? '-active' : ''}`}
+              className={`faq w-full overflow-hidden flex flex-col border-1 border-(--gray-1) duration-250 hover:border-(--primary-orange-1) group [.-active]:bg-black ${active == i ? '-active' : ''}`}
             >
 
               <button

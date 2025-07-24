@@ -16,7 +16,7 @@ const Castles: React.FC<CastlesProps> = ({ itemsClass, itemsTopClass }) => {
           <tr>
             <th className={itemsTopClass}>Castles</th>
             <th className={itemsTopClass}>Guild</th>
-            <th className={itemsTopClass}>Leader</th>
+            <th className={itemsTopClass}>Master</th>
           </tr>
         </thead>
         <tbody>
