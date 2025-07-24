@@ -25,10 +25,10 @@ const Fullbanner: React.FC = () => {
 
         <div className="flex gap-1 mt-12">
           <Link className="button-orange" href="/download">
-            Download
+            Download ⚔️
           </Link>
           <Link className="button-secondary" href="/account/signup">
-            Sign Up
+            Sign Up 👤
           </Link>
         </div>
 
