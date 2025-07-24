@@ -9,7 +9,7 @@ import {
   UserIcon
 } from '@heroicons/react/24/outline';
 
-import { checkMobile } from '@/hooks/mobile';
+import { checkMobile } from '@/hooks/checkMobile';
 
 interface ActionsProps {
   setMenuMobile: (value: boolean) => void;

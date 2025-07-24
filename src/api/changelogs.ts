@@ -1,9 +1,9 @@
-import { Menu } from '@/types/menu';
+import { Changelog } from '@/types/changelog';
 import createApiClient from '@/hooks/axios';
 
-const baseURL = `${process.env.API_URL}/menus`;
+const baseURL = `${process.env.API_URL}/changelog`;
 
-export async function getMenus(): Promise<Menu[]> {
+export async function getChangelogs(): Promise<Changelog[]> {
   const api = createApiClient(baseURL);
   try {
     const response = await api.get('/');

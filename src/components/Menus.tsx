@@ -1,12 +1,13 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 
-import { Menu } from '@/types/menu';
-import { checkMobile } from '@/hooks/mobile';
+import { checkMobile } from '@/hooks/checkMobile';
 
 import MenusMobile from './menus/MenusMobile';
 import MenusDesktop from './menus/MenusDesktop';
 import Actions from './header/Actions';
+
+import { Menu } from '@/types/menu';
 
 interface MenusProps {
   menus: Menu[];
