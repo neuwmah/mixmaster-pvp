@@ -21,7 +21,11 @@ export default async function ChangelogPage({ params }: Props) {
 
                 <p className="text-xs text-center mt-2 text-(--gray-4)">{post.date}</p>
 
-                <div className="text-base text-center text-white mt-12">{post.content}</div>
+                <div className="text-base text-left text-white mt-12">{post.content}</div>
+
+                {post.image_src && <img className="w-full mt-12 object-contain" src={post.image_src} alt={post.title} />}
+
+                {post.content2 && <div className="text-base text-left text-white mt-12">{post.content2}</div>}
 
               </div>
             </div>
