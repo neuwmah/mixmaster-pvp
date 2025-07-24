@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 /* variables definition */
-@import "./style/variables.css";
+@import "../style/variables.css";
 
 /* tailwind theme */
-@import "./style/theme.css";
+@import "../style/theme.css";
 
 /* tailwind helpers (with tailwind) */
-@import "./style/base.css";
+@import "../style/base.css";
 
 /* tailwind helpers (with css) */
-@import "./style/buttons.css";
-@import "./style/carousels.css";
+@import "../style/buttons.css";
+@import "../style/carousels.css";
