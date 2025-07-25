@@ -15,7 +15,7 @@ const News: React.FC = async () => {
           Changelog 💻
         </h2>
 
-        <p className="text-base text-white text-center max-w-120 mt-6">
+        <p className="text-xs text-center mt-2 text-(--gray-4)">
           Last updated at 07/20/2025
         </p>
 

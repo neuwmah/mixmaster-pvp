@@ -17,15 +17,15 @@ export default async function RankingPage() {
         <h1 className="title text-center w-full">
           Ranking ⭐
         </h1>
+
+        <p className="text-xs text-center mt-2 text-(--gray-4)">
+          Last updated at 07/20/2025
+        </p>
         
-        <div className="w-full flex flex-col mt-12 gap-y-12 max-w-[500px]">
+        <div className="flex w-full gap-x-[24px] gap-y-16 mt-12 sm:px-[64px] flex-col sm:flex-row">
           <Kills rankpvp={rankpvpData} />
           <Castles ranksa={ranksaData} />
         </div>
-
-        <p className="text-sm mt-12 text-right w-full max-w-[500px]">
-          Last updated at 07/23/2025
-        </p>
         
       </div>
     </section>

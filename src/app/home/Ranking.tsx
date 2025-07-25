@@ -14,7 +14,7 @@ const Ranking: React.FC = async () => {
     <section className="section-ranking section-home">
       <div className="container flex-col items-center">
         
-        <div className="flex w-full gap-x-[24px] gap-y-20 sm:px-[64px] flex-col sm:flex-row">
+        <div className="flex w-full gap-x-[24px] gap-y-16 sm:px-[64px] flex-col sm:flex-row">
           <Kills rankpvp={rankpvpData} />
           <Castles ranksa={ranksaData} />
         </div>

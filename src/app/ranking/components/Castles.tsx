@@ -16,6 +16,11 @@ const Castles: React.FC<CastlesProps> = ({ ranksa }) => {
       <h2 className="text-base font-bold">
         Siege Affair
       </h2>
+
+      <p className="text-sm mt-4">
+        Check top castles guild ranking below.
+      </p>
+
       <table className="table-fixed w-full border-collapse border border-white bg-black mt-6 text-left text-white text-sm">
         <thead>
           <tr>
