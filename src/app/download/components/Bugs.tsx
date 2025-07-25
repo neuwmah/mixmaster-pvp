@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const Bugs: React.FC = () => {
   return (
-    <section className="section-bugs section bg-(--gray-0) py-[48px] sm:py-[64px]">
+    <section className="section-bugs section bg-(--gray-0) py-[40px] sm:py-[64px]">
       <div className="container flex flex-col items-center">
 
         <h2 className="title text-center">

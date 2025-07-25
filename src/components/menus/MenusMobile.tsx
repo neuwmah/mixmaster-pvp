@@ -2,9 +2,9 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Menu } from '@/types/menu';
-
 import Logo from '@/components/header/Logo';
+
+import { Menu } from '@/types/menu';
 
 interface MenusMobileProps {
   menus: Menu[];

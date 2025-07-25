@@ -15,6 +15,6 @@
 }
 
 .section:not(.m-0) {
-  @apply my-20;
+  @apply my-16;
   @media (min-width: 768px) { @apply my-24 }
 }

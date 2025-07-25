@@ -29,7 +29,7 @@ export default async function ChangelogPage({ params }: ChangelogProps) {
                 </p>
 
                 {post.content1 &&
-                  <div className="text-base text-left text-white mt-12">
+                  <div className="text-base text-left text-white mt-12 mr-auto">
                     {post.content1}
                   </div>
                 }
@@ -39,7 +39,7 @@ export default async function ChangelogPage({ params }: ChangelogProps) {
                 }
 
                 {post.content2 &&
-                  <div className="text-base text-left text-white mt-12">
+                  <div className="text-base text-left text-white mt-12 mr-auto">
                     {post.content2}
                   </div>
                 }
