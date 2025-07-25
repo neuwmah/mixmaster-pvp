@@ -20,10 +20,61 @@ API_URL_1="https://123456789.mockapi.io/apipvp/v1"
 API_URL_2="https://123456789.mockapi.io/apipvp/v1"
 ```
 
+Schemas structure JSON:
+
+<details>
+  <summary>Menus</summary>
+
+  ```
+  id: number
+  title: string
+  url: string
+  created_at: string
+  ```
+</details>
+
+<details>
+  <summary>Changelog</summary>
+
+  ```
+  id: number
+  title: string
+  image_src: string
+  content1: string
+  content2: string
+  created_at: string
+  slug: string
+  ```
+</details>
+
+<details>
+  <summary>RankPVP</summary>
+
+  ```
+  id: number
+  kills: string
+  player: string
+  guild: string
+  created_at: string
+  ```
+</details>
+
+<details>
+  <summary>RankSA</summary>
+
+  ```
+  id: number
+  castles: string
+  master: string
+  guild: string
+  created_at: string
+  ```
+</details>
+
 &nbsp;
 
 ## ▶️ How to run?
 
 | Command       | Action                                    |
 | ------------- | ----------------------------------------- |
-| `npm run dev` | start staging on `http://localhost:3000/` |
+| `npm run dev` | start staging on [`http://localhost:3000/`](#) |
