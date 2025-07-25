@@ -10,11 +10,13 @@
   @apply flex mx-auto w-full h-full px-[5%] max-w-[1440px];
 }
 
-.section {
+.section,
+.section-home {
   @apply w-full overflow-hidden z-1 relative;
-}
-
-.section:not(.m-0) {
   @apply my-16;
   @media (min-width: 768px) { @apply my-24 }
+}
+
+.section-home {
+  @media (max-width: 767px) { @apply my-20 }
 }

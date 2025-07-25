@@ -31,7 +31,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs }) => {
     <div className={`
       carousel w-full mt-12 relative
       ${enoughSlides 
-        ? "mb-[48px]" 
+        ? "mb-[40px]" 
         : ""
       }
       ${mobile 
@@ -51,7 +51,10 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs }) => {
       >
         {changelogs.map((item: Changelog) => (
           <SwiperSlide key={item.slug}>
-            <Link className="flex flex-col items-center duration-250 text-(--white) hover:no-underline border-1 border-black hover:border-(--gray-1) group" href={`/changelog/${item.slug}`}>
+            <Link
+              className="flex flex-col items-center duration-250 text-(--white) hover:no-underline border-1 border-black hover:border-(--gray-1) group"
+              href={`/changelog/${item.slug}`}
+            >
               <div className="w-full overflow-hidden flex flex-col items-center bg-(--gray-0)">
 
                 {item.image_src && (
@@ -63,8 +66,12 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs }) => {
                 )}
 
                 <div className="w-full flex flex-col items-start p-8">
-                  <p className="text-base font-medium">{item.title}</p>
-                  <span className="text-xs no-underline mt-2 text-(--gray-4)">{item.created_at}</span>
+                  <p className="text-base font-medium">
+                    {item.title}
+                  </p>
+                  <span className="text-xs no-underline mt-2 text-(--gray-4)">
+                    {item.created_at}
+                  </span>
                 </div>
 
               </div>
