@@ -1,40 +1,49 @@
 import React from 'react';
 
+import { RankSA } from '@/types/ranksa';
+
 interface CastlesProps {
-  itemsClass: string;
-  itemsTopClass: string;
+  ranksa: RankSA[];
 }
 
-const Castles: React.FC<CastlesProps> = ({ itemsClass, itemsTopClass }) => {
+const Castles: React.FC<CastlesProps> = ({ ranksa }) => {
+  const killsDefault = 'border py-4 px-6 w-1/3'
+  const killsTop = 'border-(--gray-1) bg-(--gray-0)'
+  const killsDown = 'border-(--gray-0) text-(--gray-4)'
+
   return (
-    <div className="castles flex flex-col items-left mt-12 w-full max-w-[500px]">
+    <div className="castles flex flex-col items-left w-full max-w-full">
       <h2 className="text-base font-bold">
         Siege Affair
       </h2>
       <table className="table-fixed w-full border-collapse border border-white bg-black mt-6 text-left text-white text-sm">
         <thead>
           <tr>
-            <th className={itemsTopClass}>Castles</th>
-            <th className={itemsTopClass}>Guild</th>
-            <th className={itemsTopClass}>Master</th>
+            <th className={`${killsDefault} ${killsTop}`}>
+              Castles
+            </th>
+            <th className={`${killsDefault} ${killsTop}`}>
+              Guild
+            </th>
+            <th className={`${killsDefault} ${killsTop}`}>
+              Master
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className={itemsTopClass}>165</td>
-            <td className={itemsTopClass}>Guild 1</td>
-            <td className={itemsTopClass}>Itachi</td>
-          </tr>
-          <tr>
-            <td className={itemsClass}>152</td>
-            <td className={itemsClass}>Guild 2</td>
-            <td className={itemsClass}>Kabuto</td>
-          </tr>
-          <tr>
-            <td className={itemsClass}>140</td>
-            <td className={itemsClass}>Guild 3</td>
-            <td className={itemsClass}>Kakashi</td>
-          </tr>
+          {ranksa.map((rank: RankSA, i) => (
+            <tr key={rank.id}>
+              <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>
+                {rank.castles}
+              </td>
+              <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>
+                {rank.guild}
+              </td>
+              <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>
+                {rank.master}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

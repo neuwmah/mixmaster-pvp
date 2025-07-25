@@ -1,9 +1,10 @@
-import { Menu } from '@/types/menu';
+import { RankSA } from '@/types/ranksa';
 import createApiClient from '@/hooks/axios';
 
-const baseURL = `${process.env.API_URL_1}/menus`;
+const baseURL = `${process.env.API_URL_2}/ranksa`;
 
-export async function getMenus(): Promise<Menu[]> {
+// get top 3
+export async function getRankSA(): Promise<RankSA[]> {
   const api = createApiClient(baseURL);
   try {
     const response = await api.get('/');

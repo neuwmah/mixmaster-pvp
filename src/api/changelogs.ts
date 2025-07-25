@@ -1,7 +1,7 @@
 import { Changelog } from '@/types/changelog';
 import createApiClient from '@/hooks/axios';
 
-const baseURL = `${process.env.API_URL}/changelog`;
+const baseURL = `${process.env.API_URL_1}/changelog`;
 
 export async function getChangelogs(): Promise<Changelog[]> {
   const api = createApiClient(baseURL);

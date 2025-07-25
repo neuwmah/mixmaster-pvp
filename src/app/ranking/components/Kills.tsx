@@ -1,50 +1,49 @@
 import React from 'react';
 
+import { RankPVP } from '@/types/rankpvp';
+
 interface KillsProps {
-  itemsClass: string;
-  itemsTopClass: string;
+  rankpvp: RankPVP[];
 }
 
-const Kills: React.FC<KillsProps> = ({ itemsClass, itemsTopClass }) => {
+const Kills: React.FC<KillsProps> = ({ rankpvp }) => {
+  const killsDefault = 'border py-4 px-6 w-1/3'
+  const killsTop = 'border-(--gray-1) bg-(--gray-0)'
+  const killsDown = 'border-(--gray-0) text-(--gray-4)'
+
   return (
-    <div className="kills flex flex-col items-left mt-12 w-full max-w-[500px]">
+    <div className="kills flex flex-col items-left w-full max-w-full">
       <h2 className="text-base font-bold">
         PVP
       </h2>
       <table className="table-fixed w-full border-collapse border border-white bg-black mt-6 text-left text-white text-sm">
         <thead>
           <tr>
-            <th className={itemsTopClass}>Kills</th>
-            <th className={itemsTopClass}>Player</th>
-            <th className={itemsTopClass}>Guild</th>
+            <th className={`${killsDefault} ${killsTop}`}>
+              Kills
+            </th>
+            <th className={`${killsDefault} ${killsTop}`}>
+              Player
+            </th>
+            <th className={`${killsDefault} ${killsTop}`}>
+              Guild
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className={itemsTopClass}>165</td>
-            <td className={itemsTopClass}>Itachi</td>
-            <td className={`${itemsTopClass} text-[red]`}>Guild 1</td>
-          </tr>
-          <tr>
-            <td className={itemsTopClass}>152</td>
-            <td className={itemsTopClass}>Kabuto</td>
-            <td className={itemsTopClass}>Guild 2</td>
-          </tr>
-          <tr>
-            <td className={itemsTopClass}>140</td>
-            <td className={itemsTopClass}>Kakashi</td>
-            <td className={itemsTopClass}>Guild 3</td>
-          </tr>
-          <tr>
-            <td className={itemsClass}>139</td>
-            <td className={itemsClass}>Zabuza</td>
-            <td className={itemsClass}>Guild 2</td>
-          </tr>
-          <tr>
-            <td className={itemsClass}>116</td>
-            <td className={itemsClass}>Shino</td>
-            <td className={itemsClass}>Guild 1</td>
-          </tr>
+          {rankpvp.map((rank: RankPVP, i) => (
+            <tr key={rank.id}>
+              <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
+                {rank.kills}
+              </td>
+              <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
+                {rank.player}
+              </td>
+              <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
+                {rank.guild}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

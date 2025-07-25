@@ -1,9 +1,10 @@
-import { Menu } from '@/types/menu';
+import { RankPVP } from '@/types/rankpvp';
 import createApiClient from '@/hooks/axios';
 
-const baseURL = `${process.env.API_URL_1}/menus`;
+const baseURL = `${process.env.API_URL_2}/rankpvp`;
 
-export async function getMenus(): Promise<Menu[]> {
+// get top 5
+export async function getRankPVP(): Promise<RankPVP[]> {
   const api = createApiClient(baseURL);
   try {
     const response = await api.get('/');
