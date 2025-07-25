@@ -17,7 +17,7 @@ const Download: React.FC = () => {
       <div className="container flex flex-col items-center">
 
         <h1 className="title text-center">
-          Download 💻
+          Download ⚔️
         </h1>
 
         <p className="text-base text-white text-center mt-6">
