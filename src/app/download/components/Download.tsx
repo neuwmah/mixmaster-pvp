@@ -13,7 +13,7 @@ const fileData = {
 
 const Download: React.FC = () => {
   return (
-    <section className="section-download section">
+    <section className="section-download section section-p bg-gradient-to-b from-black to-(--gray-0) my-[0!important]">
       <div className="container flex flex-col items-center">
 
         <h1 className="title text-center">

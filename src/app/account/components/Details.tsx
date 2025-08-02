@@ -9,10 +9,10 @@ interface DetailsProps {
 }
 
 export default function Details({ user }: DetailsProps) {
-  const cardsClass = 'info text-ellipsis overflow-hidden min-w-0 p-8 bg-(--gray-0)';
+  const cardsClass = 'info text-ellipsis overflow-hidden min-w-0 p-8 border border-(--gray-0) bg-black';
   
   return (
-    <section className="section-details section">
+    <section className="section-details section section-p bg-gradient-to-b from-black bg-(--gray-0) py-[40px] mt-[0!important] sm:py-[64px]">
       <div className="container flex-col items-center">
 
         <h1 className="title">

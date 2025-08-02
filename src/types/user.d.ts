@@ -5,6 +5,7 @@ export type User = {
   username: string
   password: string
   email: string
+  phone: string
   online_points: number
   online_status: boolean
   online_time: number

@@ -20,3 +20,9 @@
 .section-home {
   @media (max-width: 767px) { @apply my-20 }
 }
+
+.section-p {
+  @apply my-0;
+  @apply py-16;
+  @media (min-width: 768px) { @apply py-24 }
+}

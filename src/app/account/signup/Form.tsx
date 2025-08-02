@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { createUser, loginUser } from '@/app/api/user';
+import { createUser, getUserByUsername } from '@/app/api/user';
+import { loginUser } from '@/app/api/account';
 
 export default function Form() {
   const [username, setUsername] = useState('');
@@ -10,36 +11,49 @@ export default function Form() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [sending, setSending] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
 
-  const handleCreate = async (event: React.FormEvent) => {
+  const handleSignup = async (event: React.FormEvent) => {
     event.preventDefault();
     setSending(true);
 
     try {
-      await createUser({ username, password, email });
-
-      try {
-        const response = await loginUser(username, password) as Response;
+      const user = await getUserByUsername(username);
+      if (!user) {
+        try {
+          await createUser({ username, password, email, phone });
   
-        if (response.ok) {
-          router.push('/account');
-          router.refresh();
-        } else {
-          console.log('handleCreate response error', response);
+          try {
+            const response = await loginUser(username, password) as Response;
+      
+            if (response.ok) {
+              router.push('/account');
+              router.refresh();
+            } else {
+              console.log('handleSignup response error', response);
+            }
+          } catch (error) {
+            console.error('handleSignup API loginUser error', error);
+          }
+        } catch (error) {
+          console.error('handleSignup API loginUser error', error);
         }
-      } catch (error) {
-        console.error('handleCreate token error', error);
+      } else {
+        setErrorMessage('Username unavailable.');
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 3000);
       }
     } catch (error) {
-      console.error('handleCreate API error', error);
+      console.log('handleSignup API getUserByUsername error', error)
     }
 
     setSending(false);
   };
 
   return (
-    <form onSubmit={handleCreate} className={`form flex flex-col items-center w-full mt-12 max-w-[320px] duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}>
+    <form onSubmit={handleSignup} className={`form flex flex-col items-center w-full mt-12 max-w-[320px] duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}>
       <div className="fields w-full grid gap-[1px] grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(1,1fr)]">
         <input
           className="bg-white text-xs text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem]"
@@ -85,6 +99,12 @@ export default function Form() {
       <button className="button-orange mt-12" type="submit" aria-label="Click to Sign Up">
         Call to Action
       </button>
+
+      {errorMessage && (
+        <p className="text-base text-white mt-12">
+          {errorMessage}
+        </p>
+      )}
     </form>
   )
 }

@@ -1,8 +1,9 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { loginUser } from '@/app/api/user';
+import { getUserByUsername } from '@/app/api/user';
+import { loginUser } from '@/app/api/account';
 
 export default function Form() {
   const [username, setUsername] = useState('');
@@ -11,13 +12,7 @@ export default function Form() {
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
 
-  useEffect(() => {
-    setTimeout(() => {
-      setErrorMessage('');
-    }, 3000);
-  }, [errorMessage]);
-
-  const handleLogin = async (event: React.FormEvent) => {
+  const handleSignin = async (event: React.FormEvent) => {
     event.preventDefault();
     setSending(true);
 
@@ -28,18 +23,21 @@ export default function Form() {
         router.push('/account');
         router.refresh();
       } else {
-        console.log('handleLogin response error', response);
+        console.log('handleSignin response error', response);
         setErrorMessage('User not found.');
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 3000);
       }
     } catch (error) {
-      console.error('handleLogin token error', error);
+      console.error('handleSignin token error', error);
     }
 
     setSending(false);
   };
 
   return (
-    <form onSubmit={handleLogin} className={`form flex flex-col items-center w-full mt-12 max-w-[320px] duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}>
+    <form onSubmit={handleSignin} className={`form flex flex-col items-center w-full mt-12 max-w-[320px] duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}>
       <div className="fields w-full grid gap-[1px] grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(1,1fr)]">
         <input
           className="bg-white text-xs text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem]"

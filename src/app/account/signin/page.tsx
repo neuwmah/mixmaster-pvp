@@ -5,7 +5,7 @@ import Form from './Form';
 
 export default async function SignInPage() {
   return (
-    <main>
+    <main className="flex flex-1 bg-gradient-to-b from-black to-(--gray-0) sm:items-center">
       <section className="section-signup section">
         <div className="container flex-col items-center">
 

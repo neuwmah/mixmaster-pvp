@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function ShopPage() {
   return (
-    <main>
+    <main className="flex flex-1 bg-gradient-to-b from-black to-(--gray-0) sm:items-center">
       <section className="section-shop section">
         <div className="container flex flex-col items-center text-left sm:text-center">
 

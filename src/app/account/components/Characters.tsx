@@ -10,7 +10,7 @@ export default function Characters({ user }: CharactersProps) {
   const cardsClass = 'info text-ellipsis overflow-hidden min-w-0 p-8 bg-(--black) relative';
   
   return (
-    <section className="section-characters section bg-(--gray-0) py-[40px] sm:py-[64px]">
+    <section className="section-characters section-p">
       <div className="container flex-col items-center">
 
         <h1 className="title">
