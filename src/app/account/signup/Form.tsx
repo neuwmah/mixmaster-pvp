@@ -2,38 +2,25 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { createUser } from '@/app/api/user';
+import { createUser, loginUser } from '@/app/api/user';
 
 export default function Form() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [sending, setSending] = useState(false);
   const router = useRouter();
 
   const handleCreate = async (event: React.FormEvent) => {
     event.preventDefault();
+    setSending(true);
 
     try {
-      await createUser({
-        created_at: new Date(),
-        characters: [],
-        username,
-        password,
-        email,
-        online_status: false,
-        online_time: 0,
-        online_points: 0,
-        last_connection_date: new Date(),
-        last_connection_ip: ""
-      });
+      await createUser({ username, password, email });
 
       try {
-        const response = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password }),
-        });
+        const response = await loginUser(username, password) as Response;
   
         if (response.ok) {
           router.push('/account');
@@ -47,10 +34,12 @@ export default function Form() {
     } catch (error) {
       console.error('handleCreate API error', error);
     }
+
+    setSending(false);
   };
 
   return (
-    <form onSubmit={handleCreate} className="form flex flex-col items-center w-full mt-12 max-w-[320px]">
+    <form onSubmit={handleCreate} className={`form flex flex-col items-center w-full mt-12 max-w-[320px] duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}>
       <div className="fields w-full grid gap-[1px] grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(1,1fr)]">
         <input
           className="bg-white text-xs text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem]"

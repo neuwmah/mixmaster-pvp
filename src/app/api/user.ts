@@ -27,8 +27,21 @@ export async function getUser(id: String): Promise<User | null> {
   }
 }
 
-export async function createUser(userData: Partial<User>): Promise<User | null> {
+export async function createUser(paramsData: Partial<User>): Promise<User | null> {
   const api = createApiClient(baseURL);
+  const date = new Date();
+
+  const userData = {
+    ...paramsData,
+    created_at: date,
+    characters: [],
+    online_status: false,
+    online_time: 0,
+    online_points: 0,
+    last_connection_date: date,
+    last_connection_ip: ""
+  }
+
   try {
     const response = await api.post('/', userData);
     
@@ -36,6 +49,34 @@ export async function createUser(userData: Partial<User>): Promise<User | null> 
   } catch (error) {
     console.error('createUser error', error);
     return null
+  }
+}
+
+export async function loginUser(username: string, password: string): Promise<Object> {
+  try {
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+
+    return response
+  } catch (error) {
+    console.error('loginUser error', error);
+    return {}
+  }
+}
+
+export async function logoutUser(): Promise<Boolean> {
+  try {
+    const response = await fetch('/api/auth/logout', {
+      method: 'POST',
+    });
+
+    return response.ok ? true : false
+  } catch (error) {
+    console.error('logoutUser error', error);
+    return false
   }
 }
 

@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   const user = await getUserByCredentials(username, password);
 
   if (!user) {
-    return NextResponse.json({ message: 'invalid credentials' }, { status: 401 });
+    return NextResponse.json({ message: 'user not found' }, { status: 401 });
   }
 
   const token = sign(
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     path: '/',
   });
 
-  return new NextResponse(JSON.stringify({ message: 'login success' }), {
+  return new NextResponse(JSON.stringify({ message: 'user found' }), {
     status: 200,
     headers: { 'Set-Cookie': serializedCookie },
   });
