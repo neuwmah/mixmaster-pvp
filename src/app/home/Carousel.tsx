@@ -70,7 +70,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs }) => {
                     {item.title}
                   </p>
                   <span className="text-xs no-underline mt-2 text-(--gray-4)">
-                    {item.created_at}
+                    {new Date(item.created_at).toLocaleDateString()}
                   </span>
                 </div>
 

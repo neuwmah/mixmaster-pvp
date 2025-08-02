@@ -1,7 +1,7 @@
 export interface RankPVP {
-  id: number;
-  kills: string;
-  player: string;
-  guild: string;
-  created_at: string;
+  id: string
+  created_at: Date
+  kills_count: number
+  character_id: string
+  guild_id: string
 }

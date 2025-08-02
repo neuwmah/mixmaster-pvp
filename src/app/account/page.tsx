@@ -1,21 +1,38 @@
 import React from 'react';
-import { redirect } from 'next/navigation';
 
-import { User } from './type';
-import { userData } from './data';
+import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
+import { verify } from 'jsonwebtoken';
+import { getUser } from '@/app/api/user';
 
 import Details from './components/Details';
 import Characters from './components/Characters';
 
-export default function AccountPage() {
-  const user: User | undefined = userData.find((p) => p.id === 833);
-  if (!user)
-    return redirect('/account/signup');
+const SECRET_KEY = process.env.JWT_SECRET || '123';
 
-  return (
-    <main>
-      <Details user={user} />
-      <Characters user={user} />
-    </main>
-  );
+export default async function AccountPage() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get('sessionToken')?.value;
+
+  if (!token)
+    return redirect('/account/signin')
+
+  try {
+    const decoded = verify(token, SECRET_KEY) as { userId: string };
+    const userId = decoded.userId;
+
+    const user = await getUser(userId);
+    return user
+      ? (
+          <main>
+            <Details user={user} />
+            <Characters user={user} />
+          </main>
+        ) 
+      : redirect('/account/signin')
+
+  } catch (error) {
+    console.error('invalid token', error);
+    return redirect('/account/signin')
+  }
 }

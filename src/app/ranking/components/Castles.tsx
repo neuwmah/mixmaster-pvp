@@ -39,13 +39,13 @@ const Castles: React.FC<CastlesProps> = ({ ranksa }) => {
           {ranksa.map((rank: RankSA, i) => (
             <tr key={rank.id}>
               <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>
-                {rank.castles}
+                {rank.castles_count}
               </td>
               <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>
-                {rank.guild}
+                {rank.guild_id}
               </td>
               <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>
-                {rank.master}
+                {rank.character_id}
               </td>
             </tr>
           ))}

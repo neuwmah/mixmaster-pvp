@@ -21,11 +21,11 @@ const FAQ: React.FC = () => {
           Frequent asked questions.
         </p>
 
-        <div className="items flex flex-col w-full gap-1 mt-12 max-w-[700px]">
+        <div className="items flex flex-col w-full gap-0 mt-12 max-w-[700px]">
           {faqData.map((item, i) => (
             <div
               key={item.id}
-              className={`faq w-full overflow-hidden flex flex-col border-1 border-(--gray-1) duration-250 hover:border-(--primary-orange-1) group [.-active]:bg-black ${active == i ? '-active' : ''}`}
+              className={`faq w-full overflow-hidden flex flex-col border-1 border-(--black) duration-250 hover:border-(--primary-orange-1) group [.-active]:bg-black ${active == i ? '-active' : ''}`}
             >
 
               <button

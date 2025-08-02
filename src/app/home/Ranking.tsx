@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { getRankPVP } from '@/api/rankpvp';
-import { getRankSA } from '@/api/ranksa';
+import { getRankPVP } from '@/app/api/rankpvp';
+import { getRankSA } from '@/app/api/ranksa';
 
 import Kills from '@/app/ranking/components/Kills';
 import Castles from '@/app/ranking/components/Castles';

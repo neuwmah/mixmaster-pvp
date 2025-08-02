@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getMenus } from '@/api/menus';
+import { getMenus } from '@/app/api/menu';
 
 import Logo from '@/components/header/Logo';
 import Menus from '@/components/Menus';

@@ -1,4 +1,4 @@
-import { getChangelogs } from '@/api/changelogs';
+import { getChangelogs } from '@/app/api/changelog';
 
 import { Changelog } from '@/types/changelog';
 
@@ -25,7 +25,7 @@ export default async function ChangelogPage({ params }: ChangelogProps) {
                 </h1>
 
                 <p className="text-xs text-center mt-2 text-(--gray-4)">
-                  {post.created_at}
+                  {new Date(post.created_at).toLocaleDateString()}
                 </p>
 
                 {post.content1 &&
@@ -35,11 +35,11 @@ export default async function ChangelogPage({ params }: ChangelogProps) {
                 }
 
                 {post.image_src &&
-                  <img className="w-full mt-12 object-contain" src={post.image_src} alt={post.title} />
+                  <img className="w-full mt-6 object-contain" src={post.image_src} alt={post.title} />
                 }
 
                 {post.content2 &&
-                  <div className="text-base text-left text-white mt-12 mr-auto">
+                  <div className="text-base text-left text-white mt-6 mr-auto">
                     {post.content2}
                   </div>
                 }

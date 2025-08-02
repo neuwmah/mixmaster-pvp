@@ -39,7 +39,7 @@ export default function ShopPage() {
           </strong>
 
           <Link className="button-orange mt-12" href="#">
-            Click to Donate
+            Call to Action
           </Link>
 
         </div>

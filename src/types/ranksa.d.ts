@@ -1,7 +1,7 @@
 export interface RankSA {
-  id: number;
-  castles: string;
-  master: string;
-  guild: string;
-  created_at: string;
+  id: string
+  created_at: Date
+  castles_count: number
+  character_id: string
+  guild_id: string
 }

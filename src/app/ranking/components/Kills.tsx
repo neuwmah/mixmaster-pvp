@@ -39,13 +39,13 @@ const Kills: React.FC<KillsProps> = ({ rankpvp }) => {
           {rankpvp.map((rank: RankPVP, i) => (
             <tr key={rank.id}>
               <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
-                {rank.kills}
+                {rank.kills_count}
               </td>
               <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
-                {rank.player}
+                {rank.character_id}
               </td>
               <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
-                {rank.guild}
+                {rank.guild_id}
               </td>
             </tr>
           ))}

@@ -1,6 +1,6 @@
 export interface Menu {
-  id: number;
-  title: string;
-  url: string;
-  created_at: string;
+  id: string
+  created_at: Date
+  title: string
+  url: string
 }

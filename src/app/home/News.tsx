@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getChangelogs } from '@/api/changelogs';
+import { getChangelogs } from '@/app/api/changelog';
 
 import Carousel from '@/app/home/Carousel';
 
