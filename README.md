@@ -11,7 +11,7 @@ Please update `.env` variables.
 | Name      | Value                                                | API endpoints         |
 | --------- | ---------------------------------------------------- | --------------------- |
 | API_URL_1 | https://**your-project-secret**.mockapi.io/apipvp/v1 | `/menus` `/changelog` |
-| API_URL_2 | https://**your-project-secret**.mockapi.io/apipvp/v1 | `/rankpvp` `ranksa`   |
+| API_URL_2 | https://**your-project-secret**.mockapi.io/apipvp/v1 | `/rankpvp` `/ranksa`  |
 
 Example `.env` file:
 
