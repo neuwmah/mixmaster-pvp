@@ -1,5 +1,5 @@
-import { Guild } from '@/types/guild';
 import createApiClient from '@/hooks/axios';
+import { Guild } from '@/types/guild';
 
 const baseURL = `${process.env.DATABASE_URL}/guilds`;
 

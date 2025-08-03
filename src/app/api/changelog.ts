@@ -1,5 +1,5 @@
-import { Changelog } from '@/types/changelog';
 import createApiClient from '@/hooks/axios';
+import { Changelog } from '@/types/changelog';
 
 const baseURL = `${process.env.DATABASE_URL}/changelog`;
 

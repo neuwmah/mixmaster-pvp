@@ -1,5 +1,5 @@
-import { User } from '@/types/user';
 import createApiClient from '@/hooks/axios';
+import { User } from '@/types/user';
 
 const baseURL = `${process.env.NEXT_PUBLIC_DATABASE_URL}/users`;
 

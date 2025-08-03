@@ -1,16 +1,24 @@
-import { RankPVP } from '@/types/rankpvp';
 import createApiClient from '@/hooks/axios';
+import { getCharacterById } from '@/app/api/character';
+import { RankPVP } from '@/types/rankpvp';
 
 const baseURL = `${process.env.DATABASE_URL}/rankpvp`;
 
-// get top 5
 export async function getRankPVP(): Promise<RankPVP[]> {
   const api = createApiClient(baseURL);
   try {
     const response = await api.get('/');
 
-    if (response.data)
-      return response.data
+    if (response.data) {
+      const result = await Promise.all(
+        response.data.map(async (rank: RankPVP) => ({
+          ...rank,
+          player: await getCharacterById(rank.player.id)
+        }))
+      );
+
+      return result;
+    }
 
     return []
   } catch (error) {

@@ -1,5 +1,5 @@
-import { Menu } from '@/types/menu';
 import createApiClient from '@/hooks/axios';
+import { Menu } from '@/types/menu';
 
 const baseURL = `${process.env.DATABASE_URL}/menus`;
 

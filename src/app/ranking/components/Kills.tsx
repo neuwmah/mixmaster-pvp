@@ -10,7 +10,8 @@ const Kills: React.FC<KillsProps> = ({ rankpvp }) => {
   const killsDefault = 'border py-4 px-6 w-1/3'
   const killsTop = 'border-(--gray-1) bg-(--gray-0)'
   const killsDown = 'border-(--gray-0) text-(--gray-4)'
-
+  const killsImage = 'border relative w-[43.4px]'
+  
   return (
     <div className="kills flex flex-col items-left w-full max-w-full">
       <h2 className="text-base font-bold">
@@ -24,6 +25,9 @@ const Kills: React.FC<KillsProps> = ({ rankpvp }) => {
       <table className="table-fixed w-full border-collapse border border-white bg-black mt-6 text-left text-white text-sm">
         <thead>
           <tr>
+            <th className={`${killsImage} ${killsTop}`}>
+              
+            </th>
             <th className={`${killsDefault} ${killsTop}`}>
               Kills
             </th>
@@ -36,16 +40,19 @@ const Kills: React.FC<KillsProps> = ({ rankpvp }) => {
           </tr>
         </thead>
         <tbody>
-          {rankpvp.map((rank: RankPVP, i) => (
+          {rankpvp.map(async (rank: RankPVP, i) => (
             <tr key={rank.id}>
-              <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
-                {rank.kills_count}
+              <td className={`${killsImage} ${i < 3 ? killsTop : killsDown}`}>
+                
               </td>
               <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
-                {rank.character_id}
+                {rank.player && rank.player.kills_count}
               </td>
               <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
-                {rank.guild_id}
+                {rank.player && rank.player.name}
+              </td>
+              <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
+                {rank.guild && rank.guild.name}
               </td>
             </tr>
           ))}
