@@ -12,8 +12,6 @@ import Details from '@/app/account/components/Details';
 import Characters from '@/app/account/components/Characters';
 import Admin from '@/app/account/components/Admin';
 
-import { Character } from '@/types/character';
-
 const SECRET_KEY = process.env.JWT_SECRET || '123';
 
 export default async function AccountPage() {
