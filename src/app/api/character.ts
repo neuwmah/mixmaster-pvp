@@ -1,3 +1,4 @@
+import { User } from '@/types/user';
 import { Character } from '@/types/character';
 import createApiClient from '@/hooks/axios';
 
@@ -30,5 +31,19 @@ export async function getCharacter(id: String): Promise<Character | null> {
   } catch (error) {
     console.error('getCharacter error', error);
     return null
+  }
+}
+
+export async function getCharactersByUser(user: User): Promise<Character[] | []> {
+  try {
+    const characters = await getCharacters();
+    const userCharacters = characters.filter(
+      (c) => c.user && c.user.id === user.id
+    );
+
+    return userCharacters
+  } catch (error) {
+    console.error('getCharactersByUser error', error);
+    return []
   }
 }

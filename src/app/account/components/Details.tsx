@@ -39,7 +39,7 @@ export default function Details({ user }: DetailsProps) {
           <div className={cardsClass}>
             <p>STATUS</p>
             <strong className={`${user.online_status ? 'text-[#00ce00]' : 'text-[#ff4f4f]'}`}>
-              {`${user.online_status ? 'online' : 'offline'}`}
+              {`${user.online_status ? 'Online' : 'Offline'}`}
             </strong>
           </div>
           <div className={cardsClass}>

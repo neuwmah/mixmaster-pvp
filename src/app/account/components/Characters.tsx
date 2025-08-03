@@ -13,9 +13,9 @@ export default function Characters({ user }: CharactersProps) {
     <section className="section-characters section">
       <div className="container flex-col items-center">
 
-        <h1 className="title">
+        <h2 className="title">
           Characters
-        </h1>
+        </h2>
 
         <p className="text-base mt-6">
           Check your account characters below.
@@ -26,24 +26,27 @@ export default function Characters({ user }: CharactersProps) {
             {user.characters.map(character => (
               <div key={character.id} className={cardsClass}>
                 <img 
-                  className="absolute top-0 left-0 object-cover w-full h-full opacity-[.7] filter-[brightness(.20)]"
+                  className="absolute top-0 left-0 object-cover w-full h-full opacity-[.7] filter-[brightness(.2)]"
                   src={`/assets/images/characters/${character.class.toLocaleLowerCase()}.jpg`}
                   alt={`char-${character.id}-${character.class}`}
                 />
                 <div className="relative z-1">
-                  <p>Class: <strong>{character.class}</strong></p>
+                  <p>Created at: <strong>{new Date(character.created_at).toLocaleDateString()}</strong></p>
+                  <p>User: <strong>{character.user.username}</strong></p>
                   <p>Name: <strong>{character.name}</strong></p>
-                  <p>Status: <strong>{character.status}</strong></p>
+                  <p>Class: <strong>{character.class.charAt(0).toUpperCase() + character.class.slice(1).toLowerCase()}</strong></p>
                   <p>Level: <strong>{character.level}</strong></p>
-                  <p>Map: <strong>{character.map}</strong></p>
+                  <p>Map: <strong>{character.map.charAt(0).toUpperCase() + character.map.slice(1).toLowerCase()}</strong></p>
                   <p>Exp: <strong>{character.exp}</strong></p>
                   <p>Gold: <strong>{character.gold}</strong></p>
                   <p>Energy: <strong>{character.attributes.energy}</strong></p>
                   <p>Agility: <strong>{character.attributes.agility}</strong></p>
                   <p>Accuracy: <strong>{character.attributes.accuracy}</strong></p>
                   <p>Luck: <strong>{character.attributes.luck}</strong></p>
-                  <p>Free points: <strong>{character.free_points}</strong></p>
-                  <p>Created at: <strong>{character.created_at}</strong></p>
+                  <p>Status: <strong>{character.online_status ? 'Online' : 'Offline'}</strong></p>
+                  <p>Online time: <strong>{character.online_time}</strong></p>
+                  <p>Last connection date: <strong>{new Date(character.last_connection_date).toLocaleDateString()}</strong></p>
+                  <p>Last connection IP: <strong>{character.last_connection_ip}</strong></p>
                 </div>
               </div>
             ))}
