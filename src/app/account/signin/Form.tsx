@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { getUserByUsername } from '@/app/api/user';
 import { loginUser } from '@/app/api/account';
 
 export default function Form() {

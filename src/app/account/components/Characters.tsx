@@ -10,7 +10,7 @@ export default function Characters({ user }: CharactersProps) {
   const cardsClass = 'info text-ellipsis overflow-hidden min-w-0 p-8 bg-(--black) relative';
   
   return (
-    <section className="section-characters section-p">
+    <section className="section-characters section">
       <div className="container flex-col items-center">
 
         <h1 className="title">
