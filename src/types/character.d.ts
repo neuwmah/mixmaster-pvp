@@ -15,6 +15,8 @@ export type Character = {
     accuracy: number
     luck: number
   }
+  kills_count: number
+  castles_count: number
   online_status: boolean
   online_time: number
   last_connection_date: Date
