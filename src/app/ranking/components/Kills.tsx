@@ -11,7 +11,7 @@ const Kills: React.FC<KillsProps> = ({ rankpvp }) => {
   const killsTop = 'border-(--gray-1) bg-(--gray-0)'
   const killsDown = 'border-(--gray-0) text-(--gray-4)'
   const killsImage = 'border relative w-[43.4px]'
-  
+
   return (
     <div className="kills flex flex-col items-left w-full max-w-full">
       <h2 className="text-base font-bold">
@@ -54,7 +54,7 @@ const Kills: React.FC<KillsProps> = ({ rankpvp }) => {
               <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
                 {rank.player && rank.player.name}
               </td>
-              <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
+              <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown} ${rank.player.name == rank.guild.master.name ? 'text-(--primary-red-2)' : ''}`}>
                 {rank.guild && rank.guild.name}
               </td>
               <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>

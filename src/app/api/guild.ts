@@ -1,4 +1,5 @@
 import createApiClient from '@/hooks/axios';
+import { getCharacter } from '@/app/api/character';
 import { Guild } from '@/types/guild';
 
 const baseURL = `${process.env.DATABASE_URL}/guilds`;
@@ -23,8 +24,12 @@ export async function getGuild(id: String): Promise<Guild | null> {
   try {
     const response = await api.get('/');
     
-    if (response.data)
-      return response.data
+    if (response.data && response.data.master) {
+      const res = response.data;
+      res.master = await getCharacter(response.data.master.id);
+
+      return res
+    }
 
     return null
   } catch (error) {

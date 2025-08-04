@@ -33,7 +33,7 @@ export default async function AccountPage() {
 
     const userData = {
       ...user,
-      characters: await getCharactersByUser({ id: user.id  })
+      characters: await getCharactersByUser({ id: user.id })
     }
 
     return (
