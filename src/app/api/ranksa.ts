@@ -1,5 +1,6 @@
 import createApiClient from '@/hooks/axios';
-import { getCharacterById } from '@/app/api/character';
+import { getGuild } from '@/app/api/guild';
+import { getCharacter } from '@/app/api/character';
 import { RankSA } from '@/types/ranksa';
 
 const baseURL = `${process.env.DATABASE_URL}/ranksa`;
@@ -13,11 +14,15 @@ export async function getRankSA(): Promise<RankSA[]> {
       const result = await Promise.all(
         response.data.map(async (rank: RankSA) => ({
           ...rank,
-          master: await getCharacterById(rank.master.id)
+          guild: await getGuild(rank.guild.id),
+          master: await getCharacter(rank.master.id)
         }))
       );
+      
+      let data: RankSA[] = result;
+      data.sort((a, b) => b.guild && b.guild.castles_count - a.guild.castles_count);
 
-      return result;
+      return data;
     }
 
     return []

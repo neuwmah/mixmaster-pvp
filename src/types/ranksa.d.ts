@@ -3,5 +3,4 @@ export interface RankSA {
   created_at: Date
   master: Character
   guild: Guild
-  castles_count: number
 }

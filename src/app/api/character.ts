@@ -19,7 +19,22 @@ export async function getCharacters(): Promise<Character[]> {
   }
 }
 
-export async function getCharactersByUser(user: User): Promise<Character[] | []> {
+export async function getCharacter(id: string): Promise<Character | null> {
+  const api = createApiClient(baseURL + `/${id}`);
+  try {
+    const response = await api.get('/');
+    
+    if (response.data)
+      return response.data
+
+    return null
+  } catch (error) {
+    console.error('getCharacter error', error);
+    return null
+  }
+}
+
+export async function getCharactersByUser(user: Partial<User>): Promise<Character[] | []> {
   try {
     const characters = await getCharacters();
     const userCharacters = characters.filter(
@@ -30,19 +45,5 @@ export async function getCharactersByUser(user: User): Promise<Character[] | []>
   } catch (error) {
     console.error('getCharactersByUser error', error);
     return []
-  }
-}
-
-export async function getCharacterById(id: string): Promise<Character | null> {
-  try {
-    const characters = await getCharacters();
-    const character = characters.filter(
-      (c) => c.id && c.id === id
-    )[0];
-
-    return character
-  } catch (error) {
-    console.error('getCharacterById error', error);
-    return null
   }
 }
