@@ -19,7 +19,7 @@ const Castles: React.FC<CastlesProps> = ({ ranksa }) => {
       </h2>
 
       <p className="text-sm mt-4">
-        Check top castles guild ranking below.
+        Check top castles guild ranking below (top 3).
       </p>
 
       <table className="table-fixed w-full border-collapse border border-white bg-black mt-6 text-left text-white text-sm">
@@ -29,13 +29,13 @@ const Castles: React.FC<CastlesProps> = ({ ranksa }) => {
               
             </th>
             <th className={`${killsDefault} ${killsTop}`}>
-              Castles
-            </th>
-            <th className={`${killsDefault} ${killsTop}`}>
               Guild
             </th>
             <th className={`${killsDefault} ${killsTop}`}>
               Master
+            </th>
+            <th className={`${killsDefault} ${killsTop}`}>
+              Castles
             </th>
           </tr>
         </thead>
@@ -46,13 +46,13 @@ const Castles: React.FC<CastlesProps> = ({ ranksa }) => {
                 
               </td>
               <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>
-                {rank.castles_count}
-              </td>
-              <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>
                 {rank.guild && rank.guild.name}
               </td>
               <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>
                 {rank.master && rank.master.name}
+              </td>
+              <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>
+                {rank.guild && rank.guild.castles_count}
               </td>
             </tr>
           ))}

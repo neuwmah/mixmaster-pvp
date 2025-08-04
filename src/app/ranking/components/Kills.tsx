@@ -19,7 +19,7 @@ const Kills: React.FC<KillsProps> = ({ rankpvp }) => {
       </h2>
 
       <p className="text-sm mt-4">
-        Check top kills player ranking below.
+        Check top kills player ranking below (top 5).
       </p>
 
       <table className="table-fixed w-full border-collapse border border-white bg-black mt-6 text-left text-white text-sm">
@@ -29,13 +29,13 @@ const Kills: React.FC<KillsProps> = ({ rankpvp }) => {
               
             </th>
             <th className={`${killsDefault} ${killsTop}`}>
-              Kills
-            </th>
-            <th className={`${killsDefault} ${killsTop}`}>
               Player
             </th>
             <th className={`${killsDefault} ${killsTop}`}>
               Guild
+            </th>
+            <th className={`${killsDefault} ${killsTop}`}>
+              Kills
             </th>
           </tr>
         </thead>
@@ -43,16 +43,22 @@ const Kills: React.FC<KillsProps> = ({ rankpvp }) => {
           {rankpvp.map(async (rank: RankPVP, i) => (
             <tr key={rank.id}>
               <td className={`${killsImage} ${i < 3 ? killsTop : killsDown}`}>
-                
-              </td>
-              <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
-                {rank.player && rank.player.kills_count}
+                {rank.player &&
+                  <img 
+                    className="absolute top-0 left-0 object-cover w-full h-full p-2 rounded-full"
+                    src={`/assets/images/characters/${rank.player.class.toLocaleLowerCase()}.jpg`} 
+                    alt={`${rank.player.name} class`}
+                  />
+                }
               </td>
               <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
                 {rank.player && rank.player.name}
               </td>
               <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
                 {rank.guild && rank.guild.name}
+              </td>
+              <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
+                {rank.player && rank.player.kills_count}
               </td>
             </tr>
           ))}
