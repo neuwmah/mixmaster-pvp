@@ -32,7 +32,6 @@ export default function Characters({ user }: CharactersProps) {
                 />
                 <div className="relative z-1">
                   <p>Created at: <strong>{new Date(character.created_at).toLocaleDateString()}</strong></p>
-                  <p>User: <strong>{character.user.username}</strong></p>
                   <p>Name: <strong>{character.name}</strong></p>
                   <p>Class: <strong>{character.class.charAt(0).toUpperCase() + character.class.slice(1).toLowerCase()}</strong></p>
                   <p>Level: <strong>{character.level}</strong></p>
