@@ -12,8 +12,14 @@ export async function getMenus(): Promise<Menu[]> {
       return response.data
 
     return []
-  } catch (error) {
-    console.error('getMenus error', error);
+  } catch (error: any) {
+    
+    if (error?.response?.status === 429) {
+      console.warn('getMenus: Rate limit exceeded (429)')
+      return []
+    }
+    
+    console.error('getMenus error', error)
     return []
   }
 }

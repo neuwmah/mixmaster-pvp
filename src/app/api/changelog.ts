@@ -12,8 +12,14 @@ export async function getChangelogs(): Promise<Changelog[]> {
       return response.data
 
     return []
-  } catch (error) {
-    console.error('getChangelogs error', error);
+  } catch (error: any) {
+    
+    if (error?.response?.status === 429) {
+      console.warn('getChangelogs: Rate limit exceeded (429)')
+      return []
+    }
+    
+    console.error('getChangelogs error', error)
     return []
   }
 }

@@ -32,8 +32,14 @@ export async function getGuild(id: String): Promise<Guild | null> {
     }
 
     return null
-  } catch (error) {
-    console.error('getGuild error', error);
+  } catch (error: any) {
+    
+    if (error?.response?.status === 429) {
+      console.warn('getGuild: Rate limit exceeded (429)')
+      return null
+    }
+    
+    console.error('getGuild error', error)
     return null
   }
 }

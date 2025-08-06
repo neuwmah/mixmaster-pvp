@@ -20,14 +20,20 @@ export async function getRankPVP(): Promise<RankPVP[]> {
       );
 
       let data: RankPVP[] = result;
-      data.sort((a, b) => b.player.kills_count - a.player.kills_count);
+      data.sort((a, b) => b.player && a.player && b.player.kills_count - a.player.kills_count);
 
-      return data;
+      return data
     }
 
     return []
-  } catch (error) {
-    console.error('getRankPVP error', error);
+  } catch (error: any) {
+    
+    if (error?.response?.status === 429) {
+      console.warn('getRankPVP: Rate limit exceeded (429)')
+      return []
+    }
+    
+    console.error('getRankPVP error', error)
     return []
   }
 }

@@ -20,14 +20,20 @@ export async function getRankSA(): Promise<RankSA[]> {
       );
       
       let data: RankSA[] = result;
-      data.sort((a, b) => b.guild && b.guild.castles_count - a.guild.castles_count);
+      data.sort((a, b) => b.guild && a.guild && b.guild.castles_count - a.guild.castles_count);
 
-      return data;
+      return data
     }
 
     return []
-  } catch (error) {
-    console.error('getRankSA error', error);
+  } catch (error: any) {
+    
+    if (error?.response?.status === 429) {
+      console.warn('getRankSA: Rate limit exceeded (429)')
+      return []
+    }
+    
+    console.error('getRankSA error', error)
     return []
   }
 }

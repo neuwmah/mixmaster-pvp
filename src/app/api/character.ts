@@ -28,8 +28,14 @@ export async function getCharacter(id: string): Promise<Character | null> {
       return response.data
 
     return null
-  } catch (error) {
-    console.error('getCharacter error', error);
+  } catch (error: any) {
+    
+    if (error?.response?.status === 429) {
+      console.warn('getCharacter: Rate limit exceeded (429)')
+      return null
+    }
+    
+    console.error('getCharacter error', error)
     return null
   }
 }
