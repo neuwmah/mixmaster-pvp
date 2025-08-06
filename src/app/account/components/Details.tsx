@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LogoutButton from './LogoutButton';
+import LogoutButton from '@/app/account/components/details/LogoutButton';
 
 import { User } from '@/types/user';
 
