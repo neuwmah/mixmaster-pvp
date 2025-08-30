@@ -7,7 +7,7 @@ import { characterRoutes } from './routes/characters.js'
 import { guildRoutes } from './routes/guilds.js'
 import { rankRoutes } from './routes/ranks.js'
 
-const app = Fastify({ logger: true })
+const app = Fastify({ logger: false })
 
 await app.register(cors, { origin: true })
 
@@ -25,4 +25,7 @@ await app.register(rankRoutes)
 
 const port = Number(process.env.PORT) || 3333
 app.listen({ port, host: '0.0.0.0' })
-  .then(() => console.log(`API localhost:${port}`))
+  .then(() => {
+    console.clear()
+    console.log(`    ▲ API localhost:${port}`)
+  })
