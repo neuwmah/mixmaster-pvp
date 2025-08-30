@@ -9,7 +9,7 @@ const Fullbanner: React.FC = () => {
       <div className="container relative flex-col items-center justify-center z-1">
         
         <div className="logo-mm mb-6">
-          <Logo height={128} />
+          <Logo height={128} full={true} />
         </div>
 
         <h1 className="title text-white mb-6">
