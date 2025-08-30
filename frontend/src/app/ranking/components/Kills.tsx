@@ -2,16 +2,20 @@ import React from 'react';
 
 import { RankPVP } from '@/types/rankpvp';
 
-interface KillsProps {
-  rankpvp: RankPVP[];
+interface Classes {
+  rankDefault: string;
+  rankTop: string;
+  rankDown: string;
+  rankImage: string;
 }
 
-const Kills: React.FC<KillsProps> = ({ rankpvp }) => {
-  const killsDefault = 'border py-4 px-6 w-1/3'
-  const killsTop = 'border-(--gray-1) bg-(--gray-0)'
-  const killsDown = 'border-(--gray-0) text-(--gray-4)'
-  const killsImage = 'border relative w-[43.4px]'
+interface KillsProps {
+  rankpvp: RankPVP[];
+  classes: Classes;
+}
 
+const Kills: React.FC<KillsProps> = ({ rankpvp, classes }) => {
+  const { rankDefault, rankTop, rankDown, rankImage } = classes
   return (
     <div className="kills flex flex-col items-left w-full max-w-full">
       <h2 className="text-base font-bold">
@@ -25,16 +29,16 @@ const Kills: React.FC<KillsProps> = ({ rankpvp }) => {
       <table className="table-fixed w-full border-collapse border border-white bg-black mt-6 text-left text-white text-sm">
         <thead>
           <tr>
-            <th className={`${killsImage} ${killsTop}`}>
+            <th className={`${rankImage} ${rankTop}`}>
               
             </th>
-            <th className={`${killsDefault} ${killsTop}`}>
+            <th className={`${rankDefault} ${rankTop}`}>
               Player
             </th>
-            <th className={`${killsDefault} ${killsTop}`}>
+            <th className={`${rankDefault} ${rankTop}`}>
               Guild
             </th>
-            <th className={`${killsDefault} ${killsTop}`}>
+            <th className={`${rankDefault} ${rankTop}`}>
               Kills
             </th>
           </tr>
@@ -42,7 +46,7 @@ const Kills: React.FC<KillsProps> = ({ rankpvp }) => {
         <tbody>
           {rankpvp.map((rank: RankPVP, i) => (
             <tr key={rank.id}>
-              <td className={`${killsImage} ${i < 3 ? killsTop : killsDown}`}>
+              <td className={`${rankImage} ${i < 3 ? rankTop : rankDown}`}>
                 {rank.player && (
                   <img
                     className="absolute top-0 left-0 object-cover w-full h-full p-2 rounded-full"
@@ -51,13 +55,13 @@ const Kills: React.FC<KillsProps> = ({ rankpvp }) => {
                   />
                 )}
               </td>
-              <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
+              <td className={`${rankDefault} ${i < 3 ? rankTop : rankDown}`}>
                 {rank.player?.name}
               </td>
-              <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown} ${rank.player && rank.guild?.master && rank.player.name === rank.guild.master.name ? 'text-(--primary-red-2)' : ''}`}>
+              <td className={`${rankDefault} ${i < 3 ? rankTop : rankDown} ${rank.player && rank.guild?.master && rank.player.name === rank.guild.master.name ? 'text-(--primary-red-2)' : ''}`}>
                 {rank.guild?.name ?? '-'}
               </td>
-              <td className={`${killsDefault} ${i < 3 ? killsTop : killsDown}`}>
+              <td className={`${rankDefault} ${i < 3 ? rankTop : rankDown}`}>
                 {rank.player?.kills_count ?? 0}
               </td>
             </tr>
