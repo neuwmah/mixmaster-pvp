@@ -7,7 +7,7 @@ import Carousel from '@/app/home/Carousel';
 const News: React.FC = async () => {
   const changelogsData = await getChangelogs();
   
-  return (
+  return changelogsData.length ? (
     <section className="section-news section-home">
       <div className="container flex-col items-center">
 
@@ -23,7 +23,7 @@ const News: React.FC = async () => {
 
       </div>
     </section>
-  );
+  ) : ``
 };
 
 export default News;

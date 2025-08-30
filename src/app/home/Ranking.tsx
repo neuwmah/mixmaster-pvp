@@ -10,7 +10,7 @@ const Ranking: React.FC = async () => {
   const rankpvpData = await getRankPVP();
   const ranksaData = await getRankSA();
   
-  return (
+  return rankpvpData.length || ranksaData.length ? (
     <section className="section-ranking section-home">
       <div className="container flex-col items-center">
         
@@ -21,7 +21,7 @@ const Ranking: React.FC = async () => {
 
       </div>
     </section>
-  );
+  ) : ``
 };
 
 export default Ranking;
