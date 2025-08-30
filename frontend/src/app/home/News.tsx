@@ -12,7 +12,7 @@ const News: React.FC = async () => {
       <div className="container flex-col items-center">
 
         <h2 className="title">
-          Changelog 💻
+          Changelog 📝
         </h2>
 
         <p className="text-xs text-center mt-2 text-(--gray-4)">

@@ -13,7 +13,7 @@ const Fullbanner: React.FC = () => {
         </div>
 
         <h1 className="title text-white mb-6">
-          MixMaster PVP
+          MixMaster PVP ⚔️
         </h1>
 
         <p className="text-base text-white text-center max-w-120">
@@ -22,7 +22,7 @@ const Fullbanner: React.FC = () => {
 
         <div className="flex gap-1 mt-12">
           <Link className="button-orange" href="/download">
-            Download ⚔️
+            Download 🎮
           </Link>
           <Link className="button-secondary" href="/account/signup">
             Sign Up 👤
