@@ -1,40 +1,34 @@
 import createApiClient from '@/hooks/axios';
 import { Changelog } from '@/types/changelog';
 
-const baseURL = `${process.env.DATABASE_URL}/changelog`;
+const baseEnv = process.env.BACKEND_API_URL;
 
 export async function getChangelogs(): Promise<Changelog[]> {
-  const api = createApiClient(baseURL);
+  if (!baseEnv) return [];
+  const api = createApiClient(baseEnv);
   try {
-    const response = await api.get('/');
-
-    if (response.data)
-      return response.data
-
-    return []
+    const { data, status } = await api.get('/changelog');
+    if (status !== 200 || !Array.isArray(data)) return [];
+    return data as Changelog[];
   } catch (error: any) {
-    
-    if (error?.response?.status === 429) {
-      console.warn('getChangelogs: Rate limit exceeded (429)')
-      return []
-    }
-    
-    console.error('getChangelogs error', error)
-    return []
+    const s = error?.response?.status;
+    if (s === 429 || s === 404) return [];
+    return [];
   }
 }
 
-export async function getChangelog(id: String): Promise<Changelog | null> {
-  const api = createApiClient(baseURL + `/${id}`);
+export async function getChangelog(id: string): Promise<Changelog | null> {
+  if (!baseEnv) return null;
+  const api = createApiClient(baseEnv);
   try {
-    const response = await api.get('/');
-    
-    if (response.data)
-      return response.data
-
-    return null
-  } catch (error) {
-    console.error('getChangelog error', error);
-    return null
+    const { data, status } = await api.get(`/changelog/${id}`);
+    if (status !== 200 || !data) return null;
+    if (data?.id) return data as Changelog;
+    if (data?.data?.id) return data.data as Changelog;
+    return null;
+  } catch (error: any) {
+    const s = error?.response?.status;
+    if (s === 429 || s === 404) return null;
+    return null;
   }
 }

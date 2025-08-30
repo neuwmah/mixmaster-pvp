@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                    String      @id @default(cuid())
+  created_at            DateTime    @default(now())
+  username              String      @unique
+  password              String
+  email                 String      @unique
+  phone                 String?     @unique
+  characters            Character[]
+  online_points         Int         @default(0)
+  online_status         Boolean     @default(false)
+  online_time           Int         @default(0)
+  last_connection_date  DateTime?   @db.Timestamptz(6)
+  last_connection_ip    String?     @db.VarChar(64)
+}
+
+model Guild {
+  id             String      @id @default(cuid())
+  created_at     DateTime    @default(now())
+  name           String      @unique
+  masterId       String?     @unique
+  master         Character?  @relation("GuildMaster", fields: [masterId], references: [id])
+  castles_count  Int         @default(0)
+  members_count  Int         @default(0)
+  members        Character[] @relation("GuildMembers")
+}
+
+model Character {
+  id                   String    @id @default(cuid())
+  created_at           DateTime  @default(now())
+  userId               String?
+  user                 User?     @relation(fields: [userId], references: [id])
+  guildId              String?
+  guild                Guild?    @relation("GuildMembers", fields: [guildId], references: [id])
+  masterOf             Guild?    @relation("GuildMaster")
+  name                 String
+  class                String
+  level                Int       @default(1)
+  map                  String    @default("city")
+  exp                  Int       @default(0)
+  gold                 Int       @default(0)
+  energy               Int       @default(0)
+  agility              Int       @default(0)
+  accuracy             Int       @default(0)
+  luck                 Int       @default(0)
+  kills_count          Int       @default(0)
+  castles_count        Int       @default(0)
+  online_status        Boolean   @default(false)
+  online_time          Int       @default(0)
+  last_connection_date DateTime? @db.Timestamptz(6)
+  last_connection_ip   String?   @db.VarChar(64)
+}
+
+model Changelog {
+  id         String   @id @default(cuid())
+  created_at DateTime @default(now())
+  slug       String   @unique
+  title      String
+  image_src  String?
+  content1   String?  @db.Text
+  content2   String?  @db.Text
+}
+
+model Menu {
+  id         String   @id @default(cuid())
+  created_at DateTime @default(now())
+  title      String
+  url        String
+}
+
+model Download {
+  id         String   @id @default(cuid())
+  created_at DateTime @default(now())
+  url        String
+}

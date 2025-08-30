@@ -1,0 +1,66 @@
+import { FastifyInstance } from 'fastify'
+import { z } from 'zod'
+import { prisma } from '../db.js'
+
+const bodySchema = z.object({
+  userId: z.string().optional(),
+  guildId: z.string().optional(),
+  name: z.string().min(1),
+  class: z.string().min(1),
+  level: z.number().int().min(1).default(1),
+  map: z.string().default('city'),
+  exp: z.number().min(0).default(0),
+  gold: z.number().min(0).default(0),
+  energy: z.number().int().min(1).default(1),
+  agility: z.number().int().min(1).default(1),
+  accuracy: z.number().int().min(1).default(1),
+  luck: z.number().int().min(1).default(1),
+  kills_count: z.number().int().min(0).default(0),
+  castles_count: z.number().int().min(0).default(0),
+  online_status: z.boolean().default(false),
+  online_time: z.number().int().min(0).default(0),
+  last_connection_date: z.string().optional(),
+  last_connection_ip: z.string().optional(),
+})
+
+export async function characterRoutes(app: FastifyInstance) {
+  app.post('/characters', async (req, reply) => {
+    const parsed = bodySchema.safeParse(req.body)
+    if (!parsed.success) return reply.code(400).send({ errors: parsed.error.flatten() })
+    const item = await prisma.character.create({ data: parsed.data })
+    return reply.code(201).send(item)
+  })
+
+  app.get('/characters', async () => {
+    return prisma.character.findMany({ include: { user: true, guild: true } })
+  })
+
+  app.get('/characters/:id', async (req, reply) => {
+    const { id } = req.params as { id: string }
+    const item = await prisma.character.findUnique({ where: { id }, include: { user: true, guild: true } })
+    if (!item) return reply.code(404).send({ message: 'Not found' })
+    return item
+  })
+
+  app.put('/characters/:id', async (req, reply) => {
+    const { id } = req.params as { id: string }
+    const parsed = bodySchema.partial().refine(d => Object.keys(d).length > 0, { message: 'Empty body' }).safeParse(req.body)
+    if (!parsed.success) return reply.code(400).send({ errors: parsed.error.flatten() })
+    try {
+      const updated = await prisma.character.update({ where: { id }, data: parsed.data })
+      return updated
+    } catch {
+      return reply.code(404).send({ message: 'Not found' })
+    }
+  })
+
+  app.delete('/characters/:id', async (req, reply) => {
+    const { id } = req.params as { id: string }
+    try {
+      await prisma.character.delete({ where: { id } })
+      return reply.code(204).send()
+    } catch {
+      return reply.code(404).send({ message: 'Not found' })
+    }
+  })
+}

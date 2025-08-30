@@ -32,28 +32,20 @@ const Castles: React.FC<CastlesProps> = ({ ranksa }) => {
               Guild
             </th>
             <th className={`${killsDefault} ${killsTop}`}>
-              Master
+              Castles
             </th>
             <th className={`${killsDefault} ${killsTop}`}>
-              Castles
+              Members
             </th>
           </tr>
         </thead>
         <tbody>
           {ranksa.map((rank: RankSA, i) => (
             <tr key={rank.id}>
-              <td className={`${killsImage} ${i < 1 ? killsTop : killsDown}`}>
-                
-              </td>
-              <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>
-                {rank.guild && rank.guild.name}
-              </td>
-              <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>
-                {rank.master && rank.master.name}
-              </td>
-              <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>
-                {rank.guild && rank.guild.castles_count}
-              </td>
+              <td className={`${killsImage} ${i < 1 ? killsTop : killsDown}`}></td>
+              <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>{rank.guild?.name ?? '-'}</td>
+              <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>{rank.guild?.castles_count ?? 0}</td>
+              <td className={`${killsDefault} ${i < 1 ? killsTop : killsDown}`}>{rank.guild?.members_count ?? 0}</td>
             </tr>
           ))}
         </tbody>

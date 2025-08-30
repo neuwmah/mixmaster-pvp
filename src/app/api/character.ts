@@ -2,54 +2,37 @@ import createApiClient from '@/hooks/axios';
 import { Character } from '@/types/character';
 import { User } from '@/types/user';
 
-const baseURL = `${process.env.DATABASE_URL}/characters`;
+const baseEnv = process.env.BACKEND_API_URL;
 
 export async function getCharacters(): Promise<Character[]> {
-  const api = createApiClient(baseURL);
+  if (!baseEnv) return [];
+  const api = createApiClient(baseEnv);
   try {
-    const response = await api.get('/');
-
-    if (response.data)
-      return response.data
-
-    return []
-  } catch (error) {
-    console.error('getCharacters error', error);
-    return []
+    const { data, status } = await api.get('/characters');
+    if (status !== 200 || !Array.isArray(data)) return [];
+    return data as Character[];
+  } catch {
+    return [];
   }
 }
 
 export async function getCharacter(id: string): Promise<Character | null> {
-  const api = createApiClient(baseURL + `/${id}`);
+  if (!baseEnv) return null;
+  const api = createApiClient(baseEnv);
   try {
-    const response = await api.get('/');
-    
-    if (response.data)
-      return response.data
-
-    return null
-  } catch (error: any) {
-    
-    if (error?.response?.status === 429) {
-      console.warn('getCharacter: Rate limit exceeded (429)')
-      return null
-    }
-    
-    console.error('getCharacter error', error)
-    return null
+    const { data, status } = await api.get(`/characters/${id}`);
+    if (status !== 200 || !data) return null;
+    return data as Character;
+  } catch {
+    return null;
   }
 }
 
 export async function getCharactersByUser(user: Partial<User>): Promise<Character[] | []> {
   try {
     const characters = await getCharacters();
-    const userCharacters = characters.filter(
-      (c) => c.user && c.user.id === user.id
-    );
-
-    return userCharacters
-  } catch (error) {
-    console.error('getCharactersByUser error', error);
-    return []
+    return characters.filter(c => c.user && c.user.id === user.id);
+  } catch {
+    return [];
   }
 }

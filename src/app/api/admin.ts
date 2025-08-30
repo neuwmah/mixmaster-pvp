@@ -1,6 +1,6 @@
 import createApiClient from '@/hooks/axios';
 
-const baseURL = `${process.env.DATABASE_URL}/admin`;
+const baseURL = `${process.env.BACKEND_API_URL}/admin`;
 
 export async function checkAdmin(id: string): Promise<boolean> {
   const api = createApiClient(baseURL + `/${id}`);

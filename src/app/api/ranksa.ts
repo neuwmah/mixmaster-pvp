@@ -1,39 +1,24 @@
 import createApiClient from '@/hooks/axios';
 import { getGuild } from '@/app/api/guild';
-import { getCharacter } from '@/app/api/character';
 import { RankSA } from '@/types/ranksa';
 
-const baseURL = `${process.env.DATABASE_URL}/ranksa`;
+const baseEnv = process.env.BACKEND_API_URL;
 
 export async function getRankSA(): Promise<RankSA[]> {
-  const api = createApiClient(baseURL);
+  if (!baseEnv) return [];
+  const api = createApiClient(baseEnv);
   try {
-    const response = await api.get('/');
-
-    if (response.data) {
-      const result = await Promise.all(
-        response.data.map(async (rank: RankSA) => ({
-          ...rank,
-          guild: await getGuild(rank.guild.id),
-          master: await getCharacter(rank.master.id)
-        }))
-      );
-      
-      let data: RankSA[] = result;
-      data.sort((a, b) => b.guild && a.guild && b.guild.castles_count - a.guild.castles_count);
-
-      return data
-    }
-
-    return []
-  } catch (error: any) {
-    
-    if (error?.response?.status === 429) {
-      console.warn('getRankSA: Rate limit exceeded (429)')
-      return []
-    }
-    
-    console.error('getRankSA error', error)
-    return []
+    const { data, status } = await api.get('/ranksa');
+    if (status !== 200 || !Array.isArray(data)) return [];
+    const list: RankSA[] = await Promise.all(
+      data.map(async (row: any) => ({
+        id: row.id,
+        guild: row.guild?.id ? await getGuild(row.guild.id) : null
+      }))
+    );
+    list.sort((a, b) => (b.guild?.castles_count ?? 0) - (a.guild?.castles_count ?? 0));
+    return list;
+  } catch {
+    return [];
   }
 }

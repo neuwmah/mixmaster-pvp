@@ -2,44 +2,29 @@ import createApiClient from '@/hooks/axios';
 import { getCharacter } from '@/app/api/character';
 import { Guild } from '@/types/guild';
 
-const baseURL = `${process.env.DATABASE_URL}/guilds`;
+const baseEnv = process.env.BACKEND_API_URL;
 
 export async function getGuilds(): Promise<Guild[]> {
-  const api = createApiClient(baseURL);
+  if (!baseEnv) return [];
+  const api = createApiClient(baseEnv);
   try {
-    const response = await api.get('/');
-
-    if (response.data)
-      return response.data
-
-    return []
-  } catch (error) {
-    console.error('getGuilds error', error);
-    return []
+    const { data, status } = await api.get('/guilds');
+    if (status !== 200 || !Array.isArray(data)) return [];
+    return data as Guild[];
+  } catch {
+    return [];
   }
 }
 
-export async function getGuild(id: String): Promise<Guild | null> {
-  const api = createApiClient(baseURL + `/${id}`);
+export async function getGuild(id: string): Promise<Guild | null> {
+  if (!baseEnv) return null;
+  const api = createApiClient(baseEnv);
   try {
-    const response = await api.get('/');
-    
-    if (response.data && response.data.master) {
-      const res = response.data;
-      res.master = await getCharacter(response.data.master.id);
-
-      return res
-    }
-
-    return null
-  } catch (error: any) {
-    
-    if (error?.response?.status === 429) {
-      console.warn('getGuild: Rate limit exceeded (429)')
-      return null
-    }
-    
-    console.error('getGuild error', error)
-    return null
+    const { data, status } = await api.get(`/guilds/${id}`);
+    if (status !== 200 || !data) return null;
+    if (data.master) data.master = await getCharacter(data.master.id);
+    return data as Guild;
+  } catch {
+    return null;
   }
 }

@@ -1,40 +1,34 @@
 import createApiClient from '@/hooks/axios';
 import { Menu } from '@/types/menu';
 
-const baseURL = `${process.env.DATABASE_URL}/menus`;
+const baseEnv = process.env.BACKEND_API_URL;
 
 export async function getMenus(): Promise<Menu[]> {
-  const api = createApiClient(baseURL);
+  if (!baseEnv) return [];
+  const api = createApiClient(baseEnv);
   try {
-    const response = await api.get('/');
-
-    if (response.data)
-      return response.data
-
-    return []
+    const { data, status } = await api.get('/menus');
+    if (status !== 200 || !Array.isArray(data)) return [];
+    return data as Menu[];
   } catch (error: any) {
-    
-    if (error?.response?.status === 429) {
-      console.warn('getMenus: Rate limit exceeded (429)')
-      return []
-    }
-    
-    console.error('getMenus error', error)
-    return []
+    const s = error?.response?.status;
+    if (s === 429 || s === 404) return [];
+    return [];
   }
 }
 
-export async function getMenu(id: String): Promise<Menu | null> {
-  const api = createApiClient(baseURL + `/${id}`);
+export async function getMenu(id: string): Promise<Menu | null> {
+  if (!baseEnv) return null;
+  const api = createApiClient(baseEnv);
   try {
-    const response = await api.get('/');
-    
-    if (response.data)
-      return response.data
-
-    return null
-  } catch (error) {
-    console.error('getMenu error', error);
-    return null
+    const { data, status } = await api.get(`/menus/${id}`);
+    if (status !== 200 || !data) return null;
+    if (data?.id) return data as Menu;
+    if (data?.data?.id) return data.data as Menu;
+    return null;
+  } catch (error: any) {
+    const s = error?.response?.status;
+    if (s === 429 || s === 404) return null;
+    return null;
   }
 }
