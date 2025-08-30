@@ -13,7 +13,7 @@ model User {
   username              String      @unique
   password              String
   email                 String      @unique
-  phone                 String?     @unique
+  phone                 String?
   characters            Character[]
   online_points         Int         @default(0)
   online_status         Boolean     @default(false)
