@@ -1,69 +1,43 @@
-import createApiClient from '@/hooks/axios';
-import { User } from '@/types/user';
+import createApiClient from '@/hooks/axios'
+import { User } from '@/types/user'
 
-const baseEnv = process.env.BACKEND_API_URL;
+const baseEnv = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL || ''
+
+function api() { return createApiClient(baseEnv) }
 
 export async function getUsers(): Promise<User[]> {
-  if (!baseEnv) return [];
-  const api = createApiClient(baseEnv);
   try {
-    const { data, status } = await api.get('/users');
-    if (status !== 200 || !Array.isArray(data)) return [];
-    return data as User[];
-  } catch {
-    return [];
-  }
+    const { data } = await api().get('/users')
+    return Array.isArray(data) ? data as User[] : []
+  } catch { return [] }
 }
 
 export async function getUser(id: string): Promise<User | null> {
-  if (!baseEnv) return null;
-  const api = createApiClient(baseEnv);
   try {
-    const { data, status } = await api.get(`/users/${id}`);
-    if (status !== 200 || !data) return null;
-    return data as User;
-  } catch {
-    return null;
-  }
+    const { data } = await api().get(`/users/${id}`)
+    return data as User
+  } catch { return null }
 }
 
 export async function getUserByUsername(username: string): Promise<User | null> {
   try {
-    const users = await getUsers();
-    return users.find(u => u.username === username) || null;
-  } catch {
-    return null;
-  }
+    const { data } = await api().get(`/users/exists/${username}`)
+    if (!data?.exists) return null
+    const users = await getUsers()
+    return users.find(u => u.username === username) || null
+  } catch { return null }
 }
 
-export async function getUserByCredentials(username: string, password: string): Promise<User | null> {
+export async function verifyCredentials(username: string, password: string): Promise<{ id: string; username: string } | null> {
   try {
-    const users = await getUsers();
-    return users.find(u => u.username === username && u.password === password) || null;
-  } catch {
-    return null;
-  }
+    const { data } = await api().post('/users/check', { username, password })
+    return data
+  } catch { return null }
 }
 
-export async function createUser(paramsData: Partial<User>): Promise<User | null> {
-  if (!baseEnv) return null;
-  const api = createApiClient(baseEnv);
-  const date = new Date();
-  const userData = {
-    ...paramsData,
-    created_at: date,
-    characters: [],
-    online_status: false,
-    online_time: 0,
-    online_points: 0,
-    last_connection_date: date,
-    last_connection_ip: ""
-  } as Partial<User>;
+export async function createUser(paramsData: Pick<User,'username'|'password'|'email'|'phone'>): Promise<User | null> {
   try {
-    const { data, status } = await api.post('/users', userData);
-    if (status !== 201 || !data) return null;
-    return data as User;
-  } catch {
-    return null;
-  }
+    const { data } = await api().post('/users', paramsData)
+    return data as User
+  } catch (e) { console.error('createUser error', e); return null }
 }

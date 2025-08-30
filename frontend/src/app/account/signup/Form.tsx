@@ -19,31 +19,28 @@ export default function Form() {
     setSending(true);
 
     try {
-      const user = await getUserByUsername(username);
-      if (!user) {
-        try {
-          await createUser({ username, password, email, phone });
-  
-          try {
-            const response = await loginUser(username, password) as Response;
-      
-            if (response.ok) {
-              router.push('/account');
-              router.refresh();
-            } else {
-              console.log('handleSignup response error', response);
-            }
-          } catch (error) {
-            console.error('handleSignup API loginUser error', error);
-          }
-        } catch (error) {
-          console.error('handleSignup API loginUser error', error);
-        }
-      } else {
+      const existing = await getUserByUsername(username);
+      if (existing) {
         setErrorMessage('Username unavailable.');
-        setTimeout(() => {
-          setErrorMessage('');
-        }, 3000);
+        setTimeout(() => setErrorMessage(''), 3000);
+        setSending(false);
+        return;
+      }
+      const created = await createUser({ username, password, email, phone });
+      if (!created) {
+        setErrorMessage('Create failed (conflict ou servidor)');
+        setTimeout(() => setErrorMessage(''), 3000);
+        setSending(false);
+        return;
+      }
+      const response = await loginUser(username, password) as Response;
+      if (!('ok' in response) || !response.ok) {
+        setErrorMessage('Auto-login failed');
+        setTimeout(() => setErrorMessage(''), 3000);
+      } else {
+        await new Promise(r => setTimeout(r, 120));
+        router.replace('/account');
+        router.refresh();
       }
     } catch (error) {
       console.log('handleSignup API getUserByUsername error', error)

@@ -2,17 +2,12 @@ import React from 'react';
 
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
-import { verify } from 'jsonwebtoken';
-
+import createApiClient from '@/hooks/axios'
 import { checkAdmin } from '@/app/api/admin';
-import { getUser } from '@/app/api/user';
-import { getCharactersByUser } from '@/app/api/character';
 
 import Details from '@/app/account/components/Details';
 import Characters from '@/app/account/components/Characters';
 import Admin from '@/app/account/components/Admin';
-
-const SECRET_KEY = process.env.JWT_SECRET || '123';
 
 export default async function AccountPage() {
   const cookieStore = await cookies();
@@ -22,19 +17,11 @@ export default async function AccountPage() {
     return redirect('/account/signin')
 
   try {
-    const decoded = verify(token, SECRET_KEY) as { userId: string };
-    const userId = decoded.userId;
-    
-    const user = await getUser(userId);
-    const admin = await checkAdmin(userId);
-
-    if (!user)
-      return redirect('/account/signin')
-
-    const userData = {
-      ...user,
-      characters: await getCharactersByUser({ id: user.id })
-    }
+    const baseEnv = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || 'http://localhost:3333'
+    const api = createApiClient(baseEnv)
+    const { data } = await api.get('/auth/me', { headers: { Authorization: `Bearer ${token}` } })
+    const userData = data
+    const admin = await checkAdmin(userData.id)
 
     return (
       <main>
@@ -45,7 +32,7 @@ export default async function AccountPage() {
     )
 
   } catch (error) {
-    console.error('invalid token', error);
+    console.error('auth/me failed', error);
     return redirect('/account/signin')
   }
 }

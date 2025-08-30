@@ -1,37 +1,29 @@
-import { NextResponse } from 'next/server';
-import { sign } from 'jsonwebtoken';
-import { serialize } from 'cookie';
+import { NextResponse } from 'next/server'
+import { serialize } from 'cookie'
+import createApiClient from '@/hooks/axios'
 
-import { getUserByCredentials } from '@/app/api/user';
-
-const SECRET_KEY = process.env.JWT_SECRET || '123';
+const baseEnv = process.env.BACKEND_API_URL
 
 export async function POST(request: Request) {
-  const body = await request.json();
-  const { username, password } = body;
-
-  const user = await getUserByCredentials(username, password);
-
-  if (!user) {
-    return NextResponse.json({ message: 'user not found' }, { status: 401 });
+  if (!baseEnv) return NextResponse.json({ message: 'api offline' }, { status: 500 })
+  const body = await request.json()
+  const { username, password } = body
+  try {
+    const api = createApiClient(baseEnv)
+    const { data } = await api.post('/auth/login', { username, password })
+    if (!data?.token) return NextResponse.json({ message: 'user not found' }, { status: 401 })
+    const serializedCookie = serialize('sessionToken', data.token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 60 * 60,
+      path: '/',
+    })
+    return new NextResponse(JSON.stringify({ message: 'user found' }), {
+      status: 200,
+      headers: { 'Set-Cookie': serializedCookie },
+    })
+  } catch {
+    return NextResponse.json({ message: 'user not found' }, { status: 401 })
   }
-
-  const token = sign(
-    { userId: user.id, username: user.username },
-    SECRET_KEY,
-    { expiresIn: '1h' }
-  );
-
-  const serializedCookie = serialize('sessionToken', token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
-    maxAge: 60 * 60,
-    path: '/',
-  });
-
-  return new NextResponse(JSON.stringify({ message: 'user found' }), {
-    status: 200,
-    headers: { 'Set-Cookie': serializedCookie },
-  });
 }

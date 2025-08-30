@@ -23,11 +23,11 @@ export default function Characters({ user }: CharactersProps) {
           Check your account characters below.
         </p>
 
-        {user.characters.length > 0 &&
+        {user.characters && user.characters.length > 0 &&
           <div className="text-sm grid mt-12 w-full max-w-[1000px] gap-4 grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(3,1fr)]">
             {user.characters.map(async (character) => {
               
-              character.user = await getUser(character.user.id)
+              character.user = await getUser(character.userId)
 
               return <Card key={character.id} {...character} />
             })}

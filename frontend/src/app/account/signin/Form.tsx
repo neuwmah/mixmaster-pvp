@@ -17,16 +17,14 @@ export default function Form() {
 
     try {
       const response = await loginUser(username, password) as Response;
-
-      if (response.ok) {
-        router.push('/account');
-        router.refresh();
-      } else {
+      if (!('ok' in response) || !response.ok) {
         console.log('handleSignin response error', response);
         setErrorMessage('User not found.');
-        setTimeout(() => {
-          setErrorMessage('');
-        }, 3000);
+        setTimeout(() => setErrorMessage(''), 3000);
+      } else {
+        await new Promise(r => setTimeout(r, 120));
+        router.replace('/account');
+        router.refresh();
       }
     } catch (error) {
       console.error('handleSignin token error', error);
