@@ -44,13 +44,13 @@ model Character {
   name                 String
   class                String
   level                Int       @default(1)
-  map                  String    @default("city")
+  map                  String    @default("magirita")
   exp                  Int       @default(0)
   gold                 Int       @default(0)
-  energy               Int       @default(0)
-  agility              Int       @default(0)
-  accuracy             Int       @default(0)
-  luck                 Int       @default(0)
+  energy               Int       @default(10)
+  agility              Int       @default(10)
+  accuracy             Int       @default(10)
+  luck                 Int       @default(10)
   kills_count          Int       @default(0)
   castles_count        Int       @default(0)
   online_status        Boolean   @default(false)
