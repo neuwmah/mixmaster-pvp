@@ -70,6 +70,24 @@
   right: 0 !important;
 }
 
+/* fade effect 1 slide per view */
+.swiper-fade-1 {
+  width: 100%;
+  overflow: visible !important;
+}
+.swiper-fade-1 .swiper-wrapper {
+  pointer-events: none;
+}
+.swiper-fade-1 .swiper-slide {
+  transition: opacity .4s;
+  pointer-events: none;
+  opacity: 0;
+}
+.swiper-fade-1 .swiper-slide-active {
+  pointer-events: all;
+  opacity: 1;
+}
+
 /* fade effect 4 slides per view */
 .swiper-fade-4 {
   width: 100%;

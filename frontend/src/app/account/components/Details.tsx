@@ -16,7 +16,7 @@ export default function Details({ user }: DetailsProps) {
       <div className="container flex-col items-center">
 
         <h1 className="title">
-          Account
+          Account 👤
         </h1>
 
         <p className="text-base mt-6">

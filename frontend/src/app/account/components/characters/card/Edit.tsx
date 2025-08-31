@@ -55,7 +55,7 @@ export default function Edit({
     </button>
 
     <p className="text-sm mt-8">
-      User ID: <strong>{character.user.id}</strong>
+      User ID: <strong>{character.user?.id || character.userId || '—'}</strong>
     </p>
 
     <button

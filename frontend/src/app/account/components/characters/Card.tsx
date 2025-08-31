@@ -21,7 +21,7 @@ export default function Card(character: Character) {
   const [resetPosition, setResetPosition] = useState(false)
   
   return (
-    <div key={character.id} className="info text-ellipsis overflow-hidden min-w-0 p-8 bg-(--black) relative min-h-[32rem]">
+    <div className="info text-ellipsis overflow-hidden min-w-0 p-8 bg-(--black) relative min-h-[32rem] sm:w-[calc(33.333%-1.0666rem)]">
       
       <img 
         className="absolute top-0 left-0 object-cover w-full h-full opacity-[.7] filter-[brightness(.2)]"
@@ -51,7 +51,7 @@ export default function Card(character: Character) {
         }
       </div>
 
-      <div className="absolute pointer-events-none p-8 top-0 right-0 z-1">
+      <div className="absolute pointer-events-none p-8 top-0 right-0 z-1 flex flex-col">
         <button className="pointer-events-auto cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1)" type="button"
           onClick={() => { setEdit(!edit) }} >
           {edit

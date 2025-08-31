@@ -94,7 +94,7 @@ export default function Form() {
       </div>
 
       <button className="button-orange mt-12" type="submit" aria-label="Click to Sign Up">
-        Call to Action
+        Register
       </button>
 
       {errorMessage && (

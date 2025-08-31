@@ -22,7 +22,7 @@ const Download: React.FC = () => {
         </p>
 
         <Link className="button-orange mt-12" href={fileData.url}>
-          Call to Action
+          Click to Download
         </Link>
 
       </div>

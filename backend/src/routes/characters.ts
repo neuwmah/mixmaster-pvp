@@ -4,23 +4,8 @@ import { prisma } from '../db.js'
 
 const bodySchema = z.object({
   userId: z.string().optional(),
-  guildId: z.string().optional(),
   name: z.string().min(1),
   class: z.string().min(1),
-  level: z.number().int().min(1).default(1),
-  map: z.string().default('city'),
-  exp: z.number().min(0).default(0),
-  gold: z.number().min(0).default(0),
-  energy: z.number().int().min(1).default(1),
-  agility: z.number().int().min(1).default(1),
-  accuracy: z.number().int().min(1).default(1),
-  luck: z.number().int().min(1).default(1),
-  kills_count: z.number().int().min(0).default(0),
-  castles_count: z.number().int().min(0).default(0),
-  online_status: z.boolean().default(false),
-  online_time: z.number().int().min(0).default(0),
-  last_connection_date: z.string().optional(),
-  last_connection_ip: z.string().optional(),
 })
 
 export async function characterRoutes(app: FastifyInstance) {

@@ -58,8 +58,8 @@ export default function Form() {
         />
       </div>
 
-      <button className={`button-orange mt-12 ${sending && 'pointer-events-none'}`} type="submit" aria-label="Click to Sign In">
-        Call to Action
+      <button className={`button-orange mt-12 ${sending && 'pointer-events-none'}`} type="submit" aria-label="Click to Login">
+        Login
       </button>
 
       {errorMessage && (
