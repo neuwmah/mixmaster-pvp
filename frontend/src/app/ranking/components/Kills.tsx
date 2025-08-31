@@ -58,7 +58,9 @@ const Kills: React.FC<KillsProps> = ({ rankpvp, classes }) => {
               <td className={`${rankDefault} ${rankDown}`}>
                 {rank.player?.name}
               </td>
-              <td className={`${rankDefault} ${rankDown} ${rank.player && rank.guild?.master && rank.player.name === rank.guild.master.name ? 'text-(--primary-red-2)' : ''}`}>
+              <td className={`${rankDefault} ${rankDown} ${
+                rank.guild?.master?.name === rank.player?.name ? 'text-(--primary-red-2)' : ''
+              }`}>
                 {rank.guild?.name ?? '-'}
               </td>
               <td className={`${rankDefault} ${rankDown}`}>

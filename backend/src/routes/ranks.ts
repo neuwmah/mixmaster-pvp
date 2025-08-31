@@ -22,16 +22,15 @@ export async function rankRoutes(app: FastifyInstance) {
         id: true,
         name: true,
         castles_count: true,
-        members_count: true,
         master: { select: { id: true, name: true, class: true } }
       },
       orderBy: { castles_count: 'desc' },
       take: 3
     })
 
-    return guilds.map((g: { id: string; name: string; castles_count: number; members_count: number; master: { id: string; name: string; class: string } | null }) => ({
+    return guilds.map((g: { id: string; name: string; castles_count: number; master: { id: string; name: string; class: string } | null }) => ({
       id: g.id,
-      guild: { id: g.id, name: g.name, castles_count: g.castles_count, members_count: g.members_count },
+      guild: { id: g.id, name: g.name, castles_count: g.castles_count },
       master: g.master ? { id: g.master.id, name: g.master.name, class: g.master.class } : null
     }))
   })

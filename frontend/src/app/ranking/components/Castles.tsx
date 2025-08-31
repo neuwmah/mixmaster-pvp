@@ -55,7 +55,7 @@ const Castles: React.FC<CastlesProps> = ({ ranksa, classes }) => {
               </td>
               <td className={`${rankDefault} ${rankDown}`}>{rank.guild?.name ?? '-'}</td>
               <td className={`${rankDefault} ${rankDown}`}>{rank.guild?.castles_count ?? 0}</td>
-              <td className={`${rankDefault} ${rankDown}`}>{rank.guild?.members_count ?? 0}</td>
+              <td className={`${rankDefault} ${rankDown}`}>{rank.guild?.members?.length ?? 0}</td>
             </tr>
           ))}
         </tbody>
