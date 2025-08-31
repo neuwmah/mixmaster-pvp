@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { getUser } from '@/app/api/user';
-
-import Card from '@/app/account/components/characters/Card';
+import Manage from '@/app/account/components/characters/Manage';
+import Create from './characters/Create';
 
 import { User } from '@/types/user';
 
@@ -20,21 +19,18 @@ export default function Characters({ user }: CharactersProps) {
         </h2>
 
         <p className="text-base mt-6">
-          Check your account characters below.
+          {user.characters && user.characters.length > 0 
+            ? `Check your account characters below.`
+            : `No characters yet. You can create a new below.`
+          }
         </p>
 
-        {user.characters && user.characters.length > 0 &&
-          <div className="text-sm grid mt-12 w-full max-w-[1000px] gap-4 grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(3,1fr)]">
-            {user.characters.map(async (character) => {
-              
-              character.user = await getUser(character.userId)
-
-              return <Card key={character.id} {...character} />
-            })}
-          </div>
+        {user.characters && user.characters.length > 0
+          ? <Manage characters={user.characters} />
+          : <Create user={user} />
         }
 
       </div>
     </section>
-  );
-};
+  )
+}

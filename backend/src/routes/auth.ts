@@ -20,8 +20,9 @@ export async function authRoutes(app: FastifyInstance) {
     const { username, password } = parsed.data
     const user = await prisma.user.findUnique({ where: { username } })
     if (!user || user.password !== hash(password)) return reply.code(401).send({ message: 'invalid credentials' })
-    const token = app.jwt.sign({ userId: user.id, username: user.username }, { expiresIn: '1h' })
-    return { token }
+    const isAdmin = (user as any).is_admin
+    const token = app.jwt.sign({ userId: user.id, username: user.username, is_admin: isAdmin }, { expiresIn: '1h' })
+    return { token, is_admin: isAdmin }
   })
 
   app.get('/auth/me', async (req, reply) => {

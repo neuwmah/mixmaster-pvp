@@ -11,4 +11,5 @@ export type User = {
   last_connection_date?: string | Date | null
   last_connection_ip?: string | null
   password?: string
+  is_admin?: boolean
 }

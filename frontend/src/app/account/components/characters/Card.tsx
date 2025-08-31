@@ -22,11 +22,13 @@ export default function Card(character: Character) {
   
   return (
     <div key={character.id} className="info text-ellipsis overflow-hidden min-w-0 p-8 bg-(--black) relative min-h-[32rem]">
+      
       <img 
         className="absolute top-0 left-0 object-cover w-full h-full opacity-[.7] filter-[brightness(.2)]"
         src={`/assets/images/characters/${character.class.toLocaleLowerCase()}.jpg`}
         alt={`char-${character.id}-${character.class}`}
       />
+
       <div className="relative z-1">
         {edit
           ? (changeNickname 
@@ -48,6 +50,7 @@ export default function Card(character: Character) {
           : <Infos {...character} />
         }
       </div>
+
       <div className="absolute pointer-events-none p-8 top-0 right-0 z-1">
         <button className="pointer-events-auto cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1)" type="button"
           onClick={() => { setEdit(!edit) }} >
@@ -57,6 +60,7 @@ export default function Card(character: Character) {
           }
         </button>
       </div>
+
     </div>
-  );
+  )
 }

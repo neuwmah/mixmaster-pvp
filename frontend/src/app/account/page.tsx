@@ -3,7 +3,6 @@ import React from 'react';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import createApiClient from '@/hooks/axios'
-import { checkAdmin } from '@/app/api/admin';
 
 import Details from '@/app/account/components/Details';
 import Characters from '@/app/account/components/Characters';
@@ -21,13 +20,12 @@ export default async function AccountPage() {
     const api = createApiClient(baseEnv)
     const { data } = await api.get('/auth/me', { headers: { Authorization: `Bearer ${token}` } })
     const userData = data
-    const admin = await checkAdmin(userData.id)
 
     return (
       <main>
         <Details user={userData} />
-        {userData.characters.length > 0 && <Characters user={userData} /> }
-        {admin && <Admin /> }
+        <Characters user={userData} />
+        {userData.is_admin && <Admin /> }
       </main>
     )
 

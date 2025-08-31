@@ -44,7 +44,7 @@ export default function Details({ user }: DetailsProps) {
           </div>
           <div className={cardsClass}>
             <p>CHARACTERS</p>
-            <strong>{user.characters.length}</strong>
+            <strong>{user.characters && user.characters.length}</strong>
           </div>
           <div className={cardsClass}>
             <p>ONLINE TIME</p>
@@ -56,5 +56,5 @@ export default function Details({ user }: DetailsProps) {
 
       </div>
     </section>
-  );
-};
+  )
+}

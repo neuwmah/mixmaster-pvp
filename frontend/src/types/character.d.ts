@@ -2,6 +2,7 @@ export type Character = {
   id: string
   created_at: Date
   user: User
+  userId: string
   guild: Guild
   name: string
   class: string
