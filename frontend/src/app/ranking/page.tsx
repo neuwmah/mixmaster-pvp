@@ -6,6 +6,8 @@ import { getRankSA } from '@/app/api/ranksa';
 import Kills from '@/app/ranking/components/Kills';
 import Castles from '@/app/ranking/components/Castles';
 
+import BackgroundMix from '@/components/BackgroundMix';
+
 export default async function RankingPage() {
   const rankpvpData = await getRankPVP();
   const ranksaData = await getRankSA();
@@ -18,8 +20,8 @@ export default async function RankingPage() {
   }
 
   return (
-    <main className="flex flex-1 bg-gradient-to-b from-black to-(--gray-0) sm:items-center">
-      <section className="section-ranking section">
+    <main className="flex flex-1 bg-gradient-to-b from-black to-(--gray-0) sm:items-center relative">
+      <section className="section-ranking section z-[5!important]">
         <div className="container flex-col items-center">
 
           <h1 className="title text-center w-full hidden">
@@ -33,6 +35,7 @@ export default async function RankingPage() {
           
         </div>
       </section>
+      <BackgroundMix char1="phoy" char2="jin" />
     </main>
   );
 }

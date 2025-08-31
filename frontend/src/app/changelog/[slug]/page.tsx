@@ -1,5 +1,7 @@
 import { getChangelogs } from '@/app/api/changelog';
 
+import Related from './Related';
+
 import { Changelog } from '@/types/changelog';
 
 interface ChangelogProps {
@@ -64,6 +66,7 @@ export default async function ChangelogPage({ params }: ChangelogProps) {
           </div>
         )
       }
+      <Related />
     </main>
   );
 }

@@ -6,6 +6,8 @@ import { getRankSA } from '@/app/api/ranksa';
 import Kills from '@/app/ranking/components/Kills';
 import Castles from '@/app/ranking/components/Castles';
 
+import BackgroundMix from '@/components/BackgroundMix';
+
 const Ranking: React.FC = async () => {
   const rankpvpData = await getRankPVP();
   const ranksaData = await getRankSA();
@@ -18,8 +20,8 @@ const Ranking: React.FC = async () => {
   }
   
   return rankpvpData.length || ranksaData.length ? (
-    <section className="section-ranking section-home">
-      <div className="container flex-col items-center">
+    <section className="section-ranking section-home pb-20 sm:pb-24 bg-gradient-to-b from-black to-(--gray-0) min-h-[480px] mb-[0!important]">
+      <div className="container flex-col items-center relative z-[2!important]">
         
         <div className="flex w-full gap-x-[24px] gap-y-16 sm:px-[64px] flex-col sm:flex-row">
           <Kills rankpvp={rankpvpData} classes={classes} />
@@ -27,6 +29,7 @@ const Ranking: React.FC = async () => {
         </div>
 
       </div>
+      <BackgroundMix char1="penril" char2="ditt" />
     </section>
   ) : ``
 };

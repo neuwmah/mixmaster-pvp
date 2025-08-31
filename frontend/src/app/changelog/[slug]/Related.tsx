@@ -4,11 +4,11 @@ import { getChangelogs } from '@/app/api/changelog';
 
 import Carousel from '@/app/home/Carousel';
 
-const News: React.FC = async () => {
+const Related: React.FC = async () => {
   const changelogsData = await getChangelogs();
   
   return changelogsData.length ? (
-    <section className="section-news section-home">
+    <section className="section-related section-home">
       <div className="container flex-col items-center">
 
         <h2 className="title">
@@ -26,4 +26,4 @@ const News: React.FC = async () => {
   ) : ``
 };
 
-export default News;
+export default Related;

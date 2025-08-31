@@ -13,12 +13,16 @@
 .section,
 .section-home {
   @apply w-full overflow-hidden z-1 relative;
-  @apply my-16;
+}
+
+.section {
+  @media (max-width: 767px) { @apply my-16 }
   @media (min-width: 768px) { @apply my-24 }
 }
 
 .section-home {
   @media (max-width: 767px) { @apply my-20 }
+  @media (min-width: 768px) { @apply my-24 }
 }
 
 .section-p {

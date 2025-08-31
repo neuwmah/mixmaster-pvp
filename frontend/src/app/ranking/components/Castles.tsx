@@ -46,14 +46,17 @@ const Castles: React.FC<CastlesProps> = ({ ranksa, classes }) => {
         <tbody>
           {ranksa.map((rank: RankSA, i) => (
             <tr key={rank.id}>
-              <td className={`${rankImage} ${i < 1 ? rankTop : rankDown}`}></td>
-              <td className={`${rankDefault} ${i < 1 ? rankTop : rankDown}`}>{rank.guild?.name ?? '-'}</td>
-              <td className={`${rankDefault} ${i < 1 ? rankTop : rankDown}`}>{rank.guild?.castles_count ?? 0}</td>
-              <td className={`${rankDefault} ${i < 1 ? rankTop : rankDown}`}>{rank.guild?.members_count ?? 0}</td>
+              <td className={`${rankImage} ${rankDown}`}></td>
+              <td className={`${rankDefault} ${rankDown}`}>{rank.guild?.name ?? '-'}</td>
+              <td className={`${rankDefault} ${rankDown}`}>{rank.guild?.castles_count ?? 0}</td>
+              <td className={`${rankDefault} ${rankDown}`}>{rank.guild?.members_count ?? 0}</td>
             </tr>
           ))}
         </tbody>
       </table>
+      <svg className="pointer-events-none rotate-[180deg] scale-x-[-1]" viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg">
+        <path className="fill-(--gray-0)" d="M0,0L1440,160L1440,160L0,160Z"></path>
+      </svg>
     </div>
   );
 };

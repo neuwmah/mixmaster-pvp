@@ -1,11 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 
-interface File {
-  id: string;
-  url: string;
-}
-
 const fileData = {
   id: '1',
   url: '#',

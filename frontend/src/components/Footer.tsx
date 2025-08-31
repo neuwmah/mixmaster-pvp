@@ -6,7 +6,7 @@ const Footer: React.FC = async () => {
   return (
     <footer className="flex justify-center text-white py-4 mt-auto bg-(--gray-0) relative z-1">
       <p className="text-sm text-center">
-        &copy; {currentYear} MixMaster PVP 🐰
+        &copy; {currentYear} MixMaster PVP ⚔️
       </p>
     </footer>
   )

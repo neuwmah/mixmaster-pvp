@@ -16,7 +16,7 @@ const MenusMobile: React.FC<MenusMobileProps> = ({ menus, menuMobile, setMenuMob
   return (
     <div className={`menu-mobile flex h-full gap-12 fixed top-0 left-0 w-full group ${menuMobile ? '-active pointer-events-auto' : 'pointer-events-none'}`}>
       <ul className="menu-body bg-black w-full max-w-lg duration-400 -translate-x-full border-r-1 border-r-(--gray-0) z-1 group-[.-active]:translate-x-0 transition-transform">
-        <div className="menu-header flex items-center h-[80px] px-[5vw]" onClick={() => { setMenuMobile(false) }}>
+        <div className="menu-header flex items-center h-[88px] px-[5vw]" onClick={() => { setMenuMobile(false) }}>
           <Logo />
         </div>
 

@@ -48,8 +48,8 @@
 }
 .swiper-button-prev:not(.swiper-button-disabled):hover,
 .swiper-button-next:not(.swiper-button-disabled):hover {
-  background: var(--gray-1);
-  border: .1rem solid var(--gray-1);
+  background: var(--primary-orange-2);
+  border: .1rem solid var(--primary-orange-2);
 }
 .swiper-button-disabled {
   opacity: 1 !important;

@@ -46,7 +46,7 @@ const Kills: React.FC<KillsProps> = ({ rankpvp, classes }) => {
         <tbody>
           {rankpvp.map((rank: RankPVP, i) => (
             <tr key={rank.id}>
-              <td className={`${rankImage} ${i < 3 ? rankTop : rankDown}`}>
+              <td className={`${rankImage} ${rankDown}`}>
                 {rank.player && (
                   <img
                     className="absolute top-0 left-0 object-cover w-full h-full p-2 rounded-full"
@@ -55,19 +55,22 @@ const Kills: React.FC<KillsProps> = ({ rankpvp, classes }) => {
                   />
                 )}
               </td>
-              <td className={`${rankDefault} ${i < 3 ? rankTop : rankDown}`}>
+              <td className={`${rankDefault} ${rankDown}`}>
                 {rank.player?.name}
               </td>
-              <td className={`${rankDefault} ${i < 3 ? rankTop : rankDown} ${rank.player && rank.guild?.master && rank.player.name === rank.guild.master.name ? 'text-(--primary-red-2)' : ''}`}>
+              <td className={`${rankDefault} ${rankDown} ${rank.player && rank.guild?.master && rank.player.name === rank.guild.master.name ? 'text-(--primary-red-2)' : ''}`}>
                 {rank.guild?.name ?? '-'}
               </td>
-              <td className={`${rankDefault} ${i < 3 ? rankTop : rankDown}`}>
+              <td className={`${rankDefault} ${rankDown}`}>
                 {rank.player?.kills_count ?? 0}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <svg className="pointer-events-none rotate-[180deg] scale-x-[-1]" viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg">
+        <path className="fill-(--gray-1)" d="M0,160L1440,0L1440,160L0,160Z"></path>
+      </svg>
     </div>
   );
 };
