@@ -46,7 +46,13 @@ const Castles: React.FC<CastlesProps> = ({ ranksa, classes }) => {
         <tbody>
           {ranksa.map((rank: RankSA, i) => (
             <tr key={rank.id}>
-              <td className={`${rankImage} ${rankDown}`}></td>
+              <td className={`${rankImage} ${rankDown}`}>
+                <img
+                  className="object-contain m-auto"
+                  src={`/assets/images/guild-icon.png`}
+                  alt={`guild-icon`}
+                />
+              </td>
               <td className={`${rankDefault} ${rankDown}`}>{rank.guild?.name ?? '-'}</td>
               <td className={`${rankDefault} ${rankDown}`}>{rank.guild?.castles_count ?? 0}</td>
               <td className={`${rankDefault} ${rankDown}`}>{rank.guild?.members_count ?? 0}</td>
