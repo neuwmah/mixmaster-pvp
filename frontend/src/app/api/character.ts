@@ -28,10 +28,10 @@ export async function getCharacter(id: string): Promise<Character | null> {
   }
 }
 
-export async function getCharactersByUser(user: Partial<User>): Promise<Character[] | []> {
+export async function getCharactersByUser(user: Partial<User>): Promise<Character[]> {
   try {
     const characters = await getCharacters();
-    return characters.filter(c => c.user && c.user.id === user.id);
+    return characters.filter(c => c.user?.id === user.id);
   } catch {
     return [];
   }

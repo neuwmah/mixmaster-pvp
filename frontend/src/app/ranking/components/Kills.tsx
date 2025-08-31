@@ -50,7 +50,7 @@ const Kills: React.FC<KillsProps> = ({ rankpvp, classes }) => {
                 {rank.player && (
                   <img
                     className="absolute top-0 left-0 object-cover w-full h-full p-2 rounded-full"
-                    src={`/assets/images/characters/${rank.player.class.toLocaleLowerCase()}.jpg`}
+                    src={`/assets/images/characters/${rank.player.class?.toLocaleLowerCase?.()}.jpg`}
                     alt={`${rank.player.name} class`}
                   />
                 )}

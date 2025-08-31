@@ -32,13 +32,15 @@ export async function characterRoutes(app: FastifyInstance) {
   })
 
   app.get('/characters', async () => {
-    return prisma.character.findMany({ include: { user: true, guild: true } })
+    const list = await prisma.character.findMany({ include: { user: true, guild: true } })
+    return list.map((c: any) => c.user ? { ...c, user: { ...c.user, password: undefined } } : c)
   })
 
   app.get('/characters/:id', async (req, reply) => {
     const { id } = req.params as { id: string }
     const item = await prisma.character.findUnique({ where: { id }, include: { user: true, guild: true } })
     if (!item) return reply.code(404).send({ message: 'Not found' })
+    if (item.user) (item as any).user.password = undefined
     return item
   })
 
