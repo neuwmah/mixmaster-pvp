@@ -30,7 +30,6 @@ model Guild {
   masterId       String?     @unique
   master         Character?  @relation("GuildMaster", fields: [masterId], references: [id])
   castles_count  Int         @default(0)
-  members_count  Int         @default(0)
   members        Character[] @relation("GuildMembers")
 }
 
