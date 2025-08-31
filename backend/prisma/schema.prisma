@@ -20,6 +20,7 @@ model User {
   online_time           Int         @default(0)
   last_connection_date  DateTime?   @db.Timestamptz(6)
   last_connection_ip    String?     @db.VarChar(64)
+  is_admin              Boolean     @default(false)
 }
 
 model Guild {
