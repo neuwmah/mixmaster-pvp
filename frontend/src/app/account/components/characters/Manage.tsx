@@ -12,7 +12,18 @@ interface ManageProps {
 export default function Manage({ characters, setCreate }: ManageProps) {
   return (
     <div className="manage w-full flex flex-col items-center">
-      <div className="text-sm grid mt-12 w-full max-w-[1000px] gap-[1.6rem] grid-cols-[repeat(1,1fr)] sm:flex sm:justify-center sm:flex-wrap">
+      <div
+        className={`
+          mt-12
+          text-sm
+          w-full max-w-[1000px]
+          grid gap-[1.6rem] grid-cols-[repeat(1,1fr)] 
+          sm:flex sm:justify-center sm:flex-wrap
+          ${characters.length >= 3 &&
+            'pb-[1.6rem]'
+          }
+        `}
+      >
         {characters.map((character, i) => (
           <Card {...character} key={i} />
         ))}

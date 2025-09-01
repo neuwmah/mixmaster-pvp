@@ -1,8 +1,10 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import type { Swiper as SwiperType } from 'swiper'
 
 import Manage from '@/app/account/components/characters/Manage';
-import Create from './characters/Create';
+import Create from '@/app/account/components/characters/Create';
+import CreateBackground from '@/app/account/components/characters/CreateBackground';
 
 import { User } from '@/types/user';
 
@@ -12,14 +14,19 @@ interface CharactersProps {
 
 export default function Characters({ user }: CharactersProps) {
   const [create, setCreate] = useState(false);
+  const backgroundRef = useRef<SwiperType | null>(null)
 
   useEffect(() => {
     setCreate(false);
   }, []);
 
   return (
-    <section className="section-characters section">
-      <div className="container flex-col items-center">
+    <section className="section-characters section overflow-hidden my-[0!important] py-20 sm:py-32">
+      {(!user.characters?.length || create) &&
+        <CreateBackground backgroundRef={backgroundRef} />
+      }
+
+      <div className="container flex-col items-center z-1 relative">
 
         <h2 className="title">
           Characters 👥
@@ -33,11 +40,19 @@ export default function Characters({ user }: CharactersProps) {
         </p>
 
         {!user.characters?.length || create
-          ? <Create user={user} setCreate={setCreate} />
+          ? <Create user={user} create={create} setCreate={setCreate} backgroundRef={backgroundRef} />
           : <Manage characters={user.characters} setCreate={setCreate} />
         }
 
       </div>
+
+      <svg className="absolute top-0 left-0 w-full pointer-events-none z-1 rotate-[180deg]" viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg">
+        <path className="fill-(--gray-1)" d="M0,0L1440,40L1440,40L0,40Z"></path>
+      </svg>
+
+      <svg className="absolute bottom-0 left-0 w-full pointer-events-none z-1" viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg">
+        <path className="fill-(--gray-1)" d="M0,0L1440,40L1440,40L0,40Z"></path>
+      </svg>
     </section>
   )
 }

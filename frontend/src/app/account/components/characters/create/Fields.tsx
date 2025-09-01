@@ -52,7 +52,7 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
   return (
     <div className="fields flex flex-col gap-8 p-[2.4rem] bg-(--black) border-[1px] border-(--gray-1)">
       <div className="nickname">
-        <p className="text-xs mb-4 text-center">Set new character nickname.</p>
+        <p className="text-sm mb-4 text-center">Set character nickname.</p>
         <div className="field flex">
           <label className="text-xs font-bold flex items-center justify-center w-[8rem] bg-(--primary-orange-1) rounded-l-[8px]" htmlFor="name">Name</label>
           <input
@@ -63,6 +63,7 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
             placeholder="Type here..."
             value={name}
             onChange={(e) => setName(e.target.value)}
+            minLength={3}
             maxLength={16}
             required
           />
@@ -70,8 +71,8 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
       </div>
 
       <div className="attributes">
-        <div className="text text-xs flex items-center justify-between mb-4">
-          <span>Choose new character attributes.</span>
+        <div className="text text-sm flex items-center justify-between mb-4">
+          <span>Choose character attributes.</span>
           <span>Points: <strong className={remaining < 0 ? 'text-red-500' : ''}>{remaining}</strong></span>
         </div>
         <div className="list flex flex-col gap-[1px]">
@@ -82,14 +83,14 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
             return (
               <div key={key} className="attribute flex items-stretch">
                 <label className="text-xs font-bold flex items-center justify-center w-[8rem] bg-(--primary-orange-1) rounded-l-[8px]" htmlFor={key}>{label}</label>
-                <div className="quantity flex text-xs justify-between items-center text-(--gray-0) h-[3.2rem] px-[.8rem] w-[16rem] bg-white flex-1 rounded-r-[8px]">
+                <div className="quantity flex text-xs justify-between items-center text-(--gray-0) h-[3.2rem] w-[16rem] bg-white flex-1 rounded-r-[8px] overflow-hidden">
                   <button
-                    className="h-[2rem] w-[2rem] rounded-full flex items-center justify-center cursor-pointer bg-(--gray-5) duration-[.25s] hover:bg-(--primary-orange-1) hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+                    className="h-[3.2rem] w-[3.2rem] flex items-center justify-center cursor-pointer bg-(--gray-5) duration-[.25s] hover:bg-(--gray-4) text-(--gray-1) hover:text-black disabled:opacity-30 disabled:cursor-not-allowed"
                     type="button"
                     disabled={disableMinus || sending}
                     onClick={() => update(key, -1)}
                   >
-                    <MinusIcon className="w-[.8rem] h-[.8rem] stroke-[3.2] duration-[.25s]" />
+                    <MinusIcon className="w-[1.6rem] h-[1.6rem] stroke-[2.4] duration-[.25s]" />
                   </button>
                   <input
                     className="min-w-0 text-center outline-none w-12 cursor-default"
@@ -100,12 +101,12 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
                     readOnly
                   />
                   <button
-                    className="h-[2rem] w-[2rem] rounded-full flex items-center justify-center cursor-pointer bg-(--gray-5) duration-[.25s] hover:bg-(--primary-orange-1) hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+                    className="h-[3.2rem] w-[3.2rem] flex items-center justify-center cursor-pointer bg-(--gray-5) duration-[.25s] hover:bg-(--gray-4) text-(--gray-1) hover:text-black disabled:opacity-30 disabled:cursor-not-allowed"
                     type="button"
                     disabled={disablePlus || sending}
                     onClick={() => update(key, 1)}
                   >
-                    <PlusIcon className="w-[.8rem] h-[.8rem] stroke-[3.2] duration-[.25s]" />
+                    <PlusIcon className="w-[1.6rem] h-[1.6rem] stroke-[2.4] duration-[.25s]" />
                   </button>
                 </div>
               </div>

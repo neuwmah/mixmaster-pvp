@@ -6,6 +6,8 @@ import { cookies } from 'next/headers';
 
 import Form from './Form';
 
+import BackgroundMix from '@/components/BackgroundMix';
+
 export default async function SignInPage() {
   const cookieStore = await cookies();
   const token = cookieStore.get('sessionToken')?.value;
@@ -14,8 +16,8 @@ export default async function SignInPage() {
     return redirect('/account')
 
   return (
-    <main className="flex flex-1 bg-gradient-to-b from-black to-(--gray-0) sm:items-center">
-      <section className="section-signup section">
+    <main className="flex flex-1 bg-gradient-to-b from-black to-(--gray-0) sm:items-center relative">
+      <section className="section-signup section relative">
         <div className="container flex-col items-center">
 
           <h1 className="title">
@@ -30,6 +32,7 @@ export default async function SignInPage() {
 
         </div>
       </section>
+      <BackgroundMix char1="penril" char2="ditt" />
     </main>
   );
 }

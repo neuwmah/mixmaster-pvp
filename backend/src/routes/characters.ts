@@ -1,19 +1,52 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import { prisma } from '../db.js'
+import { Prisma } from '@prisma/client'
 
 const bodySchema = z.object({
   userId: z.string().optional(),
-  name: z.string().min(1),
-  class: z.string().min(1),
+  name: z.string().min(3).max(16),
+  class: z.enum(['ditt', 'jin', 'penril', 'phoy']),
+  energy: z.number().int().min(10).max(500).default(0),
+  agility: z.number().int().min(10).max(500).default(0),
+  accuracy: z.number().int().min(10).max(500).default(0),
+  luck: z.number().int().min(10).max(500).default(0),
 })
 
 export async function characterRoutes(app: FastifyInstance) {
   app.post('/characters', async (req, reply) => {
     const parsed = bodySchema.safeParse(req.body)
-    if (!parsed.success) return reply.code(400).send({ errors: parsed.error.flatten() })
-    const item = await prisma.character.create({ data: parsed.data })
-    return reply.code(201).send(item)
+    if (!parsed.success) {
+      return reply.code(400).send({ message: 'Invalid data', errors: parsed.error.flatten() })
+    }
+    try {
+      const item = await prisma.character.create({ data: parsed.data })
+      return reply.code(201).send(item)
+    } catch (e: any) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError) {
+        if (e.code === 'P2002') {
+          return reply.code(409).send({ message: 'Character name already in use.' })
+        }
+      }
+      return reply.code(500).send({ message: 'Internal error' })
+    }
+  })
+
+  app.put('/characters/:id', async (req, reply) => {
+    const { id } = req.params as { id: string }
+    const parsed = bodySchema.partial().refine(d => Object.keys(d).length > 0, { message: 'Empty body' }).safeParse(req.body)
+    if (!parsed.success) {
+      return reply.code(400).send({ message: 'Invalid data', errors: parsed.error.flatten() })
+    }
+    try {
+      const updated = await prisma.character.update({ where: { id }, data: parsed.data })
+      return updated
+    } catch (e: any) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
+        return reply.code(409).send({ message: 'Character name already in use.' })
+      }
+      return reply.code(404).send({ message: 'Not found' })
+    }
   })
 
   app.get('/characters', async () => {
@@ -27,18 +60,6 @@ export async function characterRoutes(app: FastifyInstance) {
     if (!item) return reply.code(404).send({ message: 'Not found' })
     if (item.user) (item as any).user.password = undefined
     return item
-  })
-
-  app.put('/characters/:id', async (req, reply) => {
-    const { id } = req.params as { id: string }
-    const parsed = bodySchema.partial().refine(d => Object.keys(d).length > 0, { message: 'Empty body' }).safeParse(req.body)
-    if (!parsed.success) return reply.code(400).send({ errors: parsed.error.flatten() })
-    try {
-      const updated = await prisma.character.update({ where: { id }, data: parsed.data })
-      return updated
-    } catch {
-      return reply.code(404).send({ message: 'Not found' })
-    }
   })
 
   app.delete('/characters/:id', async (req, reply) => {

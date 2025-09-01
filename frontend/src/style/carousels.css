@@ -2,6 +2,9 @@
 .swiper-static {
   position: static !important;
 }
+.swiper-absolute {
+  position: absolute !important;
+}
 
 /* pagination */
 .swiper-pagination {
@@ -43,8 +46,8 @@
   border-radius: 100%;
   transition: border .25s, opacity .25s, background-color .25s;
   color: var(--white);
-  background: var(--black);
-  border: .1rem solid var(--white);
+  background: var(--gray-0);
+  border: .1rem solid var(--gray-0);
 }
 .swiper-button-prev:not(.swiper-button-disabled):hover,
 .swiper-button-next:not(.swiper-button-disabled):hover {
@@ -53,12 +56,14 @@
 }
 .swiper-button-disabled {
   opacity: 1 !important;
+  background: none !important;
   border: .1rem solid var(--black);
 }
 .swiper-button-prev::after,
 .swiper-button-next::after {
   font-size: .8rem !important;
   font-weight: 900 !important;
+  transform: scale(1.2) !important;
 
   transition: color .25s;
   color: var(--white);

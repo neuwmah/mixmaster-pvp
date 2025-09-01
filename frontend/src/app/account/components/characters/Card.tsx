@@ -3,23 +3,43 @@ import React, { useState } from 'react';
 
 import {
   ArrowUturnLeftIcon,
-  PencilSquareIcon
+  PencilSquareIcon,
+  TrashIcon
 } from '@heroicons/react/24/outline';
 
-import { Character } from '@/types/character';
+import Infos from '@/app/account/components/characters/card/Infos';
+import Edit from '@/app/account/components/characters/card/Edit';
+import ResetPosition from '@/app/account/components/characters/card/_ResetPosition';
+import TransferCharacter from '@/app/account/components/characters/card/_TransferCharacter';
+import ChangeNickname from '@/app/account/components/characters/card/_ChangeNickname';
 
-import Infos from './card/Infos';
-import Edit from './card/Edit';
-import ResetPosition from './card/_ResetPosition';
-import TransferCharacter from './card/_TransferCharacter';
-import ChangeNickname from './card/_ChangeNickname';
+import { useRouter } from 'next/navigation';
+import { deleteCharacter } from '@/app/api/character';
+
+import { Character } from '@/types/character';
 
 export default function Card(character: Character) {
   const [edit, setEdit] = useState(false);
   const [changeNickname, setChangeNickname] = useState(false)
   const [transferCharacter, setTransferCharacter] = useState(false)
   const [resetPosition, setResetPosition] = useState(false)
-  
+  const [deleting, setDeleting] = useState(false)
+  const router = useRouter()
+
+  async function removeCharacter() {
+    if (deleting) return;
+    const okConfirm = window.confirm(`Are you sure?`);
+    if (!okConfirm) return;
+    setDeleting(true);
+    const ok = await deleteCharacter(character.id);
+    if (!ok) {
+      alert('Error deleting character.');
+      return;
+    }
+    setDeleting(false);
+    router.refresh();
+  }
+
   return (
     <div className="info text-ellipsis overflow-hidden min-w-0 p-8 bg-(--black) relative min-h-[32rem] sm:w-[calc(33.333%-1.0666rem)]">
       
@@ -51,13 +71,25 @@ export default function Card(character: Character) {
         }
       </div>
 
-      <div className="absolute pointer-events-none p-8 top-0 right-0 z-1 flex flex-col">
-        <button className="pointer-events-auto cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1)" type="button"
-          onClick={() => { setEdit(!edit) }} >
+      <div className="absolute pointer-events-none p-8 top-0 right-0 z-1 flex flex-col gap-8">
+        <button
+          className="pointer-events-auto cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1)"
+          type="button"
+          onClick={() => { setEdit(!edit) }}
+        >
           {edit
             ? <ArrowUturnLeftIcon className="icon" />
             : <PencilSquareIcon className="icon" />
           }
+        </button>
+
+        <button
+          className="pointer-events-auto cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1) disabled:opacity-40 disabled:cursor-not-allowed"
+          type="button"
+          onClick={removeCharacter}
+          disabled={deleting}
+        >
+          <TrashIcon className="icon" />
         </button>
       </div>
 

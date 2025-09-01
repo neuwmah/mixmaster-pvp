@@ -11,10 +11,12 @@ import { User } from '@/types/user';
 
 interface CreateProps {
   user: User;
+  create: boolean;
+  backgroundRef: any;
   setCreate: (value: boolean) => void;
 }
 
-export default function Create({ user, setCreate }: CreateProps) {
+export default function Create({ user, create, backgroundRef, setCreate }: CreateProps) {
   const [name, setName] = useState('');
   const [job, setJob] = useState('ditt');
   const [attributes, setAttributes] = useState({ energy: 10, agility: 10, accuracy: 10, luck: 10 });
@@ -25,30 +27,31 @@ export default function Create({ user, setCreate }: CreateProps) {
   const handleCreate = async (event: React.FormEvent) => {
     event.preventDefault();
     setSending(true);
+    setErrorMessage('');
 
     try {
       const partialCharacter = {
         userId: user.id,
-        name: name,
+        name,
         class: job,
         energy: attributes.energy,
         agility: attributes.agility,
         accuracy: attributes.accuracy,
         luck: attributes.luck
-      }
+      };
 
-      const created = await createCharacter(partialCharacter);
-      if (!created) {
-        console.log('handleCreate create error');
-        setErrorMessage('Create error.');
-        setTimeout(() => setErrorMessage(''), 3000);
+      const result = await createCharacter(partialCharacter);
+      if (result.error || !result.data) {
+        alert(result.error || 'Create error.');
+        setTimeout(() => setErrorMessage(''), 2500);
       } else {
         await new Promise(r => setTimeout(r, 120));
         setCreate(false);
         router.refresh();
       }
-    } catch (error) {
-      console.error('handleCreate token error', error);
+    } catch {
+      alert('Unexpected error.');
+      setTimeout(() => setErrorMessage(''), 2500);
     }
 
     setSending(false);
@@ -58,19 +61,35 @@ export default function Create({ user, setCreate }: CreateProps) {
     <form
       onSubmit={handleCreate}
       className={`
-        form flex flex-col items-center w-full mt-12 max-w-[640px] duration-[.25s]
+        form flex flex-col items-center w-full mt-12 max-w-[700px] duration-[.25s]
         ${sending && 'pointer-events-none opacity-[.7]'}
       `}
     >
       
       <div className="wrapper w-full flex flex-col gap-12 sm:grid sm:grid-cols-2">
         <Fields sending={sending} name={name} setName={setName} attributes={attributes} setAttributes={setAttributes} />
-        <Jobs sending={sending} job={job} setJob={setJob} />
+        <Jobs sending={sending} job={job} setJob={setJob} backgroundRef={backgroundRef} />
       </div>
       
-      <button className={`w-auto button-orange mt-16 ${sending && 'pointer-events-none'}`} type="submit" aria-label="Click to Create">
-        Create ✨
-      </button>
+      <div className="mt-16 flex items-center gap-4">
+        {create &&
+          <button
+            className={`w-auto button-gray ${sending && 'pointer-events-none'}`}
+            aria-label="Click to Return"
+            type="button"
+            onClick={() => setCreate(false)}
+          >
+            Return
+          </button>      
+        }
+        <button
+          className={`w-auto button-orange ${sending && 'pointer-events-none'}`}
+          aria-label="Click to Create"
+          type="submit"
+        >
+          Create ✨
+        </button>
+      </div>
 
       {errorMessage && (
         <p className="text-base text-white mt-12">

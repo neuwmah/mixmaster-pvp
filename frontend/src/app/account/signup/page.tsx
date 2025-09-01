@@ -4,7 +4,9 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 
-import Form from './Form';
+import Form from '@/app/account/signup/Form';
+
+import BackgroundMix from '@/components/BackgroundMix';
 
 export default async function SignUpPage() {
   const cookieStore = await cookies();
@@ -14,7 +16,7 @@ export default async function SignUpPage() {
     return redirect('/account')
 
   return (
-    <main className="flex flex-1 bg-gradient-to-b from-black to-(--gray-0) sm:items-center">
+    <main className="flex flex-1 bg-gradient-to-b from-black to-(--gray-0) sm:items-center relative">
       <section className="section-signup section">
         <div className="container flex-col items-center">
 
@@ -30,6 +32,7 @@ export default async function SignUpPage() {
 
         </div>
       </section>
+      <BackgroundMix char1="penril" char2="ditt" />
     </main>
   )
 }

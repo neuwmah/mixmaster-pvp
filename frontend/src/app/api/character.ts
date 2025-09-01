@@ -37,8 +37,8 @@ export async function getCharactersByUser(user: Partial<User>): Promise<Characte
   }
 }
 
-export async function createCharacter(character: Partial<Character>): Promise<Character | null> {
-  if (!baseEnv) return null;
+export async function createCharacter(character: Partial<Character>): Promise<{ data?: Character; error?: string }> {
+  if (!baseEnv) return { error: 'API URL not configured' };
   const api = createApiClient(baseEnv);
   try {
     const payload = {
@@ -49,16 +49,29 @@ export async function createCharacter(character: Partial<Character>): Promise<Ch
       agility: character.agility,
       accuracy: character.accuracy,
       luck: character.luck,
-      level: character.level,
-      map: character.map
-    } as {
-      userId?: string; name?: string; class?: string; energy?: number; agility?: number; accuracy?: number; luck?: number; level?: number; map?: string;
+    };
+    const { data, status } = await api.post('/characters', payload);
+    if (status !== 201 || !data) return { error: 'Create failed' };
+    return { data: data as Character };
+  } catch (e: any) {
+    const msg = e?.response?.data?.message;
+    if (e?.response?.status === 409) {
+      return { error: msg || 'Character name already in use.' };
     }
-    const { data, status } = await api.post('/characters', payload)
-    if (status !== 201 || !data) return null
-    return data as Character
-  } catch (e) {
-    console.error('createCharacter error', e)
-    return null
+    if (e?.response?.status === 400) {
+      return { error: msg || 'Invalid data.' };
+    }
+    return { error: 'Unexpected error.' };
+  }
+}
+
+export async function deleteCharacter(id: string): Promise<boolean> {
+  if (!baseEnv) return false;
+  const api = createApiClient(baseEnv);
+  try {
+    const { status } = await api.delete(`/characters/${id}`);
+    return status === 204;
+  } catch {
+    return false;
   }
 }

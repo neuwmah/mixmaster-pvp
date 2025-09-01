@@ -5,28 +5,28 @@ import { Navigation } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/navigation'
-import 'swiper/css/pagination'
 
 import { checkMobile } from '@/hooks/checkMobile'
 
 interface JobsProps {
   sending: boolean
   job: string
+  backgroundRef: any
   setJob: (value: string) => void
 }
 
-const CLASSES: { value: string; label: string; image: string }[] = [
-  { value: 'ditt', label: 'Ditt', image: '/assets/images/characters/char-ditt.png' },
-  { value: 'jin', label: 'Jin', image: '/assets/images/characters/char-jin.png' },
-  { value: 'penril', label: 'Penril', image: '/assets/images/characters/char-penril.png' },
-  { value: 'phoy', label: 'Phoy', image: '/assets/images/characters/char-phoy.png' },
+const CLASSES: { value: string; label: string; image: string; desc: string }[] = [
+  { value: 'ditt', label: 'Ditt', image: '/assets/images/characters/char-ditt.png', desc: 'Swordsman' },
+  { value: 'jin', label: 'Jin', image: '/assets/images/characters/char-jin.png', desc: 'Boxer' },
+  { value: 'penril', label: 'Penril', image: '/assets/images/characters/char-penril.png', desc: 'Archer' },
+  { value: 'phoy', label: 'Phoy', image: '/assets/images/characters/char-phoy.png', desc: 'Gunslinger' },
 ]
 
-export default function Jobs({ sending, job, setJob }: JobsProps) {
+export default function Jobs({ sending, job, backgroundRef, setJob }: JobsProps) {
   const mobile = checkMobile()
   const swiperRef = useRef<SwiperType | null>(null)
+  const prevIndexRef = useRef(0)
 
-  // sincroniza slide quando job muda externamente
   useEffect(() => {
     const idx = CLASSES.findIndex(c => c.value === job)
     if (idx >= 0 && swiperRef.current && swiperRef.current.activeIndex !== idx) {
@@ -35,11 +35,11 @@ export default function Jobs({ sending, job, setJob }: JobsProps) {
   }, [job])
 
   return (
-    <div className="jobs flex flex-col gap-4 p-[2.4rem] bg-(--black) border-[1px] border-(--gray-1) min-h-[28rem] overflow-hidden">
+    <div className="jobs flex flex-col gap-8 p-[2.4rem] bg-(--black) border-[1px] border-(--gray-1) min-h-[28rem] overflow-hidden">
 
-      <span className="text text-xs text-center">Select new character class.</span>
+      <span className="text text-sm text-center">Select character class.</span>
 
-      <div className="carousel relative flex flex-1 w-full max-w-[20rem] mx-auto">
+      <div className="carousel relative flex flex-1 w-full mx-auto">
         <Swiper
           className="swiper-static swiper-fade-1"
           spaceBetween={mobile ? 16 : 24}
@@ -48,10 +48,33 @@ export default function Jobs({ sending, job, setJob }: JobsProps) {
           modules={[Navigation]}
           speed={400}
           navigation
-          onSwiper={(sw) => { swiperRef.current = sw }}
+          onSwiper={(sw) => { 
+            swiperRef.current = sw
+            prevIndexRef.current = sw.activeIndex
+          }}
           onSlideChange={(sw) => {
             const cls = CLASSES[sw.activeIndex]
             if (cls && cls.value !== job) setJob(cls.value)
+
+            if (backgroundRef?.current) {
+              const prev = prevIndexRef.current
+              const curr = sw.activeIndex
+              if (curr !== prev) {
+                const diff = Math.abs(curr - prev)
+                if (diff === 1) {
+                  if (curr > prev && typeof backgroundRef.current.slideNext === 'function') {
+                    backgroundRef.current.slideNext()
+                  } else if (curr < prev && typeof backgroundRef.current.slidePrev === 'function') {
+                    backgroundRef.current.slidePrev()
+                  } else if (typeof backgroundRef.current.slideTo === 'function') {
+                    backgroundRef.current.slideTo(curr)
+                  }
+                } else if (typeof backgroundRef.current.slideTo === 'function') {
+                  backgroundRef.current.slideTo(curr)
+                }
+              }
+              prevIndexRef.current = curr
+            }
           }}
         >
           {CLASSES.map((c, index) => {
@@ -74,7 +97,7 @@ export default function Jobs({ sending, job, setJob }: JobsProps) {
                     <img
                       src={c.image}
                       alt={c.label}
-                      className={`object-cover ${c.value == 'phoy' ? 'max-h-[12rem]' : 'max-h-[16rem]'}`}
+                      className={`object-contain ${c.value == 'phoy' ? 'max-h-[20rem]' : 'max-h-[24rem]'}`}
                     />
                   </div>
                 </button>
@@ -84,8 +107,12 @@ export default function Jobs({ sending, job, setJob }: JobsProps) {
         </Swiper>
       </div>
 
-      <span className="job text-xs text-center font-bold text-(--primary-orange-1)">
+      <span className="job text-base text-center font-bold text-(--primary-orange-1)">
         {CLASSES.find(c => c.value === job)?.label}
+      </span>
+
+      <span className="desc text-sm text-center text-white mt-[-2rem]">
+        {CLASSES.find(c => c.value === job)?.desc}
       </span>
 
     </div>

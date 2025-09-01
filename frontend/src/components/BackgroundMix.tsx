@@ -12,7 +12,14 @@ const BackgroundMix: React.FC<BackgroundMixProps> = ({ char1 = false, char2 = fa
   const mobile = checkMobile();
 
   return char1 || char2 ? (
-    <div className={`background-mix absolute z-${mobile ? 0 : 1} top-0 h-full w-full max-w-[1920px] left-[50%] translate-x-[-50%] mix-blend-darken brightness-[.15] pointer-events-none`}>
+    <div className={`
+      background-mix 
+      pointer-events-none
+      h-full w-full max-w-[1920px]
+      mix-blend-darken brightness-[.15]
+      absolute top-0 left-[50%] translate-x-[-50%]
+      z-${mobile ? 0 : 1}
+    `}>
       {char1 &&
         <img
           src={`/assets/images/characters/${char1}.jpg`}
