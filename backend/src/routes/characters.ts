@@ -19,14 +19,20 @@ export async function characterRoutes(app: FastifyInstance) {
     if (!parsed.success) {
       return reply.code(400).send({ message: 'Invalid data', errors: parsed.error.flatten() })
     }
+
+    if (parsed.data.userId) {
+      const count = await prisma.character.count({ where: { userId: parsed.data.userId } })
+      if (count >= 3) {
+        return reply.code(409).send({ message: 'User already has the maximum of 3 characters.' })
+      }
+    }
+
     try {
       const item = await prisma.character.create({ data: parsed.data })
       return reply.code(201).send(item)
     } catch (e: any) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        if (e.code === 'P2002') {
-          return reply.code(409).send({ message: 'Character name already in use.' })
-        }
+      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
+        return reply.code(409).send({ message: 'Character name already in use.' })
       }
       return reply.code(500).send({ message: 'Internal error' })
     }
@@ -38,6 +44,14 @@ export async function characterRoutes(app: FastifyInstance) {
     if (!parsed.success) {
       return reply.code(400).send({ message: 'Invalid data', errors: parsed.error.flatten() })
     }
+
+    if (parsed.data.userId) {
+      const count = await prisma.character.count({ where: { userId: parsed.data.userId, NOT: { id } } })
+      if (count >= 3) {
+        return reply.code(409).send({ message: 'Target user already has the maximum of 3 characters.' })
+      }
+    }
+
     try {
       const updated = await prisma.character.update({ where: { id }, data: parsed.data })
       return updated
