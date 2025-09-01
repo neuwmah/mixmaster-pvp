@@ -25,6 +25,5 @@ await app.register(authRoutes)
 const port = Number(process.env.PORT) || 3333
 app.listen({ port, host: '0.0.0.0' })
   .then(() => {
-    console.clear()
     console.log(`    ▲ API localhost:${port}`)
   })
