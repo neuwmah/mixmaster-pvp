@@ -33,6 +33,13 @@ model Guild {
   members        Character[] @relation("GuildMembers")
 }
 
+enum CharacterClass {
+  ditt
+  jin
+  penril
+  phoy
+}
+
 model Character {
   id                   String    @id @default(cuid())
   created_at           DateTime  @default(now())
@@ -41,8 +48,8 @@ model Character {
   guildId              String?
   guild                Guild?    @relation("GuildMembers", fields: [guildId], references: [id])
   masterOf             Guild?    @relation("GuildMaster")
-  name                 String
-  class                String
+  name                 String    @unique
+  class                CharacterClass
   level                Int       @default(1)
   map                  String    @default("magirita")
   exp                  Int       @default(0)
