@@ -15,13 +15,35 @@ interface CharactersProps {
 export default function Characters({ user }: CharactersProps) {
   const [create, setCreate] = useState(false);
   const backgroundRef = useRef<SwiperType | null>(null)
+  const userActionRef = useRef(false)
+  const initialRenderRef = useRef(true)
+
+  const handleSetCreate = (value: boolean) => {
+    userActionRef.current = true
+    setCreate(value)
+  }
 
   useEffect(() => {
-    setCreate(false);
-  }, []);
+    setCreate(false)
+  }, [])
+
+  useEffect(() => {
+    if (initialRenderRef.current) {
+      initialRenderRef.current = false
+      userActionRef.current = false
+      return
+    }
+    if (!userActionRef.current) return
+    userActionRef.current = false
+    const section = document.querySelector('.section-characters')
+    if (section)
+      setTimeout(() => {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 100)
+  }, [create])
 
   return (
-    <section className="section-characters section overflow-hidden my-[0!important] py-20 sm:py-32">
+    <section key={user.id} className="section-characters section overflow-hidden my-[0!important] py-20 sm:py-32 scroll-mt-20 sm:scroll-mt-32">
       {(!user.characters?.length || create) &&
         <CreateBackground backgroundRef={backgroundRef} />
       }
@@ -40,8 +62,8 @@ export default function Characters({ user }: CharactersProps) {
         </p>
 
         {!user.characters?.length || create
-          ? <Create user={user} create={create} setCreate={setCreate} backgroundRef={backgroundRef} />
-          : <Manage characters={user.characters} setCreate={setCreate} />
+          ? <Create user={user} create={create} setCreate={handleSetCreate} backgroundRef={backgroundRef} />
+          : <Manage characters={user.characters} setCreate={handleSetCreate} />
         }
 
       </div>

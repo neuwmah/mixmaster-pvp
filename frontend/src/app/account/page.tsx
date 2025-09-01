@@ -23,9 +23,9 @@ export default async function AccountPage() {
 
     return (
       <main>
+        {userData.is_admin && <Admin /> }
         <Details user={userData} />
         <Characters user={userData} />
-        {userData.is_admin && <Admin /> }
       </main>
     )
 

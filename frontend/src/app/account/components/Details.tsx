@@ -33,22 +33,22 @@ export default function Details({ user }: DetailsProps) {
             <strong>{user.username}</strong>
           </div>
           <div className={cardsClass}>
-            <p>E-MAIL</p>
-            <strong>{user.email}</strong>
-          </div>
-          <div className={cardsClass}>
             <p>STATUS</p>
             <strong className={`${user.online_status ? 'text-[#00ce00]' : 'text-[#ff4f4f]'}`}>
               {`${user.online_status ? 'Online' : 'Offline'}`}
             </strong>
           </div>
           <div className={cardsClass}>
-            <p>CHARACTERS</p>
-            <strong>{user.characters && user.characters.length}</strong>
+            <p>E-MAIL</p>
+            <strong>{user.email}</strong>
           </div>
           <div className={cardsClass}>
-            <p>ONLINE TIME</p>
-            <strong>{user.online_time}</strong>
+            <p>PASSWORD</p>
+            <strong>****</strong>
+          </div>
+          <div className={cardsClass}>
+            <p>PHONE</p>
+            <strong>{user.phone}</strong>
           </div>
         </div>
 

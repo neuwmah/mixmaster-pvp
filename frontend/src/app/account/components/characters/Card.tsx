@@ -1,25 +1,35 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 import {
   ArrowUturnLeftIcon,
   PencilSquareIcon,
   TrashIcon
-} from '@heroicons/react/24/outline';
+} from '@heroicons/react/24/outline'
 
-import Infos from '@/app/account/components/characters/card/Infos';
-import Edit from '@/app/account/components/characters/card/Edit';
-import ResetPosition from '@/app/account/components/characters/card/_ResetPosition';
-import TransferCharacter from '@/app/account/components/characters/card/_TransferCharacter';
-import ChangeNickname from '@/app/account/components/characters/card/_ChangeNickname';
+import Infos from '@/app/account/components/characters/card/Infos'
+import Edit from '@/app/account/components/characters/card/Edit'
+import ResetPosition from '@/app/account/components/characters/card/_ResetPosition'
+import TransferCharacter from '@/app/account/components/characters/card/_TransferCharacter'
+import ChangeNickname from '@/app/account/components/characters/card/_ChangeNickname'
 
-import { useRouter } from 'next/navigation';
-import { deleteCharacter } from '@/app/api/character';
+import { deleteCharacter } from '@/app/api/character'
+import { Character } from '@/types/character'
 
-import { Character } from '@/types/character';
+interface CardProps extends Character {
+  hoveredId?: string | null
+  setHoveredId?: (id: string | null) => void
+}
 
-export default function Card(character: Character) {
-  const [edit, setEdit] = useState(false);
+export default function Card(props: CardProps) {
+  const {
+    hoveredId,
+    setHoveredId,
+    ...character
+  } = props
+
+  const [edit, setEdit] = useState(false)
   const [changeNickname, setChangeNickname] = useState(false)
   const [transferCharacter, setTransferCharacter] = useState(false)
   const [resetPosition, setResetPosition] = useState(false)
@@ -27,37 +37,58 @@ export default function Card(character: Character) {
   const router = useRouter()
 
   async function removeCharacter() {
-    if (deleting) return;
-    const okConfirm = window.confirm(`Are you sure?`);
-    if (!okConfirm) return;
-    setDeleting(true);
-    const ok = await deleteCharacter(character.id);
+    if (deleting) return
+    if (!window.confirm('Are you sure?')) return
+    setDeleting(true)
+    const ok = await deleteCharacter(character.id)
     if (!ok) {
-      alert('Error deleting character.');
-      return;
+      alert('Error deleting character.')
+      setDeleting(false)
+      return
     }
-    setDeleting(false);
-    router.refresh();
+    router.refresh()
+  }
+
+  let brightnessClass = 'filter-[brightness(.2)blur(.4rem)]'
+  if (hoveredId) {
+    brightnessClass = hoveredId === character.id
+      ? 'filter-[brightness(.2)blur(.4rem)]'
+      : 'filter-[brightness(.1)blur(.4rem)]'
   }
 
   return (
-    <div className="info text-ellipsis overflow-hidden min-w-0 p-8 bg-(--black) relative min-h-[32rem] sm:w-[calc(33.333%-1.0666rem)]">
-      
-      <img 
-        className="absolute top-0 left-0 object-cover w-full h-full opacity-[.7] filter-[brightness(.2)]"
-        src={`/assets/images/characters/${character.class.toLocaleLowerCase()}.jpg`}
+    <div
+      className="
+        info
+        text-ellipsis
+        pointer-events-auto
+        relative overflow-hidden
+        bg-(--black)
+        min-h-[32rem] min-w-0 p-8 sm:w-[calc(33.333%-1.0666rem)]
+        transition-colors
+      "
+      onMouseEnter={() => setHoveredId?.(character.id)}
+      onMouseLeave={() => setHoveredId?.(null)}
+    >
+      <img
+        className={`
+          absolute top-0 left-0 object-cover w-full h-full opacity-[.7]
+          ${brightnessClass}
+          transition-[filter] duration-[.25s]
+        `}
+        src={`/assets/images/characters/${character.class.toLowerCase()}.jpg`}
         alt={`char-${character.id}-${character.class}`}
       />
 
       <div className="relative z-1">
         {edit
-          ? (changeNickname 
+          ? (changeNickname
             ? <ChangeNickname {...character} changeNickname={changeNickname} setChangeNickname={setChangeNickname} />
             : transferCharacter
               ? <TransferCharacter {...character} transferCharacter={transferCharacter} setTransferCharacter={setTransferCharacter} />
               : resetPosition
                 ? <ResetPosition {...character} resetPosition={resetPosition} setResetPosition={setResetPosition} />
-                : <Edit 
+                : <Edit
                   {...character}
                   changeNickname={changeNickname}
                   setChangeNickname={setChangeNickname}
@@ -75,24 +106,22 @@ export default function Card(character: Character) {
         <button
           className="pointer-events-auto cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1)"
           type="button"
-          onClick={() => { setEdit(!edit) }}
+          onClick={() => setEdit(!edit)}
         >
           {edit
             ? <ArrowUturnLeftIcon className="icon" />
             : <PencilSquareIcon className="icon" />
           }
         </button>
-
         <button
           className="pointer-events-auto cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1) disabled:opacity-40 disabled:cursor-not-allowed"
           type="button"
           onClick={removeCharacter}
           disabled={deleting}
         >
-          <TrashIcon className="icon" />
+          {deleting ? '...' : <TrashIcon className="icon" />}
         </button>
       </div>
-
     </div>
   )
 }

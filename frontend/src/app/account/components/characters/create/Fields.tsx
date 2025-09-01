@@ -90,7 +90,7 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
                     disabled={disableMinus || sending}
                     onClick={() => update(key, -1)}
                   >
-                    <MinusIcon className="w-[1.6rem] h-[1.6rem] stroke-[2.4] duration-[.25s]" />
+                    <MinusIcon className="w-[1.5rem] h-[1.5rem] stroke-[2.4] duration-[.25s]" />
                   </button>
                   <input
                     className="min-w-0 text-center outline-none w-12 cursor-default"
@@ -106,7 +106,7 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
                     disabled={disablePlus || sending}
                     onClick={() => update(key, 1)}
                   >
-                    <PlusIcon className="w-[1.6rem] h-[1.6rem] stroke-[2.4] duration-[.25s]" />
+                    <PlusIcon className="w-[1.5rem] h-[1.5rem] stroke-[2.4] duration-[.25s]" />
                   </button>
                 </div>
               </div>

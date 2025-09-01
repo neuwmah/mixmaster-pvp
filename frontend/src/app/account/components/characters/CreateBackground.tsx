@@ -28,7 +28,7 @@ export default function CreateBackground({ backgroundRef }: CreateBackgroundProp
           spaceBetween={0}
           slidesPerView={1}
           watchSlidesProgress
-          speed={400}
+          speed={700}
           onSwiper={(sw) => { backgroundRef.current = sw }}
           simulateTouch={false}
           draggable={false}

@@ -46,7 +46,7 @@ export default function Jobs({ sending, job, backgroundRef, setJob }: JobsProps)
           slidesPerView={1}
           watchSlidesProgress
           modules={[Navigation]}
-          speed={400}
+          speed={700}
           navigation
           onSwiper={(sw) => { 
             swiperRef.current = sw
