@@ -14,9 +14,10 @@ import { Changelog } from '@/types/changelog';
 
 interface CarouselProps {
   changelogs: Changelog[];
+  home?: boolean;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ changelogs }) => {
+const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
   const mobile = checkMobile();
   const [enoughSlides, setEnoughSlides] = useState(false);
 
@@ -55,7 +56,11 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs }) => {
               className="flex flex-col items-center text-(--white) hover:no-underline hover:border-(--gray-1) group"
               href={`/changelog/${item.slug}`}
             >
-              <div className="w-full overflow-hidden flex flex-col items-center bg-(--gray-0)">
+              <div className={`
+                w-full overflow-hidden
+                flex flex-col items-center
+                ${home ? 'bg-(--gray-0)' : 'bg-(--black)'}
+              `}>
 
                 {item.image_src && (
                   <img
@@ -65,11 +70,17 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs }) => {
                   />
                 )}
 
-                <div className="w-full flex flex-col items-start p-8 duration-250 border-1 border-(--gray-0) group-hover:border-(--gray-1)">
+                <div className={`
+                  w-full p-8
+                  flex flex-col items-start 
+                  duration-250 
+                  border-1
+                  ${home ? 'border-(--gray-0) group-hover:border-(--gray-1)' : 'border-(--black)'}
+                `}>
                   <p className="text-base font-medium">
                     {item.title}
                   </p>
-                  <span className="text-xs no-underline mt-2 text-(--gray-4)">
+                  <span className="text-xs no-underline mt-2 text-(--gray-4) group-hover:underline">
                     {new Date(item.created_at).toLocaleDateString()}
                   </span>
                   <span className="text-sm no-underline mt-6 text-(--white) line-clamp-3 overflow-hidden">
@@ -80,7 +91,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs }) => {
               </div>
               <svg className="pointer-events-none rotate-[180deg] scale-x-[-1]" viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg">
                 <path className="fill-(--primary-orange-1)" d="M0,160L1440,0L1440,160L0,160Z"></path>
-                <path className="fill-(--gray-1)" d="M0,0L1440,160L1440,160L0,160Z"></path>
+                <path className={home ? 'fill-(--gray-1)' : 'fill-(--black)'} d="M0,0L1440,160L1440,160L0,160Z"></path>
               </svg>
             </Link>
           </SwiperSlide>

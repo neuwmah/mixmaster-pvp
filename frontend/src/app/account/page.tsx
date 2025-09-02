@@ -4,9 +4,10 @@ import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import createApiClient from '@/hooks/axios'
 
+import Admin from '@/app/account/components/Admin';
 import Details from '@/app/account/components/Details';
 import Characters from '@/app/account/components/Characters';
-import Admin from '@/app/account/components/Admin';
+import News from '@/app/home/News';
 
 export default async function AccountPage() {
   const cookieStore = await cookies();
@@ -26,6 +27,7 @@ export default async function AccountPage() {
         {userData.is_admin && <Admin /> }
         <Details user={userData} />
         <Characters user={userData} />
+        {userData.is_admin && <News home={false} /> }
       </main>
     )
 

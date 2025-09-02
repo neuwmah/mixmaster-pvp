@@ -26,7 +26,7 @@ export default async function ChangelogPage({ params }: ChangelogProps) {
                   {post.title}
                 </h1>
 
-                <p className="text-xs text-center mt-2 text-(--gray-4)">
+                <p className="text-base text-center mt-6 text-(--gray-4)">
                   {new Date(post.created_at).toLocaleDateString()}
                 </p>
 
