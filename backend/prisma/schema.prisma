@@ -31,6 +31,8 @@ model Guild {
   master         Character?  @relation("GuildMaster", fields: [masterId], references: [id])
   castles_count  Int         @default(0)
   members        Character[] @relation("GuildMembers")
+  castles        Castle[]
+  icon           String?
 }
 
 enum CharacterClass {
@@ -67,6 +69,18 @@ model Character {
 
   @@index([userId])
   @@index([guildId])
+}
+
+model Castle {
+  id          String    @id @default(cuid())
+  created_at  DateTime  @default(now())
+  ownerId     String
+  owner       Guild     @relation(fields: [ownerId], references: [id])
+  city        String    @unique
+  weekday     String
+  time        DateTime  @db.Time(6)
+
+  @@index([ownerId])
 }
 
 model Changelog {
