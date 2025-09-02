@@ -5,6 +5,7 @@ import type { Swiper as SwiperType } from 'swiper'
 import Manage from '@/app/account/components/characters/Manage';
 import Create from '@/app/account/components/characters/Create';
 import CreateBackground from '@/app/account/components/characters/CreateBackground';
+import PendingTransfers from '@/app/account/components/characters/PendingTransfers'
 
 import { User } from '@/types/user';
 
@@ -60,6 +61,8 @@ export default function Characters({ user }: CharactersProps) {
             : `No characters yet. You can create a new one below.`
           }
         </p>
+
+        <PendingTransfers userId={user.id} />
 
         {!user.characters?.length || create
           ? <Create user={user} create={create} setCreate={handleSetCreate} backgroundRef={backgroundRef} />

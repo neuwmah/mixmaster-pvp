@@ -12,7 +12,7 @@ export default function Infos(character: Character) {
     <p>Accuracy: <strong>{character.accuracy}</strong></p>
     <p>Luck: <strong>{character.luck}</strong></p>
     <p>Map: <strong>{character.map.charAt(0).toUpperCase() + character.map.slice(1).toLowerCase()}</strong></p>
-    <p>Status: <strong>{character.online_status ? 'Online' : 'Offline'}</strong></p>
+    <p>Online status: <strong>{character.online_status ? 'Online' : 'Offline'}</strong></p>
     <p>Online time: <strong>{character.online_time}</strong></p>
     <p>Last connection: <strong>{character.last_connection_date ? new Date(character.last_connection_date).toLocaleDateString() : 'N/A'}</strong></p>
     <p>Last connection IP: <strong>{character.last_connection_ip || 'N/A'}</strong></p>

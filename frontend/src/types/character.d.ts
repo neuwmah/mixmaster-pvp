@@ -21,4 +21,7 @@ export type Character = {
   online_time: number
   last_connection_date?: string | Date | null
   last_connection_ip?: string | null
+  transferPending?: boolean
+  transferTargetUserId?: string | null
+  transferRequestedAt?: string | Date | null
 }

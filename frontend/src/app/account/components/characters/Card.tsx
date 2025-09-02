@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 import {
@@ -14,7 +14,7 @@ import ResetPosition from '@/app/account/components/characters/card/_ResetPositi
 import TransferCharacter from '@/app/account/components/characters/card/_TransferCharacter'
 import ChangeNickname from '@/app/account/components/characters/card/_ChangeNickname'
 
-import { deleteCharacter } from '@/app/api/character'
+import { deleteCharacter, getCharacter } from '@/app/api/character'
 import { Character } from '@/types/character'
 
 interface CardProps extends Character {
@@ -34,9 +34,27 @@ export default function Card(props: CardProps) {
   const [transferCharacter, setTransferCharacter] = useState(false)
   const [resetPosition, setResetPosition] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [charData, setCharData] = useState(character)
   const router = useRouter()
 
+  useEffect(() => {
+    let active = true
+    async function refresh() {
+      const latest = await getCharacter(character.id)
+      if (!active || !latest) return
+      setCharData(prev => (
+        prev.transferPending !== latest.transferPending || prev.transferTargetUserId !== latest.transferTargetUserId
+          ? { ...prev, transferPending: latest.transferPending, transferTargetUserId: latest.transferTargetUserId }
+          : prev
+      ))
+    }
+    refresh()
+    const id = setInterval(refresh, 5000)
+    return () => { active = false; clearInterval(id) }
+  }, [character.id])
+
   async function removeCharacter() {
+    if (charData.transferPending) return
     if (deleting) return
     if (!window.confirm('Are you sure?')) return
     setDeleting(true)
@@ -76,20 +94,26 @@ export default function Card(props: CardProps) {
           ${brightnessClass}
           transition-[filter] duration-[.25s]
         `}
-        src={`/assets/images/characters/${character.class.toLowerCase()}.jpg`}
-        alt={`char-${character.id}-${character.class}`}
+        src={`/assets/images/characters/${charData.class.toLowerCase()}.jpg`}
+        alt={`char-${charData.id}-${charData.class}`}
       />
+
+      {charData.transferPending && (
+        <div className="absolute bottom-0 right-0 px-4 py-2 bg-(--primary-orange-1) text-white text-xs font-bold z-10">
+          PENDING...
+        </div>
+      )}
 
       <div className="relative z-1">
         {edit
           ? (changeNickname
-            ? <ChangeNickname {...character} changeNickname={changeNickname} setChangeNickname={setChangeNickname} />
+            ? <ChangeNickname {...charData} changeNickname={changeNickname} setChangeNickname={setChangeNickname} />
             : transferCharacter
-              ? <TransferCharacter {...character} transferCharacter={transferCharacter} setTransferCharacter={setTransferCharacter} />
+              ? <TransferCharacter {...charData} transferCharacter={transferCharacter} setTransferCharacter={setTransferCharacter} />
               : resetPosition
-                ? <ResetPosition {...character} resetPosition={resetPosition} setResetPosition={setResetPosition} />
+                ? <ResetPosition {...charData} resetPosition={resetPosition} setResetPosition={setResetPosition} />
                 : <Edit
-                  {...character}
+                  {...charData}
                   changeNickname={changeNickname}
                   setChangeNickname={setChangeNickname}
                   resetPosition={resetPosition}
@@ -98,7 +122,7 @@ export default function Card(props: CardProps) {
                   setTransferCharacter={setTransferCharacter}
                 />
             )
-          : <Infos {...character} />
+          : <Infos {...charData} />
         }
       </div>
 
@@ -117,7 +141,7 @@ export default function Card(props: CardProps) {
           className="pointer-events-auto cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1) disabled:opacity-40 disabled:cursor-not-allowed"
           type="button"
           onClick={removeCharacter}
-          disabled={deleting}
+          disabled={deleting || !!charData.transferPending}
         >
           {deleting ? '...' : <TrashIcon className="icon" />}
         </button>

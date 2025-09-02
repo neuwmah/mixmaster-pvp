@@ -77,7 +77,7 @@ export default function ChangeNickname({
             {sending ? 'Saving...' : 'Update'}
           </button>
         </div>
-        {error && <p className="text-xs text-(--primary-red-1) mt-2">{error}</p>}
+        {error && <p className="text-sm text-(--primary-red-1) mt-4">{error}</p>}
       </div>
     </form>
   </>

@@ -97,3 +97,65 @@ export async function updateCharacter(id: string, data: Partial<Character>): Pro
     return { error: 'Unexpected error.' }
   }
 }
+
+export async function initTransfer(id: string, targetUserId: string): Promise<{ data?: Character; error?: string }> {
+  if (!baseEnv) return { error: 'API URL not configured' }
+  try {
+    const api = createApiClient(baseEnv)
+    const { data, status } = await api.post(`/characters/${id}/transfer/init`, { targetUserId })
+    if (status !== 200) return { error: 'Init failed' }
+    return { data: data as Character }
+  } catch (e: any) {
+    const msg = e?.response?.data?.message
+    return { error: msg || 'Init failed' }
+  }
+}
+
+export async function cancelTransfer(id: string): Promise<{ data?: Character; error?: string }> {
+  if (!baseEnv) return { error: 'API URL not configured' }
+  try {
+    const api = createApiClient(baseEnv)
+    const { data, status } = await api.post(`/characters/${id}/transfer/cancel`)
+    if (status !== 200) return { error: 'Cancel failed' }
+    return { data: data as Character }
+  } catch (e: any) {
+    const msg = e?.response?.data?.message
+    return { error: msg || 'Cancel failed' }
+  }
+}
+
+export async function acceptTransfer(id: string): Promise<{ data?: Character; error?: string }> {
+  if (!baseEnv) return { error: 'API URL not configured' }
+  try {
+    const api = createApiClient(baseEnv)
+    const { data, status } = await api.post(`/characters/${id}/transfer/accept`)
+    if (status !== 200) return { error: 'Accept failed' }
+    return { data: data as Character }
+  } catch (e: any) {
+    const msg = e?.response?.data?.message
+    return { error: msg || 'Accept failed' }
+  }
+}
+
+export async function rejectTransfer(id: string): Promise<{ data?: Character; error?: string }> {
+  if (!baseEnv) return { error: 'API URL not configured' }
+  try {
+    const api = createApiClient(baseEnv)
+    const { data, status } = await api.post(`/characters/${id}/transfer/reject`)
+    if (status !== 200) return { error: 'Reject failed' }
+    return { data: data as Character }
+  } catch (e: any) {
+    const msg = e?.response?.data?.message
+    return { error: msg || 'Reject failed' }
+  }
+}
+
+export async function getPendingTransfers(targetUserId: string): Promise<Character[]> {
+  if (!baseEnv) return []
+  try {
+    const api = createApiClient(baseEnv)
+    const { data, status } = await api.get(`/characters/pending/${targetUserId}`)
+    if (status !== 200 || !Array.isArray(data)) return []
+    return data as Character[]
+  } catch { return [] }
+}
