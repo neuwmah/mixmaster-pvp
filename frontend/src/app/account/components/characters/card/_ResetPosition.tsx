@@ -7,6 +7,7 @@ import { updateCharacter } from '@/app/api/character'
 interface ResetPositionProps extends Character {
   resetPosition: boolean
   setResetPosition: (value: boolean) => void
+  onUpdatedMap?: (map: string) => void
 }
 
 const cities = ['magirita', 'mekrita', 'herseba', 'rudis', 'purmai'] as const
@@ -14,6 +15,7 @@ const cities = ['magirita', 'mekrita', 'herseba', 'rudis', 'purmai'] as const
 export default function ResetPosition({
   resetPosition,
   setResetPosition,
+  onUpdatedMap,
   ...character
 }: ResetPositionProps) {
   const [newCity, setNewCity] = useState(character.map.toLowerCase())
@@ -36,6 +38,7 @@ export default function ResetPosition({
       setSending(false)
       return
     }
+    onUpdatedMap?.(newCity)
     setResetPosition(false)
     router.refresh()
   }
@@ -100,7 +103,7 @@ export default function ResetPosition({
             type="submit"
             disabled={sending || newCity === character.map.toLowerCase()}
           >
-            {sending ? 'Saving...' : 'Update'}
+            {sending ? '...' : 'Update'}
           </button>
         </div>
         {error && <p className="text-sm text-(--primary-red-1) mt-4">{error}</p>}

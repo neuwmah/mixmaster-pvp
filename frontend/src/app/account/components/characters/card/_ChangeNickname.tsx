@@ -7,11 +7,13 @@ import { updateCharacter } from '@/app/api/character'
 interface ChangeNicknameProps extends Character {
   changeNickname: boolean
   setChangeNickname: (value: boolean) => void
+  onUpdatedName?: (name: string) => void
 }
 
 export default function ChangeNickname({
   changeNickname,
   setChangeNickname,
+  onUpdatedName,
   ...character
 }: ChangeNicknameProps) {
   const [newName, setNewName] = useState(character.name)
@@ -34,8 +36,9 @@ export default function ChangeNickname({
       setSending(false)
       return
     }
-    setChangeNickname(false)
+    onUpdatedName?.(newName)
     router.refresh()
+    setChangeNickname(false)
   }
 
   return <>
@@ -74,7 +77,7 @@ export default function ChangeNickname({
             type="submit"
             disabled={sending || newName.trim().length < 3}
           >
-            {sending ? 'Saving...' : 'Update'}
+            {sending ? '...' : 'Update'}
           </button>
         </div>
         {error && <p className="text-sm text-(--primary-red-1) mt-4">{error}</p>}

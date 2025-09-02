@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 
 import {
@@ -37,6 +37,14 @@ export default function Card(props: CardProps) {
   const [charData, setCharData] = useState(character)
   const router = useRouter()
 
+  const prevPendingRef = useRef<boolean | null>(null)
+  useEffect(() => {
+    if (prevPendingRef.current === true && charData.transferPending === false) {
+      if (typeof window !== 'undefined') window.location.reload()
+    }
+    prevPendingRef.current = !!charData.transferPending
+  }, [charData.transferPending])
+
   useEffect(() => {
     let active = true
     async function refresh() {
@@ -52,6 +60,10 @@ export default function Card(props: CardProps) {
     const id = setInterval(refresh, 5000)
     return () => { active = false; clearInterval(id) }
   }, [character.id])
+
+  useEffect(() => {
+    setCharData(prev => prev.name !== character.name ? { ...prev, name: character.name } : prev)
+  }, [character.name])
 
   async function removeCharacter() {
     if (charData.transferPending) return
@@ -107,11 +119,11 @@ export default function Card(props: CardProps) {
       <div className="relative z-1">
         {edit
           ? (changeNickname
-            ? <ChangeNickname {...charData} changeNickname={changeNickname} setChangeNickname={setChangeNickname} />
+            ? <ChangeNickname {...charData} changeNickname={changeNickname} setChangeNickname={setChangeNickname} onUpdatedName={(n) => setCharData(prev => ({ ...prev, name: n }))} />
             : transferCharacter
               ? <TransferCharacter {...charData} transferCharacter={transferCharacter} setTransferCharacter={setTransferCharacter} />
               : resetPosition
-                ? <ResetPosition {...charData} resetPosition={resetPosition} setResetPosition={setResetPosition} />
+                ? <ResetPosition {...charData} resetPosition={resetPosition} setResetPosition={setResetPosition} onUpdatedMap={(m) => setCharData(prev => ({ ...prev, map: m }))} />
                 : <Edit
                   {...charData}
                   changeNickname={changeNickname}

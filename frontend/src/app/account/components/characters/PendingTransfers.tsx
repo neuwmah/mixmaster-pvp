@@ -54,7 +54,7 @@ export default function PendingTransfers({ userId }: PendingTransfersProps) {
       {list.map(c => (
         <div key={c.id} className="flex flex-col sm:flex-row sm:items-center gap-4 bg-(--black) p-4 rounded">
           <div className="text-sm text-center sm:text-left sm:ml-2 sm:mr-auto">
-            Transfering <span className="font-bold">{c.name}</span> ({c.class}) to you.
+            New request to receive <span className="font-bold">{c.name}</span> ({c.class})
           </div>
           <div className="flex gap-4">
             <button
