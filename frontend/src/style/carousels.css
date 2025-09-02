@@ -84,7 +84,7 @@
   pointer-events: none;
 }
 .swiper-fade-1 .swiper-slide {
-  transition: opacity .4s;
+  transition: opacity .7s;
   pointer-events: none;
   opacity: 0;
 }
