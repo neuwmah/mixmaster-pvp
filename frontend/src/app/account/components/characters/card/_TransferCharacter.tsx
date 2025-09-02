@@ -70,7 +70,7 @@ export default function TransferCharacter({
       <strong>{character.userId}</strong>
     </p>
 
-    <p className="text-sm mt-4 max-w-[calc(100%-3.2rem)]">
+    <p className="text-sm mt-4">
       {pending 
         ? `Transfer pending. Awaiting target user acceptance.`
         : `Set target user ID to transfer.`
