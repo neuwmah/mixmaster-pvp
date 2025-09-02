@@ -70,7 +70,7 @@ export default function ResetPosition({
                 bg-white
                 cursor-pointer
                 border-none
-                duration-200
+                duration-[.25s]
               "
               value={newCity}
               onChange={e => setNewCity(e.target.value)}
@@ -103,7 +103,7 @@ export default function ResetPosition({
             {sending ? 'Saving...' : 'Update'}
           </button>
         </div>
-        {error && <p className="text-xs text-red-400 mt-2">{error}</p>}
+        {error && <p className="text-xs text-(--primary-red-1) mt-2">{error}</p>}
       </div>
     </form>
   </>

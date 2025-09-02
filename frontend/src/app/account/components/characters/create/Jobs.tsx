@@ -90,7 +90,7 @@ export default function Jobs({ sending, job, backgroundRef, setJob }: JobsProps)
                     setJob(c.value)
                   }}
                   className={`
-                    group w-full h-full flex flex-col items-center justify-center overflow-hidden text-left duration-200 
+                    group w-full h-full flex flex-col items-center justify-center overflow-hidden text-left duration-[.25s] 
                   `}
                 >
                   <div className="flex justify-center relative w-full overflow-hidden">

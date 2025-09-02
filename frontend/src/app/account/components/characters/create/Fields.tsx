@@ -73,7 +73,7 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
       <div className="attributes">
         <div className="text text-sm flex items-center justify-between mb-4">
           <span>Choose character attributes.</span>
-          <span>Points: <strong className={remaining < 0 ? 'text-red-500' : ''}>{remaining}</strong></span>
+          <span>Points: <strong className={remaining < 0 ? 'text-(--primary-red-1)' : ''}>{remaining}</strong></span>
         </div>
         <div className="list flex flex-col gap-[1px]">
           {attrList.map(({ key, label }) => {
