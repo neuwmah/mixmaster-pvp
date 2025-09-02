@@ -21,6 +21,8 @@ model User {
   last_connection_date  DateTime?   @db.Timestamptz(6)
   last_connection_ip    String?     @db.VarChar(64)
   is_admin              Boolean     @default(false)
+
+  transferIncomingCharacters Character[] @relation("CharacterTransferTarget")
 }
 
 model Guild {
@@ -67,8 +69,14 @@ model Character {
   last_connection_date DateTime? @db.Timestamptz(6)
   last_connection_ip   String?   @db.VarChar(64)
 
+  transferPending        Boolean   @default(false)
+  transferTargetUserId   String?
+  transferTargetUser     User?     @relation("CharacterTransferTarget", fields: [transferTargetUserId], references: [id])
+  transferRequestedAt    DateTime?
+
   @@index([userId])
   @@index([guildId])
+  @@index([transferTargetUserId])
 }
 
 model Castle {
