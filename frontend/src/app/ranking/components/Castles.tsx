@@ -49,7 +49,7 @@ const Castles: React.FC<CastlesProps> = ({ ranksa, classes }) => {
               <td className={`${rankImage} ${rankDown}`}>
                 <img
                   className="object-contain m-auto"
-                  src={`/assets/images/guild-icon.png`}
+                  src={rank.guild?.icon || `/assets/images/guild-icon.png`}
                   alt={`guild-icon`}
                 />
               </td>

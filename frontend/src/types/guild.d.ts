@@ -6,4 +6,5 @@ export interface Guild {
   master?: Character | null
   castles_count: number
   members?: Character[]
+  icon?: string | null
 }

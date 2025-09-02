@@ -5,7 +5,8 @@ import { prisma } from '../db.js'
 const bodySchema = z.object({
   name: z.string().min(1),
   masterId: z.string().optional(),
-  castles_count: z.number().int().min(0).default(0)
+  castles_count: z.number().int().min(0).default(0),
+  icon: z.string().optional().default('/assets/images/guild-icon.png')
 })
 
 export async function guildRoutes(app: FastifyInstance) {
