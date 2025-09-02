@@ -17,7 +17,7 @@ export default async function SignUpPage() {
 
   return (
     <main className="flex flex-1 bg-gradient-to-b from-black to-(--gray-0) sm:items-center relative">
-      <section className="section-signup section">
+      <section className="section-signup section z-[2!important]">
         <div className="container flex-col items-center">
 
           <h1 className="title">

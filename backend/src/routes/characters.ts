@@ -11,6 +11,7 @@ const bodySchema = z.object({
   agility: z.number().int().min(10).max(500).default(0),
   accuracy: z.number().int().min(10).max(500).default(0),
   luck: z.number().int().min(10).max(500).default(0),
+  map: z.string().min(1).default('magirita'),
 })
 
 export async function characterRoutes(app: FastifyInstance) {

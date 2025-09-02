@@ -75,3 +75,25 @@ export async function deleteCharacter(id: string): Promise<boolean> {
     return false;
   }
 }
+
+export async function updateCharacter(id: string, data: Partial<Character>): Promise<{ data?: Character; error?: string }> {
+  if (!baseEnv) return { error: 'API URL not configured' }
+  const api = createApiClient(baseEnv)
+  try {
+    const payload: Record<string, any> = {}
+    ;['name','class','energy','agility','accuracy','luck','map','userId'].forEach(k => {
+      if (k in data && (data as any)[k] !== undefined) payload[k] = (data as any)[k]
+    })
+    if (!Object.keys(payload).length) return { error: 'No changes' }
+    const { data: resp, status } = await api.put(`/characters/${id}`, payload)
+    if (status !== 200) return { error: 'Update failed' }
+    return { data: resp as Character }
+  } catch (e: any) {
+    const st = e?.response?.status
+    const msg = e?.response?.data?.message
+    if (st === 409) return { error: msg || 'Character name already in use.' }
+    if (st === 400) return { error: msg || 'Invalid data.' }
+    if (st === 404) return { error: 'Character not found.' }
+    return { error: 'Unexpected error.' }
+  }
+}
