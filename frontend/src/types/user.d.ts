@@ -1,15 +1,26 @@
-export type User = {
+import type { Character } from './character'
+
+export interface User {
   id: string
-  created_at: string | Date
   username: string
-  password?: string
-  email: string
+  email?: string | null
   phone?: string | null
+  is_admin?: boolean
+  online_status?: boolean
   characters?: Character[]
-  online_points: number
-  online_status: boolean
-  online_time: number
-  last_connection_date?: string | Date | null
-  last_connection_ip?: string | null
-  is_admin: boolean
+  created_at?: string
+  updated_at?: string
+}
+
+export interface UserCreate {
+  username: string
+  email: string
+  password: string
+  phone?: string | null
+}
+
+export interface UserUpdate {
+  email?: string
+  phone?: string | null
+  password?: string
 }

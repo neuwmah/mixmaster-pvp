@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { PencilSquareIcon } from '@heroicons/react/24/outline';
-
 import LogoutButton from '@/app/account/components/details/LogoutButton';
+import ChangeableField from './details/ChangeableField';
 import BackgroundMix from '@/components/BackgroundMix';
 
 import { User } from '@/types/user';
@@ -12,14 +11,17 @@ interface DetailsProps {
 }
 
 export default function Details({ user }: DetailsProps) {
-  const cardsClass = 'info text-ellipsis overflow-hidden min-w-0 p-8 border border-(--gray-0) bg-black relative'
-  const hoverClass = 'group cursor-pointer'
-  const iconsClass = 'icon absolute top-[50%] translate-y-[-50%] right-8 color-white opacity-40 transition-[.25s] group-hover:opacity-100'
+  const cardsClass = `
+    info 
+    min-w-0 p-8
+    text-ellipsis relative overflow-hidden
+    border-[1px] border-(--gray-0) bg-(--black)
+  `
   
   const changeableData = [
-    { key: 'e-mail', data: user.email },
+    { key: 'e-mail', data: user.email ?? null },
     { key: 'password', data: null },
-    { key: 'phone', data: user.phone }
+    { key: 'phone', data: user.phone ?? null }
   ]
 
   return (
@@ -45,18 +47,22 @@ export default function Details({ user }: DetailsProps) {
           </div>
           <div className={cardsClass}>
             <p>STATUS</p>
-            <strong className={`${user.online_status ? 'text-[#00ce00]' : 'text-[#ff4f4f]'}`}>
-              {`${user.online_status ? 'Online' : 'Offline'}`}
+            <strong className={
+              user.online_status
+                ? 'text-[#00ce00]' 
+                : 'text-[#ff4f4f]'
+            }>
+              {user.online_status ? 'Online' : 'Offline'}
             </strong>
           </div>
-          {changeableData.map(changeable => {
-            return (
-              <div key={changeable.key} className={`${cardsClass} ${hoverClass}`}>
-                <p>{changeable.key.toLocaleUpperCase()}</p>
-                <strong>{changeable.data || '****'}</strong>
-                <PencilSquareIcon className={iconsClass} />
-              </div>
-            )
+
+          {changeableData.map((field: { key: string; data: string | null }) => {
+            return <ChangeableField
+              userId={user.id}
+              key={field.key}
+              field={field}
+              cardsClass={cardsClass}
+            />
           })}
         </div>
 

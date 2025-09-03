@@ -3,6 +3,7 @@ import { prisma } from '../db.js'
 import { z } from 'zod'
 import crypto from 'node:crypto'
 import { Prisma } from '@prisma/client'
+import jwt from '@fastify/jwt'
 
 const userCreateSchema = z.object({
   username: z.string().min(3),
@@ -16,11 +17,22 @@ const userLoginSchema = z.object({
   password: z.string()
 })
 
+const userUpdateSchema = z.object({
+  email: z.string().email().optional(),
+  phone: z.string().optional(),
+  password: z.string().min(3).optional()
+}).refine(d => Object.keys(d).length > 0, { message: 'empty body' })
+
 function hash(pw: string) {
   return crypto.createHash('sha256').update(pw).digest('hex')
 }
 
 export async function userRoutes(app: FastifyInstance) {
+  if (!app.hasDecorator('jwt')) {
+    if (!process.env.JWT_SECRET) throw new Error('JWT_SECRET missing')
+    await app.register(jwt, { secret: process.env.JWT_SECRET })
+  }
+
   app.get('/users', async () => {
     const users = await prisma.user.findMany({ include: { characters: true } })
     return users.map((u: any) => ({ ...u, password: undefined }))
@@ -64,5 +76,43 @@ export async function userRoutes(app: FastifyInstance) {
     if (!user) return reply.code(401).send({ message: 'invalid credentials' })
     if (user.password !== hash(password)) return reply.code(401).send({ message: 'invalid credentials' })
     return { id: user.id, username: user.username }
+  })
+
+  app.put('/users/:id', async (req, reply) => {
+    try {
+      const auth = req.headers.authorization
+      if (!auth) return reply.code(401).send({ message: 'unauthorized' })
+      const token = auth.split(' ')[1]
+      let payload: any
+      try {
+        payload = (app as any).jwt.verify(token)
+      } catch (err) {
+        return reply.code(401).send({ message: 'invalid token' })
+      }
+
+      const { id } = req.params as { id: string }
+      if (payload.userId !== id && !payload.is_admin) return reply.code(403).send({ message: 'forbidden' })
+
+      const parsed = userUpdateSchema.safeParse(req.body)
+      if (!parsed.success) return reply.code(400).send({ message: 'invalid data', errors: parsed.error.flatten() })
+
+      const data: any = {}
+      if (parsed.data.email !== undefined) data.email = parsed.data.email
+      if (parsed.data.phone !== undefined) data.phone = parsed.data.phone?.trim() === '' ? null : parsed.data.phone
+      if (parsed.data.password !== undefined) data.password = hash(parsed.data.password)
+
+      try {
+        const updated = await prisma.user.update({ where: { id }, data })
+        return { ...updated, password: undefined }
+      } catch (e) {
+        if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
+          return reply.code(409).send({ message: 'unique constraint', target: (e.meta as any)?.target })
+        }
+        return reply.code(404).send({ message: 'not found' })
+      }
+    } catch (e) {
+      console.error('update user error', (e as any)?.message)
+      return reply.code(500).send({ message: 'internal error' })
+    }
   })
 }

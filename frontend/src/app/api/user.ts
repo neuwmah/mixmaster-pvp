@@ -1,5 +1,5 @@
 import createApiClient from '@/hooks/axios'
-import { User } from '@/types/user'
+import { User, UserCreate, UserUpdate } from '@/types/user'
 
 const baseEnv = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL || ''
 
@@ -35,9 +35,32 @@ export async function verifyCredentials(username: string, password: string): Pro
   } catch { return null }
 }
 
-export async function createUser(paramsData: Pick<User,'username'|'password'|'email'|'phone'>): Promise<User | null> {
+export async function createUser(payload: UserCreate): Promise<User | null> {
   try {
-    const { data } = await api().post('/users', paramsData)
+    const { data } = await api().post('/users', payload)
     return data as User
   } catch (e) { console.error('createUser error', e); return null }
+}
+
+export async function updateUser(id: string, payload: UserUpdate): Promise<{ data?: User; error?: string }> {
+  try {
+    const body: UserUpdate = {}
+    ;(['email','phone','password'] as (keyof UserUpdate)[]).forEach(k => {
+      if (payload[k] !== undefined) (body as any)[k] = payload[k]
+    })
+    if (!Object.keys(body).length) return { error: 'Nada para atualizar.' }
+    const res = await fetch(`/api/user/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    })
+    if (!res.ok) {
+      const json = await res.json().catch(() => ({}))
+      return { error: json?.message || 'Falha ao atualizar.' }
+    }
+    const data = await res.json()
+    return { data }
+  } catch (e: any) {
+    return { error: 'Erro inesperado.' }
+  }
 }
