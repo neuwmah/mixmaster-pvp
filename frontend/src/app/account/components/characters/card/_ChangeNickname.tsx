@@ -60,7 +60,7 @@ export default function ChangeNickname({
         <p className="text-sm mb-4">Set character new nickname.</p>
         <div className="field flex">
           <input
-            className="text-xs text-(--gray-0) outline-none min-w-0 h-[3.2rem] px-[.8rem] w-[16rem] bg-white flex-1 max-w-[20rem]"
+            className="text-xs text-(--gray-0) outline-none min-w-0 h-[3.2rem] px-[.8rem] w-[16rem] bg-white flex-1"
             id="name"
             name="name"
             type="text"
@@ -73,7 +73,7 @@ export default function ChangeNickname({
             required
           />
           <button
-            className="text-xs font-bold ml-4 flex items-center justify-center w-[8rem] bg-(--primary-orange-1) cursor-pointer duration-[.25s] hover:bg-(--primary-orange-2) disabled:opacity-50 disabled:cursor-not-allowed"
+            className="text-xs font-bold ml-4 flex items-center justify-center min-w-[8rem] w-[8rem] bg-(--primary-orange-1) cursor-pointer duration-[.25s] hover:bg-(--primary-orange-2) disabled:opacity-50 disabled:cursor-not-allowed"
             type="submit"
             disabled={sending || newName.trim().length < 3}
           >

@@ -81,7 +81,7 @@ export default function TransferCharacter({
       {!pending && (
         <div className="field flex">
           <input
-            className="text-xs text-(--gray-0) outline-none min-w-0 h-[3.2rem] px-[.8rem] w-[20rem] bg-white"
+            className="text-xs text-(--gray-0) w-full outline-none min-w-0 h-[3.2rem] px-[.8rem] bg-white"
             placeholder="Type here..."
             value={targetUserId}
             onChange={e => setTargetUserId(e.target.value)}
@@ -89,7 +89,7 @@ export default function TransferCharacter({
             required
           />
           <button
-            className="text-xs font-bold flex items-center justify-center w-[8rem] ml-4 bg-(--primary-orange-1) cursor-pointer duration-[.25s] hover:bg-(--primary-orange-2) disabled:opacity-50 disabled:cursor-not-allowed"
+            className="text-xs font-bold flex items-center justify-center min-w-[8rem] w-[8rem] ml-4 bg-(--primary-orange-1) cursor-pointer duration-[.25s] hover:bg-(--primary-orange-2) disabled:opacity-50 disabled:cursor-not-allowed"
             type="submit"
             disabled={sending || !targetUserId.trim()}
           >

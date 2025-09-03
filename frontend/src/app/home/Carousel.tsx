@@ -59,7 +59,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
         pagination={{ clickable: true }}
         navigation
       >
-        {changelogs.map((item: Changelog) => (
+        {changelogs.map((item: Changelog) => item.active && (
           <SwiperSlide key={item.slug}>
             <Link
               className="flex flex-col items-center text-(--white) hover:no-underline hover:border-(--gray-1) group"

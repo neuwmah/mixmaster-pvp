@@ -1,7 +1,7 @@
 import createApiClient from '@/hooks/axios';
 import { Changelog } from '@/types/changelog';
 
-const baseEnv = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL || 'http://localhost:3333'
+const baseEnv = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL || ''
 
 export async function getChangelogs(): Promise<Changelog[]> {
   if (!baseEnv) return [];

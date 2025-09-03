@@ -61,7 +61,7 @@ export default function ResetPosition({
       <div className="nickname">
         <p className="text-sm mb-4">Select a new city to transfer.</p>
         <div className="field flex">
-          <div className="select relative flex-1 max-w-[20rem]">
+          <div className="select relative flex-1 w-full min-w-0">
             <select
               className="
                 capitalize
@@ -99,7 +99,7 @@ export default function ResetPosition({
             </span>
           </div>
           <button
-            className="text-xs font-bold flex items-center justify-center w-[8rem] ml-4 bg-(--primary-orange-1) cursor-pointer duration-[.25s] hover:bg-(--primary-orange-2) disabled:opacity-50 disabled:cursor-not-allowed"
+            className="text-xs font-bold flex items-center justify-center min-w-[8rem] w-[8rem] ml-4 bg-(--primary-orange-1) cursor-pointer duration-[.25s] hover:bg-(--primary-orange-2) disabled:opacity-50 disabled:cursor-not-allowed"
             type="submit"
             disabled={sending || newCity === character.map.toLowerCase()}
           >

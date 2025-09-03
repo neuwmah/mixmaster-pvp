@@ -6,4 +6,5 @@ export interface Changelog {
   image_src?: string | null
   content1?: string | null
   content2?: string | null
+  active?: boolean | null
 }

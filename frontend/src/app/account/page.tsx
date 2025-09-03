@@ -17,7 +17,7 @@ export default async function AccountPage() {
     return redirect('/account/signin')
 
   try {
-    const baseEnv = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || 'http://localhost:3333'
+    const baseEnv = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || ''
     const api = createApiClient(baseEnv)
     const { data } = await api.get('/auth/me', { headers: { Authorization: `Bearer ${token}` } })
     const userData = data
