@@ -1,19 +1,24 @@
 import React from 'react';
 
+import BackgroundMix from '@/components/BackgroundMix';
+
 export default function SiegeAffairPage() {
   return (
-    <section className="section-siegeaffair section">
-      <div className="container flex flex-col items-center">
-
-        <h1 className="title">
-          Siege Affair 🏰
-        </h1>
-
-        <div className="flex">
-          
+    <main className="flex flex-1 bg-gradient-to-b from-black to-(--gray-0) sm:items-center relative">
+      <section className="section-siegeaffair section z-[5!important]">
+        <div className="container flex flex-col items-center">
+  
+          <h1 className="title">
+            🏰
+          </h1>
+  
+          <div className="flex">
+            
+          </div>
+  
         </div>
-
-      </div>
-    </section>
-  );
+      </section>
+      <BackgroundMix char1="penril" char2="ditt" />
+    </main>
+  )
 }

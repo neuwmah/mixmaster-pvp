@@ -36,11 +36,6 @@ export default function Characters({ user }: CharactersProps) {
     }
     if (!userActionRef.current) return
     userActionRef.current = false
-    const section = document.querySelector('.section-characters')
-    if (section)
-      setTimeout(() => {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }, 100)
   }, [create])
 
   return (

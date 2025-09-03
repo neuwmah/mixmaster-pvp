@@ -6,8 +6,8 @@ import { getChangelogs } from '@/app/api/changelog'
 import createApiClient from '@/hooks/axios'
 
 import EditableText from '@/app/changelog/[slug]/EditableText'
-import Related from './Related'
 import EditableImage from '@/app/changelog/[slug]/EditableImage'
+import Related from '@/app/changelog/[slug]/Related'
 
 interface ChangelogProps {
   params: {

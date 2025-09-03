@@ -97,7 +97,12 @@ export default function Jobs({ sending, job, backgroundRef, setJob }: JobsProps)
                     <img
                       src={c.image}
                       alt={c.label}
-                      className={`object-contain ${c.value == 'phoy' ? 'max-h-[20rem]' : 'max-h-[24rem]'}`}
+                      className={`
+                        object-contain 
+                        aspect-[1/3]
+                        text-[0]
+                        ${c.value == 'phoy' ? 'max-h-[20rem]' : 'max-h-[24rem]'}
+                      `}
                     />
                   </div>
                 </button>

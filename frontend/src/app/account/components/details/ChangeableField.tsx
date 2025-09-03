@@ -126,7 +126,6 @@ export default function ChangeableField({ userId, username, field, cardsClass }:
     if (backendKey === 'phone') payload.phone = trimmed || ''
     else payload[backendKey] = trimmed
     payload.currentPassword = currentPassword
-    console.log('payload', payload)
     setSending(true)
     const res = await updateUser(userId, payload)
     setSending(false)
@@ -269,7 +268,7 @@ export default function ChangeableField({ userId, username, field, cardsClass }:
         >
           {editing
             ? <CheckCircleIcon className="min-h-[2.8rem] min-w-[2.8rem]" />
-            : <PencilSquareIcon className="min-h-[2.4rem] min-w-[2.4rem]" />
+            : <PencilSquareIcon className="min-h-[2.4rem] min-w-[2.4rem] translate-x-[-.2rem]" />
           }
         </button>
       )}
