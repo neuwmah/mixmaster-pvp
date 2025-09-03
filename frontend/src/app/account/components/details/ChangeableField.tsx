@@ -65,15 +65,15 @@ export default function ChangeableField({ userId, field, cardsClass }: Changeabl
     const trimmed = value.trim()
 
     if (backendKey === 'email' && trimmed && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(trimmed)) {
-      setError('Email inválido')
+      setError('invalid email')
       return
     }
-    if (backendKey === 'phone' && trimmed && trimmed.length < 6) {
-      setError('Telefone muito curto')
+    if (backendKey === 'phone' && trimmed && trimmed.length < 1) {
+      setError('invalid phone')
       return
     }
     if (backendKey === 'password' && trimmed.length < 3) {
-      setError('Senha deve ter 3+ caracteres')
+      setError('invalid password')
       return
     }
 
@@ -162,32 +162,53 @@ export default function ChangeableField({ userId, field, cardsClass }: Changeabl
         </strong>
       )}
       
-      <button
-        type="button"
-        className={`
-          icon
-          cursor-pointer
-          flex w-auto h-auto
-          absolute right-8 top-[50%] translate-y-[-50%]
-          text-(--white)
-          opacity-40 transition-[.25s]
-          ${editing
-            ? 'hover:opacity-100 min-w-[2.8rem] min-h-[2.8rem]'
-            : 'group-hover:opacity-100'
-          }
-        `}
-        disabled={sending}
-        aria-label={editing ? 'Confirmar' : 'Editar'}
-        onClick={(e) => {
-          e.stopPropagation();
-          editing ? submit() : setEditing(true);
-        }}
-      >
-        {editing
-          ? <CheckCircleIcon className="min-h-[2.8rem] min-w-[2.8rem]" />
-          : <PencilSquareIcon className="min-h-[2.4rem] min-w-[2.4rem]" />
-        }
-      </button>
+      {sending
+        ? (
+          <div
+            className={`
+              icon
+              loader
+              flex w-auto h-auto
+              absolute right-8 top-[50%] translate-y-[-50%]
+              text-(--white) fill-(--white)
+            `}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <circle className="spinner_b2T7" cx="4" cy="12" r="3"/>
+              <circle className="spinner_b2T7 spinner_YRVV" cx="12" cy="12" r="3"/>
+              <circle className="spinner_b2T7 spinner_c9oY" cx="20" cy="12" r="3"/>
+            </svg>
+          </div>
+        )
+        : (
+          <button
+            type="button"
+            className={`
+              icon
+              cursor-pointer
+              flex w-auto h-auto
+              absolute right-8 top-[50%] translate-y-[-50%]
+              text-(--white)
+              opacity-40 transition-[.25s]
+              ${editing
+                ? 'hover:opacity-100 min-w-[2.8rem] min-h-[2.8rem]'
+                : 'group-hover:opacity-100'
+              }
+            `}
+            disabled={sending}
+            aria-label={editing ? 'Confirmar' : 'Editar'}
+            onClick={(e) => {
+              e.stopPropagation();
+              editing ? submit() : setEditing(true);
+            }}
+          >
+            {editing
+              ? <CheckCircleIcon className="min-h-[2.8rem] min-w-[2.8rem]" />
+              : <PencilSquareIcon className="min-h-[2.4rem] min-w-[2.4rem]" />
+            }
+          </button>
+        )
+      }
     </div>
   )
 }

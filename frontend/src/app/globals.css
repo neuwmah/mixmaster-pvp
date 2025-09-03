@@ -14,3 +14,6 @@
 /* tailwind helpers (with css) */
 @import "../style/buttons.css";
 @import "../style/carousels.css";
+
+/* loader spinner */
+@import "../style/loader.css";

@@ -48,7 +48,7 @@ export async function updateUser(id: string, payload: UserUpdate): Promise<{ dat
     ;(['email','phone','password'] as (keyof UserUpdate)[]).forEach(k => {
       if (payload[k] !== undefined) (body as any)[k] = payload[k]
     })
-    if (!Object.keys(body).length) return { error: 'Nada para atualizar.' }
+    if (!Object.keys(body).length) return { error: 'nothing to update' }
     const res = await fetch(`/api/user/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -56,11 +56,11 @@ export async function updateUser(id: string, payload: UserUpdate): Promise<{ dat
     })
     if (!res.ok) {
       const json = await res.json().catch(() => ({}))
-      return { error: json?.message || 'Falha ao atualizar.' }
+      return { error: json?.message || 'updateUser error' }
     }
     const data = await res.json()
     return { data }
   } catch (e: any) {
-    return { error: 'Erro inesperado.' }
+    return { error: 'updateUser error' }
   }
 }
