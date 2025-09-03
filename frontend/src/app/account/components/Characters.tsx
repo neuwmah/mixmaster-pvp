@@ -4,7 +4,7 @@ import type { Swiper as SwiperType } from 'swiper'
 
 import Manage from '@/app/account/components/characters/Manage';
 import Create from '@/app/account/components/characters/Create';
-import CreateBackground from '@/app/account/components/characters/CreateBackground';
+import Background from '@/app/account/components/characters/create/Background';
 import PendingTransfers from '@/app/account/components/characters/PendingTransfers'
 
 import { User } from '@/types/user';
@@ -46,7 +46,7 @@ export default function Characters({ user }: CharactersProps) {
   return (
     <section key={user.id} className="section-characters section overflow-hidden my-[0!important] py-20 sm:py-32 scroll-mt-20 sm:scroll-mt-32">
       {(!user.characters?.length || create) &&
-        <CreateBackground backgroundRef={backgroundRef} />
+        <Background backgroundRef={backgroundRef} />
       }
 
       <div className="container flex-col items-center z-1 relative">

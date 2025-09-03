@@ -8,11 +8,11 @@ import {
   TrashIcon
 } from '@heroicons/react/24/outline'
 
-import Infos from '@/app/account/components/characters/card/Infos'
-import Edit from '@/app/account/components/characters/card/Edit'
-import ResetPosition from '@/app/account/components/characters/card/_ResetPosition'
-import TransferCharacter from '@/app/account/components/characters/card/_TransferCharacter'
-import ChangeNickname from '@/app/account/components/characters/card/_ChangeNickname'
+import Infos from '@/app/account/components/characters/manage/card/Infos'
+import Edit from '@/app/account/components/characters/manage/card/Edit'
+import ResetPosition from '@/app/account/components/characters/manage/card/_ResetPosition'
+import TransferCharacter from '@/app/account/components/characters/manage/card/_TransferCharacter'
+import ChangeNickname from '@/app/account/components/characters/manage/card/_ChangeNickname'
 
 import { deleteCharacter, getCharacter } from '@/app/api/character'
 import { Character } from '@/types/character'

@@ -1,7 +1,6 @@
 "use client"
-import React, { useRef } from 'react'
+import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import type { Swiper as SwiperType } from 'swiper'
 import 'swiper/css'
 
 import { checkMobile } from '@/hooks/checkMobile'
@@ -13,11 +12,11 @@ const CLASSES: { value: string; label: string; image: string }[] = [
   { value: 'phoy', label: 'Phoy', image: '/assets/images/characters/char-phoy.png' },
 ]
 
-interface CreateBackgroundProps {
+interface BackgroundProps {
   backgroundRef?: any
 }
 
-export default function CreateBackground({ backgroundRef }: CreateBackgroundProps) {
+export default function Background({ backgroundRef }: BackgroundProps) {
   const mobile = checkMobile()
 
   return !mobile && (

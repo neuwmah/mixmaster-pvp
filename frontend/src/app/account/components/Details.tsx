@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { PencilSquareIcon } from '@heroicons/react/24/outline';
+
 import LogoutButton from '@/app/account/components/details/LogoutButton';
 import BackgroundMix from '@/components/BackgroundMix';
 
@@ -10,8 +12,16 @@ interface DetailsProps {
 }
 
 export default function Details({ user }: DetailsProps) {
-  const cardsClass = 'info text-ellipsis overflow-hidden min-w-0 p-8 border border-(--gray-0) bg-black';
+  const cardsClass = 'info text-ellipsis overflow-hidden min-w-0 p-8 border border-(--gray-0) bg-black relative'
+  const hoverClass = 'group cursor-pointer'
+  const iconsClass = 'icon absolute top-[50%] translate-y-[-50%] right-8 color-white opacity-40 transition-[.25s] group-hover:opacity-100'
   
+  const changeableData = [
+    { key: 'e-mail', data: user.email },
+    { key: 'password', data: null },
+    { key: 'phone', data: user.phone }
+  ]
+
   return (
     <section className="section-details section section-p bg-gradient-to-b from-black bg-(--gray-0) py-[40px] mt-[0!important] sm:py-[64px]">
       <div className="container flex-col items-center relative z-2">
@@ -39,18 +49,15 @@ export default function Details({ user }: DetailsProps) {
               {`${user.online_status ? 'Online' : 'Offline'}`}
             </strong>
           </div>
-          <div className={cardsClass}>
-            <p>E-MAIL</p>
-            <strong>{user.email}</strong>
-          </div>
-          <div className={cardsClass}>
-            <p>PASSWORD</p>
-            <strong>****</strong>
-          </div>
-          <div className={cardsClass}>
-            <p>PHONE</p>
-            <strong>{user.phone}</strong>
-          </div>
+          {changeableData.map(changeable => {
+            return (
+              <div key={changeable.key} className={`${cardsClass} ${hoverClass}`}>
+                <p>{changeable.key.toLocaleUpperCase()}</p>
+                <strong>{changeable.data || '****'}</strong>
+                <PencilSquareIcon className={iconsClass} />
+              </div>
+            )
+          })}
         </div>
 
         <LogoutButton />

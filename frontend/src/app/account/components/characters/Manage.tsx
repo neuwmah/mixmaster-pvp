@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 
-import Card from '@/app/account/components/characters/Card'
+import Card from '@/app/account/components/characters/manage/Card'
 
 import { Character } from '@/types/character'
 

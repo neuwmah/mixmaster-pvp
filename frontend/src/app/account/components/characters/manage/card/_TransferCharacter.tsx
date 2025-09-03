@@ -70,16 +70,16 @@ export default function TransferCharacter({
       <strong>{character.userId}</strong>
     </p>
 
-    <p className="text-sm mt-4">
+    <p className="text-sm mt-2">
       {pending 
         ? `Transfer pending. Awaiting target user acceptance.`
         : `Set target user ID to transfer.`
       }
     </p>
 
-    <form onSubmit={onSubmit} className="fields flex flex-col gap-8 mt-4">
+    <form onSubmit={onSubmit} className="fields flex flex-col gap-8">
       {!pending && (
-        <div className="field flex">
+        <div className="field flex mt-4">
           <input
             className="text-xs text-(--gray-0) w-full outline-none min-w-0 h-[3.2rem] px-[.8rem] bg-white"
             placeholder="Type here..."
@@ -99,7 +99,7 @@ export default function TransferCharacter({
       )}
 
       {pending && (
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 mt-2">
           <div className="text-sm">
             Target user ID:<br/>
             <strong>{character.transferTargetUserId}</strong>
