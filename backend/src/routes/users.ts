@@ -20,8 +20,12 @@ const userLoginSchema = z.object({
 const userUpdateSchema = z.object({
   email: z.string().email().optional(),
   phone: z.string().optional(),
-  password: z.string().min(3).optional()
-}).refine(d => Object.keys(d).length > 0, { message: 'empty body' })
+  password: z.string().min(3).optional(),
+  currentPassword: z.string().optional()
+}).refine(d => {
+  const keys = Object.keys(d).filter(k => k !== 'currentPassword')
+  return keys.length > 0
+}, { message: 'empty body' })
 
 function hash(pw: string) {
   return crypto.createHash('sha256').update(pw).digest('hex')
@@ -95,6 +99,17 @@ export async function userRoutes(app: FastifyInstance) {
 
       const parsed = userUpdateSchema.safeParse(req.body)
       if (!parsed.success) return reply.code(400).send({ message: 'invalid data', errors: parsed.error.flatten() })
+
+      const targetUser = await prisma.user.findUnique({ where: { id } })
+      if (!targetUser) return reply.code(404).send({ message: 'not found' })
+
+      const wantsSensitiveChange = ['email','phone','password'].some(f => (parsed.data as any)[f] !== undefined)
+      const isAdmin = !!payload.is_admin
+      if (wantsSensitiveChange && !isAdmin) {
+        const provided = parsed.data.currentPassword
+        if (!provided) return reply.code(400).send({ message: 'current password required' })
+        if (targetUser.password !== hash(provided)) return reply.code(401).send({ message: 'invalid current password' })
+      }
 
       const data: any = {}
       if (parsed.data.email !== undefined) data.email = parsed.data.email

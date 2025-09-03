@@ -23,4 +23,5 @@ export interface UserUpdate {
   email?: string
   phone?: string | null
   password?: string
+  currentPassword?: string
 }

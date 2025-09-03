@@ -13,7 +13,7 @@ interface DetailsProps {
 export default function Details({ user }: DetailsProps) {
   const cardsClass = `
     info 
-    min-w-0 p-8
+    min-w-0 p-8 gap-2 flex flex-col
     text-ellipsis relative overflow-hidden
     border-[1px] border-(--gray-0) bg-(--black)
   `
@@ -36,7 +36,7 @@ export default function Details({ user }: DetailsProps) {
           Check your account details below.
         </p>
 
-        <div className="text-sm grid mt-12 w-full max-w-[1000px] gap-4 grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(3,1fr)]">
+        <div className="text-sm grid mt-12 w-full max-w-[1000px] gap-4 grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(3,1fr)] items-start">
           <div className={cardsClass}>
             <p>ID</p>
             <strong>{user.id}</strong>
@@ -59,6 +59,7 @@ export default function Details({ user }: DetailsProps) {
           {changeableData.map((field: { key: string; data: string | null }) => {
             return <ChangeableField
               userId={user.id}
+              username={user.username}
               key={field.key}
               field={field}
               cardsClass={cardsClass}
