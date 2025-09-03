@@ -26,7 +26,7 @@ export default function EditableImage({ postId, imageSrc, isAdmin, className }: 
 
   if (!isAdmin) {
     if (!imageSrc) return null
-    return <img className="w-full mt-6 object-contain" src={resolveSrc(imageSrc) || undefined} alt="Imagem" />
+    return <img className="w-full mt-6 aspect-[2/1] object-cover" src={resolveSrc(imageSrc) || undefined} alt="Imagem" />
   }
 
   function openPicker() {
