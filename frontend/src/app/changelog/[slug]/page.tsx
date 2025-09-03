@@ -7,6 +7,7 @@ import createApiClient from '@/hooks/axios'
 
 import EditableText from '@/app/changelog/[slug]/EditableText'
 import Related from './Related'
+import EditableImage from '@/app/changelog/[slug]/EditableImage'
 
 interface ChangelogProps {
   params: {
@@ -45,9 +46,9 @@ export default async function ChangelogPage({ params }: ChangelogProps) {
               {post.content1 && 
                 <EditableText className="text-base text-left text-white mt-12 mr-auto w-full" field="content1" postId={post.id} initialValue={post.content1} isAdmin={isAdmin} />
               }
-              {post.image_src && 
-                <img className="w-full mt-6 object-contain" src={post.image_src} alt={post.title} />
-              }
+              {post.image_src || isAdmin ? 
+                <EditableImage postId={post.id} imageSrc={post.image_src || undefined} isAdmin={isAdmin} />
+              : null}
               {post.content2 && 
                 <EditableText className="text-base text-left text-white mt-6 mr-auto w-full" field="content2" postId={post.id} initialValue={post.content2} isAdmin={isAdmin} />
               }

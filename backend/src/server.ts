@@ -7,10 +7,23 @@ import { guildRoutes } from './routes/guilds.js'
 import { rankRoutes } from './routes/ranks.js'
 import { userRoutes } from './routes/users.js'
 import { authRoutes } from './routes/auth.js'
+import multipart from '@fastify/multipart'
+import fastifyStatic from '@fastify/static'
+import jwt from '@fastify/jwt'
+import path from 'node:path'
+import fs from 'node:fs'
 
 const app = Fastify({ logger: false })
 
 await app.register(cors, { origin: true })
+
+if (!process.env.JWT_SECRET) throw new Error('JWT_SECRET env var required')
+await app.register(jwt, { secret: process.env.JWT_SECRET })
+await app.register(multipart, { limits: { fileSize: 5 * 1024 * 1024 } })
+
+const uploadDir = path.join(process.cwd(), 'uploads')
+fs.mkdirSync(uploadDir, { recursive: true })
+await app.register(fastifyStatic, { root: uploadDir, prefix: '/uploads/' })
 
 app.get('/health', async () => ({ ok: true }))
 

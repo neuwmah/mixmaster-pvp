@@ -17,6 +17,15 @@ interface CarouselProps {
   home?: boolean;
 }
 
+function resolveSrc(src: string | undefined) {
+  if (!src) return undefined
+  if (src.startsWith('/uploads/')) {
+    const base = (process.env.NEXT_PUBLIC_BACKEND_API_URL || '').replace(/\/$/, '')
+    return base + src
+  }
+  return src
+}
+
 const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
   const mobile = checkMobile();
   const [enoughSlides, setEnoughSlides] = useState(false);
@@ -64,7 +73,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
 
                 {item.image_src && (
                   <img
-                    src={item.image_src}
+                    src={resolveSrc(item.image_src)}
                     alt={item.title}
                     className="w-full"
                   />
