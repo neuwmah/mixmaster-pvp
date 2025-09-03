@@ -75,7 +75,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
                   <img
                     src={resolveSrc(item.image_src)}
                     alt={item.title}
-                    className="w-full"
+                    className="w-full aspect-[2/1] object-cover"
                   />
                 )}
 

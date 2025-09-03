@@ -62,7 +62,7 @@ export default function EditableImage({ postId, imageSrc, isAdmin, className }: 
     <div className={`group relative w-full ${uploading ? 'opacity-60 pointer-events-none' : ''}`}>      
       {preview ? (
         <img
-          className={`cursor-pointer w-full mt-6 object-contain`}
+          className={`cursor-pointer w-full mt-6 aspect-[2/1] object-cover`}
           alt="Imagem do changelog"
           src={preview}
           onClick={openPicker}
