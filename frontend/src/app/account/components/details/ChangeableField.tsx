@@ -75,31 +75,6 @@ export default function ChangeableField({ userId, username, field, cardsClass }:
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [editing, cancel])
 
-  async function submit() {
-    if (sending) return
-    const backendKey = FIELD_MAP[field.key.toLowerCase()]
-    if (!backendKey) return
-    const trimmed = value.trim()
-    const payload: any = {}
-    if (backendKey === 'phone') payload.phone = trimmed || ''
-    else payload[backendKey] = trimmed
-    payload.currentPassword = currentPassword
-    setSending(true)
-    const res = await updateUser(userId, payload)
-    setSending(false)
-    if (res.error) {
-      setError(res.error)
-      setTimeout(() => setError(''), 3000)
-      return
-    }
-    setError('')
-    setEditing(false)
-    setEditingStage(0)
-    setCurrentPassword('')
-    setCurrentPwError(false)
-    router.refresh()
-  }
-
   function validateField(): boolean {
     const backendKey = FIELD_MAP[field.key.toLowerCase()]
     if (!backendKey) return false
@@ -140,6 +115,32 @@ export default function ChangeableField({ userId, username, field, cardsClass }:
     }
     setCurrentPwError(false)
     await submit()
+  }
+
+  async function submit() {
+    if (sending) return
+    const backendKey = FIELD_MAP[field.key.toLowerCase()]
+    if (!backendKey) return
+    const trimmed = value.trim()
+    const payload: any = {}
+    if (backendKey === 'phone') payload.phone = trimmed || ''
+    else payload[backendKey] = trimmed
+    payload.currentPassword = currentPassword
+    console.log('payload', payload)
+    setSending(true)
+    const res = await updateUser(userId, payload)
+    setSending(false)
+    if (res.error) {
+      setError(res.error)
+      setTimeout(() => setError(''), 3000)
+      return
+    }
+    setError('')
+    setEditing(false)
+    setEditingStage(0)
+    setCurrentPassword('')
+    setCurrentPwError(false)
+    router.refresh()
   }
 
   function onKeyDown(e: React.KeyboardEvent) {

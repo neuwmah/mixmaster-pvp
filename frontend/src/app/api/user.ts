@@ -42,12 +42,13 @@ export async function createUser(payload: UserCreate): Promise<User | null> {
   } catch (e) { console.error('createUser error', e); return null }
 }
 
-export async function updateUser(id: string, payload: UserUpdate): Promise<{ data?: User; error?: string }> {
+export async function updateUser(id: string, payload: UserUpdate & { currentPassword?: string }): Promise<{ data?: User; error?: string }> {
   try {
-    const body: UserUpdate = {}
+    const body: any = {}
     ;(['email','phone','password'] as (keyof UserUpdate)[]).forEach(k => {
-      if (payload[k] !== undefined) (body as any)[k] = payload[k]
+      if (payload[k] !== undefined) body[k] = payload[k]
     })
+    if (payload.currentPassword) body.currentPassword = payload.currentPassword
     if (!Object.keys(body).length) return { error: 'nothing to update' }
     const res = await fetch(`/api/user/${id}`, {
       method: 'PUT',

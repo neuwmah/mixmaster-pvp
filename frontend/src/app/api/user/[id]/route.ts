@@ -4,7 +4,7 @@ const baseEnv = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_A
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   if (!baseEnv) return NextResponse.json({ message: 'API URL not configured' }, { status: 500 })
-  const { id } = params
+  const { id } = await params
   let body: any
   try { body = await req.json() } catch { return NextResponse.json({ message: 'Invalid JSON' }, { status: 400 }) }
 
