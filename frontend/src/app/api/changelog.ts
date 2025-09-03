@@ -1,7 +1,7 @@
 import createApiClient from '@/hooks/axios';
 import { Changelog } from '@/types/changelog';
 
-const baseEnv = process.env.BACKEND_API_URL;
+const baseEnv = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL || 'http://localhost:3333'
 
 export async function getChangelogs(): Promise<Changelog[]> {
   if (!baseEnv) return [];
@@ -31,4 +31,14 @@ export async function getChangelog(id: string): Promise<Changelog | null> {
     if (s === 429 || s === 404) return null;
     return null;
   }
+}
+
+export async function updateChangelogField(id: string, data: Partial<Pick<Changelog, 'title' | 'content1' | 'content2' | 'image_src' | 'slug'>>): Promise<Changelog | null> {
+  try {
+    const res = await fetch(`/api/changelog/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+    if (!res.ok) return null
+    const json = await res.json()
+    if (!json?.id) return null
+    return json as Changelog
+  } catch { return null }
 }

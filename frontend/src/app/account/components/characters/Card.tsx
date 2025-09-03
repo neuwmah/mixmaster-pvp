@@ -140,21 +140,27 @@ export default function Card(props: CardProps) {
 
       <div className="absolute pointer-events-none p-8 top-0 right-0 z-1 flex flex-col gap-8">
         <button
-          className="pointer-events-auto cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1)"
+          className="group relative pointer-events-auto cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1)"
           type="button"
           onClick={() => setEdit(!edit)}
         >
+          <span className="text-xs text-white pointer-events-none absolute right-[calc(100%+.8rem)] top-[50%] translate-y-[-50%] opacity-0 duration-[.25s] group-hover:opacity-100">
+            {edit ? 'Return' : 'Edit'}
+          </span>
           {edit
             ? <ArrowUturnLeftIcon className="icon" />
             : <PencilSquareIcon className="icon" />
           }
         </button>
         <button
-          className="pointer-events-auto cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1) disabled:opacity-40 disabled:cursor-not-allowed"
+          className="group relative pointer-events-auto cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1) disabled:opacity-40 disabled:cursor-not-allowed"
           type="button"
           onClick={removeCharacter}
           disabled={deleting || !!charData.transferPending}
         >
+          <span className="text-xs text-white pointer-events-none absolute right-[calc(100%+.8rem)] top-[50%] translate-y-[-50%] opacity-0 duration-[.25s] group-hover:opacity-100">
+            Remove
+          </span>
           {deleting ? '...' : <TrashIcon className="icon" />}
         </button>
       </div>

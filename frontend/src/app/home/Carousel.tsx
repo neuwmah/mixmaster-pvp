@@ -57,7 +57,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
               href={`/changelog/${item.slug}`}
             >
               <div className={`
-                w-full overflow-hidden
+                w-full overflow-hidden z-1
                 flex flex-col items-center
                 ${home ? 'bg-(--gray-0)' : 'bg-(--black)'}
               `}>
@@ -75,7 +75,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
                   flex flex-col items-start 
                   duration-250 
                   border-1
-                  ${home ? 'border-(--gray-0) group-hover:border-(--gray-1)' : 'border-(--black)'}
+                  ${home ? 'border-(--gray-0)' : 'border-(--black)'}
                 `}>
                   <p className="text-base font-medium">
                     {item.title}
@@ -89,9 +89,9 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
                 </div>
 
               </div>
-              <svg className="pointer-events-none rotate-[180deg] scale-x-[-1]" viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg">
-                <path className="fill-(--primary-orange-1)" d="M0,160L1440,0L1440,160L0,160Z"></path>
-                <path className={home ? 'fill-(--gray-1)' : 'fill-(--black)'} d="M0,0L1440,160L1440,160L0,160Z"></path>
+              <svg className="pointer-events-none rotate-[180deg] scale-x-[-1] mt-[-1px]" viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg">
+                <path className="fill-(--primary-orange-1) duration-[.25s] group-hover:fill-(--gray-1)" d="M0,160L1440,0L1440,160L0,160Z"></path>
+                <path className={home ? 'fill-(--gray-0)' : 'fill-(--black)'} d="M0,0L1440,160L1440,160L0,160Z"></path>
               </svg>
             </Link>
           </SwiperSlide>

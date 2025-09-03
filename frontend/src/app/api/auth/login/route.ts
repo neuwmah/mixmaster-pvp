@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { serialize } from 'cookie'
 import createApiClient from '@/hooks/axios'
 
-const baseEnv = process.env.BACKEND_API_URL
+const baseEnv = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || ''
 
 export async function POST(request: Request) {
   if (!baseEnv) return NextResponse.json({ message: 'api offline' }, { status: 500 })

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import LogoutButton from '@/app/account/components/details/LogoutButton';
+import BackgroundMix from '@/components/BackgroundMix';
 
 import { User } from '@/types/user';
 
@@ -13,7 +14,7 @@ export default function Details({ user }: DetailsProps) {
   
   return (
     <section className="section-details section section-p bg-gradient-to-b from-black bg-(--gray-0) py-[40px] mt-[0!important] sm:py-[64px]">
-      <div className="container flex-col items-center">
+      <div className="container flex-col items-center relative z-2">
 
         <h1 className="title">
           Account 👤
@@ -55,6 +56,7 @@ export default function Details({ user }: DetailsProps) {
         <LogoutButton />
 
       </div>
+      <BackgroundMix char1="phoy" char2="jin" />
     </section>
   )
 }

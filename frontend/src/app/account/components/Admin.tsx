@@ -4,7 +4,7 @@ export default function Admin() {
       <div className="container flex flex-col items-center">
 
         <h2 className="title">
-          GM
+          GM 🐰
         </h2>
 
       </div>
