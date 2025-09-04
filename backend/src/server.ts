@@ -7,6 +7,8 @@ import { guildRoutes } from './routes/guilds.js'
 import { rankRoutes } from './routes/ranks.js'
 import { userRoutes } from './routes/users.js'
 import { authRoutes } from './routes/auth.js'
+import { henchRoutes } from './routes/hench.js'
+import { petRoutes } from './routes/pets.js'
 import multipart from '@fastify/multipart'
 import fastifyStatic from '@fastify/static'
 import jwt from '@fastify/jwt'
@@ -34,9 +36,11 @@ await app.register(guildRoutes)
 await app.register(rankRoutes)
 await app.register(userRoutes)
 await app.register(authRoutes)
+await app.register(henchRoutes)
+await app.register(petRoutes)
 
 const port = Number(process.env.PORT) || 3333
 app.listen({ port, host: '0.0.0.0' })
   .then(() => {
-    console.log(`    ▲ API localhost:${port}`)
+    console.log(`API localhost:${port}`)
   })
