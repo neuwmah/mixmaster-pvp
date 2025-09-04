@@ -43,7 +43,7 @@ export default function ResetPosition({
     router.refresh()
   }
 
-  return <>
+  return <div className="reset-position w-full min-w-0">
     <button
       className="cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1) disabled:opacity-40"
       type="button"
@@ -53,23 +53,27 @@ export default function ResetPosition({
       Return
     </button>
 
-    <p className="text-sm mt-8">
+    <p className="text-base mt-8">
       Current map: <strong className="capitalize">{character.map}</strong>
     </p>
 
-    <form className="fields flex flex-col gap-8 mt-2" onSubmit={onSubmit}>
-      <div className="nickname">
-        <p className="text-sm mb-4">Select a new city to transfer.</p>
-        <div className="field flex">
-          <div className="select relative flex-1 w-full min-w-0">
+    <p className="text-base mt-4">
+      Select a new city to transfer.
+    </p>
+
+    <form className="fields flex flex-col mt-6 w-full min-w-0" onSubmit={onSubmit}>
+      <div className="position">
+
+        <div className="field flex flex-col w-full max-w-[24rem] min-w-0">
+          <div className="select relative w-full min-w-0">
             <select
               className="
                 capitalize
                 text-xs text-(--gray-0)
                 appearance-none
                 outline-none
-                h-[3.2rem] w-full
-                pr-10 pl-[.8rem]
+                h-[4rem] w-full
+                pr-[3.2rem] pl-[1.6rem]
                 bg-white
                 cursor-pointer
                 border-none
@@ -83,9 +87,10 @@ export default function ResetPosition({
                 <option key={c} value={c}>{c}</option>
               ))}
             </select>
-            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+
+            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-[1.6rem]">
               <svg
-                className="pointer-events-none w-[1.2rem] h-[1.2rem] text-(--gray-0)"
+                className="pointer-events-none w-[1.6rem] h-[1.6rem] text-(--gray-0)"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -98,16 +103,31 @@ export default function ResetPosition({
               </svg>
             </span>
           </div>
+
           <button
-            className="text-xs font-bold flex items-center justify-center min-w-[8rem] w-[8rem] ml-4 bg-(--primary-orange-1) cursor-pointer duration-[.25s] hover:bg-(--primary-orange-2) disabled:opacity-50 disabled:cursor-not-allowed"
+            className="
+              cursor-pointer
+              text-xs font-bold
+              flex items-center justify-center
+              mt-4 w-full min-h-[4rem]
+              duration-[.25s] bg-(--primary-orange-1) hover:bg-(--primary-orange-2)
+              disabled:opacity-50 disabled:cursor-not-allowed
+            "
             type="submit"
             disabled={sending || newCity === character.map.toLowerCase()}
           >
             {sending ? '...' : 'Update'}
           </button>
         </div>
-        {error && <p className="text-sm text-(--primary-red-1) mt-4">{error}</p>}
+
+        {error && 
+          <p className="text-sm text-(--primary-red-1) mt-4">
+            {error}
+          </p>
+        }
+
       </div>
     </form>
-  </>
+
+  </div>
 }

@@ -41,7 +41,7 @@ export default function ChangeNickname({
     setChangeNickname(false)
   }
 
-  return <>
+  return <div className="change-nickname w-full min-w-0">
     <button
       className="cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1) disabled:opacity-40"
       type="button"
@@ -51,16 +51,20 @@ export default function ChangeNickname({
       Return
     </button>
 
-    <p className="text-sm mt-8">
+    <p className="text-base mt-8">
       Current name: <strong>{character.name}</strong>
     </p>
 
-    <form className="fields flex flex-col gap-8 mt-2" onSubmit={onSubmit}>
+    <p className="text-base mt-4">
+      Set character new nickname.
+    </p>
+
+    <form className="fields flex flex-col mt-6" onSubmit={onSubmit}>
       <div className="nickname">
-        <p className="text-sm mb-4">Set character new nickname.</p>
-        <div className="field flex">
+
+        <div className="field flex flex-col w-full max-w-[24rem] min-w-0">
           <input
-            className="text-xs text-(--gray-0) outline-none min-w-0 h-[3.2rem] px-[.8rem] w-[16rem] bg-white flex-1"
+            className="text-sm text-(--gray-0) outline-none min-w-0 min-h-[4rem] px-[1.6rem] w-full bg-white flex-1"
             id="name"
             name="name"
             type="text"
@@ -72,16 +76,31 @@ export default function ChangeNickname({
             disabled={sending}
             required
           />
+
           <button
-            className="text-xs font-bold ml-4 flex items-center justify-center min-w-[8rem] w-[8rem] bg-(--primary-orange-1) cursor-pointer duration-[.25s] hover:bg-(--primary-orange-2) disabled:opacity-50 disabled:cursor-not-allowed"
+            className="
+              cursor-pointer
+              text-xs font-bold
+              flex items-center justify-center
+              mt-4 w-full min-h-[4rem]
+              duration-[.25s] bg-(--primary-orange-1) hover:bg-(--primary-orange-2)
+              disabled:opacity-50 disabled:cursor-not-allowed
+            "
             type="submit"
             disabled={sending || newName.trim().length < 3}
           >
             {sending ? '...' : 'Update'}
           </button>
         </div>
-        {error && <p className="text-sm text-(--primary-red-1) mt-4">{error}</p>}
+
+        {error &&
+          <p className="text-sm text-(--primary-red-1) mt-4">
+            {error}
+          </p>
+        }
+
       </div>
     </form>
-  </>
+
+  </div>
 }

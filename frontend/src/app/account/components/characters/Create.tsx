@@ -8,15 +8,17 @@ import Fields from '@/app/account/components/characters/create/Fields';
 import Jobs from '@/app/account/components/characters/create/Jobs';
 
 import { User } from '@/types/user';
+import { Character } from '@/types/character';
 
 interface CreateProps {
   user: User;
   create: boolean;
   backgroundRef: any;
   setCreate: (value: boolean) => void;
+  setCharacterHench: (value: Character | false) => void;
 }
 
-export default function Create({ user, create, backgroundRef, setCreate }: CreateProps) {
+export default function Create({ user, create, backgroundRef, setCreate, setCharacterHench }: CreateProps) {
   const [name, setName] = useState('');
   const [job, setJob] = useState('ditt');
   const [attributes, setAttributes] = useState({ energy: 10, agility: 10, accuracy: 10, luck: 10 });
@@ -47,6 +49,7 @@ export default function Create({ user, create, backgroundRef, setCreate }: Creat
       } else {
         await new Promise(r => setTimeout(r, 120));
         setCreate(false);
+        setCharacterHench(result.data);
         router.refresh();
       }
     } catch {

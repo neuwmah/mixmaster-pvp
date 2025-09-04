@@ -8,9 +8,10 @@ import { Character } from '@/types/character'
 interface ManageProps {
   characters: Character[]
   setCreate: (value: boolean) => void
+  setCharacterHench: (value: Character | false) => void
 }
 
-export default function Manage({ characters, setCreate }: ManageProps) {
+export default function Manage({ characters, setCreate, setCharacterHench }: ManageProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
 
   return (
@@ -21,7 +22,7 @@ export default function Manage({ characters, setCreate }: ManageProps) {
           text-sm
           w-full max-w-[1000px]
           grid gap-[1.6rem] grid-cols-[repeat(1,1fr)]
-          sm:flex sm:justify-center sm:flex-wrap
+          sm:flex sm:justify-center
           ${characters.length >= 3 && 'pb-[1.6rem]'}
         `}
       >
@@ -31,6 +32,7 @@ export default function Manage({ characters, setCreate }: ManageProps) {
             {...character}
             hoveredId={hoveredId}
             setHoveredId={setHoveredId}
+            setCharacterHench={setCharacterHench}
           />
         ))}
       </div>

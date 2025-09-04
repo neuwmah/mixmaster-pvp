@@ -24,4 +24,5 @@ export type Character = {
   transferPending?: boolean
   transferTargetUserId?: string | null
   transferRequestedAt?: string | Date | null
+  pets?: import('./pet').Pet[]
 }

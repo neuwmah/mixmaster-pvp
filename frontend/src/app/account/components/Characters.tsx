@@ -1,20 +1,23 @@
 "use client"
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react'
 import type { Swiper as SwiperType } from 'swiper'
 
-import Manage from '@/app/account/components/characters/Manage';
-import Create from '@/app/account/components/characters/Create';
-import Background from '@/app/account/components/characters/create/Background';
+import Manage from '@/app/account/components/characters/Manage'
+import Create from '@/app/account/components/characters/Create'
+import Hench from '@/app/account/components/characters/Hench'
+import Background from '@/app/account/components/characters/create/Background'
 import PendingTransfers from '@/app/account/components/characters/PendingTransfers'
 
-import { User } from '@/types/user';
+import { User } from '@/types/user'
+import { Character } from '@/types/character'
 
 interface CharactersProps {
   user: User;
 }
 
 export default function Characters({ user }: CharactersProps) {
-  const [create, setCreate] = useState(false);
+  const [create, setCreate] = useState(false)
+  const [characterHench, setCharacterHench] = useState<Character | false>(false)
   const backgroundRef = useRef<SwiperType | null>(null)
   const userActionRef = useRef(false)
   const initialRenderRef = useRef(true)
@@ -60,8 +63,10 @@ export default function Characters({ user }: CharactersProps) {
         <PendingTransfers userId={user.id} />
 
         {!user.characters?.length || create
-          ? <Create user={user} create={create} setCreate={handleSetCreate} backgroundRef={backgroundRef} />
-          : <Manage characters={user.characters} setCreate={handleSetCreate} />
+          ? <Create user={user} create={create} setCreate={handleSetCreate} setCharacterHench={setCharacterHench} backgroundRef={backgroundRef} />
+          : characterHench
+            ? <Hench character={characterHench} setCharacterHench={setCharacterHench} />
+            : <Manage characters={user.characters} setCreate={handleSetCreate} setCharacterHench={setCharacterHench} />
         }
 
       </div>

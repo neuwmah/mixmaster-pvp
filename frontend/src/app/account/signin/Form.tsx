@@ -37,7 +37,7 @@ export default function Form() {
     <form onSubmit={handleSignin} className={`form flex flex-col items-center w-full mt-12 max-w-[320px] duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}>
       <div className="fields w-full grid gap-[1px] grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(1,1fr)]">
         <input
-          className="bg-white text-xs text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem]"
+          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem]"
           id="username"
           name="username"
           type="text"
@@ -47,7 +47,7 @@ export default function Form() {
           required
         />
         <input
-          className="bg-white text-xs text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem]"
+          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem]"
           id="password"
           name="password"
           type="password"

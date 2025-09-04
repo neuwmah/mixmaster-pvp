@@ -20,12 +20,14 @@ import { Character } from '@/types/character'
 interface CardProps extends Character {
   hoveredId?: string | null
   setHoveredId?: (id: string | null) => void
+  setCharacterHench: (value: Character | false) => void
 }
 
 export default function Card(props: CardProps) {
   const {
     hoveredId,
     setHoveredId,
+    setCharacterHench,
     ...character
   } = props
 
@@ -80,10 +82,14 @@ export default function Card(props: CardProps) {
   }
 
   let brightnessClass = 'filter-[brightness(.2)blur(.4rem)]'
+  let opacityClass = 'opacity-100'
   if (hoveredId) {
     brightnessClass = hoveredId === character.id
       ? 'filter-[brightness(.2)blur(.4rem)]'
       : 'filter-[brightness(.1)blur(.4rem)]'
+    opacityClass = hoveredId === character.id
+      ? 'opacity-100'
+      : 'opacity-0'
   }
 
   return (
@@ -94,8 +100,8 @@ export default function Card(props: CardProps) {
         pointer-events-auto
         relative overflow-hidden
         bg-(--black)
-        min-h-[32rem] min-w-0 p-8 sm:w-[calc(33.333%-1.0666rem)]
-        transition-colors
+        min-h-[32rem] min-w-0 p-8 sm:w-[calc(33.333%-1.0666rem)] sm:min-w-[calc(20%-1.0666rem)]
+        duration-[.25s] sm:hover:w-[50%]
       "
       onMouseEnter={() => setHoveredId?.(character.id)}
       onMouseLeave={() => setHoveredId?.(null)}
@@ -104,7 +110,7 @@ export default function Card(props: CardProps) {
         className={`
           absolute top-0 left-0 object-cover w-full h-full opacity-[.7]
           ${brightnessClass}
-          transition-[filter] duration-[.25s]
+          duration-[.25s]
         `}
         src={`/assets/images/characters/${charData.class.toLowerCase()}.jpg`}
         alt={`char-${charData.id}-${charData.class}`}
@@ -138,9 +144,13 @@ export default function Card(props: CardProps) {
         }
       </div>
 
-      <div className="absolute pointer-events-none p-8 top-0 right-0 z-1 flex flex-col gap-8">
+      <div className={`
+        absolute pointer-events-none p-8 top-0 right-0 z-1 flex flex-col gap-8 h-full
+        ${opacityClass}
+        duration-[.25s]  
+      `}>
         <button
-          className="group relative pointer-events-auto cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1)"
+          className="group relative pointer-events-auto cursor-pointer duration-[.25s] hover:text-(--primary-orange-1)"
           type="button"
           onClick={() => setEdit(!edit)}
         >
@@ -153,7 +163,7 @@ export default function Card(props: CardProps) {
           }
         </button>
         <button
-          className="group relative pointer-events-auto cursor-pointer underline duration-[.25s] hover:text-(--primary-orange-1) disabled:opacity-40 disabled:cursor-not-allowed"
+          className="group relative pointer-events-auto cursor-pointer duration-[.25s] hover:text-(--primary-orange-1) disabled:opacity-40 disabled:cursor-not-allowed"
           type="button"
           onClick={removeCharacter}
           disabled={deleting || !!charData.transferPending}
@@ -162,6 +172,15 @@ export default function Card(props: CardProps) {
             Remove
           </span>
           {deleting ? '...' : <TrashIcon className="icon" />}
+        </button>        <button
+          className="text-[2rem] group relative pointer-events-auto cursor-pointer duration-[.25s] hover:text-(--primary-orange-1)"
+          type="button"
+          onClick={() => setCharacterHench(charData)}
+        >
+          <span className="text-xs text-white pointer-events-none absolute right-[calc(100%+.8rem)] top-[50%] translate-y-[-50%] opacity-0 duration-[.25s] group-hover:opacity-100">
+            Pets
+          </span>
+          🐍
         </button>
       </div>
     </div>
