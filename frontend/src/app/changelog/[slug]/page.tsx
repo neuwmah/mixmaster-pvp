@@ -39,7 +39,7 @@ export default async function ChangelogPage({ params }: ChangelogProps) {
 
               <EditableText className="title text-center" tag="h1" field="title" postId={post.id} initialValue={post.title} isAdmin={isAdmin} />
 
-              <p className="text-base text-center mt-6 text-(--gray-4)">
+              <p className="text-base text-center mt-4 text-(--gray-4)">
                 {new Date(post.created_at).toLocaleDateString()}
               </p>
 
@@ -60,7 +60,7 @@ export default async function ChangelogPage({ params }: ChangelogProps) {
         <div className="section-not-found section">
           <div className="container flex flex-col items-center">
             <h1 className="title text-center">❗ 404</h1>
-            <p className="text-base text-center mt-6 text-(--gray-4)">Not found.</p>
+            <p className="text-big text-center mt-6 text-(--gray-4)">Not found.</p>
           </div>
         </div>
       )}

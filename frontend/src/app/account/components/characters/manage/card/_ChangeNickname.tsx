@@ -64,7 +64,7 @@ export default function ChangeNickname({
 
         <div className="field flex flex-col w-full max-w-[24rem] min-w-0">
           <input
-            className="text-sm text-(--gray-0) outline-none min-w-0 min-h-[4rem] px-[1.6rem] w-full bg-white flex-1"
+            className="text-sm text-center text-(--gray-0) outline-none min-w-0 min-h-[4rem] px-[1.6rem] w-full bg-white flex-1"
             id="name"
             name="name"
             type="text"
@@ -80,7 +80,7 @@ export default function ChangeNickname({
           <button
             className="
               cursor-pointer
-              text-xs font-bold
+              text-sm font-bold
               flex items-center justify-center
               mt-4 w-full min-h-[4rem]
               duration-[.25s] bg-(--primary-orange-1) hover:bg-(--primary-orange-2)

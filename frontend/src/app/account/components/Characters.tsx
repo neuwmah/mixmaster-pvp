@@ -53,7 +53,7 @@ export default function Characters({ user }: CharactersProps) {
           Characters 👥
         </h2>
 
-        <p className={`text-base mt-6 text-center ${!user.characters?.length && 'max-w-[24rem] sm:max-w-[100%]'}`}>
+        <p className={`text-big text-center mt-6 ${!user.characters?.length && 'max-w-[24rem] sm:max-w-[100%]'}`}>
           {user.characters?.length
             ? `Check your account characters below.`
             : `No characters yet. You can create a new one below.`

@@ -37,7 +37,7 @@ export default function Jobs({ sending, job, backgroundRef, setJob }: JobsProps)
   return (
     <div className="jobs flex flex-col gap-8 p-[2.4rem] bg-(--black) border-[1px] border-(--gray-1) min-h-[28rem] overflow-hidden">
 
-      <span className="text text-sm text-center">Select character class.</span>
+      <span className="text text-base text-center">Select character class.</span>
 
       <div className="carousel relative flex flex-1 w-full mx-auto">
         <Swiper
@@ -112,7 +112,7 @@ export default function Jobs({ sending, job, backgroundRef, setJob }: JobsProps)
         </Swiper>
       </div>
 
-      <span className="job text-base text-center font-bold text-(--primary-orange-1)">
+      <span className="job text-big text-center font-bold text-(--primary-orange-1)">
         {CLASSES.find(c => c.value === job)?.label}
       </span>
 

@@ -64,12 +64,12 @@ export default function Create({ user, create, backgroundRef, setCreate, setChar
     <form
       onSubmit={handleCreate}
       className={`
-        form flex flex-col items-center w-full mt-12 max-w-[700px] duration-[.25s]
+        form flex flex-col items-center w-full mt-12 max-w-[800px] duration-[.25s]
         ${sending && 'pointer-events-none opacity-[.7]'}
       `}
     >
       
-      <div className="wrapper w-full flex flex-col gap-12 sm:grid sm:grid-cols-2">
+      <div className="wrapper w-full flex flex-col gap-12 sm:grid sm:grid-cols-2 sm:items-start">
         <Fields sending={sending} name={name} setName={setName} attributes={attributes} setAttributes={setAttributes} />
         <Jobs sending={sending} job={job} setJob={setJob} backgroundRef={backgroundRef} />
       </div>

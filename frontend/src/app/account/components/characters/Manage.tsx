@@ -18,9 +18,9 @@ export default function Manage({ characters, setCreate, setCharacterHench }: Man
     <div className="manage w-full flex flex-col items-center">
       <div
         className={`
-          mt-12
-          text-sm
-          w-full max-w-[1000px]
+          cards mt-12
+          text-base
+          w-full
           grid gap-[1.6rem] grid-cols-[repeat(1,1fr)]
           sm:flex sm:justify-center
           ${characters.length >= 3 && 'pb-[1.6rem]'}

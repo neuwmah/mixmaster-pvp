@@ -28,7 +28,7 @@ export default function Edit({
 }: EditProps) {
   return <>
 
-    <p className="text-sm">
+    <p className="text-base">
       Name: <strong>{character.name}</strong>
     </p>
 
@@ -41,7 +41,7 @@ export default function Edit({
       Change nickname
     </button>
 
-    <p className="text-sm mt-8">
+    <p className="text-base mt-8">
       Map: <strong>{character.map.charAt(0).toUpperCase() + character.map.slice(1).toLowerCase()}</strong>
     </p>
 
@@ -54,8 +54,9 @@ export default function Edit({
       Reset position
     </button>
 
-    <p className="text-sm mt-8">
-      User ID: <strong>{character.user?.id || character.userId || '—'}</strong>
+    <p className="text-base mt-8">
+      User ID:
+      <strong className="text-ellipsis block overflow-hidden w-full relative text-nowrap">{character.user?.id || character.userId || '—'}</strong>
     </p>
 
     <button

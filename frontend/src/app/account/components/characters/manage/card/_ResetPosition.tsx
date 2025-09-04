@@ -69,11 +69,11 @@ export default function ResetPosition({
             <select
               className="
                 capitalize
-                text-xs text-(--gray-0)
+                text-sm text-center text-(--gray-0)
                 appearance-none
                 outline-none
                 h-[4rem] w-full
-                pr-[3.2rem] pl-[1.6rem]
+                px-[1.6rem]
                 bg-white
                 cursor-pointer
                 border-none
@@ -107,7 +107,7 @@ export default function ResetPosition({
           <button
             className="
               cursor-pointer
-              text-xs font-bold
+              text-sm font-bold
               flex items-center justify-center
               mt-4 w-full min-h-[4rem]
               duration-[.25s] bg-(--primary-orange-1) hover:bg-(--primary-orange-2)

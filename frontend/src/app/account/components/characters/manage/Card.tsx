@@ -95,20 +95,20 @@ export default function Card(props: CardProps) {
   return (
     <div
       className="
-        info
+        card
         text-ellipsis
         pointer-events-auto
         relative overflow-hidden
         bg-(--black)
-        min-h-[32rem] min-w-0 p-8 sm:w-[calc(33.333%-1.0666rem)] sm:min-w-[calc(20%-1.0666rem)]
-        duration-[.25s] sm:hover:w-[50%]
+        min-h-[38rem] min-w-0 p-8 sm:w-[calc(33.333%-1.0666rem)] sm:min-w-[calc(20%-1.0666rem)]
+        duration-[.25s]
       "
       onMouseEnter={() => setHoveredId?.(character.id)}
       onMouseLeave={() => setHoveredId?.(null)}
     >
       <img
         className={`
-          absolute top-0 left-0 object-cover w-full h-full opacity-[.7]
+          absolute top-0 left-0 object-cover object-bottom w-full h-full opacity-[.7]
           ${brightnessClass}
           duration-[.25s]
         `}
@@ -154,7 +154,7 @@ export default function Card(props: CardProps) {
           type="button"
           onClick={() => setEdit(!edit)}
         >
-          <span className="text-xs text-white pointer-events-none absolute right-[calc(100%+.8rem)] top-[50%] translate-y-[-50%] opacity-0 duration-[.25s] group-hover:opacity-100">
+          <span className="text-sm text-white pointer-events-none absolute right-[calc(100%+.8rem)] top-[50%] translate-y-[-50%] opacity-0 duration-[.25s] group-hover:opacity-100">
             {edit ? 'Return' : 'Edit'}
           </span>
           {edit
@@ -168,7 +168,7 @@ export default function Card(props: CardProps) {
           onClick={removeCharacter}
           disabled={deleting || !!charData.transferPending}
         >
-          <span className="text-xs text-white pointer-events-none absolute right-[calc(100%+.8rem)] top-[50%] translate-y-[-50%] opacity-0 duration-[.25s] group-hover:opacity-100">
+          <span className="text-sm text-white pointer-events-none absolute right-[calc(100%+.8rem)] top-[50%] translate-y-[-50%] opacity-0 duration-[.25s] group-hover:opacity-100">
             Remove
           </span>
           {deleting ? '...' : <TrashIcon className="icon" />}
@@ -177,7 +177,7 @@ export default function Card(props: CardProps) {
           type="button"
           onClick={() => setCharacterHench(charData)}
         >
-          <span className="text-xs text-white pointer-events-none absolute right-[calc(100%+.8rem)] top-[50%] translate-y-[-50%] opacity-0 duration-[.25s] group-hover:opacity-100">
+          <span className="text-sm text-white pointer-events-none absolute right-[calc(100%+.8rem)] top-[50%] translate-y-[-50%] opacity-0 duration-[.25s] group-hover:opacity-100">
             Pets
           </span>
           🐍

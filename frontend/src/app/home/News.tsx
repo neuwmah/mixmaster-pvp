@@ -19,7 +19,7 @@ export default async function News({ home = true }: NewsProps) {
           Changelog {home ? '📝' : '⚙️'}
         </h2>
 
-        <p className="text-base text-center mt-6 text-(--gray-4)">
+        <p className="text-big text-center mt-6 text-(--gray-4)">
           {home
             ? `Last updated at ${new Date(changelogsData[0].created_at).toLocaleDateString()}`
             : `Check current posts below.`

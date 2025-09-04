@@ -24,8 +24,8 @@ export default async function SignUpPage() {
             Sign Up
           </h1>
           
-          <p className="text-base mt-6">
-            Already have an account? <Link className="link text-base duration-250 text-(--primary-orange-1) hover:underline" href="/account/signin">
+          <p className="text-big text-center mt-6">
+            Already have an account? <Link className="link duration-250 text-(--primary-orange-1) hover:underline" href="/account/signin">
               Click here
             </Link>
           </p>

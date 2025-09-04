@@ -24,8 +24,8 @@ export default async function SignInPage() {
             Sign In
           </h1>
 
-          <p className="text-base mt-6">
-            New account? <Link className="link text-base duration-250 text-(--primary-orange-1) hover:underline" href="/account/signup">
+          <p className="text-big text-center mt-6">
+            New account? <Link className="link duration-250 text-(--primary-orange-1) hover:underline" href="/account/signup">
               Click here
             </Link>
           </p>
