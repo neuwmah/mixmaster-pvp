@@ -25,18 +25,6 @@ model User {
   transferIncomingCharacters Character[] @relation("CharacterTransferTarget")
 }
 
-model Guild {
-  id             String      @id @default(cuid())
-  created_at     DateTime    @default(now())
-  name           String      @unique
-  masterId       String?     @unique
-  master         Character?  @relation("GuildMaster", fields: [masterId], references: [id])
-  castles_count  Int         @default(0)
-  members        Character[] @relation("GuildMembers")
-  castles        Castle[]
-  icon           String?
-}
-
 enum CharacterClass {
   ditt
   jin
@@ -74,19 +62,71 @@ model Character {
   transferTargetUser     User?     @relation("CharacterTransferTarget", fields: [transferTargetUserId], references: [id])
   transferRequestedAt    DateTime?
 
+  pets                 Pet[]
+
   @@index([userId])
   @@index([guildId])
   @@index([transferTargetUserId])
 }
 
+model Hench {
+  id          String          @id @default(cuid())
+  created_at  DateTime        @default(now())
+  code        String          @unique
+  name        String
+  description String?
+  rarity      String?
+  base_level  Int             @default(1)
+  base_exp    Int             @default(0)
+  sprite_url  String?
+  active      Boolean         @default(true)
+
+  pets        Pet[]
+
+  @@index([active])
+}
+
+model Pet {
+  id           String       @id @default(cuid())
+  created_at   DateTime     @default(now())
+  nickname     String?
+  level        Int          @default(1)
+  exp          Int          @default(0)
+
+  characterId  String
+  character    Character    @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  templateId   String
+  template     Hench  @relation(fields: [templateId], references: [id])
+
+  in_party     Boolean      @default(false)
+  slot         Int?
+
+  @@index([characterId])
+  @@index([templateId])
+  @@index([in_party])
+}
+
+model Guild {
+  id             String      @id @default(cuid())
+  created_at     DateTime    @default(now())
+  name           String      @unique
+  masterId       String?     @unique
+  master         Character?  @relation("GuildMaster", fields: [masterId], references: [id])
+  castles_count  Int         @default(0)
+  members        Character[] @relation("GuildMembers")
+  castles        Castle[]
+  icon           String?
+}
+
 model Castle {
-  id          String    @id @default(cuid())
-  created_at  DateTime  @default(now())
-  ownerId     String
-  owner       Guild     @relation(fields: [ownerId], references: [id])
-  city        String    @unique
-  weekday     String
-  time        DateTime  @db.Time(6)
+  id         String   @id @default(cuid())
+  created_at DateTime @default(now())
+  ownerId    String
+  owner      Guild    @relation(fields: [ownerId], references: [id])
+  city       String   @unique
+  weekday    String
+  time       DateTime @db.Time(6)
 
   @@index([ownerId])
 }
