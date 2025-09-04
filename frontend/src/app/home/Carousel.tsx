@@ -80,7 +80,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
                 )}
 
                 <div className={`
-                  w-full p-8
+                  w-full p-8 pb-12
                   flex flex-col items-start 
                   duration-250 
                   border-1
@@ -89,10 +89,10 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
                   <p className="text-base font-medium">
                     {item.title}
                   </p>
-                  <span className="text-xs no-underline mt-2 text-(--gray-4) group-hover:underline">
+                  <span className="text-sm no-underline mt-2 text-(--gray-4) group-hover:underline">
                     {new Date(item.created_at).toLocaleDateString()}
                   </span>
-                  <span className="text-sm no-underline mt-6 text-(--white) line-clamp-3 overflow-hidden">
+                  <span className="text-base no-underline mt-6 text-(--white) line-clamp-3 overflow-hidden">
                     {item.content1}
                   </span>
                 </div>
