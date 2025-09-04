@@ -69,16 +69,27 @@ model Character {
   @@index([transferTargetUserId])
 }
 
+enum HenchType {
+  dragon 
+  beast 
+  insect 
+  metal
+  mystery 
+  devil 
+  bird 
+  plant
+}
+
 model Hench {
   id          String          @id @default(cuid())
   created_at  DateTime        @default(now())
   code        String          @unique
   name        String
-  description String?
-  rarity      String?
+  type        HenchType
   base_level  Int             @default(1)
   base_exp    Int             @default(0)
   sprite_url  String?
+  icon_url    String?
   active      Boolean         @default(true)
 
   pets        Pet[]
@@ -96,14 +107,14 @@ model Pet {
   characterId  String
   character    Character    @relation(fields: [characterId], references: [id], onDelete: Cascade)
 
-  templateId   String
-  template     Hench  @relation(fields: [templateId], references: [id])
+  henchId   String
+  hench     Hench  @relation(fields: [henchId], references: [id])
 
   in_party     Boolean      @default(false)
   slot         Int?
 
   @@index([characterId])
-  @@index([templateId])
+  @@index([henchId])
   @@index([in_party])
 }
 
