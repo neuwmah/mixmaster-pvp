@@ -5,11 +5,14 @@ import { prisma } from '../db.js'
 const createSchema = z.object({
   code: z.string().min(1),
   name: z.string().min(1),
-  description: z.string().optional(),
-  rarity: z.string().optional(),
+  type: z.enum([
+    'dragon', 'beast', 'insect', 'metal',
+    'mystery', 'devil', 'bird', 'plant'
+  ]),
   base_level: z.number().int().min(1).default(1).optional(),
   base_exp: z.number().int().min(0).default(0).optional(),
-  sprite_url: z.string().url().optional(),
+  sprite_url: z.string().optional(),
+  icon_url: z.string().optional(),
   active: z.boolean().optional()
 })
 
@@ -58,7 +61,7 @@ export async function henchRoutes(app: FastifyInstance) {
 
   app.delete('/hench/:id', async (req, reply) => {
     const { id } = req.params as { id: string }
-    const petCount = await prisma.pet.count({ where: { templateId: id } })
+    const petCount = await prisma.pet.count({ where: { henchId: id } })
     if (petCount > 0) return reply.code(409).send({ message: 'cannot delete hench with existing pets' })
     try {
       await prisma.hench.delete({ where: { id } })

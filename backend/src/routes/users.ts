@@ -38,7 +38,15 @@ export async function userRoutes(app: FastifyInstance) {
   }
 
   app.get('/users', async () => {
-    const users = await prisma.user.findMany({ include: { characters: true } })
+    const users = await prisma.user.findMany({
+      include: {
+        characters: {
+          include: {
+            pets: { include: { hench: true } }
+          }
+        }
+      }
+    })
     return users.map((u: any) => ({ ...u, password: undefined }))
   })
 
@@ -50,7 +58,16 @@ export async function userRoutes(app: FastifyInstance) {
 
   app.get('/users/:id', async (req, reply) => {
     const { id } = req.params as { id: string }
-    const user = await prisma.user.findUnique({ where: { id }, include: { characters: true } })
+    const user = await prisma.user.findUnique({
+      where: { id },
+      include: {
+        characters: {
+          include: {
+            pets: { include: { hench: true } }
+          }
+        }
+      }
+    })
     if (!user) return reply.code(404).send({ message: 'not found' })
     return { ...user, password: undefined }
   })

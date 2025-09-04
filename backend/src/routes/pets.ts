@@ -4,7 +4,7 @@ import { prisma } from '../db.js'
 
 const createSchema = z.object({
   characterId: z.string(),
-  templateId: z.string(),
+  henchId: z.string(),
   nickname: z.string().optional()
 })
 
@@ -22,12 +22,12 @@ export async function petRoutes(app: FastifyInstance) {
     const characterId = typeof q.characterId === 'string' ? q.characterId : undefined
     const where: any = {}
     if (characterId) where.characterId = characterId
-    return prisma.pet.findMany({ where, include: { template: true } })
+    return prisma.pet.findMany({ where, include: { hench: true } })
   })
 
   app.get('/pets/:id', async (req, reply) => {
     const { id } = req.params as { id: string }
-    const item = await prisma.pet.findUnique({ where: { id }, include: { template: true, character: { select: { id: true, name: true } } } })
+    const item = await prisma.pet.findUnique({ where: { id }, include: { hench: true, character: { select: { id: true, name: true } } } })
     if (!item) return reply.code(404).send({ message: 'not found' })
     return item
   })
@@ -35,14 +35,14 @@ export async function petRoutes(app: FastifyInstance) {
   app.post('/pets', async (req, reply) => {
     const parsed = createSchema.safeParse(req.body)
     if (!parsed.success) return reply.code(400).send({ errors: parsed.error.flatten() })
-    const { characterId, templateId, nickname } = parsed.data
+    const { characterId, henchId, nickname } = parsed.data
 
     const character = await prisma.character.findUnique({ where: { id: characterId } })
     if (!character) return reply.code(404).send({ message: 'character not found' })
-    const template = await prisma.hench.findUnique({ where: { id: templateId, active: true } })
-    if (!template) return reply.code(404).send({ message: 'hench template not found' })
+    const hench = await prisma.hench.findUnique({ where: { id: henchId, active: true } })
+    if (!hench) return reply.code(404).send({ message: 'hench hench not found' })
 
-    const created = await prisma.pet.create({ data: { characterId, templateId, nickname, level: template.base_level, exp: template.base_exp }, include: { template: true } })
+    const created = await prisma.pet.create({ data: { characterId, henchId, nickname, level: hench.base_level, exp: hench.base_exp }, include: { hench: true } })
     return reply.code(201).send(created)
   })
 
@@ -51,7 +51,7 @@ export async function petRoutes(app: FastifyInstance) {
     const parsed = updateSchema.safeParse(req.body)
     if (!parsed.success) return reply.code(400).send({ errors: parsed.error.flatten() })
     try {
-      const updated = await prisma.pet.update({ where: { id }, data: parsed.data, include: { template: true } })
+      const updated = await prisma.pet.update({ where: { id }, data: parsed.data, include: { hench: true } })
       return updated
     } catch {
       return reply.code(404).send({ message: 'not found' })
