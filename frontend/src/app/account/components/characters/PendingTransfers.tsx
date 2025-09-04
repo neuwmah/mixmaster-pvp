@@ -26,8 +26,8 @@ export default function PendingTransfers({ userId }: PendingTransfersProps) {
   useEffect(() => { load(true) }, [userId])
 
   useEffect(() => {
-    const id = setInterval(() => { load() }, 5000)
-    return () => clearInterval(id)
+    // const id = setInterval(() => { load() }, 5000)
+    // return () => clearInterval(id)
   }, [userId])
 
   async function doAction(id: string, type: 'accept' | 'reject') {

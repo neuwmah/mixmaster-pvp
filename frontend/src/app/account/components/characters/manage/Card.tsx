@@ -59,8 +59,8 @@ export default function Card(props: CardProps) {
       ))
     }
     refresh()
-    const id = setInterval(refresh, 5000)
-    return () => { active = false; clearInterval(id) }
+    // const id = setInterval(refresh, 5000)
+    // return () => { active = false; clearInterval(id) }
   }, [character.id])
 
   useEffect(() => {
@@ -162,6 +162,7 @@ export default function Card(props: CardProps) {
             : <PencilSquareIcon className="icon" />
           }
         </button>
+        
         <button
           className="group relative pointer-events-auto cursor-pointer duration-[.25s] hover:text-(--primary-orange-1) disabled:opacity-40 disabled:cursor-not-allowed"
           type="button"
@@ -172,10 +173,16 @@ export default function Card(props: CardProps) {
             Remove
           </span>
           {deleting ? '...' : <TrashIcon className="icon" />}
-        </button>        <button
+        </button>        
+        
+        <button
           className="text-[2rem] group relative pointer-events-auto cursor-pointer duration-[.25s] hover:text-(--primary-orange-1)"
           type="button"
-          onClick={() => setCharacterHench(charData)}
+          onClick={async () => {
+            const full = await getCharacter(character.id)
+            if (full) setCharacterHench(full)
+            else setCharacterHench(charData)
+          }}
         >
           <span className="text-sm text-white pointer-events-none absolute right-[calc(100%+.8rem)] top-[50%] translate-y-[-50%] opacity-0 duration-[.25s] group-hover:opacity-100">
             Pets
