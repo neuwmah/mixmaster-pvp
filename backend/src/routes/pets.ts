@@ -10,7 +10,7 @@ const createSchema = z.object({
 
 const updateSchema = z.object({
   nickname: z.string().optional(),
-  in_party: z.boolean().optional(),
+  in_party: z.boolean().default(true).optional(),
   slot: z.number().int().min(0).nullable().optional(),
   level: z.number().int().min(1).max(999).optional(),
   exp: z.number().int().min(0).optional()
