@@ -41,7 +41,7 @@ export default function Background({ backgroundRef }: BackgroundProps) {
                   className={`
                     object-contain
                     w-[560px] h-[560px]
-                    mix-blend-darken brightness-[.3]
+                    mix-blend-darken brightness-[.3] blur-[.4rem]
                     absolute top-[50%] left-[calc(80%)] translate-x-[-50%] translate-y-[-50%]
                   `}
                 />

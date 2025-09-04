@@ -50,7 +50,7 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
   ];
 
   return (
-    <div className="fields flex flex-col gap-8 p-[2.4rem] sm:p-[2.8rem] sm:pt-[2.4rem] bg-(--black) border-[1px] border-(--gray-1)">
+    <div className="fields flex flex-col gap-8 p-[2.4rem] sm:p-[2.8rem] sm:pt-[2.4rem] bg-[rgba(0,0,0,.7)] border-[1px] border-(--gray-1) border-dashed rounded-[.8rem]">
       <div className="nickname">
         <p className="text-base mb-4 text-center">Set character nickname.</p>
         <div className="field flex">

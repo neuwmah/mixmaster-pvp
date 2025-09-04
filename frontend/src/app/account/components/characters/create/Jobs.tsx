@@ -35,7 +35,7 @@ export default function Jobs({ sending, job, backgroundRef, setJob }: JobsProps)
   }, [job])
 
   return (
-    <div className="jobs flex flex-col gap-8 p-[2.4rem] bg-(--black) border-[1px] border-(--gray-1) min-h-[28rem] overflow-hidden">
+    <div className="jobs flex flex-col gap-8 p-[2.4rem] bg-[rgba(0,0,0,.7)] border-[1px] border-(--gray-1) border-dashed rounded-[.8rem] min-h-[28rem] overflow-hidden">
 
       <span className="text text-base text-center">Select character class.</span>
 

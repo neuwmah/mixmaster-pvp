@@ -9,6 +9,7 @@ export interface Hench {
   base_level: number
   base_exp: number
   sprite_url?: string | null
+  icon_url?: string | null
   active: boolean
   pets?: Pet[]
 }

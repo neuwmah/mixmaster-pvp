@@ -47,6 +47,9 @@ export default function Create({ user, create, backgroundRef, setCreate, setChar
         alert(result.error || 'Create error.');
         setTimeout(() => setErrorMessage(''), 2500);
       } else {
+
+        
+
         await new Promise(r => setTimeout(r, 120));
         setCreate(false);
         setCharacterHench(result.data);
