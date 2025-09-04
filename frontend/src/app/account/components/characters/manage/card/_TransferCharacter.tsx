@@ -33,6 +33,7 @@ export default function TransferCharacter({
     if (res.error) {
       setError('User not found.')
       setSending(false)
+      router.refresh()
       return
     }
     setTransferCharacter(false)

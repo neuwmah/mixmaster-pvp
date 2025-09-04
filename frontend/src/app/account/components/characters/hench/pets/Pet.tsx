@@ -61,7 +61,7 @@ export default function PetComponent({ pet }: PetProps) {
         />
       }
 
-      <div className="type absolute top-[2.4rem] left-[2.4rem] flex w-[4.8rem] h-[4.8rem] z-1">
+      <div className="type absolute top-[2.4rem] left-[2.4rem] flex w-[4rem] h-[4rem] z-1">
         <img
           src={`/assets/images/hench/${hench?.type}.gif`}
           alt={`background-${hench?.type}`}
@@ -71,7 +71,7 @@ export default function PetComponent({ pet }: PetProps) {
       </div>
     
       {hench?.sprite_url && 
-        <div className="sprite flex mx-auto h-[20rem] relative z-1">
+        <div className="sprite flex mx-auto flex-1 relative z-1">
           <img
             src={`https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster/mh${hench.sprite_url}.webp`}
             alt={hench.sprite_url}

@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { createCharacter } from '@/app/api/character';
+import { createCharacter, getCharacter } from '@/app/api/character';
+import { createPetsBulk } from '@/app/api/pets';
 
 import Fields from '@/app/account/components/characters/create/Fields';
 import Jobs from '@/app/account/components/characters/create/Jobs';
@@ -47,12 +48,29 @@ export default function Create({ user, create, backgroundRef, setCreate, setChar
         alert(result.error || 'Create error.');
         setTimeout(() => setErrorMessage(''), 2500);
       } else {
+        const createdChar = result.data;
+        const henchIds = [
+          'cmf5rubal0000oxrl3qlthug8',
+          'cmf5u1umf000g111c4rdna21w',
+          'cmf5u4b93000h111c551i192k'
+        ];
+        try {
+          await createPetsBulk(henchIds.map(
+            (hid, idx) => ({ 
+              characterId: createdChar.id,
+              henchId: hid,
+              slot: idx, 
+              in_party: true
+            })
+          ))
+        } catch {}
 
-        
+        let updatedCharacter: Character | null = null;
+        try { updatedCharacter = await getCharacter(createdChar.id) } catch {}
 
         await new Promise(r => setTimeout(r, 120));
         setCreate(false);
-        setCharacterHench(result.data);
+        setCharacterHench(updatedCharacter || createdChar);
         router.refresh();
       }
     } catch {
