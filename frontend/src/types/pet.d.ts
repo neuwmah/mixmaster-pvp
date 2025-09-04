@@ -8,9 +8,9 @@ export interface Pet {
   level: number
   exp: number
   characterId: string
-  templateId: string
+  henchId: string
+  hench?: Hench
   in_party: boolean
   slot?: number | null
   character?: Character
-  template?: Hench
 }
