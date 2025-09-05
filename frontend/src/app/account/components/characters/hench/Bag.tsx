@@ -24,7 +24,7 @@ export default function Bag({ character, setPetsList }: BagProps) {
       )}
 
       {character.pets?.length ? (
-        <div className="flex flex-col gap-6 w-full">
+        <div className="flex flex-col gap-[1px] w-full">
           {character.pets
             .slice()
             .sort((a, b) => (Number(b.in_party) - Number(a.in_party)) || (b.level - a.level))

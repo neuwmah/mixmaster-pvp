@@ -15,7 +15,7 @@ interface PetInlineProps {
   character?: Character
   selectedHench?: Array<string> | false
   setSelectedHench?: (value: Array<string>) => void
-  setPetsList?: (value: Character | false) => void
+  setPetsList?: (value: Character | undefined) => void
 }
 
 export default function PetInline({ pet, hench, character, selectedHench = false, setSelectedHench, setPetsList }: PetInlineProps) {
@@ -50,34 +50,46 @@ export default function PetInline({ pet, hench, character, selectedHench = false
     router.refresh()
   }
 
+  const henchIds = [
+    'cmf5rubal0000oxrl3qlthug8',
+    'cmf5u1umf000g111c4rdna21w',
+    'cmf5u4b93000h111c551i192k'
+  ];
+
+  if (pet && pet.in_party) return
+  if (!pet && henchIds.includes(hench?.id || '')) return
   return (
     <div 
       className={`
         pet-inline
         flex items-center
         relative overflow-hidden
-        py-[.8rem] px-[2.4rem] gap-[2.4rem]
+        py-[.8rem]
+        px-[1.6rem] gap-[1.6rem] sm:px-[2.4rem] sm:gap-[2.4rem]
         bg-(--black)
-        rounded-[.8rem]
-        border-[1px] border-(--gray-1) border-dashed
-        transition-[.25s] ${((pet && !pet.in_party) || !pet) && 'bg-(--gray-0) border-(--gray-3) hover:border-(--white)'}
-        ${setSelectedHench && 'group'}
+        border-[1px] border-(--gray-1)
+        duration-(border.25s) ${((pet && !pet.in_party) || !pet) && 'bg-(--gray-0) border-(--gray-1)'}
+        ${setSelectedHench && 'group hover:border-(--gray-4)'}
         ${setSelectedHench && !active && 'cursor-pointer'}
-        ${setSelectedHench && active && 'border-(--white)'}
+        ${setSelectedHench && active && 'border-(--gray-4)'}
       `}
       data-active={active ? 'true' : 'false'}
       onClick={toggleSelect}
     >
       <img
-        src={`https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster_top/000${hench?.icon_url}.webp`}
+        src={
+          hench?.icon_url?.includes('webp')
+            ? hench.icon_url
+            : `https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster_top/000${hench?.icon_url}.webp`
+        }
         alt={displayName}
         className="object-contain w-[4rem] h-[4rem]"
         loading="lazy"
       />
 
-      <h3 className="text-base font-bold" title={hench?.name}>
+      <h3 className="text-base font-bold flex flex-col sm:block" title={hench?.name}>
         {hench?.name}
-        <span className="text-xs font-normal ml-[.8rem]">
+        <span className="text-xs font-normal sm:ml-[1.6rem]">
           Level {pet ? pet.level : hench?.base_level}
         </span>
       </h3>
@@ -85,7 +97,7 @@ export default function PetInline({ pet, hench, character, selectedHench = false
       <img
         src={`/assets/images/hench/${hench?.type}.gif`}
         alt={`icon-${hench?.type}`}
-        className="object-contain h-[3.2rem] w-[3.2rem]"
+        className="object-contain h-[3.2rem] w-[3.2rem] hidden sm:block"
         loading="lazy"
       />
 

@@ -89,6 +89,7 @@ export default function Card(props: CardProps) {
           absolute top-0 left-0 object-cover object-bottom w-full h-full opacity-[.7]
           ${brightnessClass}
           duration-[.25s]
+          pointer-events-none
         `}
         src={`/assets/images/characters/${charData.class.toLowerCase()}.jpg`}
         alt={`char-${charData.id}-${charData.class}`}

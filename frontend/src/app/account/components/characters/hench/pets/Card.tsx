@@ -58,7 +58,6 @@ export default function PetCard({ pet, hench, selectedHench = false, setSelected
         relative overflow-hidden
         p-[2.4rem]
         bg-(--black)
-        rounded-[.8rem]
         transition-[.25s]
         ${setSelectedHench && 'group border-dashed border-[1px]'}
         ${setSelectedHench && !active && 'cursor-pointer border-(--black) hover:border-(--gray-3)'}
@@ -68,10 +67,14 @@ export default function PetCard({ pet, hench, selectedHench = false, setSelected
       onClick={toggleSelect}
     >
       <img
-        src={`https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster_top/000${hench?.icon_url}.webp`}
+        src={
+          hench?.icon_url?.includes('webp')
+            ? hench?.icon_url
+            : `https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster_top/000${hench?.icon_url}.webp`
+        }  
         alt={displayName}
         className={`
-          background 
+          background pointer-events-none
           object-cover 
           w-full h-full 
           opacity-20 blur-[.8rem] scale-150 
@@ -91,7 +94,11 @@ export default function PetCard({ pet, hench, selectedHench = false, setSelected
     
       <div className="sprite flex mx-auto flex-1 relative z-1">
         <img
-          src={`https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster/mh${hench?.sprite_url}.webp`}
+          src={
+            hench?.sprite_url?.includes('webp')
+              ? hench?.sprite_url
+              : `https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster/mh${hench?.sprite_url}.webp`
+          }  
           alt={displayName}
           className="object-contain w-auto mt-auto"
           loading="lazy"
@@ -108,10 +115,14 @@ export default function PetCard({ pet, hench, selectedHench = false, setSelected
         ">
           {hench?.icon_url && 
             <img
-              src={`https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster_top/000${hench.icon_url}.webp`}
+              src={
+                hench.icon_url?.includes('webp')
+                  ? hench.icon_url
+                  : `https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster_top/000${hench.icon_url}.webp`
+              }  
               alt={hench.icon_url}
-              className="object-contain w-full h-full"
-              loading="lazy"
+                className="object-contain w-full h-full"
+                loading="lazy"
             />
           }
         </div>
