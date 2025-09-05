@@ -19,9 +19,9 @@ interface CharactersProps {
 
 export default function Characters({ user }: CharactersProps) {
   const [create, setCreate] = useState(false)
-  const [henchList, setHenchList] = useState<Character | undefined>(undefined)
-  const [petsCreate, setPetsCreate] = useState<Hench[]>([])
-  const [petsCreateDisplay, setPetsCreateDisplay] = useState(false)
+  const [petsList, setPetsList] = useState<Character | undefined>(undefined)
+  const [henchList, setHenchList] = useState<Hench[]>([])
+  const [henchListDisplay, setHenchListDisplay] = useState(false)
   const backgroundRef = useRef<SwiperType | null>(null)
   const userActionRef = useRef(false)
   const initialRenderRef = useRef(true)
@@ -67,12 +67,12 @@ export default function Characters({ user }: CharactersProps) {
         <PendingTransfers userId={user.id} />
 
         {!user.characters?.length || create
-          ? <Create user={user} create={create} setCreate={handleSetCreate} setHenchList={setHenchList} backgroundRef={backgroundRef} />
-          : petsCreate.length > 0 && petsCreateDisplay
-            ? <HenchCreate character={henchList} henches={petsCreate} setHenchList={setHenchList} setPetsCreateDisplay={setPetsCreateDisplay} />
-            : henchList != undefined
-              ? <HenchManage character={henchList} henches={petsCreate} setHenchList={setHenchList} setPetsCreate={setPetsCreate} setPetsCreateDisplay={setPetsCreateDisplay} />
-              : <Manage characters={user.characters} setCreate={handleSetCreate} setHenchList={setHenchList} />
+          ? <Create user={user} create={create} setCreate={handleSetCreate} setPetsList={setPetsList} backgroundRef={backgroundRef} />
+          : henchList.length > 0 && henchListDisplay
+            ? <HenchCreate character={petsList} henches={henchList} setPetsList={setPetsList} setHenchListDisplay={setHenchListDisplay} />
+            : petsList != undefined
+              ? <HenchManage character={petsList} henches={henchList} setPetsList={setPetsList} setHenchList={setHenchList} setHenchListDisplay={setHenchListDisplay} />
+              : <Manage characters={user.characters} setCreate={handleSetCreate} setPetsList={setPetsList} />
         }
 
       </div>

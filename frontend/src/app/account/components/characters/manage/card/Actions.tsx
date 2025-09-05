@@ -19,7 +19,7 @@ interface ActionsProps {
   deleting: boolean
   setEdit: (value: boolean) => void
   setDeleting: (value: boolean) => void
-  setHenchList: (value: Character | undefined) => void
+  setPetsList: (value: Character | undefined) => void
 }
 
 export default function Actions({
@@ -29,7 +29,7 @@ export default function Actions({
   deleting,
   setEdit,
   setDeleting,
-  setHenchList
+  setPetsList
 }: ActionsProps) {
   const router = useRouter()
   
@@ -88,7 +88,7 @@ export default function Actions({
       <button
         className="text-[2rem] group relative pointer-events-auto cursor-pointer duration-[.25s] hover:text-(--primary-orange-1)"
         type="button"
-        onClick={() => { setHenchList(character) }}
+        onClick={() => { setPetsList(character) }}
       >
         <span className="text-sm text-white pointer-events-none absolute right-[calc(100%+.8rem)] top-[50%] translate-y-[-50%] opacity-0 duration-[.25s] group-hover:opacity-100">
           Pets

@@ -8,10 +8,10 @@ import { Character } from '@/types/character'
 interface ManageProps {
   characters: Character[]
   setCreate: (value: boolean) => void
-  setHenchList: (value: Character | undefined) => void
+  setPetsList: (value: Character | undefined) => void
 }
 
-export default function Manage({ characters, setCreate, setHenchList }: ManageProps) {
+export default function Manage({ characters, setCreate, setPetsList }: ManageProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
 
   return (
@@ -32,7 +32,7 @@ export default function Manage({ characters, setCreate, setHenchList }: ManagePr
             {...character}
             hoveredId={hoveredId}
             setHoveredId={setHoveredId}
-            setHenchList={setHenchList}
+            setPetsList={setPetsList}
           />
         ))}
       </div>

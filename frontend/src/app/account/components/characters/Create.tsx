@@ -16,10 +16,10 @@ interface CreateProps {
   create: boolean;
   backgroundRef: any;
   setCreate: (value: boolean) => void;
-  setHenchList: (value: Character | undefined) => void;
+  setPetsList: (value: Character | undefined) => void;
 }
 
-export default function Create({ user, create, backgroundRef, setCreate, setHenchList }: CreateProps) {
+export default function Create({ user, create, backgroundRef, setCreate, setPetsList }: CreateProps) {
   const [name, setName] = useState('');
   const [job, setJob] = useState('ditt');
   const [attributes, setAttributes] = useState({ energy: 10, agility: 10, accuracy: 10, luck: 10 });
@@ -70,7 +70,7 @@ export default function Create({ user, create, backgroundRef, setCreate, setHenc
 
         await new Promise(r => setTimeout(r, 120));
         setCreate(false);
-        setHenchList(updatedCharacter || createdChar);
+        setPetsList(updatedCharacter || createdChar);
         router.refresh();
       }
     } catch {

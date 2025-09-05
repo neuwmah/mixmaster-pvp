@@ -11,23 +11,23 @@ import { Hench } from '@/types/hench'
 interface HenchManageProps {
   character: Character
   henches: Hench[]
-  setHenchList: (value: Character | undefined) => void
-  setPetsCreate: (value: Hench[]) => void
-  setPetsCreateDisplay: (value: boolean) => void
+  setPetsList: (value: Character | undefined) => void
+  setHenchList: (value: Hench[]) => void
+  setHenchListDisplay: (value: boolean) => void
 }
 
-export default function HenchManage({ character, henches, setHenchList, setPetsCreate, setPetsCreateDisplay }: HenchManageProps) {
+export default function HenchManage({ character, henches, setPetsList, setHenchList, setHenchListDisplay }: HenchManageProps) {
   return (
     <div className="hench-manage mt-12 w-full flex flex-col items-center">
       <Party character={character} />
-      <Bag character={character} setHenchList={setHenchList} />
+      <Bag character={character} setPetsList={setPetsList} />
 
       <div className="mt-16 flex items-center gap-4">
         <button
           className="w-auto button-gray"
           type="button"
           aria-label="Close Pets"
-          onClick={() => setHenchList(undefined)}
+          onClick={() => setPetsList(undefined)}
         >
           Save
         </button>
@@ -38,9 +38,9 @@ export default function HenchManage({ character, henches, setHenchList, setPetsC
           onClick={async () => {
             if (henches.length == 0) {
               const currentHenches = await getHenchs()
-              setPetsCreate(currentHenches)
+              setHenchList(currentHenches)
             }
-            setPetsCreateDisplay(true)
+            setHenchListDisplay(true)
           }}
         >
           New Pet 🐍

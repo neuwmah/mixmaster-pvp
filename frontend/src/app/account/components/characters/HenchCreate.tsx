@@ -12,11 +12,11 @@ import { Hench } from '@/types/hench'
 interface HenchCreateProps {
   henches: Hench[]
   character: Character | undefined
-  setHenchList: (value: Character | undefined) => void
-  setPetsCreateDisplay: (value: boolean) => void
+  setPetsList: (value: Character | undefined) => void
+  setHenchListDisplay: (value: boolean) => void
 }
 
-export default function HenchCreate({ henches, character, setHenchList, setPetsCreateDisplay }: HenchCreateProps) {
+export default function HenchCreate({ henches, character, setPetsList, setHenchListDisplay }: HenchCreateProps) {
   const [selectedHench, setSelectedHench] = useState<string[]>([])
   const [sending, setSending] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
@@ -36,8 +36,8 @@ export default function HenchCreate({ henches, character, setHenchList, setPetsC
       ))
 
       if (character && result.data)
-        setHenchList({ ...character, pets: [...character.pets || [], ...result.data] })
-      setPetsCreateDisplay(false)
+        setPetsList({ ...character, pets: [...character.pets || [], ...result.data] })
+      setHenchListDisplay(false)
       
       router.refresh()
     } catch {
@@ -57,7 +57,7 @@ export default function HenchCreate({ henches, character, setHenchList, setPetsC
           className="w-auto button-gray"
           type="button"
           aria-label="Close Pets"
-          onClick={() => setPetsCreateDisplay(false)}
+          onClick={() => setHenchListDisplay(false)}
         >
           Return
         </button>

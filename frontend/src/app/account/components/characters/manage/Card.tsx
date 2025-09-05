@@ -15,14 +15,14 @@ import { Character } from '@/types/character'
 interface CardProps extends Character {
   hoveredId?: string | null
   setHoveredId?: (id: string | null) => void
-  setHenchList: (value: Character | undefined) => void
+  setPetsList: (value: Character | undefined) => void
 }
 
 export default function Card(props: CardProps) {
   const {
     hoveredId,
     setHoveredId,
-    setHenchList,
+    setPetsList,
     ...character
   } = props
 
@@ -122,7 +122,7 @@ export default function Card(props: CardProps) {
         }
       </div>
 
-      <Actions character={charData} edit={edit} deleting={deleting} setEdit={setEdit} setDeleting={setDeleting} setHenchList={setHenchList} />
+      <Actions character={charData} edit={edit} deleting={deleting} setEdit={setEdit} setDeleting={setDeleting} setPetsList={setPetsList} />
     </div>
   )
 }
