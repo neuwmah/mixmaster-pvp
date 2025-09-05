@@ -31,7 +31,7 @@ export default function HenchManage({ character, henches, setPetsList, setHenchL
         >
           Save
         </button>
-        {character.pets?.length && character.pets.length < 20 &&
+        {(character.pets && character.pets.length < 20) ?
           <button
             className="w-auto button-orange"
             type="button"
@@ -46,7 +46,7 @@ export default function HenchManage({ character, henches, setPetsList, setHenchL
           >
             New Pet 🐍
           </button>
-        }
+        : null}
       </div>
     </div>
   )
