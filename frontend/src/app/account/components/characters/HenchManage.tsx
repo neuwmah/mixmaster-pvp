@@ -31,20 +31,22 @@ export default function HenchManage({ character, henches, setPetsList, setHenchL
         >
           Save
         </button>
-        <button
-          className="w-auto button-orange"
-          type="button"
-          aria-label="Add New Pet"
-          onClick={async () => {
-            if (henches.length == 0) {
-              const currentHenches = await getHenchs()
-              setHenchList(currentHenches)
-            }
-            setHenchListDisplay(true)
-          }}
-        >
-          New Pet 🐍
-        </button>
+        {character.pets?.length && character.pets.length < 20 &&
+          <button
+            className="w-auto button-orange"
+            type="button"
+            aria-label="Add New Pet"
+            onClick={async () => {
+              if (henches.length == 0) {
+                const currentHenches = await getHenchs()
+                setHenchList(currentHenches)
+              }
+              setHenchListDisplay(true)
+            }}
+          >
+            New Pet 🐍
+          </button>
+        }
       </div>
     </div>
   )

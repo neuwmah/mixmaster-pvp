@@ -68,10 +68,11 @@ export default function PetInline({ pet, hench, character, selectedHench = false
         px-[1.6rem] gap-[1.6rem] sm:px-[2.4rem] sm:gap-[2.4rem]
         bg-(--black)
         border-[1px] border-(--gray-1)
-        duration-(border.25s) ${((pet && !pet.in_party) || !pet) && 'bg-(--gray-0) border-(--gray-1)'}
-        ${setSelectedHench && 'group hover:border-(--gray-4)'}
-        ${setSelectedHench && !active && 'cursor-pointer'}
-        ${setSelectedHench && active && 'border-(--gray-4)'}
+        duration-[.25s]
+        ${((pet && !pet.in_party) || !pet) && 'bg-(--gray-0) border-(--gray-1)'}
+        ${setSelectedHench && 'group'}
+        ${setSelectedHench && !active && 'cursor-pointer hover:border-(--gray-2)'}
+        ${setSelectedHench && active && '!bg-(--gray-a)'}
       `}
       data-active={active ? 'true' : 'false'}
       onClick={toggleSelect}
@@ -88,7 +89,9 @@ export default function PetInline({ pet, hench, character, selectedHench = false
       />
 
       <h3 className="text-base font-bold flex flex-col sm:block" title={hench?.name}>
-        {hench?.name}
+        <span className={setSelectedHench && active ? 'underline' : ''}>
+          {hench?.name}
+        </span>
         <span className="text-xs font-normal sm:ml-[1.6rem]">
           Level {pet ? pet.level : hench?.base_level}
         </span>

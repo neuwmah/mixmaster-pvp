@@ -14,7 +14,7 @@ export default function Bag({ character, setPetsList }: BagProps) {
     <div className="
       bag
       text-base
-      flex flex-col gap-[1.6rem] mt-[1.6rem]
+      flex flex-col gap-[1.6rem]
       w-full max-w-[1000px]
     ">  
       {!character.pets?.length && (

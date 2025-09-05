@@ -48,8 +48,8 @@ export default function General({ henches, selectedHench = [], setSelectedHench 
               block
               w-full h-[1.6rem] rounded-[100%]
               absolute top-[80%] left-[50%] translate-x-[-50%]
-              transition-[.25s] bg-(--black) group-hover:bg-(--gray-0)
-              ${selectedType === type ? 'bg-(--gray-0)' : ''}
+              transition-[.25s] bg-(--black)
+              ${selectedType === type ? 'bg-(--gray-2)' : 'bg-(--gray-a) group-hover:bg-(--gray-1)'}
             `}></span>
           </button>
         ))}
