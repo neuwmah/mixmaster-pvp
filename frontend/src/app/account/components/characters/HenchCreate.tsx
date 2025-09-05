@@ -2,29 +2,30 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { createPetsBulk } from '@/app/api/pets';
+import { createPetsBulk } from '@/app/api/pets'
 
 import General from '@/app/account/components/characters/hench/General'
 
 import { Character } from '@/types/character'
-import { Pet } from '@/types/pet'
+import { Hench } from '@/types/hench'
 
 interface HenchCreateProps {
-  character: Character | false
-  setCharacterHench: (value: Character | false) => void
-  setCharacterHenchCreate: (value: boolean) => void
+  henches: Hench[]
+  character: Character | undefined
+  setHenchList: (value: Character | undefined) => void
+  setPetsCreateDisplay: (value: boolean) => void
 }
 
-export default function HenchCreate({ character, setCharacterHench, setCharacterHenchCreate }: HenchCreateProps) {
-  const [selectedHench, setSelectedHench] = useState<string[]>([]);
-  const [sending, setSending] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const router = useRouter();
+export default function HenchCreate({ henches, character, setHenchList, setPetsCreateDisplay }: HenchCreateProps) {
+  const [selectedHench, setSelectedHench] = useState<string[]>([])
+  const [sending, setSending] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const router = useRouter()
 
   const handleCreate = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setSending(true);
-    setErrorMessage('');
+    event.preventDefault()
+    setSending(true)
+    setErrorMessage('')
 
     try {
       const result = await createPetsBulk(selectedHench.map(
@@ -35,28 +36,28 @@ export default function HenchCreate({ character, setCharacterHench, setCharacter
       ))
 
       if (character && result.data)
-        setCharacterHench({ ...character, pets: [...character.pets || [], ...result.data] });
-      setCharacterHenchCreate(false);
+        setHenchList({ ...character, pets: [...character.pets || [], ...result.data] })
+      setPetsCreateDisplay(false)
       
-      router.refresh();
+      router.refresh()
     } catch {
-      alert('Unexpected error.');
-      setTimeout(() => setErrorMessage(''), 2500);
+      alert('Unexpected error.')
+      setTimeout(() => setErrorMessage(''), 2500)
     }
 
     setSending(false);
-  };
+  }
 
   return (
     <div className="hench-create mt-12 w-full flex flex-col items-center">
-      <General selectedHench={selectedHench} setSelectedHench={setSelectedHench} />
+      <General henches={henches} selectedHench={selectedHench} setSelectedHench={setSelectedHench} />
 
       <div className="mt-16 flex items-center gap-4">
         <button
           className="w-auto button-gray"
           type="button"
           aria-label="Close Pets"
-          onClick={() => setCharacterHenchCreate(false)}
+          onClick={() => setPetsCreateDisplay(false)}
         >
           Return
         </button>
@@ -67,7 +68,7 @@ export default function HenchCreate({ character, setCharacterHench, setCharacter
           onClick={handleCreate}
           disabled={!(selectedHench && selectedHench.length)}
         >
-          Create ✨
+          Create 🐍
         </button>
       </div>
     </div>

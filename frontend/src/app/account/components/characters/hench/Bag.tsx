@@ -6,10 +6,10 @@ import { Character } from '@/types/character'
 
 interface BagProps {
   character: Character
-  setCharacterHench: (value: Character | false) => void
+  setHenchList: (value: Character | undefined) => void
 }
 
-export default function Bag({ character, setCharacterHench }: BagProps) {
+export default function Bag({ character, setHenchList }: BagProps) {
   return (
     <div className="
       bag
@@ -28,7 +28,7 @@ export default function Bag({ character, setCharacterHench }: BagProps) {
           {character.pets
             .slice()
             .sort((a, b) => (Number(b.in_party) - Number(a.in_party)) || (b.level - a.level))
-            .map(pet => <PetInline pet={pet} hench={pet.hench} key={pet.id} character={character} setCharacterHench={setCharacterHench} />)}
+            .map(pet => <PetInline pet={pet} hench={pet.hench} key={pet.id} character={character} setHenchList={setHenchList} />)}
         </div>
       ) : null}
     </div>

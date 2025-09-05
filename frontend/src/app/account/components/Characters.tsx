@@ -4,13 +4,14 @@ import type { Swiper as SwiperType } from 'swiper'
 
 import Manage from '@/app/account/components/characters/Manage'
 import Create from '@/app/account/components/characters/Create'
-import Hench from '@/app/account/components/characters/Hench'
+import HenchManage from '@/app/account/components/characters/HenchManage'
 import HenchCreate from '@/app/account/components/characters/HenchCreate'
 import Background from '@/app/account/components/characters/create/Background'
 import PendingTransfers from '@/app/account/components/characters/PendingTransfers'
 
 import { User } from '@/types/user'
 import { Character } from '@/types/character'
+import { Hench } from '@/types/hench'
 
 interface CharactersProps {
   user: User;
@@ -18,8 +19,9 @@ interface CharactersProps {
 
 export default function Characters({ user }: CharactersProps) {
   const [create, setCreate] = useState(false)
-  const [characterHench, setCharacterHench] = useState<Character | false>(false)
-  const [characterHenchCreate, setCharacterHenchCreate] = useState(false)
+  const [henchList, setHenchList] = useState<Character | undefined>(undefined)
+  const [petsCreate, setPetsCreate] = useState<Hench[]>([])
+  const [petsCreateDisplay, setPetsCreateDisplay] = useState(false)
   const backgroundRef = useRef<SwiperType | null>(null)
   const userActionRef = useRef(false)
   const initialRenderRef = useRef(true)
@@ -65,12 +67,12 @@ export default function Characters({ user }: CharactersProps) {
         <PendingTransfers userId={user.id} />
 
         {!user.characters?.length || create
-          ? <Create user={user} create={create} setCreate={handleSetCreate} setCharacterHench={setCharacterHench} backgroundRef={backgroundRef} />
-          : characterHenchCreate
-            ? <HenchCreate character={characterHench} setCharacterHench={setCharacterHench} setCharacterHenchCreate={setCharacterHenchCreate} />
-            : characterHench
-              ? <Hench character={characterHench} setCharacterHench={setCharacterHench} setCharacterHenchCreate={setCharacterHenchCreate} />
-              : <Manage characters={user.characters} setCreate={handleSetCreate} setCharacterHench={setCharacterHench} />
+          ? <Create user={user} create={create} setCreate={handleSetCreate} setHenchList={setHenchList} backgroundRef={backgroundRef} />
+          : petsCreate.length > 0 && petsCreateDisplay
+            ? <HenchCreate character={henchList} henches={petsCreate} setHenchList={setHenchList} setPetsCreateDisplay={setPetsCreateDisplay} />
+            : henchList != undefined
+              ? <HenchManage character={henchList} henches={petsCreate} setHenchList={setHenchList} setPetsCreate={setPetsCreate} setPetsCreateDisplay={setPetsCreateDisplay} />
+              : <Manage characters={user.characters} setCreate={handleSetCreate} setHenchList={setHenchList} />
         }
 
       </div>

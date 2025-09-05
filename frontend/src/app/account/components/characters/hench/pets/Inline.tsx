@@ -15,10 +15,10 @@ interface PetInlineProps {
   character?: Character
   selectedHench?: Array<string> | false
   setSelectedHench?: (value: Array<string>) => void
-  setCharacterHench?: (value: Character | false) => void
+  setHenchList?: (value: Character | false) => void
 }
 
-export default function PetInline({ pet, hench, character, selectedHench = false, setSelectedHench, setCharacterHench }: PetInlineProps) {
+export default function PetInline({ pet, hench, character, selectedHench = false, setSelectedHench, setHenchList }: PetInlineProps) {
   const displayName = pet ? pet.nickname || hench?.name : hench?.name
   const active = !!(hench?.id && Array.isArray(selectedHench) && selectedHench.includes(hench.id))
   const router = useRouter()
@@ -43,8 +43,8 @@ export default function PetInline({ pet, hench, character, selectedHench = false
     const { error } = await deletePet(pet.id)
     if (error) alert(error)
       
-    if (!error && character && setCharacterHench)
-      setCharacterHench({ ...character, pets: character.pets?.filter(p => p.id !== pet.id) })
+    if (!error && character && setHenchList)
+      setHenchList({ ...character, pets: character.pets?.filter(p => p.id !== pet.id) })
     
     setDeleting(false)
     router.refresh()
