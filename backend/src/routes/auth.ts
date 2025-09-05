@@ -31,7 +31,16 @@ export async function authRoutes(app: FastifyInstance) {
       if (!auth) return reply.code(401).send({ message: 'no token' })
       const token = auth.split(' ')[1]
       const payload = app.jwt.verify<{ userId: string }>(token)
-      const user = await prisma.user.findUnique({ where: { id: payload.userId }, include: { characters: true } })
+      const user = await prisma.user.findUnique({
+        where: { id: payload.userId },
+        include: {
+          characters: {
+            include: {
+              pets: { include: { hench: true } }
+            }
+          }
+        }
+      })
       if (!user) return reply.code(404).send({ message: 'not found' })
       return { ...user, password: undefined }
     } catch (e) {
