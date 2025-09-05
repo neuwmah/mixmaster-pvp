@@ -10,6 +10,7 @@ import PendingTransfers from '@/app/account/components/characters/PendingTransfe
 
 import { User } from '@/types/user'
 import { Character } from '@/types/character'
+import HenchCreate from './characters/HenchCreate'
 
 interface CharactersProps {
   user: User;
@@ -18,6 +19,7 @@ interface CharactersProps {
 export default function Characters({ user }: CharactersProps) {
   const [create, setCreate] = useState(false)
   const [characterHench, setCharacterHench] = useState<Character | false>(false)
+  const [characterHenchCreate, setCharacterHenchCreate] = useState(false)
   const backgroundRef = useRef<SwiperType | null>(null)
   const userActionRef = useRef(false)
   const initialRenderRef = useRef(true)
@@ -64,9 +66,11 @@ export default function Characters({ user }: CharactersProps) {
 
         {!user.characters?.length || create
           ? <Create user={user} create={create} setCreate={handleSetCreate} setCharacterHench={setCharacterHench} backgroundRef={backgroundRef} />
-          : characterHench
-            ? <Hench character={characterHench} setCharacterHench={setCharacterHench} />
-            : <Manage characters={user.characters} setCreate={handleSetCreate} setCharacterHench={setCharacterHench} />
+          : characterHenchCreate
+            ? <HenchCreate character={characterHench} setCharacterHenchCreate={setCharacterHenchCreate} />
+            : characterHench
+              ? <Hench character={characterHench} setCharacterHench={setCharacterHench} setCharacterHenchCreate={setCharacterHenchCreate} />
+              : <Manage characters={user.characters} setCreate={handleSetCreate} setCharacterHench={setCharacterHench} />
         }
 
       </div>

@@ -1,14 +1,15 @@
 import React from 'react'
 
 import { Pet } from '@/types/pet'
+import { Hench } from '@/types/hench'
 
-interface PetProps {
-  pet: Pet
+interface PetCardProps {
+  pet?: Pet | false
+  hench: Hench | undefined
 }
 
-export default function PetComponent({ pet }: PetProps) {
-  const hench = pet.hench
-  const displayName = pet.nickname || hench?.name || ''
+export default function PetCard({ pet, hench }: PetCardProps) {
+  const displayName = pet ? pet.nickname || hench?.name : hench?.name
 
   function Row({ label, children }: { label: string; children: React.ReactNode }) {
     return (
@@ -36,30 +37,27 @@ export default function PetComponent({ pet }: PetProps) {
     )
   }
 
-  return pet.in_party && (
-    <div key={pet.id} className="
-      pet 
+  return ((pet && pet.in_party) || !pet) && (
+    <div className="
+      pet-card 
       flex flex-col
       relative overflow-hidden
       p-[2.4rem]
       bg-(--black)
       rounded-[.8rem]
-      border-[1px] border-(--gray-1) border-dashed
     ">
-      {hench?.icon_url && 
-        <img
-          src={`https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster_top/000${hench.icon_url}.webp`}
-          alt={hench.icon_url}
-          className="
-            background 
-            object-cover 
-            w-full h-full 
-            opacity-20 blur-[.8rem] scale-150 
-            absolute top-0 left-0 translate-y-[-1.6rem] 
-          "
-          loading="lazy"
-        />
-      }
+      <img
+        src={`https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster_top/000${hench?.icon_url}.webp`}
+        alt={displayName}
+        className="
+          background 
+          object-cover 
+          w-full h-full 
+          opacity-20 blur-[.8rem] scale-150 
+          absolute top-0 left-0 translate-y-[-1.6rem] 
+        "
+        loading="lazy"
+      />
 
       <div className="type absolute top-[2.4rem] left-[2.4rem] flex w-[4rem] h-[4rem] z-1">
         <img
@@ -70,16 +68,14 @@ export default function PetComponent({ pet }: PetProps) {
         />
       </div>
     
-      {hench?.sprite_url && 
-        <div className="sprite flex mx-auto flex-1 relative z-1">
-          <img
-            src={`https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster/mh${hench.sprite_url}.webp`}
-            alt={hench.sprite_url}
-            className="object-contain w-auto mt-auto"
-            loading="lazy"
-          />
-        </div>
-      }
+      <div className="sprite flex mx-auto flex-1 relative z-1">
+        <img
+          src={`https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster/mh${hench?.sprite_url}.webp`}
+          alt={displayName}
+          className="object-contain w-auto mt-auto"
+          loading="lazy"
+        />
+      </div>
 
       <div className="infos flex justify-center items-center my-[1.6rem] relative z-1 h-[4rem]">
         <div className="
@@ -117,7 +113,7 @@ export default function PetComponent({ pet }: PetProps) {
         }
         <Row label="Hench">{hench?.name ?? '—'}</Row>
         <Row label="Type">{hench?.type ?? '—'}</Row>
-        <Row label="Level"><strong>{pet.level}</strong>/{hench?.base_level ? hench?.base_level + 25 : '—'}</Row>
+        <Row label="Level"><strong>{pet ? pet.level : hench?.base_level}</strong>/{hench?.base_level ? hench?.base_level + 25 : '—'}</Row>
       </div>
     </div>
   )

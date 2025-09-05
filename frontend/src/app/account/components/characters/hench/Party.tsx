@@ -1,33 +1,33 @@
 import React from 'react'
 
-import PetComponent from '@/app/account/components/characters/hench/pets/Pet'
+import PetCard from '@/app/account/components/characters/hench/pets/Card'
 
 import { Character } from '@/types/character'
 
-interface HenchProps {
+interface PartyProps {
   character: Character
 }
 
-export default function Pets({ character }: HenchProps) {
+export default function Party({ character }: PartyProps) {
   return (
     <div className="
-      pets
+      party
       text-base
       flex flex-col gap-8
       w-full max-w-[1000px]
     ">  
       {!character.pets?.length && (
         <p className="text-center">
-          No pets for this character.
+          No pets in party.
         </p>
       )}
 
       {character.pets?.length ? (
-        <div className="grid gap-12 sm:grid-cols-2 xl:grid-cols-3 w-full">
+        <div className="grid gap-[1.6rem] sm:grid-cols-2 xl:grid-cols-3 w-full">
           {character.pets
-            .sort((a, b) => a.level - b.level)
+            .sort((a, b) => b.level - a.level)
             .map(pet => {
-              return <PetComponent pet={pet} key={pet.id} />
+              return <PetCard key={pet.id} pet={pet} hench={pet.hench} />
             })}
         </div>
       ) : null}
