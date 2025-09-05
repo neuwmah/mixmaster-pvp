@@ -2,6 +2,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 
+import { deleteCharacter, getCharacter } from '@/app/api/character'
+
 import {
   ArrowUturnLeftIcon,
   PencilSquareIcon,
@@ -14,7 +16,6 @@ import ResetPosition from '@/app/account/components/characters/manage/card/_Rese
 import TransferCharacter from '@/app/account/components/characters/manage/card/_TransferCharacter'
 import ChangeNickname from '@/app/account/components/characters/manage/card/_ChangeNickname'
 
-import { deleteCharacter, getCharacter } from '@/app/api/character'
 import { Character } from '@/types/character'
 
 interface CardProps extends Character {
@@ -59,8 +60,6 @@ export default function Card(props: CardProps) {
       ))
     }
     refresh()
-    // const id = setInterval(refresh, 5000)
-    // return () => { active = false; clearInterval(id) }
   }, [character.id])
 
   useEffect(() => {

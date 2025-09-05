@@ -5,12 +5,12 @@ import type { Swiper as SwiperType } from 'swiper'
 import Manage from '@/app/account/components/characters/Manage'
 import Create from '@/app/account/components/characters/Create'
 import Hench from '@/app/account/components/characters/Hench'
+import HenchCreate from '@/app/account/components/characters/HenchCreate'
 import Background from '@/app/account/components/characters/create/Background'
 import PendingTransfers from '@/app/account/components/characters/PendingTransfers'
 
 import { User } from '@/types/user'
 import { Character } from '@/types/character'
-import HenchCreate from './characters/HenchCreate'
 
 interface CharactersProps {
   user: User;
@@ -67,7 +67,7 @@ export default function Characters({ user }: CharactersProps) {
         {!user.characters?.length || create
           ? <Create user={user} create={create} setCreate={handleSetCreate} setCharacterHench={setCharacterHench} backgroundRef={backgroundRef} />
           : characterHenchCreate
-            ? <HenchCreate character={characterHench} setCharacterHenchCreate={setCharacterHenchCreate} />
+            ? <HenchCreate character={characterHench} setCharacterHench={setCharacterHench} setCharacterHenchCreate={setCharacterHenchCreate} />
             : characterHench
               ? <Hench character={characterHench} setCharacterHench={setCharacterHench} setCharacterHenchCreate={setCharacterHenchCreate} />
               : <Manage characters={user.characters} setCreate={handleSetCreate} setCharacterHench={setCharacterHench} />

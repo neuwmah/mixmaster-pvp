@@ -41,3 +41,16 @@ export async function updatePet(id: string, payload: Partial<Pick<Pet, 'nickname
     return { error: msg || 'Update pet failed' }
   }
 }
+
+export async function deletePet(id: string): Promise<{ ok?: boolean; error?: string }> {
+  if (!baseEnv) return { error: 'API URL not configured' }
+  try {
+    const api = createApiClient(baseEnv)
+    const { status } = await api.delete(`/pets/${id}`)
+    if (status !== 204) return { error: 'Delete pet failed' }
+    return { ok: true }
+  } catch (e: any) {
+    const msg = e?.response?.data?.message
+    return { error: msg || 'Delete pet failed' }
+  }
+}

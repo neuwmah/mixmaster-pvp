@@ -23,7 +23,7 @@ export default function Party({ character }: PartyProps) {
       )}
 
       {character.pets?.length ? (
-        <div className="grid gap-[1.6rem] sm:grid-cols-2 xl:grid-cols-3 w-full">
+        <div className="grid gap-[1.6rem] sm:grid-cols-3 xl:grid-cols-3 w-full">
           {character.pets
             .sort((a, b) => b.level - a.level)
             .map(pet => {

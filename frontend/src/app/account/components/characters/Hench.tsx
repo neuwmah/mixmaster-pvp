@@ -15,7 +15,7 @@ export default function Hench({ character, setCharacterHench, setCharacterHenchC
   return (
     <div className="hench mt-12 w-full flex flex-col items-center">
       <Party character={character} />
-      <Bag character={character} />
+      <Bag character={character} setCharacterHench={setCharacterHench} />
 
       <div className="mt-16 flex items-center gap-4">
         <button
@@ -24,7 +24,7 @@ export default function Hench({ character, setCharacterHench, setCharacterHenchC
           aria-label="Close Pets"
           onClick={() => setCharacterHench(false)}
         >
-          Return
+          Save
         </button>
         <button
           className="w-auto button-orange"

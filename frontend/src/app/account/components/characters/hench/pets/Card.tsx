@@ -6,11 +6,24 @@ import { Hench } from '@/types/hench'
 interface PetCardProps {
   pet?: Pet | false
   hench: Hench | undefined
+  selectedHench?: Array<string> | false
+  setSelectedHench?: (value: Array<string>) => void
 }
 
-export default function PetCard({ pet, hench }: PetCardProps) {
+export default function PetCard({ pet, hench, selectedHench = false, setSelectedHench }: PetCardProps) {
   const displayName = pet ? pet.nickname || hench?.name : hench?.name
+  const active = !!(hench?.id && Array.isArray(selectedHench) && selectedHench.includes(hench.id))
 
+  function toggleSelect() {
+    if (!hench?.id || !setSelectedHench) return
+    if (Array.isArray(selectedHench) && selectedHench.includes(hench.id)) {
+      setSelectedHench(selectedHench.filter(id => id !== hench.id))
+    } else {
+      const current = Array.isArray(selectedHench) ? selectedHench : []
+      setSelectedHench([...current, hench.id])
+    }
+  }
+  
   function Row({ label, children }: { label: string; children: React.ReactNode }) {
     return (
       <div className="flex items-stretch">
@@ -38,24 +51,32 @@ export default function PetCard({ pet, hench }: PetCardProps) {
   }
 
   return ((pet && pet.in_party) || !pet) && (
-    <div className="
-      pet-card 
-      flex flex-col
-      relative overflow-hidden
-      p-[2.4rem]
-      bg-(--black)
-      rounded-[.8rem]
-    ">
+    <div
+      className={`
+        pet-card 
+        flex flex-col
+        relative overflow-hidden
+        p-[2.4rem]
+        bg-(--black)
+        rounded-[.8rem]
+        transition-[.25s]
+        ${setSelectedHench && 'group border-dashed border-[1px]'}
+        ${setSelectedHench && !active && 'cursor-pointer border-(--black) hover:border-(--gray-3)'}
+        ${setSelectedHench && active && 'border-(--white)'}
+      `}
+      data-active={active ? 'true' : 'false'}
+      onClick={toggleSelect}
+    >
       <img
         src={`https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster_top/000${hench?.icon_url}.webp`}
         alt={displayName}
-        className="
+        className={`
           background 
           object-cover 
           w-full h-full 
           opacity-20 blur-[.8rem] scale-150 
-          absolute top-0 left-0 translate-y-[-1.6rem] 
-        "
+          absolute top-0 left-0 translate-y-[-1.6rem]
+        `}
         loading="lazy"
       />
 
