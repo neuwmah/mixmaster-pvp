@@ -3,19 +3,6 @@ import { Pet } from '@/types/pet'
 
 const baseEnv = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL || ''
 
-export async function createPet(data: { characterId: string; henchId: string; nickname?: string; in_party?: boolean; slot?: number | null }): Promise<{ data?: Pet; error?: string }> {
-  if (!baseEnv) return { error: 'API URL not configured' }
-  try {
-    const api = createApiClient(baseEnv)
-    const { data: resp, status } = await api.post('/pets', data)
-    if (status !== 201) return { error: 'Create pet failed' }
-    return { data: resp as Pet }
-  } catch (e: any) {
-    const msg = e?.response?.data?.message
-    return { error: msg || 'Create pet failed' }
-  }
-}
-
 export async function createPetsBulk(list: { characterId: string; henchId: string; nickname?: string; in_party?: boolean; slot?: number | null }[]): Promise<{ data?: Pet[]; error?: string }> {
   if (!baseEnv) return { error: 'API URL not configured' }
   try {
@@ -26,19 +13,6 @@ export async function createPetsBulk(list: { characterId: string; henchId: strin
   } catch (e: any) {
     const msg = e?.response?.data?.message
     return { error: msg || 'Bulk create failed' }
-  }
-}
-
-export async function updatePet(id: string, payload: Partial<Pick<Pet, 'nickname' | 'in_party' | 'slot' | 'level' | 'exp'>>): Promise<{ data?: Pet; error?: string }> {
-  if (!baseEnv) return { error: 'API URL not configured' }
-  try {
-    const api = createApiClient(baseEnv)
-    const { data, status } = await api.put(`/pets/${id}`, payload)
-    if (status !== 200) return { error: 'Update pet failed' }
-    return { data: data as Pet }
-  } catch (e: any) {
-    const msg = e?.response?.data?.message
-    return { error: msg || 'Update pet failed' }
   }
 }
 
