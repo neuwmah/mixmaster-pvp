@@ -50,6 +50,7 @@ export default function HenchCreate({ henches, character, setPetsList, setHenchL
 
   return (
     <div className="hench-create mt-12 w-full flex flex-col items-center">
+
       <General henches={henches} selectedHench={selectedHench} setSelectedHench={setSelectedHench} />
 
       <div className="mt-16 flex items-center gap-4">
@@ -61,16 +62,18 @@ export default function HenchCreate({ henches, character, setPetsList, setHenchL
         >
           Return
         </button>
+
         <button
-          className="w-auto button-orange"
+          className={`w-auto button-orange disabled:!cursor-not-allowed`}
           type="button"
           aria-label="Add New Pet"
           onClick={handleCreate}
-          disabled={!(selectedHench && selectedHench.length)}
+          disabled={!selectedHench?.length || sending}
         >
-          Create 🐍
+          {sending ? '...' : 'Create 🐍'}
         </button>
       </div>
+
     </div>
   )
 }
