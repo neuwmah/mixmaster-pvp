@@ -7,9 +7,9 @@ import BackgroundMix from '@/components/BackgroundMix';
 const Fullbanner: React.FC = () => {
   return (
     <section className="section-fullbanner section-home relative h-200 bg-gradient-to-b from-black to-(--gray-0) m-[0!important]">
-      <div className="container relative flex-col items-center justify-center z-1">
+      <div className="container relative flex-col items-center justify-center z-5">
         
-        <div className="logo-mm mb-6">
+        <div className="logo-mm mb-8">
           <Logo height={128} full={true} />
         </div>
 
