@@ -30,6 +30,7 @@ export default function ButtonRemove({ postId, className = '', children }: Props
       }
       router.push('/account')
     } catch (e) {
+      console.log(e)
       setError('unexpected error')
       setLoading(false)
     }

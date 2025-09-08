@@ -32,6 +32,7 @@ export default function ButtonActive({ postId, postActive, className = '', child
       postSetActive(!postActive)
       router.refresh()
     } catch (e) {
+      console.log(e)
       setError('unexpected error')
       setLoading(false)
     }

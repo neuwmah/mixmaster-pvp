@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { getPendingTransfers, acceptTransfer, rejectTransfer } from '@/app/api/character'
 import { Character } from '@/types/character'
 import { useRouter } from 'next/navigation'
@@ -13,7 +13,7 @@ export default function PendingTransfers({ userId }: PendingTransfersProps) {
   const [error, setError] = useState('')
   const router = useRouter()
 
-  async function load(initial?: boolean) {
+  const load = useCallback(async (initial?: boolean) => {
     if (initial) setLoading(true)
     try {
       const data = await getPendingTransfers(userId)
@@ -21,14 +21,9 @@ export default function PendingTransfers({ userId }: PendingTransfersProps) {
     } finally {
       if (initial) setLoading(false)
     }
-  }
-
-  useEffect(() => { load(true) }, [userId])
-
-  useEffect(() => {
-    // const id = setInterval(() => { load() }, 5000)
-    // return () => clearInterval(id)
   }, [userId])
+
+  useEffect(() => { load(true) }, [load])
 
   async function doAction(id: string, type: 'accept' | 'reject') {
     if (actionId) return

@@ -10,13 +10,7 @@ import EditableText from '@/app/changelog/[slug]/EditableText'
 import EditableImage from '@/app/changelog/[slug]/EditableImage'
 import Related from '@/app/changelog/[slug]/Related'
 
-interface ChangelogProps {
-  params: {
-    slug: string
-  }
-}
-
-export default async function ChangelogPage({ params }: ChangelogProps) {
+export default async function ChangelogPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const changelogsData = await getChangelogs()
   const post = changelogsData.find(p => p.slug === slug)

@@ -19,17 +19,15 @@ interface HenchCreateProps {
 export default function HenchCreate({ henches, character, setPetsList, setHenchListDisplay }: HenchCreateProps) {
   const [selectedHench, setSelectedHench] = useState<string[]>([])
   const [sending, setSending] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
   const router = useRouter()
 
   const handleCreate = async (event: React.FormEvent) => {
     event.preventDefault()
     setSending(true)
-    setErrorMessage('')
 
     try {
       const result = await createPetsBulk(selectedHench.map(
-        (hid, idx) => ({ 
+        (hid) => ({ 
           characterId: character ? character.id : '',
           henchId: hid
         })
@@ -42,7 +40,6 @@ export default function HenchCreate({ henches, character, setPetsList, setHenchL
       router.refresh()
     } catch {
       alert('Unexpected error.')
-      setTimeout(() => setErrorMessage(''), 2500)
     }
 
     setSending(false);

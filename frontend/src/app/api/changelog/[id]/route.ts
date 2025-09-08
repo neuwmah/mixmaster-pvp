@@ -3,7 +3,7 @@ import createApiClient from '@/hooks/axios'
 
 const baseEnv = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || ''
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   if (!id) return NextResponse.json({ message: 'missing id' }, { status: 400 })
   const authHeader = req.headers.get('cookie') || ''
@@ -19,6 +19,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     const updated = await api.put(`/changelog/${id}`, body, { headers: { Authorization: `Bearer ${token}` } }).then(r => r.data)
     return NextResponse.json(updated, { status: 200 })
   } catch (e) {
+    console.log(e)
     return NextResponse.json({ message: 'update failed' }, { status: 500 })
   }
 }

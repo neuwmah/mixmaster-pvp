@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useMemo } from 'react'
+import Image from 'next/image'
 
 import PetInline from '@/app/account/components/characters/hench/pets/Inline'
 
@@ -38,7 +39,10 @@ export default function General({ henches, selectedHench = [], setSelectedHench 
             `}
             title={type}
           >
-            <img
+            <Image
+              unoptimized
+              width={48}
+              height={48}
               src={`/assets/images/hench/${type}.gif`}
               alt={type}
               className="z-1 relative max-w-full max-h-full object-contain"

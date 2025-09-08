@@ -5,7 +5,6 @@ import Link from 'next/link';
 import {
   ArrowDownTrayIcon,
   Bars3Icon,
-  ShoppingCartIcon,
   UserIcon
 } from '@heroicons/react/24/outline';
 

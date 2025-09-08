@@ -14,7 +14,7 @@ export default function ShopPage() {
           </h1>
 
           <p className="text-base text-white w-full mt-6">
-            No! We don't sell anything. <br/>
+            No! We dont sell anything. <br/>
             Theres no game advantages you can buy with cash in this server.
           </p>
 

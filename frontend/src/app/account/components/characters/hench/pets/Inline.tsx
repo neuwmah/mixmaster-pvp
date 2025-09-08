@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 import { deletePet } from '@/app/api/pets'
 
@@ -77,13 +78,16 @@ export default function PetInline({ pet, hench, character, selectedHench = false
       data-active={active ? 'true' : 'false'}
       onClick={toggleSelect}
     >
-      <img
+      <Image
+        unoptimized
+        width={40}
+        height={40}
         src={
           hench?.icon_url?.includes('webp')
             ? hench.icon_url
             : `https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster_top/000${hench?.icon_url}.webp`
         }
-        alt={displayName}
+        alt={displayName ?? ''}
         className="object-contain w-[4rem] h-[4rem]"
         loading="lazy"
       />
@@ -97,7 +101,10 @@ export default function PetInline({ pet, hench, character, selectedHench = false
         </span>
       </h3>
 
-      <img
+      <Image
+        unoptimized
+        width={32}
+        height={32}
         src={`/assets/images/hench/${hench?.type}.gif`}
         alt={`icon-${hench?.type}`}
         className="object-contain h-[3.2rem] w-[3.2rem] hidden sm:block"

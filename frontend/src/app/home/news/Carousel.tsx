@@ -1,6 +1,7 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { checkMobile } from '@/hooks/checkMobile';
 
@@ -28,14 +29,9 @@ function resolveSrc(src: string | undefined) {
 
 const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
   const mobile = checkMobile();
-  const [enoughSlides, setEnoughSlides] = useState(false);
-
-  useEffect(() => {
-    setEnoughSlides(mobile
-      ? changelogs.length > 1 
-      : changelogs.length > 4
-    );
-  }, []);
+  const enoughSlides = useMemo(() => (
+    mobile ? changelogs.length > 1 : changelogs.length > 4
+  ), [mobile, changelogs.length]);
 
   return (
     <div className={`
@@ -72,9 +68,12 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
               `}>
 
                 {item.image_src && (
-                  <img
-                    src={resolveSrc(item.image_src)}
+                  <Image
+                    src={resolveSrc(item.image_src) ?? ''}
                     alt={item.title}
+                    unoptimized
+                    width={1000}
+                    height={500}
                     className="w-full aspect-[2/1] object-cover"
                   />
                 )}

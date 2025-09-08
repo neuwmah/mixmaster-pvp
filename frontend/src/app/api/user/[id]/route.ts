@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const baseEnv = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL || ''
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   if (!baseEnv) return NextResponse.json({ message: 'API URL not configured' }, { status: 500 })
   const { id } = await params
   let body: any
@@ -23,6 +23,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     const data = await res.json().catch(() => undefined)
     return NextResponse.json(data, { status: res.status })
   } catch (e) {
+    console.log(e)
     return NextResponse.json({ message: 'proxy error' }, { status: 500 })
   }
 }

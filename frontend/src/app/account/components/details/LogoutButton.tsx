@@ -7,7 +7,7 @@ export default function LogoutButton() {
   const router = useRouter()
 
   const handleLogout = async () => {
-    const response = await logoutUser() as Boolean
+    const response = await logoutUser() as boolean
 
     if (response) {
       router.push('/account/signin')

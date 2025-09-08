@@ -1,5 +1,6 @@
 "use client"
 import React from 'react';
+import Image from 'next/image';
 
 import { checkMobile } from '@/hooks/checkMobile';
 
@@ -21,16 +22,22 @@ const BackgroundMix: React.FC<BackgroundMixProps> = ({ char1 = false, char2 = fa
       z-${mobile ? 0 : 1}
     `}>
       {char1 &&
-        <img
+        <Image
+          unoptimized
           src={`/assets/images/characters/${char1}.jpg`}
-          alt="logo"
+          alt={`${char1}.jpg`}
+          width={500}
+          height={500}
           className={`object-${mobile ? 'cover' : 'contain'} absolute bottom-0 left-0 w-full h-[100%] max-w-[480px] max-h-[480px] blur-[4px]`}
         />
       }
       {char2 && !mobile &&
-        <img
+        <Image
+          unoptimized
           src={`/assets/images/characters/${char2}.jpg`}
-          alt="logo"
+          alt={`${char2}.jpg`}
+          width={500}
+          height={500}
           className="object-contain absolute bottom-0 right-0 h-[100%] max-w-[480px] max-h-[480px] blur-[4px]"
         />
       }

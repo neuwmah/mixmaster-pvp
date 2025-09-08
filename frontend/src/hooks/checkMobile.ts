@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react';
 
-export function checkMobile(breakpoint = 768) {
+export function useMobile(breakpoint = 768) {
   const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
@@ -15,3 +15,5 @@ export function checkMobile(breakpoint = 768) {
 
   return mobile;
 }
+
+export const checkMobile = useMobile;

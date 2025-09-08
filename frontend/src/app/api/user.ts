@@ -39,7 +39,7 @@ export async function createUser(payload: UserCreate): Promise<User | null> {
   try {
     const { data } = await api().post('/users', payload)
     return data as User
-  } catch (e) { console.error('createUser error', e); return null }
+  } catch (e) { console.log(e); console.error('createUser error', e); return null }
 }
 
 export async function updateUser(id: string, payload: UserUpdate & { currentPassword?: string }): Promise<{ data?: User; error?: string }> {
@@ -62,6 +62,7 @@ export async function updateUser(id: string, payload: UserUpdate & { currentPass
     const data = await res.json()
     return { data }
   } catch (e: any) {
+    console.log(e)
     return { error: 'updateUser error' }
   }
 }

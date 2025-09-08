@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 import { RankPVP } from '@/types/rankpvp';
 
@@ -44,11 +45,14 @@ const Kills: React.FC<KillsProps> = ({ rankpvp, classes }) => {
           </tr>
         </thead>
         <tbody>
-          {rankpvp.map((rank: RankPVP, i) => (
+          {rankpvp.map((rank: RankPVP) => (
             <tr key={rank.id}>
               <td className={`${rankImage} ${rankDown}`}>
                 {rank.player && (
-                  <img
+                  <Image
+                    unoptimized
+                    width={90}
+                    height={90}
                     className="absolute top-0 left-0 object-cover w-full h-full p-2 rounded-full"
                     src={`/assets/images/characters/${rank.player.class?.toLocaleLowerCase?.()}.jpg`}
                     alt={`${rank.player.name} class`}

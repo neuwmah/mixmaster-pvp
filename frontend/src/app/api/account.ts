@@ -1,4 +1,4 @@
-export async function loginUser(username: string, password: string): Promise<Object> {
+export async function loginUser(username: string, password: string): Promise<object> {
   try {
     const response = await fetch('/api/auth/login', {
       method: 'POST',
@@ -13,7 +13,7 @@ export async function loginUser(username: string, password: string): Promise<Obj
   }
 }
 
-export async function logoutUser(): Promise<Boolean> {
+export async function logoutUser(): Promise<boolean> {
   try {
     const response = await fetch('/api/auth/logout', {
       method: 'POST',

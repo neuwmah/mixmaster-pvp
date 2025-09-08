@@ -1,5 +1,7 @@
 "use client"
 import React from 'react'
+import Image from 'next/image'
+
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
@@ -35,7 +37,10 @@ export default function Background({ backgroundRef }: BackgroundProps) {
           {CLASSES.map((c) => {
             return (
               <SwiperSlide key={c.value}>
-                <img
+                <Image
+                  unoptimized
+                  width={500}
+                  height={500}
                   src={c.image}
                   alt={c.label}
                   className={`

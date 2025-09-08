@@ -3,7 +3,7 @@ import createApiClient from '@/hooks/axios'
 
 const baseEnv = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || ''
 
-export async function POST(req: Request, { params }: { params: { id: string } }) {
+export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   if (!baseEnv) return NextResponse.json({ message: 'api offline' }, { status: 500 })
   const { id } = await params
   if (!id) return NextResponse.json({ message: 'missing id' }, { status: 400 })
@@ -40,6 +40,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     if (!res.ok) return NextResponse.json(json || { message: 'upload failed' }, { status: res.status })
     return NextResponse.json(json, { status: 200 })
   } catch (e) {
+    console.log(e)
     return NextResponse.json({ message: 'proxy upload error' }, { status: 500 })
   }
 }

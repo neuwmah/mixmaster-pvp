@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 import { Pet } from '@/types/pet'
 import { Hench } from '@/types/hench'
@@ -66,13 +67,16 @@ export default function PetCard({ pet, hench, selectedHench = false, setSelected
       data-active={active ? 'true' : 'false'}
       onClick={toggleSelect}
     >
-      <img
+      <Image
+        unoptimized
+        width={40}
+        height={40}
         src={
           hench?.icon_url?.includes('webp')
             ? hench?.icon_url
             : `https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster_top/000${hench?.icon_url}.webp`
         }  
-        alt={displayName}
+        alt={displayName ?? ''}
         className={`
           background pointer-events-none
           object-cover 
@@ -84,7 +88,10 @@ export default function PetCard({ pet, hench, selectedHench = false, setSelected
       />
 
       <div className="type absolute top-[2.4rem] left-[2.4rem] flex w-[4rem] h-[4rem] z-1">
-        <img
+        <Image
+          unoptimized
+          width={48}
+          height={48}
           src={`/assets/images/hench/${hench?.type}.gif`}
           alt={`background-${hench?.type}`}
           className="object-contain h-full w-auto"
@@ -93,13 +100,17 @@ export default function PetCard({ pet, hench, selectedHench = false, setSelected
       </div>
     
       <div className="sprite flex mx-auto flex-1 relative z-1">
-        <img
+        <Image
+          unoptimized
+          width={500}
+          height={500}
+          sizes="(max-width: 768px) 90vw, 500px"
           src={
             hench?.sprite_url?.includes('webp')
               ? hench?.sprite_url
               : `https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster/mh${hench?.sprite_url}.webp`
           }  
-          alt={displayName}
+          alt={displayName ?? ''}
           className="object-contain w-auto mt-auto"
           loading="lazy"
         />
@@ -114,7 +125,10 @@ export default function PetCard({ pet, hench, selectedHench = false, setSelected
           absolute left-0 top-[50%] translate-y-[-50%]
         ">
           {hench?.icon_url && 
-            <img
+            <Image
+              unoptimized
+              width={40}
+              height={40}
               src={
                 hench.icon_url?.includes('webp')
                   ? hench.icon_url

@@ -1,6 +1,7 @@
 "use client"
 import React, { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 interface Props {
   postId: string
@@ -26,7 +27,16 @@ export default function EditableImage({ postId, imageSrc, isAdmin }: Props) {
 
   if (!isAdmin) {
     if (!imageSrc) return null
-    return <img className="w-full mt-6 aspect-[2/1] object-cover" src={resolveSrc(imageSrc) || undefined} alt="Imagem" />
+    return (
+      <Image
+        className="w-full mt-6 aspect-[2/1] object-cover"
+        src={resolveSrc(imageSrc) ?? ''}
+        alt="Imagem"
+        unoptimized
+        width={1000}
+        height={500}
+      />
+    )
   }
 
   function openPicker() {
@@ -61,11 +71,14 @@ export default function EditableImage({ postId, imageSrc, isAdmin }: Props) {
   return (
     <div className={`group relative w-full ${uploading ? 'opacity-60 pointer-events-none' : ''}`}>      
       {preview ? (
-        <img
+        <Image
           className={`cursor-pointer w-full mt-6 aspect-[2/1] object-cover`}
           alt="Imagem do changelog"
           src={preview}
           onClick={openPicker}
+          unoptimized
+          width={1000}
+          height={500}
         />
       ) : (
         <div

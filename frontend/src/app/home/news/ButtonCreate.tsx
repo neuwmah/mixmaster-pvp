@@ -35,6 +35,7 @@ export default function ButtonCreate({ className = '', children }: Props) {
       }
       router.push(`/changelog/${newItem.slug}`)
     } catch (e) {
+      console.log(e)
       setError('unexpected error')
       setLoading(false)
     }

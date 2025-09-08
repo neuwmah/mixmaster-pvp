@@ -263,7 +263,12 @@ export default function ChangeableField({ userId, username, field, cardsClass }:
           aria-label={editing ? (editingStage === 0 ? 'Continuar' : 'Confirmar') : 'Editar'}
           onClick={(e) => {
             e.stopPropagation();
-            editing ? proceed() : (setEditing(true), setEditingStage(0));
+            if (editing) {
+              void proceed();
+            } else {
+              setEditing(true);
+              setEditingStage(0);
+            }
           }}
         >
           {editing

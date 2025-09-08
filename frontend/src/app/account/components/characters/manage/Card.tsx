@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 
 import { getCharacter } from '@/app/api/character'
 
@@ -42,7 +43,7 @@ export default function Card(props: CardProps) {
   }, [charData.transferPending])
 
   useEffect(() => {
-    let active = true
+    const active = true
     async function refresh() {
       const latest = await getCharacter(character.id)
       if (!active || !latest) return
@@ -60,15 +61,10 @@ export default function Card(props: CardProps) {
   }, [character.name])
 
   let brightnessClass = 'filter-[brightness(.2)blur(.4rem)]'
-  let opacityClass = 'opacity-100'
-  if (hoveredId) {
+  if (hoveredId)
     brightnessClass = hoveredId === character.id
       ? 'filter-[brightness(.2)blur(.4rem)]'
       : 'filter-[brightness(.1)blur(.4rem)]'
-    opacityClass = hoveredId === character.id
-      ? 'opacity-100'
-      : 'opacity-0'
-  }
 
   return (
     <div
@@ -84,7 +80,10 @@ export default function Card(props: CardProps) {
       onMouseEnter={() => setHoveredId?.(character.id)}
       onMouseLeave={() => setHoveredId?.(null)}
     >
-      <img
+      <Image
+        unoptimized
+        width={500}
+        height={500}
         className={`
           absolute top-0 left-0 object-cover object-bottom w-full h-full opacity-[.7]
           ${brightnessClass}
