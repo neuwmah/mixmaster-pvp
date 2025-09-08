@@ -18,7 +18,7 @@ function resolveSrc(src: string | null | undefined) {
   return src
 }
 
-export default function EditableImage({ postId, imageSrc, isAdmin, className }: Props) {
+export default function EditableImage({ postId, imageSrc, isAdmin }: Props) {
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [preview, setPreview] = useState<string | null>(resolveSrc(imageSrc) || null)
   const [uploading, setUploading] = useState(false)

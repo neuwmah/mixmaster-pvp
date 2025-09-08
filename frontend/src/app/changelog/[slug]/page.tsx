@@ -5,6 +5,7 @@ import { getChangelogs } from '@/app/api/changelog'
 
 import createApiClient from '@/hooks/axios'
 
+import Actions from '@/app/changelog/[slug]/Actions'
 import EditableText from '@/app/changelog/[slug]/EditableText'
 import EditableImage from '@/app/changelog/[slug]/EditableImage'
 import Related from '@/app/changelog/[slug]/Related'
@@ -19,6 +20,7 @@ export default async function ChangelogPage({ params }: ChangelogProps) {
   const { slug } = await params
   const changelogsData = await getChangelogs()
   const post = changelogsData.find(p => p.slug === slug)
+
   const cookieStore = await cookies()
   const token = cookieStore.get('sessionToken')?.value
   let isAdmin = false
@@ -30,12 +32,17 @@ export default async function ChangelogPage({ params }: ChangelogProps) {
       if (data?.is_admin) isAdmin = true
     } catch {}
   }
+  
   return (
     <main>
       {post ? (
         <section className="section-changelog section">
           <div className="container flex justify-center">
-            <div className="content flex flex-col items-center w-full max-w-[700px]">
+            <div className="content flex flex-col items-center w-full max-w-[700px] relative">
+
+              {isAdmin && 
+                <Actions postId={post.id} postActive={post.active} />
+              }
 
               <EditableText className="title text-center" tag="h1" field="title" postId={post.id} initialValue={post.title} isAdmin={isAdmin} />
 

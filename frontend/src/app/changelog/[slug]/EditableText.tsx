@@ -66,11 +66,8 @@ export default function EditableText({ tag = 'div', field, postId, initialValue,
       className={`${className} group relative cursor-pointer whitespace-pre-line`}
       ref={viewRef as any}
       onClick={() => { 
-        console.log('viewRef', viewRef)
         if (viewRef.current) { 
           const r = viewRef.current.getBoundingClientRect();
-          console.log('r', r) 
-          console.log('r.height', r.height) 
           setH(r.height); 
           const cs = window.getComputedStyle(viewRef.current); 
           setLh(cs.lineHeight);

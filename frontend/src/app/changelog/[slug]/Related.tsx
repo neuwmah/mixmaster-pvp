@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getChangelogs } from '@/app/api/changelog';
 
-import Carousel from '@/app/home/Carousel';
+import Carousel from '@/app/home/news/Carousel';
 
 const Related: React.FC = async () => {
   const changelogsData = await getChangelogs();
