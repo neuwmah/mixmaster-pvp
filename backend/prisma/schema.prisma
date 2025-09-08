@@ -150,7 +150,7 @@ model Changelog {
   image_src  String?
   content1   String?  @db.Text
   content2   String?  @db.Text
-  active     Boolean? @default(true)
+  active     Boolean? @default(false)
 }
 
 model Menu {
