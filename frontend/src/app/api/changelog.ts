@@ -33,7 +33,7 @@ export async function getChangelog(id: string): Promise<Changelog | null> {
   }
 }
 
-export async function updateChangelogField(id: string, data: Partial<Pick<Changelog, 'title' | 'content1' | 'content2' | 'image_src' | 'slug'>>): Promise<Changelog | null> {
+export async function updateChangelogField(id: string, data: Partial<Pick<Changelog, 'title' | 'content1' | 'content2' | 'image_src' | 'slug' | 'active'>>): Promise<Changelog | null> {
   try {
     const res = await fetch(`/api/changelog/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
     if (!res.ok) return null
@@ -41,4 +41,27 @@ export async function updateChangelogField(id: string, data: Partial<Pick<Change
     if (!json?.id) return null
     return json as Changelog
   } catch { return null }
+}
+
+export async function createChangelog(data: Pick<Changelog, 'slug' | 'title' | 'image_src'> & Partial<Pick<Changelog,'content1'|'content2'>>): Promise<Changelog | null> {
+  if (!baseEnv) return null;
+  const api = createApiClient(baseEnv);
+  try {
+    const { data: res, status } = await api.post('/changelog', data);
+    if (status !== 201 || !res?.id) return null;
+    return res as Changelog;
+  } catch {
+    return null;
+  }
+}
+
+export async function deleteChangelog(id: string): Promise<boolean> {
+  if (!baseEnv) return false;
+  const api = createApiClient(baseEnv);
+  try {
+    const { status } = await api.delete(`/changelog/${id}`);
+    return status === 204 || status === 200;
+  } catch {
+    return false;
+  }
 }

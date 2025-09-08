@@ -9,7 +9,8 @@ const bodySchema = z.object({
   title: z.string().min(1),
   image_src: z.string().min(1).refine(v => v.startsWith('/') || /^https?:\/\//.test(v), 'Invalid url'),
   content1: z.string().optional(),
-  content2: z.string().optional()
+  content2: z.string().optional(),
+  active: z.boolean().optional().default(false)
 })
 
 export async function changelogRoutes(app: FastifyInstance) {
