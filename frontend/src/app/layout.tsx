@@ -1,12 +1,13 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import './globals.css'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 
-import Landing from '@/components/Landing';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import Landing from '@/components/Landing'
+import TopBar from '@/components/TopBar'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'MixMaster PVP ⚔️',
@@ -27,6 +28,7 @@ export default function RootLayout({
           ? <Landing />
           : 
           <>
+            <TopBar />
             <Header />
             {children}
             <Footer />

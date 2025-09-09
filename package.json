@@ -20,5 +20,8 @@
     "prisma:migrate": "npm run prisma:migrate -w backend",
     "prisma:generate": "npm run prisma:generate -w backend",
     "prisma:studio": "npm run prisma:studio -w backend"
+  },
+  "dependencies": {
+    "framer-motion": "^12.23.12"
   }
 }
