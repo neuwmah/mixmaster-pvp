@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'MixMaster PVP ⚔️',
-  description: 'Hi.',
+  description: 'No grind. Log in and go fight.',
 };
 
 export default function RootLayout({
