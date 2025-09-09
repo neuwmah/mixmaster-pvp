@@ -34,7 +34,7 @@ const FAQ: React.FC = () => {
                 onClick={() => setActive(i)}
               >
                 <p className="text-big font-bold">{item.title}</p>
-                <span className="text-base">{active == i ? '-' : '+'}</span>
+                <span className="text-big !font-normal">{active == i ? '-' : '+'}</span>
               </button>
 
               <div className="dropdown px-8 max-h-0 duration-700 group-[.-active]:max-h-[200px]">
