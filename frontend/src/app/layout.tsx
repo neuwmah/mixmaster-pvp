@@ -10,16 +10,20 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'),
   title: 'MixMaster PVP ⚔️',
   description: 'No grind. Log in and go fight.',
+  openGraph: {
+    images: ['/assets/images/meta.jpg'],
+  },
 };
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const isStaging = (process.env.NEXT_PUBLIC_APP_ENV ?? process.env.NODE_ENV) === 'production';
+  const isStaging = (process.env.NEXT_PUBLIC_APP_ENV ?? process.env.NODE_ENV) === 'production'
 
   return (
     <html className="text-[62.5%] h-[100%] min-h-[100%]" lang="en">

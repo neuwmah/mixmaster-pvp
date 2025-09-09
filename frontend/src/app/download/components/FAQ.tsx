@@ -39,7 +39,7 @@ const FAQ: React.FC = () => {
 
               <div className="dropdown px-8 max-h-0 duration-700 group-[.-active]:max-h-[200px]">
                 <p
-                  className="answer text-sm text-white mb-8 opacity-0 duration-700 group-[.-active]:opacity-100"
+                  className="answer text-base text-white mb-8 opacity-0 duration-700 group-[.-active]:opacity-100"
                   dangerouslySetInnerHTML={{ __html: item.text }}
                 ></p>
               </div>
