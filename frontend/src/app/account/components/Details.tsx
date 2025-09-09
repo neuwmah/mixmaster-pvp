@@ -25,7 +25,11 @@ export default function Details({ user }: DetailsProps) {
   ]
 
   return (
-    <section className="section-details section section-p bg-gradient-to-b from-black bg-(--gray-0) py-[40px] mt-[0!important] sm:py-[64px]">
+    <section className="
+      section-details section section-p
+      mt-[0!important] py-[40px] sm:py-[64px]
+      bg-gradient-to-b from-black bg-(--gray-0)
+    ">
       <div className="container flex-col items-center relative z-2">
 
         <h1 className="title">

@@ -69,10 +69,10 @@ export default function EditableImage({ postId, imageSrc, isAdmin }: Props) {
   }
 
   return (
-    <div className={`group relative w-full ${uploading ? 'opacity-60 pointer-events-none' : ''}`}>      
+    <div className={`group relative w-full mt-[2.4rem] ${uploading ? 'opacity-60 pointer-events-none' : ''}`}>      
       {preview ? (
         <Image
-          className={`cursor-pointer w-full mt-6 aspect-[2/1] object-cover`}
+          className={`cursor-pointer w-full aspect-[2/1] object-cover`}
           alt="Imagem do changelog"
           src={preview}
           onClick={openPicker}
@@ -82,7 +82,7 @@ export default function EditableImage({ postId, imageSrc, isAdmin }: Props) {
         />
       ) : (
         <div
-          className="text-base text-(--gray-4) mt-6 w-full aspect-video flex items-center justify-center cursor-pointer border border-dashed border-(--gray-6)"
+          className="text-base text-(--gray-4) w-full aspect-video flex items-center justify-center cursor-pointer border border-dashed border-(--gray-6)"
           onClick={openPicker}
         >
           Adicionar imagem

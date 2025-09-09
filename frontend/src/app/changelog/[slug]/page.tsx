@@ -5,10 +5,10 @@ import { getChangelogs } from '@/app/api/changelog'
 
 import createApiClient from '@/hooks/axios'
 
-import Actions from '@/app/changelog/[slug]/Actions'
-import EditableText from '@/app/changelog/[slug]/EditableText'
-import EditableImage from '@/app/changelog/[slug]/EditableImage'
-import Related from '@/app/changelog/[slug]/Related'
+import Fullbanner from '@/app/changelog/[slug]/components/Fullbanner'
+import Content from '@/app/changelog/[slug]/components/Content'
+import NotFound from '@/app/changelog/[slug]/components/NotFound'
+import Related from '@/app/changelog/[slug]/components/Related'
 
 export default async function ChangelogPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -30,40 +30,25 @@ export default async function ChangelogPage({ params }: { params: Promise<{ slug
   return (
     <main>
       {post ? (
-        <section className="section-changelog section">
-          <div className="container flex justify-center">
-            <div className="content flex flex-col items-center w-full max-w-[700px] relative">
-
-              {isAdmin && 
-                <Actions postId={post.id} postActive={post.active} />
-              }
-
-              <EditableText className="title text-center" tag="h1" field="title" postId={post.id} initialValue={post.title} isAdmin={isAdmin} />
-
-              <p className="text-base text-center mt-4 text-(--gray-4)">
-                {new Date(post.created_at).toLocaleDateString()}
-              </p>
-
-              {post.content1 && 
-                <EditableText className="text-base text-left text-white mt-12 mr-auto w-full" field="content1" postId={post.id} initialValue={post.content1} isAdmin={isAdmin} />
-              }
-              {post.image_src || isAdmin ? 
-                <EditableImage postId={post.id} imageSrc={post.image_src || undefined} isAdmin={isAdmin} />
-              : null}
-              {post.content2 && 
-                <EditableText className="text-base text-left text-white mt-6 mr-auto w-full" field="content2" postId={post.id} initialValue={post.content2} isAdmin={isAdmin} />
-              }
-
-            </div>
-          </div>
-        </section>
+        <>
+          <Fullbanner
+            isAdmin={isAdmin}
+            postId={post.id}
+            postActive={post.active}
+            postSlug={post.slug}
+            postTitle={post.title}
+            postCreatedAt={post.created_at}
+          />
+          <Content
+            isAdmin={isAdmin}
+            postId={post.id}
+            postContent1={post.content1}
+            postContent2={post.content2}
+            postImageSrc={post.image_src}
+          />
+        </>
       ) : (
-        <div className="section-not-found section">
-          <div className="container flex flex-col items-center">
-            <h1 className="title text-center">❗ 404</h1>
-            <p className="text-big text-center mt-6 text-(--gray-4)">Not found.</p>
-          </div>
-        </div>
+        <NotFound />
       )}
       <Related />
     </main>
