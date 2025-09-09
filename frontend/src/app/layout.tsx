@@ -21,8 +21,8 @@ export default function RootLayout({
   const isStaging = (process.env.NEXT_PUBLIC_APP_ENV ?? process.env.NODE_ENV) === 'production';
 
   return (
-    <html className="text-[62.5%]" lang="en">
-      <body className={`${inter.className} flex flex-col min-h-[100vh] text-white bg-black`}>
+    <html className="text-[62.5%] h-[100%] min-h-[100%]" lang="en">
+      <body className={`${inter.className} flex flex-col min-h-[100%] text-white bg-black`}>
         {isStaging
           ? <Landing />
           : 
