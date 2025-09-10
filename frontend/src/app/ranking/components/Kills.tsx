@@ -23,7 +23,7 @@ const Kills: React.FC<KillsProps> = ({ rankpvp, classes }) => {
         PVP
       </h2>
 
-      <p className="text-base mt-6 max-w-[32rem] sm:max-w-full">
+      <p className="text-base mt-6 max-w-[30rem] sm:max-w-full">
         Check top kills player ranking below (top 5).
       </p>
 

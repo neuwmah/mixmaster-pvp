@@ -38,15 +38,15 @@ export default function PetInline({ pet, hench, character, selectedHench = false
   async function removePet(e: React.MouseEvent) {
     e.stopPropagation()
     if (!pet) return
-    
+
     setDeleting(true)
-    
+
     const { error } = await deletePet(pet.id)
     if (error) alert(error)
-      
+
     if (!error && character && setPetsList)
       setPetsList({ ...character, pets: character.pets?.filter(p => p.id !== pet.id) })
-    
+
     setDeleting(false)
     router.refresh()
   }
@@ -57,10 +57,9 @@ export default function PetInline({ pet, hench, character, selectedHench = false
     'cmf5u4b93000h111c551i192k'
   ];
 
-  if (pet && pet.in_party) return
   if (!pet && henchIds.includes(hench?.id || '')) return
   return (
-    <div 
+    <div
       className={`
         pet-inline
         flex items-center
@@ -70,6 +69,7 @@ export default function PetInline({ pet, hench, character, selectedHench = false
         bg-(--black)
         border-[1px] border-(--gray-1)
         duration-[.25s]
+        ${((pet && pet.in_party)) && 'bg-(--gray-a)'}
         ${((pet && !pet.in_party) || !pet) && 'bg-(--gray-0) border-(--gray-1)'}
         ${setSelectedHench && 'group'}
         ${setSelectedHench && !active && 'cursor-pointer hover:border-(--gray-2)'}
@@ -111,7 +111,7 @@ export default function PetInline({ pet, hench, character, selectedHench = false
         <button
           className="
             group relative ml-auto
-            pointer-events-auto cursor-pointer 
+            pointer-events-auto cursor-pointer
             duration-[.25s] hover:text-(--primary-orange-1)
             disabled:opacity-40 disabled:cursor-not-allowed
           "

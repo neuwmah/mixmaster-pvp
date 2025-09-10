@@ -41,7 +41,7 @@ const TopBar = () => {
       overflow-x-hidden
       bg-[var(--gray-0)]
     ">
-      <div className="container">
+      <div className="container !max-w-full !px-[1.6rem] sm:!px-[4rem]">
         <div className="
           text
           text-sm font-bold text-[var(--white)] 

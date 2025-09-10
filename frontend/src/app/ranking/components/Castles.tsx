@@ -23,7 +23,7 @@ const Castles: React.FC<CastlesProps> = ({ ranksa, classes }) => {
         Siege Affair
       </h2>
 
-      <p className="text-base mt-6 max-w-[32rem] sm:max-w-full">
+      <p className="text-base mt-6 max-w-[30rem] sm:max-w-full">
         Check top castles guild ranking below (top 3).
       </p>
 
