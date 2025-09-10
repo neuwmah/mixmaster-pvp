@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
           {
             key: 'Content-Security-Policy',
             value:
-              "connect-src 'self' http://localhost:3333 https://api.mixmasterpvp.com.br;",
+              "connect-src 'self' http://localhost:3333 https://api.mixmasterpvp.com.br http://api.mixmasterpvp.com.br;",
           },
         ],
       },
@@ -27,7 +27,12 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'api.mixmasterpvp.com.br',
         pathname: '/uploads/**',
-      }
+      },
+      {
+        protocol: 'http',
+        hostname: 'api.mixmasterpvp.com.br',
+        pathname: '/uploads/**',
+      },
     ],
   },
 };

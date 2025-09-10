@@ -22,6 +22,8 @@ await app.register(cors, {
     'http://localhost:3000',
     'https://mixmasterpvp.com.br',
     'https://www.mixmasterpvp.com.br',
+    'http://mixmasterpvp.com.br',
+    'http://www.mixmasterpvp.com.br',
   ],
 })
 
