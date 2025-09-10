@@ -17,7 +17,13 @@ import fs from 'node:fs'
 
 const app = Fastify({ logger: false })
 
-await app.register(cors, { origin: true })
+await app.register(cors, {
+  origin: [
+    'http://localhost:3000',
+    'https://mixmasterpvp.com.br',
+    'https://www.mixmasterpvp.com.br',
+  ],
+})
 
 if (!process.env.JWT_SECRET) throw new Error('JWT_SECRET env var required')
 await app.register(jwt, { secret: process.env.JWT_SECRET })
