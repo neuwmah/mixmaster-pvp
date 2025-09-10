@@ -8,7 +8,13 @@ const Related: React.FC = async () => {
   const changelogsData = await getChangelogs();
   
   return changelogsData.length ? (
-    <section className="section-related section-home">
+    <section className={`
+      section-related section-home
+      ${changelogsData.length <= 4
+        ? "sm:!mb-32"
+        : ""
+      }
+    `}>
       <div className="container flex-col items-center">
 
         <h2 className="title">

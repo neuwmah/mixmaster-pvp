@@ -4,6 +4,11 @@ import { prisma } from '../db.js'
 export async function rankRoutes(app: FastifyInstance) {
   app.get('/rankpvp', async () => {
     const chars = await prisma.character.findMany({
+      where: {
+        kills_count: {
+          gte: 1,
+        },
+      },
       select: {
         id: true,
         name: true,
@@ -18,6 +23,11 @@ export async function rankRoutes(app: FastifyInstance) {
 
   app.get('/ranksa', async () => {
     const guilds = await prisma.guild.findMany({
+      where: {
+        castles_count: {
+          gte: 1,
+        },
+      },
       select: {
         id: true,
         name: true,

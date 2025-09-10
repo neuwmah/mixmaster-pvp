@@ -13,7 +13,19 @@ export default async function News({ home = true }: NewsProps) {
   const changelogsData = await getChangelogs();
   
   return changelogsData.length ? (
-    <section className={`section-news ${home ? 'section-home' : 'w-full overflow-hidden z-1 relative bg-(--gray-a) m-0 py-16 sm:py-24'}`}>
+    <section className={`
+      section-news 
+      ${home 
+        ? 'section-home' 
+        : 'w-full overflow-hidden z-1 relative bg-(--gray-a) m-0 py-16 sm:py-24'
+      }
+      ${changelogsData.length <= 4
+        ? home
+          ? "sm:!mb-32"
+          : "sm:!pb-32"
+        : ""
+      }
+    `}>
       <div className="container flex-col items-center">
 
         <h2 className="title">

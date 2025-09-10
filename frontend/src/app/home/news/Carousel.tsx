@@ -43,8 +43,8 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
       ${mobile 
         ? "px-[48px]" 
         : "px-[64px]"
-      }`
-    }>
+      }
+    `}>
       <Swiper
         className="swiper-static swiper-fade-4"
         spaceBetween={mobile ? 16 : 24}

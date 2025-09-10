@@ -1,8 +1,10 @@
-import React from 'react';
-import Link from 'next/link';
+import React from 'react'
+import Link from 'next/link'
 
-import Logo from '@/components/header/Logo';
-import BackgroundMix from '@/components/BackgroundMix';
+import Logo from '@/components/header/Logo'
+import BackgroundMix from '@/components/BackgroundMix'
+
+import { _environment } from '@/utils/environment'
 
 const Fullbanner: React.FC = () => {
   return (
@@ -22,9 +24,11 @@ const Fullbanner: React.FC = () => {
         </p>
 
         <div className="flex gap-1 mt-12">
-          <Link className="button-orange" href="/download">
-            Download 🎮
-          </Link>
+          {_environment.current == 'staging' &&
+            <Link className="button-orange" href="/download">
+              Download 🎮
+            </Link>
+          }
           <Link className="button-secondary" href="/account/signup">
             Sign Up 👤
           </Link>
@@ -42,7 +46,7 @@ const Fullbanner: React.FC = () => {
         <path className="fill-(--gray-1)" d="M0,0L1440,40L1440,40L0,40Z"></path>
       </svg>
     </section>
-  );
-};
+  )
+}
 
-export default Fullbanner;
+export default Fullbanner
