@@ -1,7 +1,9 @@
-import React from 'react';
-import Link from 'next/link';
+import React from 'react'
+import Link from 'next/link'
 
-import BackgroundMix from '@/components/BackgroundMix';
+import BackgroundMix from '@/components/BackgroundMix'
+
+import { _discordUrl } from '@/utils/discordUrl';
 
 export default function ShopPage() {
   return (
@@ -40,7 +42,7 @@ export default function ShopPage() {
             When you donate you are just helping the project.
           </strong>
 
-          <Link className="button-gray mt-12 hover:!bg-[#5865F2]" href="#">
+          <Link className="button-gray mt-12 hover:!bg-[#5865F2]" href={_discordUrl}>
             Contact us
             <svg className="icon fill-current ml-[.8rem]" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <title>Discord</title>

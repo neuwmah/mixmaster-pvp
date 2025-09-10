@@ -28,7 +28,7 @@ const marqueeVariants = {
 const TopBar = () => {
   const renderMarqueeItems = (startKey = 0) =>
     marqueeItems.map((item, index) => (
-      <p key={startKey + index} className="flex mx-[4rem]">
+      <p key={startKey + index} className="flex mx-[1.6rem] sm:mx-[4rem]">
         {item.text}
         <span className="translate-y-[-.2rem] ml-[.8rem]">{item.emoji}</span>
       </p>

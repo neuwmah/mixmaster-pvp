@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 
-import { getRankPVP } from '@/app/api/rankpvp';
-import { getRankSA } from '@/app/api/ranksa';
+import { getRankPVP } from '@/app/api/rankpvp'
+import { getRankSA } from '@/app/api/ranksa'
 
-import Kills from '@/app/ranking/components/Kills';
-import Castles from '@/app/ranking/components/Castles';
+import Kills from '@/app/ranking/components/Kills'
+import Castles from '@/app/ranking/components/Castles'
 
-import BackgroundMix from '@/components/BackgroundMix';
+import BackgroundMix from '@/components/BackgroundMix'
 
 const Ranking: React.FC = async () => {
-  const rankpvpData = await getRankPVP();
-  const ranksaData = await getRankSA();
+  const rankpvpData = await getRankPVP()
+  const ranksaData = await getRankSA()
 
   const classes = {
     rankDefault: 'border py-4 px-6 w-1/3 overflow-hidden text-ellipsis',
@@ -19,7 +19,7 @@ const Ranking: React.FC = async () => {
     rankImage: 'border relative w-[43.4px]'
   }
   
-  return rankpvpData.length || ranksaData.length ? (
+  return (
     <section className="section-ranking section-home pb-20 sm:pb-24 bg-gradient-to-b from-black to-(--gray-0) min-h-[480px] mb-[0!important]">
       <div className="container flex-col items-center relative z-[2!important]">
         
@@ -31,7 +31,7 @@ const Ranking: React.FC = async () => {
       </div>
       <BackgroundMix char1="penril" char2="ditt" />
     </section>
-  ) : ``
-};
+  )
+}
 
-export default Ranking;
+export default Ranking

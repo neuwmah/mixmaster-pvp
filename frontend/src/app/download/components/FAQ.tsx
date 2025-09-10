@@ -1,15 +1,17 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 
-import { faqData } from '../data';
+import { faqData } from '@/app/download/data'
+
+import { _environment } from '@/utils/environment'
 
 const FAQ: React.FC = () => {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(0)
   useEffect(() => {
-    setActive(0);
-  }, []);
+    setActive(0)
+  }, [])
 
-  return (
+  return _environment.current == 'staging' && (
     <section className="section-faq section">
       <div className="container flex flex-col items-center">
 
@@ -50,7 +52,7 @@ const FAQ: React.FC = () => {
 
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default FAQ;
+export default FAQ
