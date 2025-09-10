@@ -28,7 +28,7 @@ export default function Form() {
       }
       const created = await createUser({ username, password, email, phone });
       if (!created) {
-        setErrorMessage('Create failed (conflict ou servidor)');
+        setErrorMessage('Create failed');
         setTimeout(() => setErrorMessage(''), 3000);
         setSending(false);
         return;
