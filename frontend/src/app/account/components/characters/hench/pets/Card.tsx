@@ -71,11 +71,7 @@ export default function PetCard({ pet, hench, selectedHench = false, setSelected
         unoptimized
         width={40}
         height={40}
-        src={
-          hench?.icon_url?.includes('webp')
-            ? hench?.icon_url
-            : `https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster_top/000${hench?.icon_url}.webp`
-        }  
+        src={`/assets/images/hench/icon/${hench?.code}.webp`}
         alt={displayName ?? ''}
         className={`
           background pointer-events-none
@@ -105,11 +101,7 @@ export default function PetCard({ pet, hench, selectedHench = false, setSelected
           width={500}
           height={500}
           sizes="(max-width: 768px) 90vw, 500px"
-          src={
-            hench?.sprite_url?.includes('webp')
-              ? hench?.sprite_url
-              : `https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster/mh${hench?.sprite_url}.webp`
-          }  
+          src={`/assets/images/hench/sprite/${hench?.code}.webp`}
           alt={displayName ?? ''}
           className="object-contain w-auto mt-auto"
           loading="lazy"
@@ -124,21 +116,15 @@ export default function PetCard({ pet, hench, selectedHench = false, setSelected
           w-[4rem] h-[4rem]
           absolute left-0 top-[50%] translate-y-[-50%]
         ">
-          {hench?.icon_url && 
-            <Image
-              unoptimized
-              width={40}
-              height={40}
-              src={
-                hench.icon_url?.includes('webp')
-                  ? hench.icon_url
-                  : `https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster_top/000${hench.icon_url}.webp`
-              }  
-              alt={hench.icon_url}
-                className="object-contain w-full h-full"
-                loading="lazy"
-            />
-          }
+          <Image
+            unoptimized
+            width={40}
+            height={40}
+            src={`/assets/images/hench/icon/${hench?.code}.webp`}
+            alt={hench?.code}
+              className="object-contain w-full h-full"
+              loading="lazy"
+          />
         </div>
 
         <div className="name flex flex-col items-center text-center">

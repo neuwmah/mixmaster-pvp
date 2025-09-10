@@ -8,12 +8,7 @@ const nextConfig: NextConfig = {
         hostname: 'localhost',
         port: '3333',
         pathname: '/uploads/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'gamedata.joyplegames.com',
-        pathname: '/mixmaster/**',
-      },
+      }
     ],
   },
 };

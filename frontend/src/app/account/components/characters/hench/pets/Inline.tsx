@@ -82,11 +82,7 @@ export default function PetInline({ pet, hench, character, selectedHench = false
         unoptimized
         width={40}
         height={40}
-        src={
-          hench?.icon_url?.includes('webp')
-            ? hench.icon_url
-            : `https://gamedata.joyplegames.com/mixmaster/data/img/spr/monster_top/000${hench?.icon_url}.webp`
-        }
+        src={`/assets/images/hench/icon/${hench?.code}.webp`}
         alt={displayName ?? ''}
         className="object-contain w-[4rem] h-[4rem]"
         loading="lazy"

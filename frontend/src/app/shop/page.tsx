@@ -4,7 +4,8 @@ import Link from 'next/link'
 
 import BackgroundMix from '@/components/BackgroundMix'
 
-import { _discordRedirect, _discordUrl } from '@/utils/discordUrl';
+import { _environment } from '@/utils/environment'
+import { _discordRedirect, _discordUrl } from '@/utils/discordUrl'
 
 export default function ShopPage() {
   return (
@@ -39,8 +40,16 @@ export default function ShopPage() {
           </div>
 
           <strong className="text-base text-white w-full mt-8">
-            Server will stay online even without a fully charged bar. <span className="font-normal line-through text-(--gray-3)">fow now</span> <br/>
-            When you donate you are just helping the project.
+            {_environment.current == 'staging'
+              ? <>
+                Server will stay online even without a fully charged bar. <span className="font-normal line-through text-(--gray-3)">fow now</span> <br/>
+                When you donate you are just helping the project.
+              </>
+              : <>
+                Server will be launched even without a fully charged bar. <span className="font-normal line-through text-(--gray-3)">fow now</span> <br/>
+                When you donate you are just helping the project.
+              </>
+            }
           </strong>
 
           <Link
