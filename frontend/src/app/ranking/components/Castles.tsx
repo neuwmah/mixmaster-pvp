@@ -45,23 +45,26 @@ const Castles: React.FC<CastlesProps> = ({ ranksa, classes }) => {
           </tr>
         </thead>
         <tbody>
-          {ranksa.map((rank: RankSA) => (
-            <tr key={rank.id}>
-              <td className={`${rankImage} ${rankDown}`}>
-                <Image
-                  unoptimized
-                  width={16}
-                  height={16}
-                  className="object-contain m-auto"
-                  src={rank.guild?.icon || `/assets/images/guilds/guild-icon.png`}
-                  alt={`guild-icon`}
-                />
-              </td>
-              <td className={`${rankDefault} ${rankDown}`}>{rank.guild?.name ?? '-'}</td>
-              <td className={`${rankDefault} ${rankDown}`}>{rank.guild?.castles_count ?? 0}</td>
-              <td className={`${rankDefault} ${rankDown}`}>{rank.guild?.members?.length ?? 0}</td>
-            </tr>
-          ))}
+          {Array.from({ length: 3 }).map((_, i) => {
+            const rank = ranksa[i];
+            return (
+              <tr key={rank?.id || i}>
+                <td className={`${rankImage} ${rankDown}`}>
+                  <Image
+                    unoptimized
+                    width={16}
+                    height={16}
+                    className="object-contain m-auto"
+                    src={rank?.guild?.icon || `/assets/images/guilds/guild-icon.png`}
+                    alt={`guild-icon`}
+                  />
+                </td>
+                <td className={`${rankDefault} ${rankDown}`}>{rank?.guild?.name ?? '-'}</td>
+                <td className={`${rankDefault} ${rankDown}`}>{rank?.guild?.castles_count ?? '-'}</td>
+                <td className={`${rankDefault} ${rankDown}`}>{rank?.guild?.members?.length ?? '-'}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <svg className="pointer-events-none rotate-[180deg] scale-x-[-1]" viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg">

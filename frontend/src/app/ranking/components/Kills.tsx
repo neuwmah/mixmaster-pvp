@@ -45,33 +45,36 @@ const Kills: React.FC<KillsProps> = ({ rankpvp, classes }) => {
           </tr>
         </thead>
         <tbody>
-          {rankpvp.map((rank: RankPVP) => (
-            <tr key={rank.id}>
-              <td className={`${rankImage} ${rankDown}`}>
-                {rank.player && (
-                  <Image
-                    unoptimized
-                    width={90}
-                    height={90}
-                    className="absolute top-0 left-0 object-cover w-full h-full p-2 rounded-full"
-                    src={`/assets/images/characters/${rank.player.class?.toLocaleLowerCase?.()}.jpg`}
-                    alt={`${rank.player.name} class`}
-                  />
-                )}
-              </td>
-              <td className={`${rankDefault} ${rankDown}`}>
-                {rank.player?.name}
-              </td>
-              <td className={`${rankDefault} ${rankDown} ${
-                rank.guild?.master?.name === rank.player?.name ? 'text-(--primary-red-1)' : ''
-              }`}>
-                {rank.guild?.name ?? '-'}
-              </td>
-              <td className={`${rankDefault} ${rankDown}`}>
-                {rank.player?.kills_count ?? 0}
-              </td>
-            </tr>
-          ))}
+          {Array.from({ length: 5 }).map((_, i) => {
+            const rank = rankpvp[i];
+            return (
+              <tr key={rank?.id || i}>
+                <td className={`${rankImage} ${rankDown}`}>
+                  {rank?.player && (
+                    <Image
+                      unoptimized
+                      width={90}
+                      height={90}
+                      className="absolute top-0 left-0 object-cover w-full h-full p-2 rounded-full"
+                      src={`/assets/images/characters/${rank.player.class?.toLocaleLowerCase?.()}.jpg`}
+                      alt={`${rank.player.name} class`}
+                    />
+                  )}
+                </td>
+                <td className={`${rankDefault} ${rankDown}`}>
+                  {rank?.player?.name ?? '-'}
+                </td>
+                <td className={`${rankDefault} ${rankDown} ${
+                  rank && rank?.guild?.master?.name === rank?.player?.name ? 'text-(--primary-red-1)' : ''
+                }`}>
+                  {rank?.guild?.name ?? '-'}
+                </td>
+                <td className={`${rankDefault} ${rankDown}`}>
+                  {rank?.player?.kills_count ?? '-'}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <svg className="pointer-events-none rotate-[180deg] scale-x-[-1]" viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg">
