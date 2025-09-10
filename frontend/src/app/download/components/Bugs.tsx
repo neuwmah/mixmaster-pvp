@@ -1,8 +1,9 @@
+"use client"
 import React from 'react'
 import Link from 'next/link'
 
 import { _environment } from '@/utils/environment'
-import { _discordUrl } from '@/utils/discordUrl'
+import { _discordRedirect, _discordUrl } from '@/utils/discordUrl'
 
 const Bugs: React.FC = () => {
   return (
@@ -16,12 +17,20 @@ const Bugs: React.FC = () => {
             </h2>
     
             <p className="text-base text-white text-center mt-6">
-              Contact us via <Link className="text-(--discord) hover:underline" href={_discordUrl}>
+              <Link 
+                className="text-(--discord) hover:underline" 
+                href={_discordUrl} 
+                onClick={_discordRedirect}
+              >
                 Discord
               </Link>.
             </p>
           </> :
-            <Link className="button-orange !border-[#5865F2] !bg-[#5865F2] hover:!border-(--white)" href={_discordUrl}>
+            <Link
+              className="button-orange !border-[#5865F2] !bg-[#5865F2] hover:!border-(--white)"
+              href={_discordUrl}
+              onClick={_discordRedirect}
+            >
               Join now
               <svg className="icon fill-current ml-[.8rem]" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <title>Discord</title>

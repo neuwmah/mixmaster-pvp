@@ -1,9 +1,10 @@
+"use client"
 import React from 'react'
 import Link from 'next/link'
 
 import BackgroundMix from '@/components/BackgroundMix'
 
-import { _discordUrl } from '@/utils/discordUrl';
+import { _discordRedirect, _discordUrl } from '@/utils/discordUrl';
 
 export default function ShopPage() {
   return (
@@ -29,11 +30,11 @@ export default function ShopPage() {
           <div className="progress-bar flex flex-col items-center w-full mt-12">
             <div className="bar flex relative w-full max-w-160">
               <div className="background w-full h-[4px] rounded-[1.6rem] bg-(--gray-1)"></div>
-              <div className={`progress absolute top-0 left-0 min-w-[1%] h-[4px] rounded-[1.6rem] bg-(--primary-orange-1)`}></div>
+              <div className={`progress absolute top-0 left-0 min-w-[0%] h-[4px] rounded-[1.6rem] bg-(--primary-orange-1)`}></div>
             </div>
 
             <p className="text text-sm text-white mt-4">
-              R$ 1,00 / <strong>R$ 100,00</strong>
+              $ 0.00 / <strong>$ 35.00</strong>
             </p>
           </div>
 
@@ -42,7 +43,11 @@ export default function ShopPage() {
             When you donate you are just helping the project.
           </strong>
 
-          <Link className="button-gray mt-12 hover:!bg-[#5865F2]" href={_discordUrl}>
+          <Link
+            className="button-gray mt-12 hover:!bg-[#5865F2]"
+            href={_discordUrl}
+            onClick={_discordRedirect}
+          >
             Contact us
             <svg className="icon fill-current ml-[.8rem]" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <title>Discord</title>
