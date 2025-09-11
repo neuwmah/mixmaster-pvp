@@ -121,9 +121,9 @@ export default function PetCard({ pet, hench, selectedHench = false, setSelected
             width={40}
             height={40}
             src={`/assets/images/hench/icon/${hench?.code}.webp`}
-            alt={hench?.code}
-              className="object-contain w-full h-full"
-              loading="lazy"
+            alt={hench?.code ?? ''}
+            className="object-contain w-full h-full"
+            loading="lazy"
           />
         </div>
 
