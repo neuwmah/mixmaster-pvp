@@ -64,7 +64,7 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
             value={name}
             onChange={(e) => setName(e.target.value)}
             minLength={3}
-            maxLength={16}
+            maxLength={12}
             required
           />
         </div>

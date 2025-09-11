@@ -72,7 +72,7 @@ export default function ChangeNickname({
             value={newName}
             onChange={e => setNewName(e.target.value)}
             minLength={3}
-            maxLength={16}
+            maxLength={12}
             disabled={sending}
             required
           />
