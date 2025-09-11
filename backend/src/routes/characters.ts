@@ -5,13 +5,15 @@ import { Prisma } from '@prisma/client'
 
 const bodySchema = z.object({
   userId: z.string().optional(),
-  name: z.string().min(3).max(16),
+  name: z.string().min(3).max(12),
   class: z.enum(['ditt', 'jin', 'penril', 'phoy']),
   energy: z.number().int().min(10).max(500).default(0),
   agility: z.number().int().min(10).max(500).default(0),
   accuracy: z.number().int().min(10).max(500).default(0),
   luck: z.number().int().min(10).max(500).default(0),
   map: z.string().min(1).default('magirita'),
+  u_hero_id_idx: z.number().int().default(0),
+  u_hero_order: z.number().int().default(0)
 })
 
 const transferInitSchema = z.object({
@@ -36,7 +38,7 @@ export async function characterRoutes(app: FastifyInstance) {
       const item = await prisma.character.create({ data: parsed.data })
       return reply.code(201).send(item)
     } catch (e: any) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
+      if (e.code === 'P2002') {
         return reply.code(409).send({ message: 'Character name already in use.' })
       }
       return reply.code(500).send({ message: 'Internal error' })
@@ -65,7 +67,7 @@ export async function characterRoutes(app: FastifyInstance) {
       const updated = await prisma.character.update({ where: { id }, data: parsed.data })
       return updated
     } catch (e: any) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
+      if (e.code === 'P2002') {
         return reply.code(409).send({ message: 'Character name already in use.' })
       }
       return reply.code(404).send({ message: 'Not found' })

@@ -80,8 +80,8 @@ export async function userRoutes(app: FastifyInstance) {
     try {
       const user = await prisma.user.create({ data: { username: data.username, email: data.email, phone, password: hash(data.password) } })
       return reply.code(201).send({ ...user, password: undefined })
-    } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
+    } catch (e: any) {
+      if (e?.code === 'P2002') {
         return reply.code(409).send({ message: 'unique constraint', target: (e.meta as any)?.target })
       }
       console.error('create user error', e)
@@ -136,8 +136,8 @@ export async function userRoutes(app: FastifyInstance) {
       try {
         const updated = await prisma.user.update({ where: { id }, data })
         return { ...updated, password: undefined }
-      } catch (e) {
-        if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
+      } catch (e: any) {
+        if (e?.code === 'P2002') {
           return reply.code(409).send({ message: 'unique constraint', target: (e.meta as any)?.target })
         }
         return reply.code(404).send({ message: 'not found' })

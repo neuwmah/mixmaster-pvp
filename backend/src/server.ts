@@ -14,7 +14,10 @@ import { userRoutes } from './routes/users.js'
 import { authRoutes } from './routes/auth.js'
 import { henchRoutes } from './routes/hench.js'
 import { petRoutes } from './routes/pets.js'
-import { mysqlRoutes } from './routes/mysql.js'
+import { playerRoutes } from './routes/mysql/player.js'
+import { u_heroRoutes } from './routes/mysql/u_hero.js'
+import { s_monsterRoutes } from './routes/mysql/s_monster.js'
+import { u_hench_1Routes } from './routes/mysql/u_hench_1.js'
 
 const app = Fastify({ logger: false })
 
@@ -47,7 +50,10 @@ await app.register(userRoutes)
 await app.register(authRoutes)
 await app.register(henchRoutes)
 await app.register(petRoutes)
-await app.register(mysqlRoutes)
+await app.register(playerRoutes)
+await app.register(u_heroRoutes)
+await app.register(s_monsterRoutes)
+await app.register(u_hench_1Routes)
 
 const port = Number(process.env.PORT) || 3333
 app.listen({ port, host: '0.0.0.0' })
