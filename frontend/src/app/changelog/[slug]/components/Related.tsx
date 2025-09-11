@@ -1,13 +1,15 @@
-import React from 'react';
+import React from 'react'
 
-import { getChangelogs } from '@/app/api/changelog';
+import { getChangelogs } from '@/app/api/changelog'
 
-import Carousel from '@/app/home/news/Carousel';
+import Carousel from '@/app/home/news/Carousel'
 
 const Related: React.FC = async () => {
-  const changelogsData = await getChangelogs();
+  const changelogsData = await getChangelogs()
   
-  return changelogsData.length ? (
+  const active = changelogsData.filter(d => d.active)
+
+  return active.length ? (
     <section className={`
       section-related section-home
       ${changelogsData.length <= 4
@@ -25,11 +27,11 @@ const Related: React.FC = async () => {
           Last updated at {new Date(changelogsData[0].created_at).toLocaleDateString()}
         </p>
 
-        <Carousel changelogs={changelogsData} />
+        <Carousel changelogs={changelogsData} account={false} />
 
       </div>
     </section>
   ) : ``
-};
+}
 
-export default Related;
+export default Related

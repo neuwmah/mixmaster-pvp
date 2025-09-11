@@ -1,26 +1,28 @@
-import React from 'react';
+import React from 'react'
 
-import { getChangelogs } from '@/app/api/changelog';
+import { getChangelogs } from '@/app/api/changelog'
 
-import Carousel from '@/app/home/news/Carousel';
-import ButtonCreate from '@/app/home/news/ButtonCreate';
+import Carousel from '@/app/home/news/Carousel'
+import ButtonCreate from '@/app/home/news/ButtonCreate'
 
 interface NewsProps {
-  home?: boolean;
+  account?: boolean
 }
 
-export default async function News({ home = true }: NewsProps) {
-  const changelogsData = await getChangelogs();
+export default async function News({ account }: NewsProps) {
+  const changelogsData = await getChangelogs()
   
-  return changelogsData.length ? (
+  const active = changelogsData.filter(d => d.active)
+
+  return (active.length || account) ? (
     <section className={`
       section-news 
-      ${home 
+      ${!account 
         ? 'section-home' 
         : 'w-full overflow-hidden z-1 relative bg-(--gray-a) m-0 py-16 sm:py-24'
       }
       ${changelogsData.length <= 4
-        ? home
+        ? !account
           ? "sm:!mb-32"
           : "sm:!pb-32"
         : ""
@@ -29,11 +31,11 @@ export default async function News({ home = true }: NewsProps) {
       <div className="container flex-col items-center">
 
         <h2 className="title">
-          Changelog {home ? '📝' : '⚙️'}
+          Changelog {!account ? '📝' : '⚙️'}
         </h2>
 
         <p className="text-big text-center mt-6 text-(--gray-4)">
-          {home
+          {!account
             ? `Last updated at ${new Date(changelogsData[0].created_at).toLocaleDateString()}`
             : <>
               Check current posts below. Or
@@ -51,7 +53,7 @@ export default async function News({ home = true }: NewsProps) {
           }
         </p>
 
-        <Carousel changelogs={changelogsData} home={home} />
+        <Carousel changelogs={changelogsData} account={account} />
 
       </div>
     </section>

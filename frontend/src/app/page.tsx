@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <main>
       <Fullbanner />
-      <News />
+      <News account={false} />
       <Ranking />
     </main>
   )

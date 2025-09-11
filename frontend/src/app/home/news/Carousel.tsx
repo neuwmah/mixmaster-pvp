@@ -15,7 +15,7 @@ import { Changelog } from '@/types/changelog';
 
 interface CarouselProps {
   changelogs: Changelog[];
-  home?: boolean;
+  account?: boolean;
 }
 
 function resolveSrc(src: string | undefined) {
@@ -27,7 +27,7 @@ function resolveSrc(src: string | undefined) {
   return src
 }
 
-const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
+const Carousel: React.FC<CarouselProps> = ({ changelogs, account = false }) => {
   const mobile = checkMobile();
   const enoughSlides = useMemo(() => (
     mobile ? changelogs.length > 1 : changelogs.length > 4
@@ -55,7 +55,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
         pagination={{ clickable: true }}
         navigation
       >
-        {changelogs.map((item: Changelog) => (item.active || !home) && (
+        {changelogs.map((item: Changelog) => (item.active || account) && (
           <SwiperSlide key={item.slug}>
             <Link
               className="flex flex-col items-center text-(--white) hover:no-underline hover:border-(--gray-1) group"
@@ -64,7 +64,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
               <div className={`
                 w-full overflow-hidden z-1
                 flex flex-col items-center
-                ${home ? 'bg-(--gray-0)' : 'bg-(--black)'}
+                ${!account ? 'bg-(--gray-0)' : 'bg-(--black)'}
               `}>
 
                 {item.image_src && (
@@ -83,7 +83,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
                   flex flex-col items-start 
                   duration-250 
                   border-1
-                  ${home ? 'border-(--gray-0)' : 'border-(--black)'}
+                  ${!account ? 'border-(--gray-0)' : 'border-(--black)'}
                 `}>
                   <p className="text-base font-medium">
                     {item.title}
@@ -99,7 +99,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, home = true }) => {
               </div>
               <svg className="pointer-events-none rotate-[180deg] scale-x-[-1] mt-[-1px]" viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg">
                 <path className="fill-(--primary-orange-1) duration-[.25s] group-hover:fill-(--gray-1)" d="M0,160L1440,0L1440,160L0,160Z"></path>
-                <path className={home ? 'fill-(--gray-0)' : 'fill-(--black)'} d="M0,0L1440,160L1440,160L0,160Z"></path>
+                <path className={!account ? 'fill-(--gray-0)' : 'fill-(--black)'} d="M0,0L1440,160L1440,160L0,160Z"></path>
               </svg>
             </Link>
           </SwiperSlide>

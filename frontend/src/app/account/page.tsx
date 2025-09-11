@@ -27,7 +27,7 @@ export default async function AccountPage() {
         {userData.is_admin && <Admin /> }
         <Details user={userData} />
         <Characters user={userData} />
-        {userData.is_admin && <News home={false} /> }
+        {userData.is_admin && <News account={true} /> }
       </main>
     )
 
