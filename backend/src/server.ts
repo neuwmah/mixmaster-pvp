@@ -1,5 +1,10 @@
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
+import multipart from '@fastify/multipart'
+import fastifyStatic from '@fastify/static'
+import jwt from '@fastify/jwt'
+import path from 'node:path'
+import fs from 'node:fs'
 import { menusRoutes } from './routes/menus.js'
 import { changelogRoutes } from './routes/changelogs.js'
 import { characterRoutes } from './routes/characters.js'
@@ -9,11 +14,7 @@ import { userRoutes } from './routes/users.js'
 import { authRoutes } from './routes/auth.js'
 import { henchRoutes } from './routes/hench.js'
 import { petRoutes } from './routes/pets.js'
-import multipart from '@fastify/multipart'
-import fastifyStatic from '@fastify/static'
-import jwt from '@fastify/jwt'
-import path from 'node:path'
-import fs from 'node:fs'
+import { mysqlRoutes } from './routes/mysql.js'
 
 const app = Fastify({ logger: false })
 
@@ -46,6 +47,7 @@ await app.register(userRoutes)
 await app.register(authRoutes)
 await app.register(henchRoutes)
 await app.register(petRoutes)
+await app.register(mysqlRoutes)
 
 const port = Number(process.env.PORT) || 3333
 app.listen({ port, host: '0.0.0.0' })

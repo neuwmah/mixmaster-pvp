@@ -1,0 +1,1764 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/mysql"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_GAME_URL")
+}
+
+model player_peak {
+  id         Int  @id @default(autoincrement())
+  peak_count Int?
+}
+
+model rank_target_idx {
+  idx Int? @unique(map: "idx") @db.UnsignedInt
+
+  @@ignore
+}
+
+model s_NicknameColor {
+  nickname_id  Int    @id
+  text_color   String @db.VarChar(12)
+  border_color String @db.VarChar(12)
+}
+
+model temp_dup_serials {
+  serial BigInt @default(0) @db.UnsignedBigInt
+
+  @@ignore
+}
+
+model temp_dup_serials_copy {
+  serial BigInt @default(0) @db.UnsignedBigInt
+
+  @@ignore
+}
+
+model temp_online_serials {
+  serial BigInt @default(0) @db.UnsignedBigInt
+
+  @@ignore
+}
+
+model u_BillItem_0 {
+  SubType      u_BillItem_0_SubType @default(ITEM)
+  GiftPlayerID String               @default("") @db.VarChar(20)
+  GiftIdIdx    Int                  @default(0)
+  IdIdx        Int                  @default(0)
+  nKey         Int                  @default(0)
+  ItemIdx      Int                  @default(0) @db.UnsignedSmallInt
+  Opt          Int                  @default(0) @db.TinyInt
+  OptLevel     Int                  @default(0) @db.TinyInt
+  Qty          Int                  @default(0) @db.TinyInt
+  ServerID     Int                  @default(0) @db.TinyInt
+  Flag         u_BillItem_0_Flag    @default(NEW)
+  RegDate      DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  TakeType     Int                  @default(1) @db.UnsignedTinyInt
+
+  @@ignore
+}
+
+model u_BillItem_1 {
+  SubType      u_BillItem_1_SubType @default(ITEM)
+  GiftPlayerID String               @default("") @db.VarChar(20)
+  GiftIdIdx    Int                  @default(0)
+  IdIdx        Int                  @default(0)
+  nKey         Int                  @default(0) @db.UnsignedInt
+  ItemIdx      Int                  @default(0) @db.UnsignedSmallInt
+  Opt          Int                  @default(0) @db.TinyInt
+  OptLevel     Int                  @default(0) @db.TinyInt
+  Qty          Int                  @default(0) @db.TinyInt
+  ServerID     Int                  @default(0) @db.TinyInt
+  Flag         u_BillItem_1_Flag    @default(NEW)
+  RegDate      DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  TakeType     Int?                 @db.UnsignedTinyInt
+
+  @@ignore
+}
+
+model u_BillItem_2 {
+  SubType      u_BillItem_2_SubType @default(ITEM)
+  GiftPlayerID String               @default("") @db.VarChar(20)
+  GiftIdIdx    Int                  @default(0)
+  IdIdx        Int                  @default(0)
+  nKey         Int                  @default(0) @db.UnsignedInt
+  ItemIdx      Int                  @default(0) @db.UnsignedSmallInt
+  Opt          Int                  @default(0) @db.TinyInt
+  OptLevel     Int                  @default(0) @db.TinyInt
+  Qty          Int                  @default(0) @db.TinyInt
+  ServerID     Int                  @default(0) @db.TinyInt
+  Flag         u_BillItem_2_Flag    @default(NEW)
+  RegDate      DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  TakeType     Int?                 @db.UnsignedTinyInt
+
+  @@ignore
+}
+
+model u_BillItem_3 {
+  SubType      u_BillItem_3_SubType @default(ITEM)
+  GiftPlayerID String               @default("") @db.VarChar(20)
+  GiftIdIdx    Int                  @default(0)
+  IdIdx        Int                  @default(0)
+  nKey         Int                  @default(0) @db.UnsignedInt
+  ItemIdx      Int                  @default(0) @db.UnsignedSmallInt
+  Opt          Int                  @default(0) @db.TinyInt
+  OptLevel     Int                  @default(0) @db.TinyInt
+  Qty          Int                  @default(0) @db.TinyInt
+  ServerID     Int                  @default(0) @db.TinyInt
+  Flag         u_BillItem_3_Flag    @default(NEW)
+  RegDate      DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  TakeType     Int?                 @db.UnsignedTinyInt
+
+  @@ignore
+}
+
+model u_BillItem_4 {
+  SubType      u_BillItem_4_SubType @default(ITEM)
+  GiftPlayerID String               @default("") @db.VarChar(20)
+  GiftIdIdx    Int                  @default(0)
+  IdIdx        Int                  @default(0)
+  nKey         Int                  @default(0) @db.UnsignedInt
+  ItemIdx      Int                  @default(0) @db.UnsignedSmallInt
+  Opt          Int                  @default(0) @db.TinyInt
+  OptLevel     Int                  @default(0) @db.TinyInt
+  Qty          Int                  @default(0) @db.TinyInt
+  ServerID     Int                  @default(0) @db.TinyInt
+  Flag         u_BillItem_4_Flag    @default(NEW)
+  RegDate      DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  TakeType     Int?                 @db.UnsignedTinyInt
+
+  @@ignore
+}
+
+model u_BillItem_5 {
+  SubType      u_BillItem_5_SubType @default(ITEM)
+  GiftPlayerID String               @default("") @db.VarChar(20)
+  GiftIdIdx    Int                  @default(0)
+  IdIdx        Int                  @default(0)
+  nKey         Int                  @default(0) @db.UnsignedInt
+  ItemIdx      Int                  @default(0) @db.UnsignedSmallInt
+  Opt          Int                  @default(0) @db.TinyInt
+  OptLevel     Int                  @default(0) @db.TinyInt
+  Qty          Int                  @default(0) @db.TinyInt
+  ServerID     Int                  @default(0) @db.TinyInt
+  Flag         u_BillItem_5_Flag    @default(NEW)
+  RegDate      DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  TakeType     Int?                 @db.UnsignedTinyInt
+
+  @@ignore
+}
+
+model u_BillItem_6 {
+  SubType      u_BillItem_6_SubType @default(ITEM)
+  GiftPlayerID String               @default("") @db.VarChar(20)
+  GiftIdIdx    Int                  @default(0)
+  IdIdx        Int                  @default(0)
+  nKey         Int                  @default(0) @db.UnsignedInt
+  ItemIdx      Int                  @default(0) @db.UnsignedSmallInt
+  Opt          Int                  @default(0) @db.TinyInt
+  OptLevel     Int                  @default(0) @db.TinyInt
+  Qty          Int                  @default(0) @db.TinyInt
+  ServerID     Int                  @default(0) @db.TinyInt
+  Flag         u_BillItem_6_Flag    @default(NEW)
+  RegDate      DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  TakeType     Int?                 @db.UnsignedTinyInt
+
+  @@ignore
+}
+
+model u_BillItem_7 {
+  SubType      u_BillItem_7_SubType @default(ITEM)
+  GiftPlayerID String               @default("") @db.VarChar(20)
+  GiftIdIdx    Int                  @default(0)
+  IdIdx        Int                  @default(0)
+  nKey         Int                  @default(0) @db.UnsignedInt
+  ItemIdx      Int                  @default(0) @db.UnsignedSmallInt
+  Opt          Int                  @default(0) @db.TinyInt
+  OptLevel     Int                  @default(0) @db.TinyInt
+  Qty          Int                  @default(0) @db.TinyInt
+  ServerID     Int                  @default(0) @db.TinyInt
+  Flag         u_BillItem_7_Flag    @default(NEW)
+  RegDate      DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  TakeType     Int?                 @db.UnsignedTinyInt
+
+  @@ignore
+}
+
+model u_BillItem_8 {
+  SubType      u_BillItem_8_SubType @default(ITEM)
+  GiftPlayerID String               @default("") @db.VarChar(20)
+  GiftIdIdx    Int                  @default(0)
+  IdIdx        Int                  @default(0)
+  nKey         Int                  @default(0) @db.UnsignedInt
+  ItemIdx      Int                  @default(0) @db.UnsignedSmallInt
+  Opt          Int                  @default(0) @db.TinyInt
+  OptLevel     Int                  @default(0) @db.TinyInt
+  Qty          Int                  @default(0) @db.TinyInt
+  ServerID     Int                  @default(0) @db.TinyInt
+  Flag         u_BillItem_8_Flag    @default(NEW)
+  RegDate      DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  TakeType     Int?                 @db.UnsignedTinyInt
+
+  @@ignore
+}
+
+model u_BillItem_9 {
+  SubType      u_BillItem_9_SubType @default(ITEM)
+  GiftPlayerID String               @default("") @db.VarChar(20)
+  GiftIdIdx    Int                  @default(0)
+  IdIdx        Int                  @default(0)
+  nKey         Int                  @default(0) @db.UnsignedInt
+  ItemIdx      Int                  @default(0) @db.UnsignedSmallInt
+  Opt          Int                  @default(0) @db.TinyInt
+  OptLevel     Int                  @default(0) @db.TinyInt
+  Qty          Int                  @default(0) @db.TinyInt
+  ServerID     Int                  @default(0) @db.TinyInt
+  Flag         u_BillItem_9_Flag    @default(NEW)
+  RegDate      DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  TakeType     Int?                 @db.UnsignedTinyInt
+
+  @@ignore
+}
+
+model u_CastleWarInfo {
+  zone_idx   Int     @default(0) @db.UnsignedSmallInt
+  entry_type Int     @default(0) @db.UnsignedTinyInt
+  guild_idx  Int     @default(0) @db.UnsignedSmallInt
+  guild_name String? @db.VarChar(12)
+
+  @@id([entry_type, zone_idx, guild_idx])
+}
+
+model u_GuildZone {
+  zone_idx         Int       @id @default(0) @db.UnsignedSmallInt
+  guild_idx        Int       @default(0) @db.UnsignedSmallInt
+  tax_rate         Int       @default(100) @db.UnsignedTinyInt
+  tax_change_count Int       @default(100) @db.UnsignedTinyInt
+  tax_check_time   DateTime? @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+}
+
+model u_HeroSkill {
+  heroIndex     Int      @default(0) @db.UnsignedInt
+  heroSocketNum Int      @default(0) @db.UnsignedTinyInt
+  skillIndex    Int      @default(0) @db.UnsignedTinyInt
+  skillLevel    Int      @default(0) @db.UnsignedTinyInt
+  skillPoint    Int      @default(0) @db.UnsignedSmallInt
+  learningDate  DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@ignore
+}
+
+model u_MixLog {
+  HeroIdx          Int       @default(0) @db.UnsignedInt
+  HeroOrder        Int       @default(0) @db.UnsignedTinyInt
+  type             Int?      @db.UnsignedSmallInt
+  SuccessCount     Int?      @db.UnsignedSmallInt
+  FirstSuccessTime DateTime? @db.DateTime(0)
+
+  @@ignore
+}
+
+model u_MixSkill {
+  HeroIdx    Int @default(0) @db.UnsignedInt
+  HeroOrder  Int @default(0) @db.UnsignedTinyInt
+  MixSkill1  Int @default(0) @db.UnsignedSmallInt
+  MixSkill2  Int @default(0) @db.UnsignedSmallInt
+  MixSkill3  Int @default(0) @db.UnsignedSmallInt
+  MixSkill4  Int @default(0) @db.UnsignedSmallInt
+  MixSkill5  Int @default(0) @db.UnsignedSmallInt
+  MixSkill6  Int @default(0) @db.UnsignedSmallInt
+  MixSkill7  Int @default(0) @db.UnsignedSmallInt
+  MixSkill8  Int @default(0) @db.UnsignedSmallInt
+  MixSkill9  Int @default(0) @db.UnsignedSmallInt
+  MixSkill10 Int @default(0) @db.UnsignedSmallInt
+
+  @@ignore
+}
+
+model u_PrTotal {
+  idx     Int?      @db.SmallInt
+  u_idx   Int?
+  tinyint Int?      @db.TinyInt
+  pr_lidx String?   @db.VarChar(255)
+  n_idx   String?   @db.VarChar(255)
+  ptime   DateTime? @db.DateTime(0)
+
+  @@ignore
+}
+
+model u_QuestLog {
+  id_idx      Int      @default(0) @db.UnsignedInt
+  hero_order  Int      @default(0) @db.UnsignedTinyInt
+  quest_index Int      @default(0) @db.UnsignedSmallInt
+  quest_state Int      @default(0) @db.UnsignedTinyInt
+  start_time  DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  end_time    DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  end_count   Int      @default(0) @db.UnsignedSmallInt
+
+  @@index([id_idx, hero_order], map: "index1")
+  @@ignore
+}
+
+model u_guild {
+  GuildIdx      Int       @id @default(autoincrement()) @db.UnsignedSmallInt
+  Name          String?   @db.VarChar(12)
+  Info          String?   @default("0") @db.VarChar(200)
+  Cert          String?   @default("0") @db.VarChar(100)
+  EstablishDate DateTime? @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  LimitCount    Int?      @default(0) @db.UnsignedSmallInt
+  Status        Int       @default(0) @db.UnsignedTinyInt
+  MarkRegDate   DateTime? @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  MarkRegCnt    Int?      @default(0) @db.UnsignedTinyInt
+  Dissolution   DateTime? @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  gold          Int?      @db.UnsignedInt
+  HiringIdx     Int?      @db.UnsignedSmallInt
+  CertDate      DateTime  @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  InfoDate      DateTime  @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+}
+
+model u_guild_hench {
+  guild_idx       Int    @default(0) @db.UnsignedInt
+  serial          BigInt @default(0) @db.UnsignedBigInt
+  hench_order     Int    @default(0) @db.UnsignedTinyInt
+  monster_type    Int    @default(0) @db.UnsignedSmallInt
+  name            String @default("0") @db.Char(12)
+  sex             Int    @default(0) @db.UnsignedTinyInt
+  state           Int    @default(0) @db.UnsignedTinyInt
+  mixnum          Int    @default(0) @db.UnsignedSmallInt
+  baselevel       Int    @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int    @default(0) @db.UnsignedTinyInt
+  exp             BigInt @default(0) @db.UnsignedBigInt
+  speed_move      Int    @default(0) @db.UnsignedTinyInt
+  speed_attack    Int    @default(0) @db.UnsignedSmallInt
+  speed_spell     Int    @default(0) @db.UnsignedSmallInt
+  str             Int    @default(0) @db.UnsignedSmallInt
+  dex             Int    @default(0) @db.UnsignedSmallInt
+  aim             Int    @default(0) @db.UnsignedSmallInt
+  luck            Int    @default(0) @db.UnsignedSmallInt
+  ap              Int    @default(0) @db.UnsignedSmallInt
+  dp              Int    @default(0) @db.UnsignedSmallInt
+  hc              Int    @default(0) @db.UnsignedSmallInt
+  hd              Int    @default(0) @db.UnsignedSmallInt
+  hp              Int    @default(0) @db.UnsignedSmallInt
+  mp              Int    @default(0) @db.UnsignedSmallInt
+  maxhp           Int    @default(0) @db.UnsignedSmallInt
+  maxmp           Int    @default(0) @db.UnsignedSmallInt
+  item0           Int    @default(0) @db.UnsignedInt
+  item1           Int    @default(0) @db.UnsignedInt
+  item2           Int    @default(0) @db.UnsignedInt
+  growthtype      Int    @default(0) @db.UnsignedTinyInt
+  race_val        Int    @default(0) @db.UnsignedInt
+  ign_att_cnt     Int    @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int    @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?   @default(0) @db.TinyInt
+  item_slot_total Int    @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int    @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt @default(0) @db.UnsignedBigInt
+  item_duration_0 Int    @default(0) @db.UnsignedInt
+  item_idx_1      Int    @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt @default(0) @db.UnsignedBigInt
+  item_duration_1 Int    @default(0) @db.UnsignedInt
+  item_idx_2      Int    @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt @default(0) @db.UnsignedBigInt
+  item_duration_2 Int    @default(0) @db.UnsignedInt
+
+  @@index([guild_idx], map: "guild_idx")
+  @@ignore
+}
+
+model u_guild_item {
+  guild_idx       Int      @default(0) @db.UnsignedInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  item_idx        Int      @default(0) @db.UnsignedInt
+  socket_num      Int      @default(0) @db.UnsignedTinyInt
+  count           Int      @default(0) @db.UnsignedSmallInt
+  opt             Int      @default(0) @db.UnsignedTinyInt
+  opt_level       Int      @default(0) @db.UnsignedTinyInt
+  duration        Int?     @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  synergy         Int?     @default(0) @db.UnsignedTinyInt
+  synergy_level   Int?     @default(0) @db.UnsignedTinyInt
+
+  @@index([guild_idx], map: "guild_idx")
+  @@ignore
+}
+
+model u_guildmember {
+  HeroIdx     Int      @default(0) @db.UnsignedInt
+  HeroOrder   Int      @default(0) @db.UnsignedTinyInt
+  GuildIdx    Int      @default(0) @db.UnsignedSmallInt
+  MemberID    Int      @default(0) @db.UnsignedSmallInt
+  Grade       Int?     @default(0) @db.UnsignedTinyInt
+  Authority   Int?     @default(0) @db.UnsignedInt
+  UpgradeDate DateTime @default(now()) @db.Timestamp(0)
+  Memo        String   @default("") @db.VarChar(31)
+
+  @@id([HeroIdx, HeroOrder])
+}
+
+model u_hench_0 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  hero_order      Int      @default(0) @db.UnsignedTinyInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  position        Int      @default(0) @db.UnsignedTinyInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             String   @default("0") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedSmallInt
+  ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@id([id_idx, hero_order])
+  @@index([id_idx, hero_order], map: "g_index1")
+}
+
+model u_hench_1 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  hero_order      Int      @default(0) @db.UnsignedTinyInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  position        Int      @default(0) @db.UnsignedTinyInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             String   @default("0") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedSmallInt
+  ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx, hero_order], map: "g_index1")
+  @@ignore
+}
+
+model u_hench_2 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  hero_order      Int      @default(0) @db.UnsignedTinyInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  position        Int      @default(0) @db.UnsignedTinyInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             String   @default("0") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedSmallInt
+  ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx, hero_order], map: "g_index1")
+  @@ignore
+}
+
+model u_hench_3 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  hero_order      Int      @default(0) @db.UnsignedTinyInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  position        Int      @default(0) @db.UnsignedTinyInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             String   @default("0") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedSmallInt
+  ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx, hero_order], map: "g_index1")
+  @@ignore
+}
+
+model u_hench_4 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  hero_order      Int      @default(0) @db.UnsignedTinyInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  position        Int      @default(0) @db.UnsignedTinyInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             String   @default("0") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedSmallInt
+  ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx, hero_order], map: "g_index1")
+  @@ignore
+}
+
+model u_hench_5 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  hero_order      Int      @default(0) @db.UnsignedTinyInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  position        Int      @default(0) @db.UnsignedTinyInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             String   @default("0") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedSmallInt
+  ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx, hero_order], map: "g_index1")
+  @@ignore
+}
+
+model u_hench_6 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  hero_order      Int      @default(0) @db.UnsignedTinyInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  position        Int      @default(0) @db.UnsignedTinyInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             String   @default("0") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedSmallInt
+  ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx, hero_order], map: "g_index1")
+  @@ignore
+}
+
+model u_hench_7 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  hero_order      Int      @default(0) @db.UnsignedTinyInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  position        Int      @default(0) @db.UnsignedTinyInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             String   @default("0") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedSmallInt
+  ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx, hero_order], map: "g_index1")
+  @@ignore
+}
+
+model u_hench_8 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  hero_order      Int      @default(0) @db.UnsignedTinyInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  position        Int      @default(0) @db.UnsignedTinyInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             String   @default("0") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedSmallInt
+  ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx, hero_order], map: "g_index1")
+  @@ignore
+}
+
+model u_hench_9 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  hero_order      Int      @default(0) @db.UnsignedTinyInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  position        Int      @default(0) @db.UnsignedTinyInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             String   @default("0") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedSmallInt
+  ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx, hero_order], map: "g_index1")
+  @@ignore
+}
+
+model u_hero {
+  id_idx           Int      @default(0) @db.UnsignedInt
+  hero_order       Int      @default(0) @db.UnsignedTinyInt
+  serial           BigInt   @default(0) @db.UnsignedBigInt
+  class            Int      @default(0) @db.UnsignedTinyInt
+  name             String   @default("") @db.VarChar(12)
+  hero_type        Int      @default(0) @db.UnsignedTinyInt
+  now_zone_idx     Int      @default(0) @db.UnsignedSmallInt
+  now_zone_x       Int      @default(0) @db.UnsignedTinyInt
+  now_zone_y       Int      @default(0) @db.UnsignedTinyInt
+  init_pos_layer   Int      @default(0) @db.UnsignedSmallInt
+  revive_zone_idx  Int      @default(0) @db.UnsignedSmallInt
+  baselevel        Int      @default(1) @db.UnsignedSmallInt
+  gold             Int      @default(0) @db.UnsignedInt
+  attr             Int      @default(0) @db.UnsignedInt
+  exp              String   @default("0") @db.VarChar(255)
+  speed_move       Int      @default(0) @db.UnsignedTinyInt
+  speed_attack     Int      @default(0) @db.UnsignedSmallInt
+  speed_skill      Int      @default(0) @db.UnsignedSmallInt
+  str              Int      @default(0) @db.UnsignedSmallInt
+  dex              Int      @default(0) @db.UnsignedSmallInt
+  aim              Int      @default(0) @db.UnsignedSmallInt
+  luck             Int      @default(0) @db.UnsignedSmallInt
+  ap               Int      @default(0) @db.UnsignedSmallInt
+  dp               Int      @default(0) @db.UnsignedSmallInt
+  hc               Int      @default(0) @db.UnsignedSmallInt
+  hd               Int      @default(0) @db.UnsignedSmallInt
+  hp               Int      @default(0) @db.UnsignedSmallInt
+  mp               Int      @default(0) @db.UnsignedSmallInt
+  maxhp            Int      @default(0) @db.UnsignedSmallInt
+  maxmp            Int      @default(0) @db.UnsignedSmallInt
+  abil_freepoint   Int      @default(0) @db.UnsignedSmallInt
+  res_fire         Int      @default(0) @db.UnsignedSmallInt
+  res_water        Int      @default(0) @db.UnsignedSmallInt
+  res_earth        Int      @default(0) @db.UnsignedSmallInt
+  res_wind         Int      @default(0) @db.UnsignedSmallInt
+  res_devil        Int      @default(0) @db.UnsignedSmallInt
+  ign_att_cnt      Int?     @default(0) @db.UnsignedTinyInt
+  regdate          DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  avatar_head      Int?     @default(0) @db.UnsignedSmallInt
+  avatar_body      Int?     @default(0) @db.UnsignedSmallInt
+  avatar_foot      Int?     @default(0) @db.UnsignedSmallInt
+  return_time      Int?     @default(0) @db.UnsignedInt
+  status           Int?     @default(0) @db.UnsignedTinyInt
+  status_time      DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  nickname         Int      @default(0) @db.UnsignedSmallInt
+  last_logout_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  skill_point      Int      @default(0) @db.UnsignedSmallInt
+  login            Boolean  @default(false)
+  limit_zone_idx   Int      @default(0) @db.UnsignedSmallInt
+  requestname      Int      @default(0) @db.UnsignedSmallInt
+  PlayedTime       Int      @default(0)
+  resets           Int      @default(24)
+
+  @@id([id_idx, hero_order])
+  @@index([id_idx, hero_order], map: "g_index1")
+  @@index([name])
+}
+
+model u_hero_event {
+  id_idx     Int  @default(0) @db.UnsignedInt
+  hero_order Int  @default(0) @db.UnsignedTinyInt
+  event_no   Int? @db.UnsignedInt
+
+  @@id([id_idx, hero_order])
+  @@index([id_idx, hero_order], map: "hero_event_idx")
+}
+
+model u_hero_pvps {
+  id_idx     Int    @default(0) @db.UnsignedInt
+  hero_order Int    @default(0) @db.UnsignedTinyInt
+  name       String @default("") @db.VarChar(12)
+  hero_type  Int    @default(0) @db.UnsignedTinyInt
+  pvp        Int    @default(0) @db.TinyInt
+
+  @@ignore
+}
+
+model u_hero_quest {
+  id_idx        Int      @default(0) @db.UnsignedInt
+  hero_order    Int      @default(0) @db.UnsignedTinyInt
+  switch_number Int      @default(0) @db.UnsignedSmallInt
+  success_count Int?     @db.UnsignedSmallInt
+  success_time  DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx, hero_order], map: "g_index1")
+  @@ignore
+}
+
+model u_item {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  hero_order      Int      @default(0) @db.UnsignedTinyInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  item_idx        Int      @default(0) @db.UnsignedInt
+  socket_type     Int      @default(0) @db.UnsignedTinyInt
+  socket_num      Int      @default(0) @db.UnsignedTinyInt
+  count           Int      @default(0) @db.UnsignedSmallInt
+  opt             Int      @default(0) @db.UnsignedTinyInt
+  opt_level       Int      @default(0) @db.UnsignedTinyInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  synergy         Int?     @default(0) @db.UnsignedTinyInt
+  synergy_level   Int?     @default(0) @db.UnsignedTinyInt
+
+  @@index([id_idx, hero_order], map: "g_index1")
+  @@ignore
+}
+
+model u_item_market {
+  identify        Int       @id @default(autoincrement()) @db.UnsignedInt
+  coin_type       Int       @db.UnsignedSmallInt
+  price           BigInt    @db.UnsignedBigInt
+  category        Int       @db.UnsignedSmallInt
+  id_idx          Int       @db.UnsignedInt
+  hero_order      Int       @db.UnsignedInt
+  serial          BigInt    @db.UnsignedBigInt
+  item_idx        Int       @db.UnsignedSmallInt
+  count           Int       @db.UnsignedSmallInt
+  opt             Int       @db.UnsignedSmallInt
+  opt_level       Int       @db.UnsignedSmallInt
+  duration        BigInt?
+  synergy         Int       @db.UnsignedSmallInt
+  synergy_level   Int       @db.UnsignedSmallInt
+  flag            Int       @default(0) @db.UnsignedSmallInt
+  expire_day_item DateTime? @db.DateTime(0)
+}
+
+model u_messenger {
+  HeroIdx         Int @default(0) @db.UnsignedInt
+  HeroOrder       Int @default(0) @db.UnsignedTinyInt
+  TargetHeroIdx   Int @default(0) @db.UnsignedInt
+  TargetHeroOrder Int @default(0) @db.UnsignedTinyInt
+  Status          Int @default(0) @db.UnsignedTinyInt
+  MyState         Int @default(1) @db.UnsignedTinyInt
+
+  @@id([HeroIdx, HeroOrder, TargetHeroIdx, TargetHeroOrder])
+}
+
+model u_skillstate {
+  id_idx          Int    @default(0)
+  hero_order      Int    @default(0) @db.TinyInt
+  effect_idx      Int    @default(0) @db.TinyInt
+  SkillIdx        Int    @default(0) @db.TinyInt
+  EffectSkillTime Int    @default(0)
+  EffectValue     String @default("0") @db.VarChar(255)
+  EffectLevel     Int    @default(0) @db.TinyInt
+
+  @@ignore
+}
+
+model u_store {
+  id_idx          Int      @id @default(0) @db.UnsignedInt
+  store_gold      Int      @default(0) @db.UnsignedInt
+  store_state     Int      @default(0) @db.UnsignedTinyInt
+  last_store_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+}
+
+model u_store_hench_0 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("0") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             BigInt   @default(0) @db.UnsignedBigInt
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_spell     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedInt
+  ign_att_cnt     Int      @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx], map: "id_idx")
+  @@ignore
+}
+
+model u_store_hench_1 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("0") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             BigInt   @default(0) @db.UnsignedBigInt
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_spell     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedInt
+  ign_att_cnt     Int      @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx], map: "id_idx")
+  @@ignore
+}
+
+model u_store_hench_2 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("0") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             BigInt   @default(0) @db.UnsignedBigInt
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_spell     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedInt
+  ign_att_cnt     Int      @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx], map: "id_idx")
+  @@ignore
+}
+
+model u_store_hench_3 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("0") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             BigInt   @default(0) @db.UnsignedBigInt
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_spell     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedInt
+  ign_att_cnt     Int      @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx], map: "id_idx")
+  @@ignore
+}
+
+model u_store_hench_4 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("0") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             BigInt   @default(0) @db.UnsignedBigInt
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_spell     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedInt
+  ign_att_cnt     Int      @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx], map: "id_idx")
+  @@ignore
+}
+
+model u_store_hench_5 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("0") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             BigInt   @default(0) @db.UnsignedBigInt
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_spell     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedInt
+  ign_att_cnt     Int      @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx], map: "id_idx")
+  @@ignore
+}
+
+model u_store_hench_6 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("0") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             BigInt   @default(0) @db.UnsignedBigInt
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_spell     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedInt
+  ign_att_cnt     Int      @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx], map: "id_idx")
+  @@ignore
+}
+
+model u_store_hench_7 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("0") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             BigInt   @default(0) @db.UnsignedBigInt
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_spell     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedInt
+  ign_att_cnt     Int      @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx], map: "id_idx")
+  @@ignore
+}
+
+model u_store_hench_8 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("0") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             BigInt   @default(0) @db.UnsignedBigInt
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_spell     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedInt
+  ign_att_cnt     Int      @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx], map: "id_idx")
+  @@ignore
+}
+
+model u_store_hench_9 {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  hench_order     Int      @default(0) @db.UnsignedTinyInt
+  monster_type    Int      @default(0) @db.UnsignedSmallInt
+  name            String   @default("0") @db.VarChar(255)
+  sex             Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt
+  mixnum          Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(0) @db.UnsignedSmallInt
+  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
+  exp             BigInt   @default(0) @db.UnsignedBigInt
+  speed_move      Int      @default(0) @db.UnsignedTinyInt
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt
+  speed_spell     Int      @default(0) @db.UnsignedSmallInt
+  str             Int      @default(0) @db.UnsignedSmallInt
+  dex             Int      @default(0) @db.UnsignedSmallInt
+  aim             Int      @default(0) @db.UnsignedSmallInt
+  luck            Int      @default(0) @db.UnsignedSmallInt
+  ap              Int      @default(0) @db.UnsignedSmallInt
+  dp              Int      @default(0) @db.UnsignedSmallInt
+  hc              Int      @default(0) @db.UnsignedSmallInt
+  hd              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(0) @db.UnsignedSmallInt
+  mp              Int      @default(0) @db.UnsignedSmallInt
+  maxhp           Int      @default(0) @db.UnsignedSmallInt
+  maxmp           Int      @default(0) @db.UnsignedSmallInt
+  item0           Int      @default(0) @db.UnsignedInt
+  item1           Int      @default(0) @db.UnsignedInt
+  item2           Int      @default(0) @db.UnsignedInt
+  growthtype      Int      @default(0) @db.UnsignedTinyInt
+  race_val        Int      @default(0) @db.UnsignedInt
+  ign_att_cnt     Int      @default(0) @db.UnsignedTinyInt
+  add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
+  enchant_grade   Int?     @default(0) @db.TinyInt
+  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_0 Int      @default(0) @db.UnsignedInt
+  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_1 Int      @default(0) @db.UnsignedInt
+  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
+  item_duration_2 Int      @default(0) @db.UnsignedInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([id_idx], map: "id_idx")
+  @@ignore
+}
+
+model u_store_item {
+  id_idx          Int      @default(0) @db.UnsignedInt
+  serial          BigInt   @default(0) @db.UnsignedBigInt
+  item_idx        Int      @default(0) @db.UnsignedInt
+  socket_num      Int      @default(0) @db.UnsignedTinyInt
+  count           Int      @default(0) @db.UnsignedSmallInt
+  opt             Int      @default(0) @db.UnsignedTinyInt
+  opt_level       Int      @default(0) @db.UnsignedTinyInt
+  duration        Int?     @default(0) @db.UnsignedInt
+  last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  synergy         Int?     @default(0) @db.UnsignedTinyInt
+  synergy_level   Int?     @default(0) @db.UnsignedTinyInt
+
+  @@index([id_idx], map: "id_idx")
+  @@ignore
+}
+
+enum u_BillItem_0_SubType {
+  TNULL
+  HENCH
+  ITEM
+}
+
+enum u_BillItem_1_SubType {
+  TNULL
+  HENCH
+  ITEM
+}
+
+enum u_BillItem_2_SubType {
+  TNULL
+  HENCH
+  ITEM
+}
+
+enum u_BillItem_3_SubType {
+  TNULL
+  HENCH
+  ITEM
+}
+
+enum u_BillItem_4_SubType {
+  TNULL
+  HENCH
+  ITEM
+}
+
+enum u_BillItem_5_SubType {
+  TNULL
+  HENCH
+  ITEM
+}
+
+enum u_BillItem_6_SubType {
+  TNULL
+  HENCH
+  ITEM
+}
+
+enum u_BillItem_7_SubType {
+  TNULL
+  HENCH
+  ITEM
+}
+
+enum u_BillItem_8_SubType {
+  TNULL
+  HENCH
+  ITEM
+}
+
+enum u_BillItem_9_SubType {
+  TNULL
+  HENCH
+  ITEM
+}
+
+enum u_BillItem_0_Flag {
+  NEW
+  LOCK
+  SPEND
+  RESPEND
+}
+
+enum u_BillItem_1_Flag {
+  NEW
+  LOCK
+  SPEND
+  RESPEND
+}
+
+enum u_BillItem_2_Flag {
+  NEW
+  LOCK
+  SPEND
+  RESPEND
+}
+
+enum u_BillItem_3_Flag {
+  NEW
+  LOCK
+  SPEND
+  RESPEND
+}
+
+enum u_BillItem_4_Flag {
+  NEW
+  LOCK
+  SPEND
+  RESPEND
+}
+
+enum u_BillItem_5_Flag {
+  NEW
+  LOCK
+  SPEND
+  RESPEND
+}
+
+enum u_BillItem_6_Flag {
+  NEW
+  LOCK
+  SPEND
+  RESPEND
+}
+
+enum u_BillItem_7_Flag {
+  NEW
+  LOCK
+  SPEND
+  RESPEND
+}
+
+enum u_BillItem_8_Flag {
+  NEW
+  LOCK
+  SPEND
+  RESPEND
+}
+
+enum u_BillItem_9_Flag {
+  NEW
+  LOCK
+  SPEND
+  RESPEND
+}
