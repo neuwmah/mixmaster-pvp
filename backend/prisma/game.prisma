@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "./generated/mysql"
+  output   = "./generated/mysql/game"
 }
 
 datasource db {
@@ -503,8 +503,8 @@ model u_hench_1 {
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
+  @@id([id_idx, hero_order])
   @@index([id_idx, hero_order], map: "g_index1")
-  @@ignore
 }
 
 model u_hench_2 {
@@ -557,8 +557,8 @@ model u_hench_2 {
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
+  @@id([id_idx, hero_order])
   @@index([id_idx, hero_order], map: "g_index1")
-  @@ignore
 }
 
 model u_hench_3 {
@@ -611,8 +611,8 @@ model u_hench_3 {
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
+  @@id([id_idx, hero_order])
   @@index([id_idx, hero_order], map: "g_index1")
-  @@ignore
 }
 
 model u_hench_4 {
@@ -665,8 +665,8 @@ model u_hench_4 {
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
+  @@id([id_idx, hero_order])
   @@index([id_idx, hero_order], map: "g_index1")
-  @@ignore
 }
 
 model u_hench_5 {
@@ -719,8 +719,8 @@ model u_hench_5 {
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
+  @@id([id_idx, hero_order])
   @@index([id_idx, hero_order], map: "g_index1")
-  @@ignore
 }
 
 model u_hench_6 {
@@ -773,8 +773,8 @@ model u_hench_6 {
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
+  @@id([id_idx, hero_order])
   @@index([id_idx, hero_order], map: "g_index1")
-  @@ignore
 }
 
 model u_hench_7 {
@@ -827,8 +827,8 @@ model u_hench_7 {
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
+  @@id([id_idx, hero_order])
   @@index([id_idx, hero_order], map: "g_index1")
-  @@ignore
 }
 
 model u_hench_8 {
@@ -881,8 +881,8 @@ model u_hench_8 {
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
+  @@id([id_idx, hero_order])
   @@index([id_idx, hero_order], map: "g_index1")
-  @@ignore
 }
 
 model u_hench_9 {
@@ -935,8 +935,8 @@ model u_hench_9 {
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
+  @@id([id_idx, hero_order])
   @@index([id_idx, hero_order], map: "g_index1")
-  @@ignore
 }
 
 model u_hero {

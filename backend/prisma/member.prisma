@@ -1,0 +1,513 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/mysql/member"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_MEMBER_URL")
+}
+
+model ChangePassword {
+  AdminID  String   @default("") @db.VarChar(12)
+  id_idx   Int?
+  PlayerID String   @default("") @db.VarChar(12)
+  Passwd   String   @default("") @db.VarChar(30)
+  RegDate  DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@id([PlayerID, AdminID])
+}
+
+model Distraint {
+  id         Int       @id @default(autoincrement())
+  player_id  String?   @db.VarChar(255)
+  old_ep     Int?
+  new_ep     Int?
+  updated_by String?   @db.VarChar(255)
+  updated_at DateTime? @default(now()) @db.Timestamp(0)
+}
+
+model Distraint2 {
+  Num          Int                  @id @default(autoincrement()) @db.UnsignedInt
+  id_idx       Int                  @default(0) @db.UnsignedInt
+  PlayerID     String               @default("") @db.VarChar(12)
+  CPPlayerID   String               @default("") @db.VarChar(20)
+  CPCode       Int                  @default(0) @db.UnsignedTinyInt
+  AdminID      String               @default("") @db.VarChar(20)
+  BlockType    Distraint2_BlockType @default(GAME)
+  Access       Distraint2_Access    @default(ALLOW)
+  CharName     String?              @db.VarChar(20)
+  ServerName   String?              @db.VarChar(50)
+  Subject      String               @default("") @db.VarChar(255)
+  Content      String               @db.Text
+  StartDate    DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  EndDate      DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  RegDate      DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  B_Flag       Distraint2_B_Flag    @default(Y)
+  BlockTypeNum Int?                 @default(0)
+
+  @@index([PlayerID], map: "PlayerID")
+  @@index([id_idx], map: "id_idx")
+}
+
+model Management {
+  Num           Int             @id @default(autoincrement()) @db.UnsignedInt
+  AdminID       String          @default("") @db.VarChar(20)
+  Passwd        String          @default("") @db.VarChar(30)
+  Name          String          @default("") @db.VarChar(30)
+  Team          String          @default("") @db.VarChar(30)
+  Jigham        String          @default("") @db.VarChar(30)
+  Email         String          @default("") @db.VarChar(30)
+  ZipCode       String          @default("") @db.VarChar(7)
+  Address       String          @default("") @db.VarChar(255)
+  Tphone        String          @default("") @db.VarChar(20)
+  Cphone        String          @default("") @db.VarChar(20)
+  StartDate     DateTime        @default(dbgenerated("'0001-01-01'")) @db.Date
+  EndDate       DateTime        @default(dbgenerated("'0001-01-01'")) @db.Date
+  Access        Int             @default(10) @db.TinyInt
+  Flag          Management_Flag @default(Y)
+  nCount        Int             @default(0) @db.UnsignedInt
+  LoginIP       String?         @db.VarChar(15)
+  LastLoginDate DateTime?       @db.DateTime(0)
+  RegDate       DateTime        @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+}
+
+model Mark {
+  id_idx   Int?
+  PlayerID String? @db.VarChar(255)
+
+  @@ignore
+}
+
+model Player {
+  id_idx          Int                @default(autoincrement()) @db.UnsignedInt
+  PlayerID        String             @unique(map: "PlayerID") @default("") @db.VarChar(255)
+  Passwd          String             @default("") @db.VarChar(255)
+  EP              BigInt             @default(0)
+  Passwd_A        String?            @db.VarChar(64)
+  Passwd_Q        String?            @db.Char(2)
+  Name            String             @default("") @db.VarChar(20)
+  JuminNo         String             @default("") @db.VarChar(20)
+  nYear           String             @default("") @db.VarChar(4)
+  nMonth          String             @default("") @db.Char(2)
+  nDay            String?            @db.Char(2)
+  Sex             String             @default(dbgenerated("1"))
+  TelePhone1      String?            @db.VarChar(20)
+  CPhone1         String?            @db.VarChar(13)
+  CPhone2         String             @default("") @db.VarChar(4)
+  CPhone3         String             @default("") @db.VarChar(4)
+  ZipCode         String             @default("") @db.VarChar(10)
+  AddressDo       String?            @db.VarChar(20)
+  AddressSi       String?            @db.VarChar(30)
+  AddressDong     String?            @db.VarChar(50)
+  AddressEtc      String?            @db.VarChar(100)
+  Address         String?            @db.VarChar(255)
+  Email           String?            @db.VarChar(255)
+  Access          Int                @default(21) @db.UnsignedTinyInt
+  Block           Player_Block?      @default(ALLOW)
+  LoginIP         String?            @db.VarChar(15)
+  NewsLetter      String?            @default(dbgenerated("1"))
+  ParentName      String?            @db.VarChar(20)
+  ParentJuminNo   String?            @db.VarChar(20)
+  ParentPhone1    String?            @db.VarChar(13)
+  ParentPhone2    String             @default("") @db.VarChar(4)
+  ParentPhone3    String             @default("") @db.VarChar(4)
+  LastLoginDate   DateTime?          @db.DateTime(0)
+  SecederDate     DateTime?          @db.DateTime(0)
+  PayPlayDate     DateTime?          @db.DateTime(0)
+  PayPlayHours    Int?               @default(0) @db.UnsignedInt
+  RegDate         DateTime           @default(dbgenerated("'0001-01-01 00:00:00'")) @db.DateTime(0)
+  OldBlock        Player_OldBlock    @default(ALLOW)
+  ssoChk          String?            @db.Char(1)
+  AuthCheck       Player_AuthCheck   @default(AUTH_OK)
+  AuthTimeLimit   DateTime           @default(dbgenerated("'0001-01-01 00:00:00'")) @db.DateTime(0)
+  LoginState      Boolean            @default(false)
+  personal_auth   String?            @default("N") @db.Char(1)
+  Accesschecktype Int?               @default(0)
+  avatar          String             @default("0") @db.VarChar(255)
+  IP              String?            @db.VarChar(255)
+  token           String?            @db.VarChar(255)
+  isValidateToken Int                @default(0)
+  PlayTime        Int?               @default(0)
+  OnPoints        String?            @default("1") @db.VarChar(255)
+  TelePhone2      String?            @db.VarChar(4)
+  TelePhone3      String?            @db.VarChar(4)
+  JobType         String?            @db.Char(2)
+  affiliate_id    Int?
+  GPBank          String             @default("0") @db.VarChar(20)
+  gems            BigInt             @default(0)
+  online_points   Int                @default(0)
+
+  @@id([id_idx, RegDate])
+  @@index([Name], map: "Name")
+  @@index([RegDate], map: "RegDate")
+  @@index([JuminNo, Block, id_idx], map: "g_JuminNo")
+  @@index([PlayerID, JuminNo, Block, RegDate], map: "p_index1")
+}
+
+model Player2 {
+  id_idx           Int                 @id @default(autoincrement()) @db.UnsignedInt
+  PlayerID         String?             @unique(map: "PlayerID") @default("") @db.VarChar(255)
+  Passwd           String?             @default("") @db.VarChar(255)
+  Passwd_Q         String?             @db.Char(2)
+  Passwd_A         String?             @db.VarChar(64)
+  Name             String?             @default("") @db.VarChar(20)
+  JuminNo          String?             @default("") @db.VarChar(20)
+  nYear            String?             @default("") @db.VarChar(4)
+  nMonth           String?             @default("") @db.Char(2)
+  nDay             String?             @db.Char(2)
+  Sex              String?             @default(dbgenerated("1"))
+  TelePhone1       String?             @db.VarChar(13)
+  CPhone1          String?             @db.VarChar(13)
+  CPhone2          String?             @default("") @db.VarChar(4)
+  CPhone3          String?             @default("") @db.VarChar(4)
+  ZipCode          String?             @default("") @db.VarChar(10)
+  AddressDo        String?             @db.VarChar(20)
+  AddressSi        String?             @db.VarChar(30)
+  AddressDong      String?             @db.VarChar(50)
+  AddressEtc       String?             @db.VarChar(100)
+  Address          String?             @db.VarChar(255)
+  Email            String?             @db.VarChar(255)
+  Raison_du_Ban    String?             @db.VarChar(300)
+  Date_de_deban    String?             @db.VarChar(100)
+  Access           Int?                @default(21) @db.UnsignedTinyInt
+  Block            Player2_Block?      @default(ALLOW)
+  LoginIP          String?             @db.VarChar(15)
+  NewsLetter       String?             @default(dbgenerated("1"))
+  ParentName       String?             @db.VarChar(20)
+  ParentJuminNo    String?             @db.VarChar(20)
+  ParentPhone1     String?             @db.VarChar(13)
+  ParentPhone2     String?             @default("") @db.VarChar(4)
+  ParentPhone3     String?             @default("") @db.VarChar(4)
+  LastLoginDate    DateTime?           @db.DateTime(0)
+  SecederDate      DateTime?           @db.DateTime(0)
+  PayPlayDate      DateTime?           @db.DateTime(0)
+  PayPlayHours     Int?                @default(0) @db.UnsignedInt
+  RegDate          DateTime?           @default(dbgenerated("'0001-01-01 00:00:00'")) @db.DateTime(0)
+  OldBlock         Player2_OldBlock?   @default(ALLOW)
+  ssoChk           String?             @db.Char(1)
+  AuthCheck        Player2_AuthCheck?  @default(AUTH_OK)
+  AuthTimeLimit    DateTime?           @default(dbgenerated("'0001-01-01 00:00:00'")) @db.DateTime(0)
+  LoginState       Boolean?            @default(false)
+  personal_auth    String?             @default("N") @db.Char(1)
+  Accesschecktype  Int?                @default(0)
+  PlayerNickName   String?             @db.VarChar(30)
+  PlayerGameServer String?             @db.VarChar(15)
+  EP               Int?                @default(0)
+  EPTotal          String?             @db.VarChar(255)
+  Parrain          String?             @db.VarChar(25)
+  avatar           String?             @default("0") @db.VarChar(255)
+  IP               String?             @db.VarChar(255)
+  token            String?             @db.VarChar(255)
+  isValidateToken  Int?                @default(0)
+  SuperMark        Int?                @default(0)
+  membre_post      Int?                @default(0)
+  forum_level      Int?                @default(0)
+  actif_forum      Int?                @default(0)
+  forum_nickname   String?             @default("0") @db.VarChar(255)
+  AdminID          String?             @db.VarChar(255)
+  ask              String?             @db.VarChar(255)
+  resp             String?             @db.VarChar(255)
+  country          String?             @db.VarChar(255)
+  CashPoint        String?             @default("0") @db.VarChar(255)
+  IsAdmin          String?             @db.VarChar(255)
+  IsVip            String?             @db.VarChar(255)
+  EndVip           DateTime?           @db.DateTime(0)
+  PlayTime         Int?                @default(0)
+  OnPoints         String?             @default("1") @db.VarChar(255)
+
+  @@index([Name], map: "Name")
+  @@index([RegDate], map: "RegDate")
+  @@index([Date_de_deban], map: "SchoolName")
+  @@index([JuminNo, Block, id_idx], map: "g_JuminNo")
+  @@index([PlayerID, JuminNo, Block, RegDate], map: "p_index1")
+  @@ignore
+}
+
+model Player_pos_bagunca {
+  id_idx          Int                            @default(autoincrement()) @db.UnsignedInt
+  PlayerID        String                         @unique(map: "PlayerID") @default("") @db.VarChar(255)
+  Passwd          String                         @default("") @db.VarChar(255)
+  EP              Int                            @default(0)
+  Passwd_A        String?                        @db.VarChar(64)
+  Passwd_Q        String?                        @db.Char(2)
+  Name            String                         @default("") @db.VarChar(20)
+  JuminNo         String                         @default("") @db.VarChar(20)
+  nYear           String                         @default("") @db.VarChar(4)
+  nMonth          String                         @default("") @db.Char(2)
+  nDay            String?                        @db.Char(2)
+  Sex             String                         @default(dbgenerated("1"))
+  TelePhone1      String?                        @db.VarChar(13)
+  CPhone1         String?                        @db.VarChar(13)
+  CPhone2         String                         @default("") @db.VarChar(4)
+  CPhone3         String                         @default("") @db.VarChar(4)
+  ZipCode         String                         @default("") @db.VarChar(10)
+  AddressDo       String?                        @db.VarChar(20)
+  AddressSi       String?                        @db.VarChar(30)
+  AddressDong     String?                        @db.VarChar(50)
+  AddressEtc      String?                        @db.VarChar(100)
+  Address         String?                        @db.VarChar(255)
+  Email           String?                        @db.VarChar(255)
+  Access          Int                            @default(21) @db.UnsignedTinyInt
+  Block           Player_pos_bagunca_Block?      @default(ALLOW)
+  LoginIP         String?                        @db.VarChar(15)
+  NewsLetter      String?                        @default(dbgenerated("1"))
+  ParentName      String?                        @db.VarChar(20)
+  ParentJuminNo   String?                        @db.VarChar(20)
+  ParentPhone1    String?                        @db.VarChar(13)
+  ParentPhone2    String                         @default("") @db.VarChar(4)
+  ParentPhone3    String                         @default("") @db.VarChar(4)
+  LastLoginDate   DateTime?                      @db.DateTime(0)
+  SecederDate     DateTime?                      @db.DateTime(0)
+  PayPlayDate     DateTime?                      @db.DateTime(0)
+  PayPlayHours    Int?                           @default(0) @db.UnsignedInt
+  RegDate         DateTime                       @default(dbgenerated("'0001-01-01 00:00:00'")) @db.DateTime(0)
+  OldBlock        Player_pos_bagunca_OldBlock    @default(ALLOW)
+  ssoChk          String?                        @db.Char(1)
+  AuthCheck       Player_pos_bagunca_AuthCheck   @default(AUTH_OK)
+  AuthTimeLimit   DateTime                       @default(dbgenerated("'0001-01-01 00:00:00'")) @db.DateTime(0)
+  LoginState      Boolean                        @default(false)
+  personal_auth   String?                        @default("N") @db.Char(1)
+  Accesschecktype Int?                           @default(0)
+  avatar          String                         @default("0") @db.VarChar(255)
+  IP              String?                        @db.VarChar(255)
+  token           String?                        @db.VarChar(255)
+  isValidateToken Int                            @default(0)
+  PlayTime        Int?                           @default(0)
+  OnPoints        String?                        @default("1") @db.VarChar(255)
+  TelePhone2      String?                        @db.VarChar(4)
+  TelePhone3      String?                        @db.VarChar(4)
+  JobType         String?                        @db.Char(2)
+  affiliate_id    Int?
+
+  @@id([id_idx, RegDate])
+  @@index([Name], map: "Name")
+  @@index([RegDate], map: "RegDate")
+  @@index([JuminNo, Block, id_idx], map: "g_JuminNo")
+  @@index([PlayerID, JuminNo, Block, RegDate], map: "p_index1")
+}
+
+model buycash {
+  id       Int    @id @default(autoincrement())
+  Login    String @db.VarChar(32)
+  serial   String @db.VarChar(50)
+  status   Int    @default(0)
+  type     Int
+  method   Int
+  itemid   Int
+  quantity Int
+  date     String @db.VarChar(32)
+}
+
+model code_promo {
+  code      String? @db.VarChar(255)
+  pts_bonus String? @db.VarChar(255)
+  id_use    String? @db.VarChar(255)
+
+  @@ignore
+}
+
+model general_config {
+  id         Int       @id @default(autoincrement())
+  key        String?   @db.Text
+  value      String?   @db.Text
+  updated_at DateTime? @db.Timestamp(0)
+  created_at DateTime? @db.Timestamp(0)
+}
+
+model log_change_nick {
+  player_id Int
+  old_name  String    @db.VarChar(255)
+  new_name  String    @db.VarChar(255)
+  date      DateTime? @db.DateTime(0)
+
+  @@ignore
+}
+
+model player_prizes {
+  id         Int       @id @default(autoincrement())
+  prize_idx  Int?
+  to_idx     Int?
+  from_idx   Int?
+  hero_order Int?
+  created_at DateTime? @default(now()) @db.Timestamp(0)
+  obtained   Int?      @db.TinyInt
+  new_date   DateTime? @db.Timestamp(0)
+}
+
+model player_wait {
+  PlayerID     String               @id @default("") @db.VarChar(12)
+  id_idx       Int                  @default(0)
+  Block        player_wait_Block    @default(ALLOW)
+  SecederDate  DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  HandlingDate DateTime             @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  OldBlock     player_wait_OldBlock @default(ALLOW)
+}
+
+model prizes {
+  id                Int     @id @default(autoincrement())
+  name              String? @db.Text
+  description       String? @db.Text
+  requirements_text String? @db.Text
+  quantity          Int?
+  img               String? @db.Text
+  item_id           Int?
+  required_level    Int?
+  quests_ids        String? @db.Text
+  items_ids         String? @db.Text
+  cores_ids         String? @db.Text
+}
+
+model transaction_items {
+  id             Int       @id @default(autoincrement())
+  transaction_id Int?
+  mall_id        Int?
+  item_id        Int?
+  item           String?   @db.VarChar(255)
+  price          Decimal?  @db.Decimal(10, 2)
+  quantity       Int?
+  real_money     Int?      @db.TinyInt
+  callback       String?   @db.Text
+  created_at     DateTime? @db.Timestamp(0)
+}
+
+model transactions {
+  id                         Int       @id @default(autoincrement())
+  PlayerID                   String?   @db.VarChar(255)
+  amount                     Float?    @db.Float
+  donation_spent             Float?    @db.Float
+  donation_before            Float?    @db.Float
+  currency                   String?   @db.VarChar(10)
+  gateway                    String?   @db.VarChar(50)
+  sub_acquirer               String?   @db.VarChar(50)
+  payment_method             String?   @db.VarChar(50)
+  status                     Int?      @db.TinyInt
+  centavo                    Int?      @db.TinyInt
+  transaction_details        String?   @db.Text
+  created_at                 DateTime? @db.Timestamp(0)
+  updated_at                 DateTime? @db.Timestamp(0)
+  donation_point_equivalency Float?    @default(0)
+}
+
+model transfered_donation_points {
+  id          Int       @id @default(autoincrement())
+  fromIdx     String?   @db.VarChar(255)
+  fromIdxName String?   @db.VarChar(255)
+  toIdx       String?   @db.VarChar(255)
+  toIdxName   String?   @db.VarChar(255)
+  quantity    Int?      @db.UnsignedInt
+  created_at  DateTime? @db.Timestamp(0)
+  fromName    String?   @db.Text
+  toName      String?   @db.Text
+}
+
+enum player_wait_Block {
+  ALLOW
+  GAME
+  WEB
+  SUM
+  SECEDER
+  WAIT
+}
+
+enum player_wait_OldBlock {
+  ALLOW
+  GAME
+  WEB
+  SUM
+  SECEDER
+  WAIT
+}
+
+enum Distraint2_BlockType {
+  WEB
+  GAME
+  SUM
+}
+
+enum Distraint2_Access {
+  ALLOW
+  DENY
+}
+
+enum Management_Flag {
+  Y
+  N
+}
+
+enum Distraint2_B_Flag {
+  Y
+  N
+}
+
+enum Player_Block {
+  ALLOW
+  GAME
+  WEB
+  SUM
+  SECEDER
+  WAIT
+}
+
+enum Player_pos_bagunca_Block {
+  ALLOW
+  GAME
+  WEB
+  SUM
+  SECEDER
+  WAIT
+}
+
+enum Player2_Block {
+  ALLOW
+  GAME
+  WEB
+  SUM
+  SECEDER
+  WAIT
+}
+
+enum Player_OldBlock {
+  ALLOW
+  GAME
+  WEB
+  SUM
+  SECEDER
+  WAIT
+}
+
+enum Player_pos_bagunca_OldBlock {
+  ALLOW
+  GAME
+  WEB
+  SUM
+  SECEDER
+  WAIT
+}
+
+enum Player2_OldBlock {
+  ALLOW
+  GAME
+  WEB
+  SUM
+  SECEDER
+  WAIT
+}
+
+enum Player_AuthCheck {
+  AUTH_OK
+  AUTH_WAIT
+  AUTH_CHECK
+}
+
+enum Player_pos_bagunca_AuthCheck {
+  AUTH_OK
+  AUTH_WAIT
+  AUTH_CHECK
+}
+
+enum Player2_AuthCheck {
+  AUTH_OK
+  AUTH_WAIT
+  AUTH_CHECK
+}
