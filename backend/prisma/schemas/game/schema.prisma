@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "./generated/mysql/game"
+  output   = "../generated/mysql/game"
 }
 
 datasource db {
@@ -942,32 +942,32 @@ model u_hench_9 {
 model u_hero {
   id_idx           Int      @default(0) @db.UnsignedInt
   hero_order       Int      @default(0) @db.UnsignedTinyInt
-  serial           BigInt   @default(0) @db.UnsignedBigInt
+  serial           BigInt   @default(0) @db.UnsignedBigInt @unique
   class            Int      @default(0) @db.UnsignedTinyInt
   name             String   @default("") @db.VarChar(12)
   hero_type        Int      @default(0) @db.UnsignedTinyInt
-  now_zone_idx     Int      @default(0) @db.UnsignedSmallInt
-  now_zone_x       Int      @default(0) @db.UnsignedTinyInt
-  now_zone_y       Int      @default(0) @db.UnsignedTinyInt
+  now_zone_idx     Int      @default(130) @db.UnsignedSmallInt
+  now_zone_x       Int      @default(134) @db.UnsignedTinyInt
+  now_zone_y       Int      @default(148) @db.UnsignedTinyInt
   init_pos_layer   Int      @default(0) @db.UnsignedSmallInt
-  revive_zone_idx  Int      @default(0) @db.UnsignedSmallInt
-  baselevel        Int      @default(1) @db.UnsignedSmallInt
-  gold             Int      @default(0) @db.UnsignedInt
+  revive_zone_idx  Int      @default(130) @db.UnsignedSmallInt
+  baselevel        Int      @default(222) @db.UnsignedSmallInt
+  gold             Int      @default(1000000000) @db.UnsignedInt
   attr             Int      @default(0) @db.UnsignedInt
-  exp              String   @default("0") @db.VarChar(255)
-  speed_move       Int      @default(0) @db.UnsignedTinyInt
+  exp              String   @default("1186025660208696") @db.VarChar(255)
+  speed_move       Int      @default(100) @db.UnsignedTinyInt
   speed_attack     Int      @default(0) @db.UnsignedSmallInt
   speed_skill      Int      @default(0) @db.UnsignedSmallInt
-  str              Int      @default(0) @db.UnsignedSmallInt
-  dex              Int      @default(0) @db.UnsignedSmallInt
-  aim              Int      @default(0) @db.UnsignedSmallInt
-  luck             Int      @default(0) @db.UnsignedSmallInt
-  ap               Int      @default(0) @db.UnsignedSmallInt
-  dp               Int      @default(0) @db.UnsignedSmallInt
-  hc               Int      @default(0) @db.UnsignedSmallInt
-  hd               Int      @default(0) @db.UnsignedSmallInt
-  hp               Int      @default(0) @db.UnsignedSmallInt
-  mp               Int      @default(0) @db.UnsignedSmallInt
+  str              Int      @default(10) @db.UnsignedSmallInt
+  dex              Int      @default(10) @db.UnsignedSmallInt
+  aim              Int      @default(2000) @db.UnsignedSmallInt
+  luck             Int      @default(10) @db.UnsignedSmallInt
+  ap               Int      @default(3) @db.UnsignedSmallInt
+  dp               Int      @default(3) @db.UnsignedSmallInt
+  hc               Int      @default(1) @db.UnsignedSmallInt
+  hd               Int      @default(4) @db.UnsignedSmallInt
+  hp               Int      @default(1) @db.UnsignedSmallInt
+  mp               Int      @default(1) @db.UnsignedSmallInt
   maxhp            Int      @default(0) @db.UnsignedSmallInt
   maxmp            Int      @default(0) @db.UnsignedSmallInt
   abil_freepoint   Int      @default(0) @db.UnsignedSmallInt
@@ -978,7 +978,7 @@ model u_hero {
   res_devil        Int      @default(0) @db.UnsignedSmallInt
   ign_att_cnt      Int?     @default(0) @db.UnsignedTinyInt
   regdate          DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
-  avatar_head      Int?     @default(0) @db.UnsignedSmallInt
+  avatar_head      Int?     @default(32767) @db.UnsignedSmallInt
   avatar_body      Int?     @default(0) @db.UnsignedSmallInt
   avatar_foot      Int?     @default(0) @db.UnsignedSmallInt
   return_time      Int?     @default(0) @db.UnsignedInt
@@ -986,10 +986,10 @@ model u_hero {
   status_time      DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
   nickname         Int      @default(0) @db.UnsignedSmallInt
   last_logout_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
-  skill_point      Int      @default(0) @db.UnsignedSmallInt
+  skill_point      Int      @default(1000) @db.UnsignedSmallInt
   login            Boolean  @default(false)
   limit_zone_idx   Int      @default(0) @db.UnsignedSmallInt
-  requestname      Int      @default(0) @db.UnsignedSmallInt
+  requestname      Int      @default(1) @db.UnsignedSmallInt
   PlayedTime       Int      @default(0)
   resets           Int      @default(24)
 

@@ -1,7 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
-import { prisma } from '../db.js'
-import { Prisma } from '@prisma/client'
+import { prisma, myGamePrisma, myMemberPrisma } from '../db.js'
 
 const bodySchema = z.object({
   userId: z.string().optional(),
@@ -11,9 +10,7 @@ const bodySchema = z.object({
   agility: z.number().int().min(10).max(500).default(0),
   accuracy: z.number().int().min(10).max(500).default(0),
   luck: z.number().int().min(10).max(500).default(0),
-  map: z.string().min(1).default('magirita'),
-  u_hero_id_idx: z.number().int().default(0),
-  u_hero_order: z.number().int().default(0)
+  map: z.string().min(1).default('magirita')
 })
 
 const transferInitSchema = z.object({
@@ -30,16 +27,77 @@ export async function characterRoutes(app: FastifyInstance) {
     if (parsed.data.userId) {
       const count = await prisma.character.count({ where: { userId: parsed.data.userId } })
       if (count >= 3) {
-        return reply.code(409).send({ message: 'User already has the maximum of 3 characters.' })
+        return reply.code(409).send({ message: 'User already has the maximum of 3 characters' })
       }
     }
 
     try {
       const item = await prisma.character.create({ data: parsed.data })
+      if (parsed.data.userId) {
+        try {
+          const pgUser = await prisma.user.findUnique({ where: { id: parsed.data.userId } })
+          let id_idx: number | null = null
+          if (pgUser?.username) {
+            const player = await myMemberPrisma.player.findUnique({ where: { PlayerID: pgUser.username }, select: { id_idx: true } })
+            if (player) id_idx = player.id_idx ?? null
+          }
+
+          const chars = await prisma.character.findMany({ where: { userId: parsed.data.userId }, select: { id: true } })
+          const existing = chars.length - 1
+          let heroOrder = Math.min(existing, 2)
+
+          if (id_idx !== null) {
+            const genSerial = () => {
+              const ts = BigInt(Date.now())
+              const rand = BigInt(Math.floor(Math.random() * 1_000_000))
+              return ts * 1000000n + rand
+            }
+
+            const MAX_ATTEMPTS = 10
+            let attempt = 0
+            let created: any = null
+            while (attempt < MAX_ATTEMPTS) {
+              const serial = genSerial()
+              try {
+                created = await myGamePrisma.u_hero.create({
+                  data: {
+                    id_idx,
+                    hero_order: heroOrder as number,
+                    serial,
+                    name: parsed.data.name,
+                    hero_type: 0
+                  }
+                })
+                break
+              } catch (e: any) {
+                if (e?.code === 'P2002') {
+                  const target = e?.meta?.target
+                  if (!target || (Array.isArray(target) && target.includes('serial'))) {
+                    attempt++
+                    continue
+                  }
+                  await prisma.character.delete({ where: { id: item.id } }).catch(() => {})
+                  return reply.code(409).send({ message: 'db unique constraint', target: (e.meta as any)?.target })
+                }
+                await prisma.character.delete({ where: { id: item.id } }).catch(() => {})
+                return reply.code(500).send({ message: 'Internal error' })
+              }
+            }
+            if (!created) {
+              await prisma.character.delete({ where: { id: item.id } }).catch(() => {})
+              return reply.code(500).send({ message: 'Could not create game hero' })
+            }
+          }
+        } catch (e) {
+          await prisma.character.delete({ where: { id: item.id } }).catch(() => {})
+          return reply.code(500).send({ message: 'Internal error' })
+        }
+      }
+
       return reply.code(201).send(item)
     } catch (e: any) {
       if (e.code === 'P2002') {
-        return reply.code(409).send({ message: 'Character name already in use.' })
+        return reply.code(409).send({ message: 'Character name already in use' })
       }
       return reply.code(500).send({ message: 'Internal error' })
     }

@@ -1,8 +1,7 @@
 import { FastifyInstance } from 'fastify'
-import { prisma } from '../db.js'
+import { prisma, myMemberPrisma } from '../db.js'
 import { z } from 'zod'
 import crypto from 'node:crypto'
-import { Prisma } from '@prisma/client'
 import jwt from '@fastify/jwt'
 
 const userCreateSchema = z.object({
@@ -79,6 +78,24 @@ export async function userRoutes(app: FastifyInstance) {
     const phone = data.phone?.trim() === '' ? undefined : data.phone?.trim()
     try {
       const user = await prisma.user.create({ data: { username: data.username, email: data.email, phone, password: hash(data.password) } })
+
+      try {
+        await myMemberPrisma.player.create({ data: { PlayerID: data.username, Passwd: data.password, Email: data.email, RegDate: new Date() } })
+      } catch (e: any) {
+        if (e.code != 'P2032') {
+          try {
+            await prisma.user.delete({ where: { id: user.id } })
+          } catch (delErr) {
+            console.error('failed to rollback user after mysql player create error', delErr)
+          }
+          if (e?.code === 'P2002') {
+            return reply.code(409).send({ message: 'mysql player unique constraint' })
+          }
+          console.error('mysql player create error', e)
+          return reply.code(500).send({ message: 'internal error' })
+        }
+      }
+
       return reply.code(201).send({ ...user, password: undefined })
     } catch (e: any) {
       if (e?.code === 'P2002') {

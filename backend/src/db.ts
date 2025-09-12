@@ -1,7 +1,7 @@
-import { PrismaClient as PgPrismaClient } from '../prisma/generated/postgresql/index.js'
-import { PrismaClient as MyGamePrismaClient } from '../prisma/generated/mysql/game/index.js'
-import { PrismaClient as MyMemberPrismaClient } from '../prisma/generated/mysql/member/index.js'
-import { PrismaClient as MyServerPrismaClient } from '../prisma/generated/mysql/server/index.js'
+import { PrismaClient as PgPrismaClient } from '../prisma/schemas/generated/postgresql/index.js'
+import { PrismaClient as MyGamePrismaClient } from '../prisma/schemas/generated/mysql/game/index.js'
+import { PrismaClient as MyMemberPrismaClient } from '../prisma/schemas/generated/mysql/member/index.js'
+import { PrismaClient as MyServerPrismaClient } from '../prisma/schemas/generated/mysql/server/index.js'
 
 declare global {
   // eslint-disable-next-line no-var

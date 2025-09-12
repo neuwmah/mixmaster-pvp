@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "./generated/mysql/member"
+  output   = "../generated/mysql/member"
 }
 
 datasource db {
@@ -106,7 +106,7 @@ model Player {
   Access          Int                @default(21) @db.UnsignedTinyInt
   Block           Player_Block?      @default(ALLOW)
   LoginIP         String?            @db.VarChar(15)
-  NewsLetter      String?            @default(dbgenerated("1"))
+  NewsLetter      String?            @default("1") @db.Char(1)
   ParentName      String?            @db.VarChar(20)
   ParentJuminNo   String?            @db.VarChar(20)
   ParentPhone1    String?            @db.VarChar(13)
@@ -173,7 +173,7 @@ model Player2 {
   Access           Int?                @default(21) @db.UnsignedTinyInt
   Block            Player2_Block?      @default(ALLOW)
   LoginIP          String?             @db.VarChar(15)
-  NewsLetter       String?             @default(dbgenerated("1"))
+  NewsLetter       String?             @default("1") @db.Char(1)
   ParentName       String?             @db.VarChar(20)
   ParentJuminNo    String?             @db.VarChar(20)
   ParentPhone1     String?             @db.VarChar(13)
@@ -251,7 +251,7 @@ model Player_pos_bagunca {
   Access          Int                            @default(21) @db.UnsignedTinyInt
   Block           Player_pos_bagunca_Block?      @default(ALLOW)
   LoginIP         String?                        @db.VarChar(15)
-  NewsLetter      String?                        @default(dbgenerated("1"))
+  NewsLetter      String?                        @default("1") @db.Char(1)
   ParentName      String?                        @db.VarChar(20)
   ParentJuminNo   String?                        @db.VarChar(20)
   ParentPhone1    String?                        @db.VarChar(13)
