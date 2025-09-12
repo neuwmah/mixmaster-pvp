@@ -2,7 +2,7 @@
 import React, { useState, useMemo } from 'react'
 import Image from 'next/image'
 
-import PetInline from '@/app/account/components/characters/hench/pets/Inline'
+import PetInline from '@/app/account/components/hench/pets/Inline'
 
 import { Hench } from '@/types/hench'
 

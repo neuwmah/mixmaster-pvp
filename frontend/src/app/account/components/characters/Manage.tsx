@@ -6,7 +6,7 @@ import Card from '@/app/account/components/characters/manage/Card'
 import { Character } from '@/types/character'
 
 interface ManageProps {
-  characters: Character[]
+  characters: Character[] | undefined
   setCreate: (value: boolean) => void
   setPetsList: (value: Character | undefined) => void
 }
@@ -14,7 +14,7 @@ interface ManageProps {
 export default function Manage({ characters, setCreate, setPetsList }: ManageProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
 
-  return (
+  return characters != undefined && (
     <div className="manage w-full flex flex-col items-center">
       <div
         className={`

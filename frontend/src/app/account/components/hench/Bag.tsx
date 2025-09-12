@@ -1,6 +1,6 @@
 import React from 'react'
 
-import PetInline from '@/app/account/components/characters/hench/pets/Inline'
+import PetInline from '@/app/account/components/hench/pets/Inline'
 
 import { Character } from '@/types/character'
 

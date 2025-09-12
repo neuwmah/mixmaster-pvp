@@ -1,80 +1,32 @@
 "use client"
-import React, { useEffect, useState, useRef } from 'react'
-import type { Swiper as SwiperType } from 'swiper'
+import React from 'react'
 
-import Manage from '@/app/account/components/characters/Manage'
-import Create from '@/app/account/components/characters/Create'
-import HenchManage from '@/app/account/components/characters/HenchManage'
-import HenchCreate from '@/app/account/components/characters/HenchCreate'
-import Background from '@/app/account/components/characters/create/Background'
 import PendingTransfers from '@/app/account/components/characters/PendingTransfers'
+import Manage from '@/app/account/components/characters/Manage'
 
 import { User } from '@/types/user'
 import { Character } from '@/types/character'
-import { Hench } from '@/types/hench'
 
 interface CharactersProps {
-  user: User;
+  user: User
+  setPetsList: (value: Character | undefined) => void
+  handleSetCreate: (value: boolean) => void
 }
 
-export default function Characters({ user }: CharactersProps) {
-  const [create, setCreate] = useState(false)
-  const [petsList, setPetsList] = useState<Character | undefined>(undefined)
-  const [henchList, setHenchList] = useState<Hench[]>([])
-  const [henchListDisplay, setHenchListDisplay] = useState(false)
-  const backgroundRef = useRef<SwiperType | null>(null)
-  const userActionRef = useRef(false)
-  const initialRenderRef = useRef(true)
-
-  const handleSetCreate = (value: boolean) => {
-    userActionRef.current = true
-    setCreate(value)
-  }
-
-  useEffect(() => {
-    setCreate(false)
-  }, [])
-
-  useEffect(() => {
-    if (initialRenderRef.current) {
-      initialRenderRef.current = false
-      userActionRef.current = false
-      return
-    }
-    if (!userActionRef.current) return
-    userActionRef.current = false
-  }, [create])
-
+export default function Characters({ user, setPetsList, handleSetCreate }: CharactersProps) {
   return (
-    <section key={user.id} className="section-characters section overflow-hidden my-[0!important] py-20 sm:py-32 scroll-mt-20 sm:scroll-mt-32">
-      {(!user.characters?.length || create) &&
-        <Background backgroundRef={backgroundRef} />
-      }
-
+    <section className="section-characters section overflow-hidden my-[0!important] py-20 sm:py-32 scroll-mt-20 sm:scroll-mt-32">
       <div className="container flex-col items-center z-1 relative">
-
         <h2 className="title">
           Characters 👥
         </h2>
 
-        <p className={`text-big text-center mt-6 ${!user.characters?.length && 'max-w-[24rem] sm:max-w-[100%]'}`}>
-          {user.characters?.length
-            ? `Check your account characters below.`
-            : `No characters yet. You can create a new one below.`
-          }
+        <p className={`text-big text-center mt-6`}>
+          Check your account characters below.
         </p>
 
         <PendingTransfers userId={user.id} />
-
-        {!user.characters?.length || create
-          ? <Create user={user} create={create} setCreate={handleSetCreate} setPetsList={setPetsList} backgroundRef={backgroundRef} />
-          : henchList.length > 0 && henchListDisplay
-            ? <HenchCreate character={petsList} henches={henchList} setPetsList={setPetsList} setHenchListDisplay={setHenchListDisplay} />
-            : petsList != undefined
-              ? <HenchManage character={petsList} henches={henchList} setPetsList={setPetsList} setHenchList={setHenchList} setHenchListDisplay={setHenchListDisplay} />
-              : <Manage characters={user.characters} setCreate={handleSetCreate} setPetsList={setPetsList} />
-        }
-
+        <Manage characters={user.characters} setCreate={handleSetCreate} setPetsList={setPetsList} />
       </div>
 
       <svg className="absolute top-0 left-0 w-full pointer-events-none z-1 rotate-[180deg]" viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg">

@@ -1,17 +1,15 @@
-import React from 'react';
+import React from 'react'
 
-import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 import createApiClient from '@/hooks/axios'
 
-import Admin from '@/app/account/components/Admin';
-import Details from '@/app/account/components/Details';
-import Characters from '@/app/account/components/Characters';
-import News from '@/app/home/News';
+import Router from '@/app/account/components/Router'
+import News from '@/app/home/News'
 
 export default async function AccountPage() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get('sessionToken')?.value;
+  const cookieStore = await cookies()
+  const token = cookieStore.get('sessionToken')?.value
 
   if (!token)
     return redirect('/account/signin')
@@ -24,15 +22,13 @@ export default async function AccountPage() {
 
     return (
       <main>
-        {userData.is_admin && <Admin /> }
-        <Details user={userData} />
-        <Characters user={userData} />
+        <Router user={userData} />
         {userData.is_admin && <News account={true} /> }
       </main>
     )
 
   } catch (error) {
-    console.error('auth/me failed', error);
+    console.error('auth/me failed', error)
     return redirect('/account/signin')
   }
 }

@@ -48,3 +48,4 @@ next-env.d.ts
 /frontend/node_modules
 /frontend/.env
 /frontend/.next
+/frontend/**/henchwebp

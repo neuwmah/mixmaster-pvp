@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import PetCard from '@/app/account/components/characters/hench/pets/Card'
+import PetCard from '@/app/account/components/hench/pets/Card'
 
 import { Character } from '@/types/character'
 import { Pet } from '@/types/pet'
