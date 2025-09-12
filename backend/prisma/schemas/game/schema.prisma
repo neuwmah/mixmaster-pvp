@@ -946,15 +946,15 @@ model u_hero {
   class            Int      @default(0) @db.UnsignedTinyInt
   name             String   @default("") @db.VarChar(12)
   hero_type        Int      @default(0) @db.UnsignedTinyInt
-  now_zone_idx     Int      @default(130) @db.UnsignedSmallInt
-  now_zone_x       Int      @default(134) @db.UnsignedTinyInt
-  now_zone_y       Int      @default(148) @db.UnsignedTinyInt
+  now_zone_idx     Int      @default(70) @db.UnsignedSmallInt
+  now_zone_x       Int      @default(133) @db.UnsignedTinyInt
+  now_zone_y       Int      @default(97) @db.UnsignedTinyInt
   init_pos_layer   Int      @default(0) @db.UnsignedSmallInt
-  revive_zone_idx  Int      @default(130) @db.UnsignedSmallInt
+  revive_zone_idx  Int      @default(70) @db.UnsignedSmallInt
   baselevel        Int      @default(222) @db.UnsignedSmallInt
   gold             Int      @default(1000000000) @db.UnsignedInt
   attr             Int      @default(0) @db.UnsignedInt
-  exp              String   @default("1186025660208696") @db.VarChar(255)
+  exp              String   @default("1169614056802222") @db.VarChar(255)
   speed_move       Int      @default(100) @db.UnsignedTinyInt
   speed_attack     Int      @default(0) @db.UnsignedSmallInt
   speed_skill      Int      @default(0) @db.UnsignedSmallInt
@@ -966,8 +966,8 @@ model u_hero {
   dp               Int      @default(3) @db.UnsignedSmallInt
   hc               Int      @default(1) @db.UnsignedSmallInt
   hd               Int      @default(4) @db.UnsignedSmallInt
-  hp               Int      @default(1) @db.UnsignedSmallInt
-  mp               Int      @default(1) @db.UnsignedSmallInt
+  hp               Int      @default(35845) @db.UnsignedSmallInt
+  mp               Int      @default(20) @db.UnsignedSmallInt
   maxhp            Int      @default(0) @db.UnsignedSmallInt
   maxmp            Int      @default(0) @db.UnsignedSmallInt
   abil_freepoint   Int      @default(0) @db.UnsignedSmallInt
