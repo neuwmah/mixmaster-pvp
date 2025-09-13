@@ -8,15 +8,17 @@ import General from '@/app/account/components/hench/General'
 
 import { Character } from '@/types/character'
 import { Hench } from '@/types/hench'
+import { User } from '@/types/user'
 
 interface HenchCreateProps {
+  user: User
   henches: Hench[]
   character: Character | undefined
   setPetsList: (value: Character | undefined) => void
   setHenchListDisplay: (value: boolean) => void
 }
 
-export default function HenchCreate({ henches, character, setPetsList, setHenchListDisplay }: HenchCreateProps) {
+export default function HenchCreate({ user, henches, character, setPetsList, setHenchListDisplay }: HenchCreateProps) {
   const [selectedHench, setSelectedHench] = useState<string[]>([])
   const [sending, setSending] = useState(false)
   const router = useRouter()
@@ -28,6 +30,7 @@ export default function HenchCreate({ henches, character, setPetsList, setHenchL
     try {
       const result = await createPetsBulk(selectedHench.map(
         (hid) => ({ 
+          characterOrder: character ? user?.characters?.findIndex(c => c.id === character.id) : 0,
           characterId: character ? character.id : '',
           henchId: hid
         })

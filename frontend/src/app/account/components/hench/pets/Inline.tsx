@@ -84,7 +84,7 @@ export default function PetInline({ pet, hench, character, selectedHench = false
 
       <h3 className="text-sm font-semibold flex flex-col sm:block" title={hench?.name}>
         <span className={setSelectedHench && active ? 'underline' : ''}>
-          {pet ? pet.nickname : hench?.name}
+          {pet && pet.nickname ? pet.nickname : hench?.name}
         </span>
         <span className="text-xs font-normal sm:ml-[1.6rem]">
           Level {pet ? pet.level : hench?.start_base_level}

@@ -3,24 +3,25 @@ import React, { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Swiper as SwiperType } from 'swiper'
 
-import { createCharacter, getCharacter } from '@/app/api/character'
-import { createPetsBulk } from '@/app/api/pets'
+import { createCharacter } from '@/app/api/character'
+import { getHenchs } from '@/app/api/hench'
 
 import Background from '@/app/account/components/characters/Background'
 import Fields from '@/app/account/components/charactersCreate/Fields'
 import Jobs from '@/app/account/components/charactersCreate/Jobs'
 
 import { User } from '@/types/user'
-import { Character } from '@/types/character'
+import { Hench } from '@/types/hench'
 
 interface CharactersCreateProps {
   user: User
   create: boolean
   setCreate: (value: boolean) => void
-  setPetsList: (value: Character | undefined) => void
+  setHenchList: (value: Hench[]) => void
+  setHenchListDisplay: (value: boolean) => void
 }
 
-export default function CharactersCreate({ user, create, setCreate, setPetsList }: CharactersCreateProps) {
+export default function CharactersCreate({ user, create, setCreate, setHenchList, setHenchListDisplay }: CharactersCreateProps) {
   const [name, setName] = useState('')
   const [job, setJob] = useState('ditt')
   const [attributes, setAttributes] = useState({ energy: 10, agility: 10, accuracy: 10, luck: 10 })
@@ -50,29 +51,10 @@ export default function CharactersCreate({ user, create, setCreate, setPetsList 
         alert(result.error || 'Create error.')
         setTimeout(() => setErrorMessage(''), 2500)
       } else {
-        const createdChar = result.data
-        const henchIds = [
-          'cmf5rubal0000oxrl3qlthug8',
-          'cmf5u1umf000g111c4rdna21w',
-          'cmf5u4b93000h111c551i192k'
-        ]
-        try {
-          await createPetsBulk(henchIds.map(
-            (hid, idx) => ({ 
-              characterId: createdChar.id,
-              henchId: hid,
-              slot: idx, 
-              in_party: true
-            })
-          ))
-        } catch {}
-
-        let updatedCharacter: Character | null = null
-        try { updatedCharacter = await getCharacter(createdChar.id) } catch {}
-
-        await new Promise(r => setTimeout(r, 120))
+        const currentHenches = await getHenchs()
         setCreate(false)
-        setPetsList(updatedCharacter || createdChar)
+        setHenchList(currentHenches)
+        setHenchListDisplay(true)
         router.refresh()
       }
     } catch {

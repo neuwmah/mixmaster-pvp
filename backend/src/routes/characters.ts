@@ -45,7 +45,7 @@ export async function characterRoutes(app: FastifyInstance) {
           const chars = await prisma.character.findMany({ where: { userId: parsed.data.userId }, select: { id: true } })
           const existing = chars.length - 1
           let heroOrder = Math.min(existing, 2)
-
+ 
           if (id_idx !== null) {
             const genSerial = () => {
               const ts = BigInt(Date.now())

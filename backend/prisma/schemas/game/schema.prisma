@@ -400,43 +400,43 @@ model u_guildmember {
 }
 
 model u_hench_0 {
-  id_idx          Int      @default(0) @db.UnsignedInt
-  hero_order      Int      @default(0) @db.UnsignedTinyInt
-  serial          BigInt   @default(0) @db.UnsignedBigInt
-  position        Int      @default(0) @db.UnsignedTinyInt
-  hench_order     Int      @default(0) @db.UnsignedTinyInt
-  monster_type    Int      @default(0) @db.UnsignedSmallInt
-  name            String   @default("") @db.VarChar(255)
+  id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
+  hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
+  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
+  hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
+  monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
+  name            String   @default("") @db.VarChar(255) // s_monster name field
   sex             Int      @default(0) @db.UnsignedTinyInt
-  state           Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt // 0:alive 1:dead
   mixnum          Int      @default(0) @db.UnsignedSmallInt
-  baselevel       Int      @default(0) @db.UnsignedSmallInt
-  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
-  exp             String   @default("0") @db.VarChar(255)
-  speed_move      Int      @default(0) @db.UnsignedTinyInt
-  speed_attack    Int      @default(0) @db.UnsignedSmallInt
-  speed_skill     Int      @default(0) @db.UnsignedSmallInt
-  str             Int      @default(0) @db.UnsignedSmallInt
-  dex             Int      @default(0) @db.UnsignedSmallInt
-  aim             Int      @default(0) @db.UnsignedSmallInt
-  luck            Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level
+  max_baselevel   Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level +25
+  exp             String   @default("9070000319418083328") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt // s_monster field
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  str             Int      @default(3416) @db.UnsignedSmallInt
+  dex             Int      @default(1648) @db.UnsignedSmallInt
+  aim             Int      @default(3080) @db.UnsignedSmallInt
+  luck            Int      @default(2590) @db.UnsignedSmallInt
   ap              Int      @default(0) @db.UnsignedSmallInt
   dp              Int      @default(0) @db.UnsignedSmallInt
   hc              Int      @default(0) @db.UnsignedSmallInt
   hd              Int      @default(0) @db.UnsignedSmallInt
-  hp              Int      @default(0) @db.UnsignedSmallInt
-  mp              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(65535) @db.UnsignedSmallInt
+  mp              Int      @default(2600) @db.UnsignedSmallInt
   maxhp           Int      @default(0) @db.UnsignedSmallInt
   maxmp           Int      @default(0) @db.UnsignedSmallInt
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(0) @db.UnsignedTinyInt
-  race_val        Int      @default(0) @db.UnsignedSmallInt
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
-  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
   item_idx_0      Int      @default(0) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
   item_duration_0 Int      @default(0) @db.UnsignedInt
@@ -454,43 +454,43 @@ model u_hench_0 {
 }
 
 model u_hench_1 {
-  id_idx          Int      @default(0) @db.UnsignedInt
-  hero_order      Int      @default(0) @db.UnsignedTinyInt
-  serial          BigInt   @default(0) @db.UnsignedBigInt
-  position        Int      @default(0) @db.UnsignedTinyInt
-  hench_order     Int      @default(0) @db.UnsignedTinyInt
-  monster_type    Int      @default(0) @db.UnsignedSmallInt
-  name            String   @default("") @db.VarChar(255)
+  id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
+  hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
+  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
+  hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
+  monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
+  name            String   @default("") @db.VarChar(255) // s_monster name field
   sex             Int      @default(0) @db.UnsignedTinyInt
-  state           Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt // 0:alive 1:dead
   mixnum          Int      @default(0) @db.UnsignedSmallInt
-  baselevel       Int      @default(0) @db.UnsignedSmallInt
-  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
-  exp             String   @default("0") @db.VarChar(255)
-  speed_move      Int      @default(0) @db.UnsignedTinyInt
-  speed_attack    Int      @default(0) @db.UnsignedSmallInt
-  speed_skill     Int      @default(0) @db.UnsignedSmallInt
-  str             Int      @default(0) @db.UnsignedSmallInt
-  dex             Int      @default(0) @db.UnsignedSmallInt
-  aim             Int      @default(0) @db.UnsignedSmallInt
-  luck            Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level
+  max_baselevel   Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level +25
+  exp             String   @default("9070000319418083328") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt // s_monster field
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  str             Int      @default(3416) @db.UnsignedSmallInt
+  dex             Int      @default(1648) @db.UnsignedSmallInt
+  aim             Int      @default(3080) @db.UnsignedSmallInt
+  luck            Int      @default(2590) @db.UnsignedSmallInt
   ap              Int      @default(0) @db.UnsignedSmallInt
   dp              Int      @default(0) @db.UnsignedSmallInt
   hc              Int      @default(0) @db.UnsignedSmallInt
   hd              Int      @default(0) @db.UnsignedSmallInt
-  hp              Int      @default(0) @db.UnsignedSmallInt
-  mp              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(65535) @db.UnsignedSmallInt
+  mp              Int      @default(2600) @db.UnsignedSmallInt
   maxhp           Int      @default(0) @db.UnsignedSmallInt
   maxmp           Int      @default(0) @db.UnsignedSmallInt
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(0) @db.UnsignedTinyInt
-  race_val        Int      @default(0) @db.UnsignedSmallInt
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
-  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
   item_idx_0      Int      @default(0) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
   item_duration_0 Int      @default(0) @db.UnsignedInt
@@ -508,43 +508,43 @@ model u_hench_1 {
 }
 
 model u_hench_2 {
-  id_idx          Int      @default(0) @db.UnsignedInt
-  hero_order      Int      @default(0) @db.UnsignedTinyInt
-  serial          BigInt   @default(0) @db.UnsignedBigInt
-  position        Int      @default(0) @db.UnsignedTinyInt
-  hench_order     Int      @default(0) @db.UnsignedTinyInt
-  monster_type    Int      @default(0) @db.UnsignedSmallInt
-  name            String   @default("") @db.VarChar(255)
+  id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
+  hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
+  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
+  hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
+  monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
+  name            String   @default("") @db.VarChar(255) // s_monster name field
   sex             Int      @default(0) @db.UnsignedTinyInt
-  state           Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt // 0:alive 1:dead
   mixnum          Int      @default(0) @db.UnsignedSmallInt
-  baselevel       Int      @default(0) @db.UnsignedSmallInt
-  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
-  exp             String   @default("0") @db.VarChar(255)
-  speed_move      Int      @default(0) @db.UnsignedTinyInt
-  speed_attack    Int      @default(0) @db.UnsignedSmallInt
-  speed_skill     Int      @default(0) @db.UnsignedSmallInt
-  str             Int      @default(0) @db.UnsignedSmallInt
-  dex             Int      @default(0) @db.UnsignedSmallInt
-  aim             Int      @default(0) @db.UnsignedSmallInt
-  luck            Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level
+  max_baselevel   Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level +25
+  exp             String   @default("9070000319418083328") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt // s_monster field
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  str             Int      @default(3416) @db.UnsignedSmallInt
+  dex             Int      @default(1648) @db.UnsignedSmallInt
+  aim             Int      @default(3080) @db.UnsignedSmallInt
+  luck            Int      @default(2590) @db.UnsignedSmallInt
   ap              Int      @default(0) @db.UnsignedSmallInt
   dp              Int      @default(0) @db.UnsignedSmallInt
   hc              Int      @default(0) @db.UnsignedSmallInt
   hd              Int      @default(0) @db.UnsignedSmallInt
-  hp              Int      @default(0) @db.UnsignedSmallInt
-  mp              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(65535) @db.UnsignedSmallInt
+  mp              Int      @default(2600) @db.UnsignedSmallInt
   maxhp           Int      @default(0) @db.UnsignedSmallInt
   maxmp           Int      @default(0) @db.UnsignedSmallInt
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(0) @db.UnsignedTinyInt
-  race_val        Int      @default(0) @db.UnsignedSmallInt
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
-  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
   item_idx_0      Int      @default(0) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
   item_duration_0 Int      @default(0) @db.UnsignedInt
@@ -562,43 +562,43 @@ model u_hench_2 {
 }
 
 model u_hench_3 {
-  id_idx          Int      @default(0) @db.UnsignedInt // from myMemberPrisma.player
-  hero_order      Int      @default(0) @db.UnsignedTinyInt // from user.characters index
-  serial          BigInt   @default(0) @db.UnsignedBigInt // random by js
+  id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
+  hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
+  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
   position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
-  hench_order     Int      @default(0) @db.UnsignedTinyInt // from character.pets length/in_party
-  monster_type    Int      @default(0) @db.UnsignedSmallInt // from s_monster
-  name            String   @default("") @db.VarChar(255) // from s_monster
+  hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
+  monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
+  name            String   @default("") @db.VarChar(255) // s_monster name field
   sex             Int      @default(0) @db.UnsignedTinyInt
-  state           Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt // 0:alive 1:dead
   mixnum          Int      @default(0) @db.UnsignedSmallInt
-  baselevel       Int      @default(0) @db.UnsignedSmallInt // from s_monster
-  max_baselevel   Int      @default(0) @db.UnsignedSmallInt // from s_monster +25
-  exp             String   @default("0") @db.VarChar(255)
-  speed_move      Int      @default(0) @db.UnsignedTinyInt // from s_monster
-  speed_attack    Int      @default(0) @db.UnsignedSmallInt // from s_monster
-  speed_skill     Int      @default(0) @db.UnsignedSmallInt // from s_monster
-  str             Int      @default(999) @db.UnsignedSmallInt
-  dex             Int      @default(999) @db.UnsignedSmallInt
-  aim             Int      @default(999) @db.UnsignedSmallInt
-  luck            Int      @default(999) @db.UnsignedSmallInt
+  baselevel       Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level
+  max_baselevel   Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level +25
+  exp             String   @default("9070000319418083328") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt // s_monster field
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  str             Int      @default(3416) @db.UnsignedSmallInt
+  dex             Int      @default(1648) @db.UnsignedSmallInt
+  aim             Int      @default(3080) @db.UnsignedSmallInt
+  luck            Int      @default(2590) @db.UnsignedSmallInt
   ap              Int      @default(0) @db.UnsignedSmallInt
   dp              Int      @default(0) @db.UnsignedSmallInt
   hc              Int      @default(0) @db.UnsignedSmallInt
   hd              Int      @default(0) @db.UnsignedSmallInt
-  hp              Int      @default(100000) @db.UnsignedSmallInt
-  mp              Int      @default(100000) @db.UnsignedSmallInt
+  hp              Int      @default(65535) @db.UnsignedSmallInt
+  mp              Int      @default(2600) @db.UnsignedSmallInt
   maxhp           Int      @default(0) @db.UnsignedSmallInt
   maxmp           Int      @default(0) @db.UnsignedSmallInt
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(1) @db.UnsignedTinyInt // nimble? etc.
-  race_val        Int      @default(0) @db.UnsignedSmallInt
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
-  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
   item_idx_0      Int      @default(0) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
   item_duration_0 Int      @default(0) @db.UnsignedInt
@@ -616,43 +616,43 @@ model u_hench_3 {
 }
 
 model u_hench_4 {
-  id_idx          Int      @default(0) @db.UnsignedInt
-  hero_order      Int      @default(0) @db.UnsignedTinyInt
-  serial          BigInt   @default(0) @db.UnsignedBigInt
-  position        Int      @default(0) @db.UnsignedTinyInt
-  hench_order     Int      @default(0) @db.UnsignedTinyInt
-  monster_type    Int      @default(0) @db.UnsignedSmallInt
-  name            String   @default("") @db.VarChar(255)
+  id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
+  hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
+  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
+  hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
+  monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
+  name            String   @default("") @db.VarChar(255) // s_monster name field
   sex             Int      @default(0) @db.UnsignedTinyInt
-  state           Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt // 0:alive 1:dead
   mixnum          Int      @default(0) @db.UnsignedSmallInt
-  baselevel       Int      @default(0) @db.UnsignedSmallInt
-  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
-  exp             String   @default("0") @db.VarChar(255)
-  speed_move      Int      @default(0) @db.UnsignedTinyInt
-  speed_attack    Int      @default(0) @db.UnsignedSmallInt
-  speed_skill     Int      @default(0) @db.UnsignedSmallInt
-  str             Int      @default(0) @db.UnsignedSmallInt
-  dex             Int      @default(0) @db.UnsignedSmallInt
-  aim             Int      @default(0) @db.UnsignedSmallInt
-  luck            Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level
+  max_baselevel   Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level +25
+  exp             String   @default("9070000319418083328") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt // s_monster field
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  str             Int      @default(3416) @db.UnsignedSmallInt
+  dex             Int      @default(1648) @db.UnsignedSmallInt
+  aim             Int      @default(3080) @db.UnsignedSmallInt
+  luck            Int      @default(2590) @db.UnsignedSmallInt
   ap              Int      @default(0) @db.UnsignedSmallInt
   dp              Int      @default(0) @db.UnsignedSmallInt
   hc              Int      @default(0) @db.UnsignedSmallInt
   hd              Int      @default(0) @db.UnsignedSmallInt
-  hp              Int      @default(0) @db.UnsignedSmallInt
-  mp              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(65535) @db.UnsignedSmallInt
+  mp              Int      @default(2600) @db.UnsignedSmallInt
   maxhp           Int      @default(0) @db.UnsignedSmallInt
   maxmp           Int      @default(0) @db.UnsignedSmallInt
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(0) @db.UnsignedTinyInt
-  race_val        Int      @default(0) @db.UnsignedSmallInt
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
-  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
   item_idx_0      Int      @default(0) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
   item_duration_0 Int      @default(0) @db.UnsignedInt
@@ -670,43 +670,43 @@ model u_hench_4 {
 }
 
 model u_hench_5 {
-  id_idx          Int      @default(0) @db.UnsignedInt
-  hero_order      Int      @default(0) @db.UnsignedTinyInt
-  serial          BigInt   @default(0) @db.UnsignedBigInt
-  position        Int      @default(0) @db.UnsignedTinyInt
-  hench_order     Int      @default(0) @db.UnsignedTinyInt
-  monster_type    Int      @default(0) @db.UnsignedSmallInt
-  name            String   @default("") @db.VarChar(255)
+  id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
+  hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
+  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
+  hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
+  monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
+  name            String   @default("") @db.VarChar(255) // s_monster name field
   sex             Int      @default(0) @db.UnsignedTinyInt
-  state           Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt // 0:alive 1:dead
   mixnum          Int      @default(0) @db.UnsignedSmallInt
-  baselevel       Int      @default(0) @db.UnsignedSmallInt
-  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
-  exp             String   @default("0") @db.VarChar(255)
-  speed_move      Int      @default(0) @db.UnsignedTinyInt
-  speed_attack    Int      @default(0) @db.UnsignedSmallInt
-  speed_skill     Int      @default(0) @db.UnsignedSmallInt
-  str             Int      @default(0) @db.UnsignedSmallInt
-  dex             Int      @default(0) @db.UnsignedSmallInt
-  aim             Int      @default(0) @db.UnsignedSmallInt
-  luck            Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level
+  max_baselevel   Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level +25
+  exp             String   @default("9070000319418083328") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt // s_monster field
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  str             Int      @default(3416) @db.UnsignedSmallInt
+  dex             Int      @default(1648) @db.UnsignedSmallInt
+  aim             Int      @default(3080) @db.UnsignedSmallInt
+  luck            Int      @default(2590) @db.UnsignedSmallInt
   ap              Int      @default(0) @db.UnsignedSmallInt
   dp              Int      @default(0) @db.UnsignedSmallInt
   hc              Int      @default(0) @db.UnsignedSmallInt
   hd              Int      @default(0) @db.UnsignedSmallInt
-  hp              Int      @default(0) @db.UnsignedSmallInt
-  mp              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(65535) @db.UnsignedSmallInt
+  mp              Int      @default(2600) @db.UnsignedSmallInt
   maxhp           Int      @default(0) @db.UnsignedSmallInt
   maxmp           Int      @default(0) @db.UnsignedSmallInt
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(0) @db.UnsignedTinyInt
-  race_val        Int      @default(0) @db.UnsignedSmallInt
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
-  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
   item_idx_0      Int      @default(0) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
   item_duration_0 Int      @default(0) @db.UnsignedInt
@@ -724,43 +724,43 @@ model u_hench_5 {
 }
 
 model u_hench_6 {
-  id_idx          Int      @default(0) @db.UnsignedInt
-  hero_order      Int      @default(0) @db.UnsignedTinyInt
-  serial          BigInt   @default(0) @db.UnsignedBigInt
-  position        Int      @default(0) @db.UnsignedTinyInt
-  hench_order     Int      @default(0) @db.UnsignedTinyInt
-  monster_type    Int      @default(0) @db.UnsignedSmallInt
-  name            String   @default("") @db.VarChar(255)
+  id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
+  hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
+  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
+  hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
+  monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
+  name            String   @default("") @db.VarChar(255) // s_monster name field
   sex             Int      @default(0) @db.UnsignedTinyInt
-  state           Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt // 0:alive 1:dead
   mixnum          Int      @default(0) @db.UnsignedSmallInt
-  baselevel       Int      @default(0) @db.UnsignedSmallInt
-  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
-  exp             String   @default("0") @db.VarChar(255)
-  speed_move      Int      @default(0) @db.UnsignedTinyInt
-  speed_attack    Int      @default(0) @db.UnsignedSmallInt
-  speed_skill     Int      @default(0) @db.UnsignedSmallInt
-  str             Int      @default(0) @db.UnsignedSmallInt
-  dex             Int      @default(0) @db.UnsignedSmallInt
-  aim             Int      @default(0) @db.UnsignedSmallInt
-  luck            Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level
+  max_baselevel   Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level +25
+  exp             String   @default("9070000319418083328") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt // s_monster field
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  str             Int      @default(3416) @db.UnsignedSmallInt
+  dex             Int      @default(1648) @db.UnsignedSmallInt
+  aim             Int      @default(3080) @db.UnsignedSmallInt
+  luck            Int      @default(2590) @db.UnsignedSmallInt
   ap              Int      @default(0) @db.UnsignedSmallInt
   dp              Int      @default(0) @db.UnsignedSmallInt
   hc              Int      @default(0) @db.UnsignedSmallInt
   hd              Int      @default(0) @db.UnsignedSmallInt
-  hp              Int      @default(0) @db.UnsignedSmallInt
-  mp              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(65535) @db.UnsignedSmallInt
+  mp              Int      @default(2600) @db.UnsignedSmallInt
   maxhp           Int      @default(0) @db.UnsignedSmallInt
   maxmp           Int      @default(0) @db.UnsignedSmallInt
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(0) @db.UnsignedTinyInt
-  race_val        Int      @default(0) @db.UnsignedSmallInt
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
-  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
   item_idx_0      Int      @default(0) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
   item_duration_0 Int      @default(0) @db.UnsignedInt
@@ -778,43 +778,43 @@ model u_hench_6 {
 }
 
 model u_hench_7 {
-  id_idx          Int      @default(0) @db.UnsignedInt
-  hero_order      Int      @default(0) @db.UnsignedTinyInt
-  serial          BigInt   @default(0) @db.UnsignedBigInt
-  position        Int      @default(0) @db.UnsignedTinyInt
-  hench_order     Int      @default(0) @db.UnsignedTinyInt
-  monster_type    Int      @default(0) @db.UnsignedSmallInt
-  name            String   @default("") @db.VarChar(255)
+  id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
+  hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
+  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
+  hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
+  monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
+  name            String   @default("") @db.VarChar(255) // s_monster name field
   sex             Int      @default(0) @db.UnsignedTinyInt
-  state           Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt // 0:alive 1:dead
   mixnum          Int      @default(0) @db.UnsignedSmallInt
-  baselevel       Int      @default(0) @db.UnsignedSmallInt
-  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
-  exp             String   @default("0") @db.VarChar(255)
-  speed_move      Int      @default(0) @db.UnsignedTinyInt
-  speed_attack    Int      @default(0) @db.UnsignedSmallInt
-  speed_skill     Int      @default(0) @db.UnsignedSmallInt
-  str             Int      @default(0) @db.UnsignedSmallInt
-  dex             Int      @default(0) @db.UnsignedSmallInt
-  aim             Int      @default(0) @db.UnsignedSmallInt
-  luck            Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level
+  max_baselevel   Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level +25
+  exp             String   @default("9070000319418083328") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt // s_monster field
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  str             Int      @default(3416) @db.UnsignedSmallInt
+  dex             Int      @default(1648) @db.UnsignedSmallInt
+  aim             Int      @default(3080) @db.UnsignedSmallInt
+  luck            Int      @default(2590) @db.UnsignedSmallInt
   ap              Int      @default(0) @db.UnsignedSmallInt
   dp              Int      @default(0) @db.UnsignedSmallInt
   hc              Int      @default(0) @db.UnsignedSmallInt
   hd              Int      @default(0) @db.UnsignedSmallInt
-  hp              Int      @default(0) @db.UnsignedSmallInt
-  mp              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(65535) @db.UnsignedSmallInt
+  mp              Int      @default(2600) @db.UnsignedSmallInt
   maxhp           Int      @default(0) @db.UnsignedSmallInt
   maxmp           Int      @default(0) @db.UnsignedSmallInt
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(0) @db.UnsignedTinyInt
-  race_val        Int      @default(0) @db.UnsignedSmallInt
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
-  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
   item_idx_0      Int      @default(0) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
   item_duration_0 Int      @default(0) @db.UnsignedInt
@@ -832,43 +832,43 @@ model u_hench_7 {
 }
 
 model u_hench_8 {
-  id_idx          Int      @default(0) @db.UnsignedInt
-  hero_order      Int      @default(0) @db.UnsignedTinyInt
-  serial          BigInt   @default(0) @db.UnsignedBigInt
-  position        Int      @default(0) @db.UnsignedTinyInt
-  hench_order     Int      @default(0) @db.UnsignedTinyInt
-  monster_type    Int      @default(0) @db.UnsignedSmallInt
-  name            String   @default("") @db.VarChar(255)
+  id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
+  hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
+  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
+  hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
+  monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
+  name            String   @default("") @db.VarChar(255) // s_monster name field
   sex             Int      @default(0) @db.UnsignedTinyInt
-  state           Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt // 0:alive 1:dead
   mixnum          Int      @default(0) @db.UnsignedSmallInt
-  baselevel       Int      @default(0) @db.UnsignedSmallInt
-  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
-  exp             String   @default("0") @db.VarChar(255)
-  speed_move      Int      @default(0) @db.UnsignedTinyInt
-  speed_attack    Int      @default(0) @db.UnsignedSmallInt
-  speed_skill     Int      @default(0) @db.UnsignedSmallInt
-  str             Int      @default(0) @db.UnsignedSmallInt
-  dex             Int      @default(0) @db.UnsignedSmallInt
-  aim             Int      @default(0) @db.UnsignedSmallInt
-  luck            Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level
+  max_baselevel   Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level +25
+  exp             String   @default("9070000319418083328") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt // s_monster field
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  str             Int      @default(3416) @db.UnsignedSmallInt
+  dex             Int      @default(1648) @db.UnsignedSmallInt
+  aim             Int      @default(3080) @db.UnsignedSmallInt
+  luck            Int      @default(2590) @db.UnsignedSmallInt
   ap              Int      @default(0) @db.UnsignedSmallInt
   dp              Int      @default(0) @db.UnsignedSmallInt
   hc              Int      @default(0) @db.UnsignedSmallInt
   hd              Int      @default(0) @db.UnsignedSmallInt
-  hp              Int      @default(0) @db.UnsignedSmallInt
-  mp              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(65535) @db.UnsignedSmallInt
+  mp              Int      @default(2600) @db.UnsignedSmallInt
   maxhp           Int      @default(0) @db.UnsignedSmallInt
   maxmp           Int      @default(0) @db.UnsignedSmallInt
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(0) @db.UnsignedTinyInt
-  race_val        Int      @default(0) @db.UnsignedSmallInt
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
-  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
   item_idx_0      Int      @default(0) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
   item_duration_0 Int      @default(0) @db.UnsignedInt
@@ -886,43 +886,43 @@ model u_hench_8 {
 }
 
 model u_hench_9 {
-  id_idx          Int      @default(0) @db.UnsignedInt
-  hero_order      Int      @default(0) @db.UnsignedTinyInt
-  serial          BigInt   @default(0) @db.UnsignedBigInt
-  position        Int      @default(0) @db.UnsignedTinyInt
-  hench_order     Int      @default(0) @db.UnsignedTinyInt
-  monster_type    Int      @default(0) @db.UnsignedSmallInt
-  name            String   @default("") @db.VarChar(255)
+  id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
+  hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
+  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
+  hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
+  monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
+  name            String   @default("") @db.VarChar(255) // s_monster name field
   sex             Int      @default(0) @db.UnsignedTinyInt
-  state           Int      @default(0) @db.UnsignedTinyInt
+  state           Int      @default(0) @db.UnsignedTinyInt // 0:alive 1:dead
   mixnum          Int      @default(0) @db.UnsignedSmallInt
-  baselevel       Int      @default(0) @db.UnsignedSmallInt
-  max_baselevel   Int      @default(0) @db.UnsignedSmallInt
-  exp             String   @default("0") @db.VarChar(255)
-  speed_move      Int      @default(0) @db.UnsignedTinyInt
-  speed_attack    Int      @default(0) @db.UnsignedSmallInt
-  speed_skill     Int      @default(0) @db.UnsignedSmallInt
-  str             Int      @default(0) @db.UnsignedSmallInt
-  dex             Int      @default(0) @db.UnsignedSmallInt
-  aim             Int      @default(0) @db.UnsignedSmallInt
-  luck            Int      @default(0) @db.UnsignedSmallInt
+  baselevel       Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level
+  max_baselevel   Int      @default(272) @db.UnsignedSmallInt // s_monster field start_base_level +25
+  exp             String   @default("9070000319418083328") @db.VarChar(255)
+  speed_move      Int      @default(0) @db.UnsignedTinyInt // s_monster field
+  speed_attack    Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  speed_skill     Int      @default(0) @db.UnsignedSmallInt // s_monster field
+  str             Int      @default(3416) @db.UnsignedSmallInt
+  dex             Int      @default(1648) @db.UnsignedSmallInt
+  aim             Int      @default(3080) @db.UnsignedSmallInt
+  luck            Int      @default(2590) @db.UnsignedSmallInt
   ap              Int      @default(0) @db.UnsignedSmallInt
   dp              Int      @default(0) @db.UnsignedSmallInt
   hc              Int      @default(0) @db.UnsignedSmallInt
   hd              Int      @default(0) @db.UnsignedSmallInt
-  hp              Int      @default(0) @db.UnsignedSmallInt
-  mp              Int      @default(0) @db.UnsignedSmallInt
+  hp              Int      @default(65535) @db.UnsignedSmallInt
+  mp              Int      @default(2600) @db.UnsignedSmallInt
   maxhp           Int      @default(0) @db.UnsignedSmallInt
   maxmp           Int      @default(0) @db.UnsignedSmallInt
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(0) @db.UnsignedTinyInt
-  race_val        Int      @default(0) @db.UnsignedSmallInt
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
-  item_slot_total Int      @default(0) @db.UnsignedTinyInt
+  item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
   item_idx_0      Int      @default(0) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
   item_duration_0 Int      @default(0) @db.UnsignedInt
@@ -951,10 +951,10 @@ model u_hero {
   now_zone_y       Int      @default(97) @db.UnsignedTinyInt
   init_pos_layer   Int      @default(0) @db.UnsignedSmallInt
   revive_zone_idx  Int      @default(70) @db.UnsignedSmallInt
-  baselevel        Int      @default(222) @db.UnsignedSmallInt
+  baselevel        Int      @default(270) @db.UnsignedSmallInt
   gold             Int      @default(1000000000) @db.UnsignedInt
   attr             Int      @default(0) @db.UnsignedInt
-  exp              String   @default("1169614056802222") @db.VarChar(255)
+  exp              String   @default("7391666932848402432") @db.VarChar(255)
   speed_move       Int      @default(100) @db.UnsignedTinyInt
   speed_attack     Int      @default(0) @db.UnsignedSmallInt
   speed_skill      Int      @default(0) @db.UnsignedSmallInt

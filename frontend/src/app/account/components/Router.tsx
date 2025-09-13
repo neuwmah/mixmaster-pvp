@@ -42,20 +42,15 @@ export default function Router({ user }: RouterProps) {
     userActionRef.current = false
   }, [create])
 
-  return (
-    <>
-      {!user.characters?.length || create
-        ? <CharactersCreate user={user} create={create} setCreate={handleSetCreate} setPetsList={setPetsList} />
-        : henchList.length > 0 && henchListDisplay
-          ? <HenchCreate character={petsList} henches={henchList} setPetsList={setPetsList} setHenchListDisplay={setHenchListDisplay} />
-          : petsList != undefined
-            ? <HenchManage character={petsList} henches={henchList} setPetsList={setPetsList} setHenchList={setHenchList} setHenchListDisplay={setHenchListDisplay} />
-            : 
-            <>
-              <Details user={user} />
-              <Characters user={user} setPetsList={setPetsList} handleSetCreate={handleSetCreate} />
-            </>
-      }
-    </>
-  )
+  return !user.characters?.length || create
+    ? <CharactersCreate user={user} create={create} setCreate={handleSetCreate} setHenchList={setHenchList} setHenchListDisplay={setHenchListDisplay} />
+    : henchList.length > 0 && henchListDisplay
+      ? <HenchCreate user={user} character={petsList} henches={henchList} setPetsList={setPetsList} setHenchListDisplay={setHenchListDisplay} />
+      : petsList != undefined
+        ? <HenchManage character={petsList} henches={henchList} setPetsList={setPetsList} setHenchList={setHenchList} setHenchListDisplay={setHenchListDisplay} />
+        : 
+        <>
+          <Details user={user} />
+          <Characters user={user} setPetsList={setPetsList} handleSetCreate={handleSetCreate} />
+        </>
 }

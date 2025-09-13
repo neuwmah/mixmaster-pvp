@@ -11,6 +11,5 @@ export interface Pet {
   henchId: string
   hench?: Hench
   in_party: boolean
-  slot?: number | null
   character?: Character
 }
