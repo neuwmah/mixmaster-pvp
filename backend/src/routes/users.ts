@@ -39,11 +39,7 @@ export async function userRoutes(app: FastifyInstance) {
   app.get('/users', async () => {
     const users = await prisma.user.findMany({
       include: {
-        characters: {
-          include: {
-            pets: { include: { hench: true } }
-          }
-        }
+        characters: true
       }
     })
     return users.map((u: any) => ({ ...u, password: undefined }))
@@ -60,11 +56,7 @@ export async function userRoutes(app: FastifyInstance) {
     const user = await prisma.user.findUnique({
       where: { id },
       include: {
-        characters: {
-          include: {
-            pets: { include: { hench: true } }
-          }
-        }
+        characters: true
       }
     })
     if (!user) return reply.code(404).send({ message: 'not found' })

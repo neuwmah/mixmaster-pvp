@@ -17,29 +17,7 @@ const deleteBulkSchema = z.object({
   petIds: z.array(z.string()).min(1).max(20)
 })
 
-const updateSchema = z.object({
-  nickname: z.string().optional(),
-  in_party: z.boolean().default(true).optional(),
-  level: z.number().int().min(1).max(999).optional(),
-  exp: z.number().int().min(0).optional()
-}).refine(d => Object.keys(d).length > 0, { message: 'empty body' })
-
 export async function petRoutes(app: FastifyInstance) {
-  app.get('/pets', async (req) => {
-    const q: any = req.query || {}
-    const characterId = typeof q.characterId === 'string' ? q.characterId : undefined
-    const where: any = {}
-    if (characterId) where.characterId = characterId
-    return prisma.pet.findMany({ where, include: { hench: true } })
-  })
-
-  app.get('/pets/:id', async (req, reply) => {
-    const { id } = req.params as { id: string }
-    const item = await prisma.pet.findUnique({ where: { id }, include: { hench: true, character: { select: { id: true, name: true } } } })
-    if (!item) return reply.code(404).send({ message: 'not found' })
-    return item
-  })
-
   app.post('/pets/bulk', async (req, reply) => {
     const parsed = createManySchema.safeParse(req.body)
     if (!parsed.success) return reply.code(400).send({ errors: parsed.error.flatten() })
@@ -165,28 +143,6 @@ export async function petRoutes(app: FastifyInstance) {
       })
     } catch (e: any) {
       return reply.code(500).send({ message: 'could not delete game henches', details: e?.message })
-    }
-  })
-
-  app.put('/pets/:id', async (req, reply) => {
-    const { id } = req.params as { id: string }
-    const parsed = updateSchema.safeParse(req.body)
-    if (!parsed.success) return reply.code(400).send({ errors: parsed.error.flatten() })
-    try {
-      const updated = await prisma.pet.update({ where: { id }, data: parsed.data, include: { hench: true } })
-      return updated
-    } catch {
-      return reply.code(404).send({ message: 'not found' })
-    }
-  })
-
-  app.delete('/pets/:id', async (req, reply) => {
-    const { id } = req.params as { id: string }
-    try {
-      await prisma.pet.delete({ where: { id } })
-      return reply.code(204).send()
-    } catch {
-      return reply.code(404).send({ message: 'not found' })
     }
   })
 }

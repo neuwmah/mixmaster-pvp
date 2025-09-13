@@ -171,6 +171,16 @@ export async function characterRoutes(app: FastifyInstance) {
     }
   })
 
+  /* Need to update */
+  app.get('/characters/:id', async (req, reply) => {
+    const { id } = req.params as { id: string }
+    const item = await prisma.character.findUnique({ where: { id }, include: { user: true, guild: true } })
+    if (!item) return reply.code(404).send({ message: 'Not found' })
+    if (item.user) (item as any).user.password = undefined
+    return item
+  })
+  
+  /* Need to update */
   app.put('/characters/:id', async (req, reply) => {
     const { id } = req.params as { id: string }
     const parsed = bodySchema.partial().refine(d => Object.keys(d).length > 0, { message: 'Empty body' }).safeParse(req.body)
@@ -248,18 +258,5 @@ export async function characterRoutes(app: FastifyInstance) {
     const { userId } = req.params as { userId: string }
     const list = await prisma.character.findMany({ where: { transferPending: true, transferTargetUserId: userId } })
     return list
-  })
-
-  app.get('/characters', async () => {
-    const list = await prisma.character.findMany({ include: { user: true, guild: true, pets: { include: { hench: true } } } })
-    return list.map((c: any) => c.user ? { ...c, user: { ...c.user, password: undefined } } : c)
-  })
-
-  app.get('/characters/:id', async (req, reply) => {
-    const { id } = req.params as { id: string }
-    const item = await prisma.character.findUnique({ where: { id }, include: { user: true, guild: true, pets: { include: { hench: true } } } })
-    if (!item) return reply.code(404).send({ message: 'Not found' })
-    if (item.user) (item as any).user.password = undefined
-    return item
   })
 }
