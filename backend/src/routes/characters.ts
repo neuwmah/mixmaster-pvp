@@ -6,10 +6,10 @@ const bodySchema = z.object({
   userId: z.string().optional(),
   name: z.string().min(3).max(12),
   class: z.enum(['ditt', 'jin', 'penril', 'phoy']),
-  energy: z.number().int().min(10).max(500).default(0),
-  agility: z.number().int().min(10).max(500).default(0),
-  accuracy: z.number().int().min(10).max(500).default(0),
-  luck: z.number().int().min(10).max(500).default(0),
+  energy: z.number().int().min(10).max(2500).default(0),
+  agility: z.number().int().min(10).max(2500).default(0),
+  accuracy: z.number().int().min(10).max(2500).default(0),
+  luck: z.number().int().min(10).max(2500).default(0),
   map: z.string().min(1).default('magirita')
 })
 
@@ -56,16 +56,25 @@ export async function characterRoutes(app: FastifyInstance) {
             const MAX_ATTEMPTS = 10
             let attempt = 0
             let created: any = null
+            let heroType = 0
+            if (parsed.data.class == 'ditt') heroType = 0
+            if (parsed.data.class == 'jin') heroType = 1
+            if (parsed.data.class == 'penril') heroType = 2
+            if (parsed.data.class == 'phoy') heroType = 3
             while (attempt < MAX_ATTEMPTS) {
               const serial = genSerial()
               try {
                 created = await myGamePrisma.u_hero.create({
                   data: {
+                    serial,
                     id_idx,
                     hero_order: heroOrder as number,
-                    serial,
+                    hero_type: heroType,
                     name: parsed.data.name,
-                    hero_type: 0
+                    str: parsed.data.energy,
+                    dex: parsed.data.agility,
+                    aim: parsed.data.accuracy,
+                    luck: parsed.data.luck
                   }
                 })
                 break

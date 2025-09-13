@@ -29,7 +29,7 @@ export default function HenchManage({ character, henches, setPetsList, setHenchL
     ">
       <div className="container flex-col items-center z-1 relative">
         <h2 className="title">
-          Henchs 🐍
+          Pets 🐍
         </h2>
 
         <p className={`text-big text-center mt-6`}>

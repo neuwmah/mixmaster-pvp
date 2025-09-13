@@ -23,18 +23,17 @@ interface FieldsProps {
   }>>;
 }
 
-export default function Fields({ sending, name, setName, attributes, setAttributes }: FieldsProps) {
+export default function Fields({ sending, name, attributes, setName, setAttributes }: FieldsProps) {
   const MIN = 10;
-  const MAX = 15;
-  const EXTRA_TOTAL = 5;
+  const EXTRA_TOTAL = 2000;
   const spent = (attributes.energy - MIN) + (attributes.agility - MIN) + (attributes.accuracy - MIN) + (attributes.luck - MIN);
   const remaining = EXTRA_TOTAL - spent;
 
-  function update(key: keyof typeof attributes, delta: 1 | -1) {
+  function update(key: keyof typeof attributes, delta: 100 | -100) {
     setAttributes(prev => {
       const next = { ...prev } as typeof attributes;
       const candidate = next[key] + delta;
-      if (candidate < MIN || candidate > MAX) return prev;
+      if (candidate < MIN) return prev;
       const prospectiveSpent = spent + (candidate - next[key]);
       if (prospectiveSpent > EXTRA_TOTAL) return prev;
       next[key] = candidate;
@@ -52,7 +51,7 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
   return (
     <div className="fields flex flex-col gap-8 p-[2.4rem] sm:p-[2.8rem] sm:pt-[2.4rem] bg-[rgba(0,0,0,.7)] border-[1px] border-(--gray-1) border-dashed rounded-[.8rem]">
       <div className="nickname">
-        <p className="text-base mb-4 text-center">Set character nickname.</p>
+        <p className="text-sm mb-4 text-center">Set character nickname.</p>
         <div className="field flex">
           <label className="text-xs font-bold flex items-center justify-center w-[8rem] bg-(--primary-orange-1) rounded-l-[8px]" htmlFor="name">Name</label>
           <input
@@ -71,7 +70,7 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
       </div>
 
       <div className="attributes">
-        <div className="text text-base flex items-center justify-between mb-4">
+        <div className="text text-sm flex items-center justify-between mb-4">
           <span>Choose character attributes.</span>
           <span>Points: <strong className={remaining < 0 ? 'text-(--primary-red-1)' : ''}>{remaining}</strong></span>
         </div>
@@ -79,7 +78,7 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
           {attrList.map(({ key, label }) => {
             const value = attributes[key];
             const disableMinus = value <= MIN;
-            const disablePlus = value >= MAX || remaining <= 0;
+            const disablePlus = remaining <= 0;
             return (
               <div key={key} className="attribute flex items-stretch">
                 <label className="text-xs font-bold flex items-center justify-center w-[8rem] bg-(--primary-orange-1) rounded-l-[8px]" htmlFor={key}>{label}</label>
@@ -88,7 +87,7 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
                     className="h-[3.2rem] w-[3.2rem] flex items-center justify-center cursor-pointer bg-(--gray-5) duration-[.25s] hover:bg-(--gray-4) text-(--gray-1) hover:text-black disabled:opacity-30 disabled:cursor-not-allowed"
                     type="button"
                     disabled={disableMinus || sending}
-                    onClick={() => update(key, -1)}
+                    onClick={() => update(key, -100)}
                   >
                     <MinusIcon className="w-[1.5rem] h-[1.5rem] stroke-[2.4] duration-[.25s]" />
                   </button>
@@ -104,7 +103,7 @@ export default function Fields({ sending, name, setName, attributes, setAttribut
                     className="h-[3.2rem] w-[3.2rem] flex items-center justify-center cursor-pointer bg-(--gray-5) duration-[.25s] hover:bg-(--gray-4) text-(--gray-1) hover:text-black disabled:opacity-30 disabled:cursor-not-allowed"
                     type="button"
                     disabled={disablePlus || sending}
-                    onClick={() => update(key, 1)}
+                    onClick={() => update(key, 100)}
                   >
                     <PlusIcon className="w-[1.5rem] h-[1.5rem] stroke-[2.4] duration-[.25s]" />
                   </button>

@@ -39,7 +39,7 @@ export default function Jobs({ sending, job, backgroundRef, setJob }: JobsProps)
   return (
     <div className="jobs flex flex-col gap-8 p-[2.4rem] bg-[rgba(0,0,0,.7)] border-[1px] border-(--gray-1) border-dashed rounded-[.8rem] min-h-[28rem] overflow-hidden">
 
-      <span className="text text-base text-center">Select character class.</span>
+      <span className="text text-sm text-center">Select character class.</span>
 
       <div className="carousel relative flex flex-1 w-full mx-auto">
         <Swiper

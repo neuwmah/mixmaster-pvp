@@ -960,7 +960,7 @@ model u_hero {
   speed_skill      Int      @default(0) @db.UnsignedSmallInt
   str              Int      @default(10) @db.UnsignedSmallInt
   dex              Int      @default(10) @db.UnsignedSmallInt
-  aim              Int      @default(2000) @db.UnsignedSmallInt
+  aim              Int      @default(10) @db.UnsignedSmallInt
   luck             Int      @default(10) @db.UnsignedSmallInt
   ap               Int      @default(3) @db.UnsignedSmallInt
   dp               Int      @default(3) @db.UnsignedSmallInt
