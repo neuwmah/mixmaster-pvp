@@ -11,6 +11,7 @@ import Fields from '@/app/account/components/charactersCreate/Fields'
 import Jobs from '@/app/account/components/charactersCreate/Jobs'
 
 import { User } from '@/types/user'
+import { Character } from '@/types/character'
 import { Hench } from '@/types/hench'
 
 interface CharactersCreateProps {
@@ -19,9 +20,10 @@ interface CharactersCreateProps {
   setCreate: (value: boolean) => void
   setHenchList: (value: Hench[]) => void
   setHenchListDisplay: (value: boolean) => void
+  setPetsList: (value: Character | undefined) => void
 }
 
-export default function CharactersCreate({ user, create, setCreate, setHenchList, setHenchListDisplay }: CharactersCreateProps) {
+export default function CharactersCreate({ user, create, setCreate, setHenchList, setHenchListDisplay, setPetsList }: CharactersCreateProps) {
   const [name, setName] = useState('')
   const [job, setJob] = useState('ditt')
   const [attributes, setAttributes] = useState({ energy: 10, agility: 10, accuracy: 10, luck: 10 })
@@ -52,6 +54,7 @@ export default function CharactersCreate({ user, create, setCreate, setHenchList
         setTimeout(() => setErrorMessage(''), 2500)
       } else {
         const currentHenches = await getHenchs()
+        setPetsList(result.data)
         setCreate(false)
         setHenchList(currentHenches)
         setHenchListDisplay(true)

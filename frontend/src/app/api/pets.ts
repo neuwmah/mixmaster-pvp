@@ -24,6 +24,22 @@ export async function createPetsBulk(
   }
 }
 
+export async function deletePetsBulk(
+  characterId: string,
+  petIds: string[]
+): Promise<{ ok?: boolean; count?: number; error?: string }> {
+  if (!baseEnv) return { error: 'API URL not configured' }
+  try {
+    const api = createApiClient(baseEnv)
+    const { data, status } = await api.delete('/pets/bulk', { data: { characterId, petIds } })
+    if (status !== 200) return { error: 'Bulk delete failed' }
+    return { ok: true, count: data.count }
+  } catch (e: any) {
+    const msg = e?.response?.data?.message
+    return { error: msg || 'Bulk delete failed' }
+  }
+}
+
 export async function deletePet(id: string): Promise<{ ok?: boolean; error?: string }> {
   if (!baseEnv) return { error: 'API URL not configured' }
   try {

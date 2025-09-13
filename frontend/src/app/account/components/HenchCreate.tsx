@@ -14,11 +14,12 @@ interface HenchCreateProps {
   user: User
   henches: Hench[]
   character: Character | undefined
+  isFirstTime?: boolean
   setPetsList: (value: Character | undefined) => void
   setHenchListDisplay: (value: boolean) => void
 }
 
-export default function HenchCreate({ user, henches, character, setPetsList, setHenchListDisplay }: HenchCreateProps) {
+export default function HenchCreate({ user, henches, character, isFirstTime = false, setPetsList, setHenchListDisplay }: HenchCreateProps) {
   const [selectedHench, setSelectedHench] = useState<string[]>([])
   const [sending, setSending] = useState(false)
   const router = useRouter()
@@ -32,7 +33,8 @@ export default function HenchCreate({ user, henches, character, setPetsList, set
         (hid) => ({ 
           characterOrder: character ? user?.characters?.findIndex(c => c.id === character.id) : 0,
           characterId: character ? character.id : '',
-          henchId: hid
+          henchId: hid,
+          in_party: isFirstTime
         })
       ))
 
@@ -64,12 +66,12 @@ export default function HenchCreate({ user, henches, character, setPetsList, set
         </h2>
 
         <p className={`text-big text-center mt-6`}>
-          Select new pets to create below.
+          {isFirstTime ? 'Select up to 3 pets to create below.' : 'Select new pets to create below.'}
         </p>
 
         <div className="hench-create mt-12 w-full flex flex-col items-center">
 
-          <General henches={henches} selectedHench={selectedHench} setSelectedHench={setSelectedHench} />
+          <General henches={henches} selectedHench={selectedHench} setSelectedHench={setSelectedHench} maxSelection={isFirstTime ? 3 : undefined} />
 
           <div className="mt-16 flex items-center gap-4">
             <button

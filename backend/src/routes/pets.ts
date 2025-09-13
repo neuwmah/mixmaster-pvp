@@ -12,6 +12,11 @@ const createSchema = z.object({
 
 const createManySchema = z.array(createSchema).min(1).max(20)
 
+const deleteBulkSchema = z.object({
+  characterId: z.string(),
+  petIds: z.array(z.string()).min(1).max(20)
+})
+
 const updateSchema = z.object({
   nickname: z.string().optional(),
   in_party: z.boolean().default(true).optional(),
@@ -121,6 +126,46 @@ export async function petRoutes(app: FastifyInstance) {
     }
 
     return reply.code(201).send(created)
+  })
+
+  app.delete('/pets/bulk', async (req, reply) => {
+    const parsed = deleteBulkSchema.safeParse(req.body)
+    if (!parsed.success) return reply.code(400).send({ errors: parsed.error.flatten() })
+    const { characterId, petIds } = parsed.data
+
+    const char = await prisma.character.findUnique({ where: { id: characterId }, include: { user: true } })
+    if (!char) return reply.code(404).send({ message: 'character not found' })
+
+    let id_idx: number | null = null
+    if (char.user?.username) {
+      const player = await myMemberPrisma.player.findUnique({ where: { PlayerID: char.user.username }, select: { id_idx: true } }).catch(() => null)
+      if (!player || player.id_idx === null || player.id_idx === undefined) return reply.code(404).send({ message: 'player id_idx not found' })
+      id_idx = player.id_idx
+    } else {
+      return reply.code(400).send({ message: 'character has no linked user' })
+    }
+
+    const lastDigit = Math.abs(Number(id_idx)) % 10
+    const henchTableName = `u_hench_${lastDigit}`
+    const henchModel = (myGamePrisma as any)[henchTableName]
+    if (!henchModel || typeof henchModel.deleteMany !== 'function') return reply.code(500).send({ message: 'game hench table not available' })
+
+    try {
+      const deleted = await henchModel.deleteMany({ 
+        where: { 
+          id_idx,
+          serial: { in: petIds.map(id => BigInt(id)) }
+        } 
+      })
+
+      return reply.code(200).send({ 
+        message: 'pets deleted successfully', 
+        count: deleted.count,
+        deletedIds: petIds 
+      })
+    } catch (e: any) {
+      return reply.code(500).send({ message: 'could not delete game henches', details: e?.message })
+    }
   })
 
   app.put('/pets/:id', async (req, reply) => {

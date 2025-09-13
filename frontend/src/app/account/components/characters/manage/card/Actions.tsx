@@ -44,12 +44,14 @@ export default function Actions({
     if (deleting) return
     if (!window.confirm('Are you sure?')) return
     setDeleting(true)
-    const ok = await deleteCharacter(character.id)
+    
+    const { ok, error } = await deleteCharacter(character.id)
     if (!ok) {
-      alert('Error deleting character.')
+      alert(error || 'Error deleting character.')
       setDeleting(false)
       return
     }
+    
     router.refresh()
   }
 

@@ -43,9 +43,9 @@ export default function Router({ user }: RouterProps) {
   }, [create])
 
   return !user.characters?.length || create
-    ? <CharactersCreate user={user} create={create} setCreate={handleSetCreate} setHenchList={setHenchList} setHenchListDisplay={setHenchListDisplay} />
+    ? <CharactersCreate user={user} create={create} setCreate={handleSetCreate} setHenchList={setHenchList} setHenchListDisplay={setHenchListDisplay} setPetsList={setPetsList} />
     : henchList.length > 0 && henchListDisplay
-      ? <HenchCreate user={user} character={petsList} henches={henchList} setPetsList={setPetsList} setHenchListDisplay={setHenchListDisplay} />
+      ? <HenchCreate user={user} character={petsList} henches={henchList} setPetsList={setPetsList} setHenchListDisplay={setHenchListDisplay} isFirstTime={!petsList?.pets?.length} />
       : petsList != undefined
         ? <HenchManage character={petsList} henches={henchList} setPetsList={setPetsList} setHenchList={setHenchList} setHenchListDisplay={setHenchListDisplay} />
         : 

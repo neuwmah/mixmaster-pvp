@@ -49,7 +49,7 @@ export default function HenchManage({ character, henches, setPetsList, setHenchL
             >
               Save
             </button>
-            {(character.pets && character.pets.length < 20) ?
+            {!character.pets || (character.pets && character.pets?.length < 20) ?
               <button
                 className="w-auto button-orange"
                 type="button"

@@ -65,14 +65,18 @@ export async function createCharacter(character: Partial<Character>): Promise<{ 
   }
 }
 
-export async function deleteCharacter(id: string): Promise<boolean> {
-  if (!baseEnv) return false;
+export async function deleteCharacter(id: string): Promise<{ ok?: boolean; error?: string }> {
+  if (!baseEnv) return { error: 'API URL not configured' };
   const api = createApiClient(baseEnv);
   try {
     const { status } = await api.delete(`/characters/${id}`);
-    return status === 204;
-  } catch {
-    return false;
+    if (status === 204) {
+      return { ok: true };
+    }
+    return { error: 'Delete failed' };
+  } catch (e: any) {
+    const msg = e?.response?.data?.message;
+    return { error: msg || 'Delete failed' };
   }
 }
 

@@ -8,11 +8,12 @@ import { Hench } from '@/types/hench'
 
 interface GeneralProps {
   henches: Hench[]
+  maxSelection?: number
   selectedHench?: Array<string>
   setSelectedHench?: (value: Array<string>) => void
 }
 
-export default function General({ henches, selectedHench = [], setSelectedHench = () => {} }: GeneralProps) {
+export default function General({ henches, maxSelection, selectedHench = [], setSelectedHench = () => {} }: GeneralProps) {
   const types = [0,1,2,3,4,5,6,7]
 
   const [selectedType, setSelectedType] = useState<number>(0)
@@ -30,7 +31,7 @@ export default function General({ henches, selectedHench = [], setSelectedHench 
           <button
             key={`button${type}`}
             type="button"
-            onClick={() => setSelectedType(prev => prev === type ? 0 : type)}
+            onClick={() => setSelectedType(type)}
             className={`
               relative group
               flex items-center justify-center
@@ -76,6 +77,7 @@ export default function General({ henches, selectedHench = [], setSelectedHench 
                 hench={h}
                 selectedHench={selectedHench}
                 setSelectedHench={setSelectedHench}
+                maxSelection={maxSelection}
               />
             ))}
         </div>

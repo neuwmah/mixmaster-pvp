@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
-import { deletePet } from '@/app/api/pets'
+import { deletePetsBulk } from '@/app/api/pets'
 import { getIcon } from '@/app/account/components/hench/pets/image/index'
 
 import { TrashIcon } from '@heroicons/react/24/outline'
@@ -15,14 +15,17 @@ interface PetInlineProps {
   pet?: Pet
   hench: Hench | undefined
   character?: Character
+  maxSelection?: number
   selectedHench?: Array<string> | false
   setSelectedHench?: (value: Array<string>) => void
   setPetsList?: (value: Character | undefined) => void
 }
 
-export default function PetInline({ pet, hench, character, selectedHench = false, setSelectedHench, setPetsList }: PetInlineProps) {
+export default function PetInline({ pet, hench, character, maxSelection, selectedHench = false, setSelectedHench, setPetsList }: PetInlineProps) {
   const displayName = pet ? pet.nickname || hench?.name : hench?.name
   const active = !!(hench?.type && Array.isArray(selectedHench) && selectedHench.includes(hench.type))
+  const current = Array.isArray(selectedHench) ? selectedHench : []
+  const isMaxReached = maxSelection && current.length >= maxSelection && !active
   const router = useRouter()
   const [deleting, setDeleting] = useState(false)
 
@@ -32,20 +35,21 @@ export default function PetInline({ pet, hench, character, selectedHench = false
       setSelectedHench(selectedHench.filter(type => type !== hench.type))
     } else {
       const current = Array.isArray(selectedHench) ? selectedHench : []
+      if (maxSelection && current.length >= maxSelection) return
       setSelectedHench([...current, hench.type])
     }
   }
 
   async function removePet(e: React.MouseEvent) {
     e.stopPropagation()
-    if (!pet) return
+    if (!pet || !character) return
 
     setDeleting(true)
 
-    const { error } = await deletePet(pet.id)
+    const { error } = await deletePetsBulk(character.id, [pet.id])
     if (error) alert(error)
 
-    if (!error && character && setPetsList)
+    if (!error && setPetsList)
       setPetsList({ ...character, pets: character.pets?.filter(p => p.id !== pet.id) })
 
     setDeleting(false)
@@ -66,8 +70,9 @@ export default function PetInline({ pet, hench, character, selectedHench = false
         ${((pet && pet.in_party)) && 'bg-(--gray-a)'}
         ${((pet && !pet.in_party) || !pet) && 'bg-(--gray-0) border-(--gray-1)'}
         ${setSelectedHench && 'group'}
-        ${setSelectedHench && !active && 'cursor-pointer hover:border-(--gray-2)'}
-        ${setSelectedHench && active && '!bg-(--gray-a)'}
+        ${setSelectedHench && !active && !isMaxReached && 'cursor-pointer hover:border-(--gray-2)'}
+        ${setSelectedHench && active && 'cursor-pointer !bg-(--gray-a)'}
+        ${isMaxReached && 'opacity-50 cursor-not-allowed'}
       `}
       data-active={active ? 'true' : 'false'}
       onClick={toggleSelect}

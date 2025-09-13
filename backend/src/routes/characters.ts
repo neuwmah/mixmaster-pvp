@@ -112,6 +112,65 @@ export async function characterRoutes(app: FastifyInstance) {
     }
   })
 
+  app.delete('/characters/:id', async (req, reply) => {
+    const { id } = req.params as { id: string }
+    try {
+      const char = await prisma.character.findUnique({ where: { id }, include: { user: true } })
+      if (!char) return reply.code(404).send({ message: 'Not found' })
+      if (char.transferPending) return reply.code(409).send({ message: 'Character in transfer pending state.' })
+
+      let id_idx: number | null = null
+      let hero_order: number = 0
+      
+      if (char.user?.username) {
+        const player = await myMemberPrisma.player.findUnique({ where: { PlayerID: char.user.username }, select: { id_idx: true } }).catch(() => null)
+        if (player && player.id_idx !== null && player.id_idx !== undefined) {
+          id_idx = player.id_idx
+          
+          const userChars = await prisma.character.findMany({ 
+            where: { userId: char.userId }, 
+            orderBy: { created_at: 'asc' },
+            select: { id: true }
+          })
+          hero_order = userChars.findIndex(c => c.id === char.id)
+          if (hero_order === -1) hero_order = 0
+        }
+      }
+
+      if (id_idx !== null) {
+        try {
+          const lastDigit = Math.abs(Number(id_idx)) % 10
+          const henchTableName = `u_hench_${lastDigit}`
+          const henchModel = (myGamePrisma as any)[henchTableName]
+          
+          if (henchModel && typeof henchModel.deleteMany === 'function') {
+            await henchModel.deleteMany({ 
+              where: { 
+                id_idx,
+                hero_order
+              } 
+            })
+          }
+
+          await myGamePrisma.u_hero.deleteMany({
+            where: {
+              id_idx,
+              hero_order
+            }
+          }).catch(() => null)
+        } catch (e) {
+          console.error('Error deleting game data:', e)
+        }
+      }
+
+      await prisma.character.delete({ where: { id } })
+      return reply.code(204).send()
+    } catch (e: any) {
+      console.error('Character deletion error:', e)
+      return reply.code(500).send({ message: 'Error deleting character' })
+    }
+  })
+
   app.put('/characters/:id', async (req, reply) => {
     const { id } = req.params as { id: string }
     const parsed = bodySchema.partial().refine(d => Object.keys(d).length > 0, { message: 'Empty body' }).safeParse(req.body)
@@ -202,18 +261,5 @@ export async function characterRoutes(app: FastifyInstance) {
     if (!item) return reply.code(404).send({ message: 'Not found' })
     if (item.user) (item as any).user.password = undefined
     return item
-  })
-
-  app.delete('/characters/:id', async (req, reply) => {
-    const { id } = req.params as { id: string }
-    try {
-      const char = await prisma.character.findUnique({ where: { id } })
-      if (!char) return reply.code(404).send({ message: 'Not found' })
-      if (char.transferPending) return reply.code(409).send({ message: 'Character in transfer pending state.' })
-      await prisma.character.delete({ where: { id } })
-      return reply.code(204).send()
-    } catch {
-      return reply.code(404).send({ message: 'Not found' })
-    }
   })
 }
