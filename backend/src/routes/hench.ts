@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
-import { prisma } from '../db.js'
+import { prisma, myServerPrisma } from '../db.js'
 
 const createSchema = z.object({
   code: z.string().min(1),
@@ -17,13 +17,10 @@ const createSchema = z.object({
 })
 
 export async function henchRoutes(app: FastifyInstance) {
-  app.get('/hench', async (req) => {
-    const q: any = (req.query || {})
-    const activeParam = typeof q.active === 'string' ? q.active : undefined
+  app.get('/hench', async () => {
     const where: any = {}
-    if (activeParam === 'true') where.active = true
-    else if (activeParam === 'false') where.active = false
-    const list = await prisma.hench.findMany({ where, orderBy: { created_at: 'desc' } })
+    where.start_base_level = { gt: 250 }
+    const list = await myServerPrisma.s_monster.findMany({ where })
     return list
   })
 

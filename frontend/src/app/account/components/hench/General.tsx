@@ -13,14 +13,14 @@ interface GeneralProps {
 }
 
 export default function General({ henches, selectedHench = [], setSelectedHench = () => {} }: GeneralProps) {
-  const types = ['dragon','beast','insect','metal','mystery','devil','bird','plant']
+  const types = [0,1,2,3,4,5,6,7]
 
-  const [selectedType, setSelectedType] = useState<string | undefined>('dragon')
+  const [selectedType, setSelectedType] = useState<number>(0)
 
   const filteredHenches = useMemo(() => {
     if (!Array.isArray(henches)) return []
-    if (!selectedType) return henches
-    return henches.filter(h => h.type === selectedType)
+    if (!selectedType && selectedType != 0) return henches
+    return henches.filter(h => h.race === selectedType)
   }, [henches, selectedType])
 
   return (
@@ -28,16 +28,16 @@ export default function General({ henches, selectedHench = [], setSelectedHench 
       <div className="flex flex-wrap gap-12 items-center justify-center">
         {types.map(type => (
           <button
-            key={type}
+            key={`button${type}`}
             type="button"
-            onClick={() => setSelectedType(prev => prev === type ? undefined : type)}
+            onClick={() => setSelectedType(prev => prev === type ? 0 : type)}
             className={`
               relative group
               flex items-center justify-center
               w-[4.8rem] h-[4.8rem]
               ${selectedType === type ? 'cursor-default' : 'cursor-pointer'}
             `}
-            title={type}
+            title={`${type}`}
           >
             <Image
               unoptimized
@@ -60,19 +60,19 @@ export default function General({ henches, selectedHench = [], setSelectedHench 
       </div>
 
       {Array.isArray(filteredHenches) && filteredHenches.length > 0 && (
-        <div className="flex flex-col gap-[1px] w-full">
+        <div className="flex flex-col gap-[1px] w-full max-h-[320px] overflow-auto">
           {filteredHenches
             .slice()
             .sort((a, b) => {
-              const activeDiff = Number(b.active) - Number(a.active)
-              if (activeDiff !== 0) return activeDiff
-              const levelDiff = a.base_level - b.base_level
-              if (levelDiff !== 0) return levelDiff
+              if (a.start_base_level && b.start_base_level) {
+                const levelDiff = b.start_base_level - a.start_base_level
+                if (levelDiff !== 0) return levelDiff
+              }
               return a.name.localeCompare(b.name)
             })
             .map(h => (
               <PetInline
-                key={h.id}
+                key={`${h.type}`}
                 hench={h}
                 selectedHench={selectedHench}
                 setSelectedHench={setSelectedHench}

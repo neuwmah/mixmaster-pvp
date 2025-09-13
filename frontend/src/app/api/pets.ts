@@ -3,7 +3,15 @@ import { Pet } from '@/types/pet'
 
 const baseEnv = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL || ''
 
-export async function createPetsBulk(list: { characterId: string; henchId: string; nickname?: string; in_party?: boolean; slot?: number | null }[]): Promise<{ data?: Pet[]; error?: string }> {
+export async function createPetsBulk(
+    list: {
+      characterId: string; 
+      henchId: string; 
+      nickname?: string; 
+      in_party?: boolean; 
+      slot?: number | null 
+    }[]
+  ): Promise<{ data?: Pet[]; error?: string }>{
   if (!baseEnv) return { error: 'API URL not configured' }
   try {
     const api = createApiClient(baseEnv)

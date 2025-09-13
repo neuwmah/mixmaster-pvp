@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
-import { prisma } from '../db.js'
+import { prisma, myMemberPrisma, myGamePrisma } from '../db.js'
 import crypto from 'node:crypto'
 import jwt from '@fastify/jwt'
 
@@ -31,18 +31,56 @@ export async function authRoutes(app: FastifyInstance) {
       if (!auth) return reply.code(401).send({ message: 'no token' })
       const token = auth.split(' ')[1]
       const payload = app.jwt.verify<{ userId: string }>(token)
-      const user = await prisma.user.findUnique({
-        where: { id: payload.userId },
-        include: {
-          characters: {
-            include: {
-              pets: { include: { hench: true } }
-            }
-          }
-        }
-      })
+      const user = await prisma.user.findUnique({ where: { id: payload.userId }, include: { characters: true } })
       if (!user) return reply.code(404).send({ message: 'not found' })
-      return { ...user, password: undefined }
+
+      try {
+        const player = await myMemberPrisma.player.findUnique({ where: { PlayerID: user.username }, select: { id_idx: true } })
+        if (!player || player.id_idx === null || player.id_idx === undefined) {
+          return { ...user, password: undefined }
+        }
+
+        const lastDigit = Math.abs(Number(player.id_idx)) % 10
+        const henchTableName = `u_hench_${lastDigit}`
+
+        const henchModel = (myGamePrisma as any)[henchTableName]
+        let henchRows: any[] = []
+        if (henchModel && typeof henchModel.findMany === 'function') {
+          henchRows = await henchModel.findMany({ where: { id_idx: player.id_idx } })
+        }
+
+        const pets: any[] = []
+        for (const h of henchRows) {
+          const pet: any = {
+            id: String(h.serial ?? `${h.id_idx}-${h.hero_order}`),
+            created_at: h.last_check_time ?? new Date(),
+            nickname: h.name || null,
+            level: h.baselevel ?? 1,
+            exp: Number(h.exp ?? 0),
+            characterId: String(h.hero_order ?? 0),
+            henchId: String(h.monster_type ?? 1),
+            in_party: h.position == 0 ? true : false,
+            slot: h.position ?? null
+          }
+          try {
+            const mtype = Number(h.monster_type ?? 0)
+            const monster = await (myServerPrisma as any).s_monster.findUnique({ where: { type: mtype } }).catch(() => null)
+            if (monster) pet.hench = monster
+          } catch {}
+          pets.push(pet)
+        }
+
+        const chars = Array.isArray(user.characters) ? user.characters : []
+        const charactersWithPets = chars.map((c: any) => {
+          const cPets = pets.filter(p => String(p.characterId) === String(c.id) || Number(p.characterId) === (c.hero_order ?? -1) || true && [])
+          return { ...c, pets: cPets }
+        })
+
+        return { ...user, password: undefined, characters: charactersWithPets, pets }
+      } catch (e) {
+        console.error('auth/me pets fetch error', (e as any)?.message)
+        return { ...user, password: undefined }
+      }
     } catch (e) {
       console.error('auth/me error', (e as any)?.message)
       return reply.code(401).send({ message: 'invalid token' })

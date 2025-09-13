@@ -12,4 +12,6 @@ export interface Hench {
   icon_url?: string | null
   active: boolean
   pets?: Pet[]
+  race?: number | null
+  start_base_level?: number | null
 }
