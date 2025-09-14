@@ -48,4 +48,5 @@ next-env.d.ts
 /frontend/node_modules
 /frontend/.env
 /frontend/.next
-/frontend/**/henchwebp
+/frontend/public/assets/images/hench
+/frontend/public/assets/images/items
