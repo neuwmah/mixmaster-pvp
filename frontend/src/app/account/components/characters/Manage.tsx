@@ -8,10 +8,11 @@ import { Character } from '@/types/character'
 interface ManageProps {
   characters: Character[] | undefined
   setCreate: (value: boolean) => void
+  setItems: (value: Character | undefined) => void
   setPetsList: (value: Character | undefined) => void
 }
 
-export default function Manage({ characters, setCreate, setPetsList }: ManageProps) {
+export default function Manage({ characters, setCreate, setItems, setPetsList }: ManageProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
 
   return characters != undefined && (
@@ -32,6 +33,7 @@ export default function Manage({ characters, setCreate, setPetsList }: ManagePro
             {...character}
             hoveredId={hoveredId}
             setHoveredId={setHoveredId}
+            setItems={setItems}
             setPetsList={setPetsList}
           />
         ))}

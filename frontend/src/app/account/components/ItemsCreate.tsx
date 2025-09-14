@@ -1,26 +1,19 @@
-"use client"
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { createPetsBulk } from '@/app/api/pets'
+import Store from '@/app/account/components/items/Store'
 
-import General from '@/app/account/components/hench/General'
-
+import { Item } from '@/types/item'
 import { Character } from '@/types/character'
-import { Hench } from '@/types/hench'
-import { User } from '@/types/user'
 
-interface HenchCreateProps {
-  user: User
-  henches: Hench[]
-  character: Character | undefined
-  isFirstTime?: boolean
-  setPetsList: (value: Character | undefined) => void
-  setHenchListDisplay: (value: boolean) => void
+interface ItemCreateProps {
+  items: Item[]
+  setItems: (value: Character | undefined) => void
+  setItemsList: (value: Item[]) => void
 }
 
-export default function HenchCreate({ user, henches, character, isFirstTime = false, setPetsList, setHenchListDisplay }: HenchCreateProps) {
-  const [selectedHench, setSelectedHench] = useState<string[]>([])
+export default function ItemsCreate({ items, setItems, setItemsList }: ItemCreateProps) {
+  const [selectedItems, setSelectedItems] = useState<string[]>([])
   const [sending, setSending] = useState(false)
   const router = useRouter()
 
@@ -29,19 +22,6 @@ export default function HenchCreate({ user, henches, character, isFirstTime = fa
     setSending(true)
 
     try {
-      const result = await createPetsBulk(selectedHench.map(
-        (hid) => ({ 
-          characterOrder: character ? user?.characters?.findIndex(c => c.id === character.id) : 0,
-          characterId: character ? character.id : '',
-          henchId: hid,
-          in_party: isFirstTime
-        })
-      ))
-
-      if (character && result.data)
-        setPetsList({ ...character, pets: [...character.pets || [], ...result.data] })
-      setHenchListDisplay(false)
-      
       router.refresh()
     } catch {
       alert('Unexpected error.')
@@ -52,7 +32,7 @@ export default function HenchCreate({ user, henches, character, isFirstTime = fa
 
   return (
     <section className="
-      section-hench-create section
+      section-items-create section
       my-[0!important]
       overflow-hidden
       py-20 sm:py-32
@@ -62,23 +42,22 @@ export default function HenchCreate({ user, henches, character, isFirstTime = fa
     ">
       <div className="container flex-col items-center z-1 relative">
         <h2 className="title">
-          Pets 🐍
+          Items 🛡️
         </h2>
 
         <p className={`text-big text-center mt-6`}>
-          {isFirstTime ? 'Select up to 3 pets to create below.' : 'Select new pets to create below.'}
+          Select new items to create below.
         </p>
 
-        <div className="hench-create mt-12 w-full flex flex-col items-center">
-
-          <General henches={henches} selectedHench={selectedHench} setSelectedHench={setSelectedHench} maxSelection={isFirstTime ? 3 : undefined} />
+        <div className="items-create mt-12 w-full flex flex-col items-center">
+          <Store items={items} setItems={setItems} setSelectedItems={setSelectedItems} maxSelection={100} />
 
           <div className="mt-16 flex items-center gap-4">
             <button
               className="w-auto button-gray"
               type="button"
-              aria-label="Close Pets Create"
-              onClick={() => setHenchListDisplay(false)}
+              aria-label="Close Items Create"
+              onClick={() => setItemsList([])}
             >
               Return
             </button>
@@ -88,12 +67,11 @@ export default function HenchCreate({ user, henches, character, isFirstTime = fa
               type="button"
               aria-label="Add New Pet"
               onClick={handleCreate}
-              disabled={!selectedHench?.length || sending}
+              disabled={!selectedItems?.length || sending}
             >
-              {sending ? '...' : 'Create 🐍'}
+              {sending ? '...' : 'Create 🛡️'}
             </button>
           </div>
-
         </div>
       </div>
 

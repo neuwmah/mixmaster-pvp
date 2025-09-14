@@ -4,12 +4,15 @@ import React, { useEffect, useState, useRef } from 'react'
 import CharactersCreate from '@/app/account/components/CharactersCreate'
 import HenchCreate from '@/app/account/components/HenchCreate'
 import HenchManage from '@/app/account/components/HenchManage'
+import ItemsManage from '@/app/account/components/ItemsManage'
+import ItemsCreate from '@/app/account/components/ItemsCreate'
 import Details from '@/app/account/components/Details'
 import Characters from '@/app/account/components/Characters'
 
 import { User } from '@/types/user'
 import { Character } from '@/types/character'
 import { Hench } from '@/types/hench'
+import { Item } from '@/types/item'
 
 interface RouterProps {
   user: User;
@@ -17,9 +20,15 @@ interface RouterProps {
 
 export default function Router({ user }: RouterProps) {
   const [create, setCreate] = useState(false)
+
+  const [items, setItems] = useState<Character | undefined>(undefined)
   const [petsList, setPetsList] = useState<Character | undefined>(undefined)
+
+  const [itemsList, setItemsList] = useState<Item[]>([])
   const [henchList, setHenchList] = useState<Hench[]>([])
+
   const [henchListDisplay, setHenchListDisplay] = useState(false)
+
   const userActionRef = useRef(false)
   const initialRenderRef = useRef(true)
   
@@ -48,9 +57,13 @@ export default function Router({ user }: RouterProps) {
       ? <HenchCreate user={user} character={petsList} henches={henchList} setPetsList={setPetsList} setHenchListDisplay={setHenchListDisplay} isFirstTime={!petsList?.pets?.length} />
       : petsList != undefined
         ? <HenchManage character={petsList} henches={henchList} setPetsList={setPetsList} setHenchList={setHenchList} setHenchListDisplay={setHenchListDisplay} />
-        : 
-        <>
-          <Characters user={user} setPetsList={setPetsList} handleSetCreate={handleSetCreate} />
-          <Details user={user} />
-        </>
+        : itemsList.length > 0
+          ? <ItemsCreate items={itemsList} setItems={setItems} setItemsList={setItemsList} />
+          : items != undefined
+            ? <ItemsManage character={items} setItems={setItems} setItemsList={setItemsList} />
+            :
+              <>
+                <Characters user={user} setPetsList={setPetsList} setItems={setItems} handleSetCreate={handleSetCreate} />
+                <Details user={user} />
+              </>
 }

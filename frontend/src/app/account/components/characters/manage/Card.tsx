@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 
 import { getCharacter } from '@/app/api/character'
+import { getIcon } from '@/app/account/components/hench/pets/image'
 
 import Infos from '@/app/account/components/characters/manage/card/Infos'
 import Edit from '@/app/account/components/characters/manage/card/Edit'
@@ -17,6 +18,7 @@ interface CardProps extends Character {
   hoveredId?: string | null
   setHoveredId?: (id: string | null) => void
   setPetsList: (value: Character | undefined) => void
+  setItems: (value: Character | undefined) => void
 }
 
 export default function Card(props: CardProps) {
@@ -24,6 +26,7 @@ export default function Card(props: CardProps) {
     hoveredId,
     setHoveredId,
     setPetsList,
+    setItems,
     ...character
   } = props
 
@@ -73,9 +76,9 @@ export default function Card(props: CardProps) {
         text-ellipsis
         pointer-events-auto
         relative overflow-hidden
+        w-full p-8
+        min-w-0 sm:w-[calc(33.333%-1.0666rem)] sm:min-w-[calc(20%-1.0666rem)]
         bg-(--black)
-        min-h-[38rem] min-w-0 p-8 sm:w-[calc(33.333%-1.0666rem)] sm:min-w-[calc(20%-1.0666rem)]
-        duration-[.25s]
       "
       onMouseEnter={() => setHoveredId?.(character.id)}
       onMouseLeave={() => setHoveredId?.(null)}
@@ -100,7 +103,7 @@ export default function Card(props: CardProps) {
         </div>
       )}
 
-      <div className="relative z-1">
+      <div className="relative z-1 h-auto w-full">
         {edit
           ? (changeNickname
             ? <ChangeNickname {...charData} changeNickname={changeNickname} setChangeNickname={setChangeNickname} onUpdatedName={(n) => setCharData(prev => ({ ...prev, name: n }))} />
@@ -122,7 +125,26 @@ export default function Card(props: CardProps) {
         }
       </div>
 
-      <Actions character={charData} edit={edit} deleting={deleting} setEdit={setEdit} setDeleting={setDeleting} setPetsList={setPetsList} />
+      {character.pets && character.pets.length > 0 ?
+        <div className="pets flex relative w-full gap-4 z-1 mt-12">
+          {character.pets.map((pet, i) => pet.in_party && (
+            <div className="pet rounded-full border-[1px] border-(--black)" key={`pet${i}`}>
+              <Image
+                unoptimized
+                width={40}
+                height={40}
+                src={getIcon(pet.henchId)}
+                alt={pet.nickname}
+                className="object-contain w-[4rem] h-[4rem] rounded-full"
+                loading="lazy"
+                title={pet.nickname}
+              />
+            </div>
+          ))}
+        </div>
+      : ''}
+
+      <Actions character={charData} edit={edit} deleting={deleting} setEdit={setEdit} setDeleting={setDeleting} setPetsList={setPetsList} setItems={setItems} />
     </div>
   )
 }

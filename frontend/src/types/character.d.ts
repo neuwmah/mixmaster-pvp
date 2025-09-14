@@ -1,4 +1,5 @@
 import type { Pet } from './pet'
+import type { ItemInventory } from './item'
 
 export type Character = {
   id: string
@@ -27,4 +28,5 @@ export type Character = {
   transferTargetUserId?: string | null
   transferRequestedAt?: string | Date | null
   pets?: Pet[]
+  items?: ItemInventory[]
 }

@@ -10,7 +10,7 @@ interface ResetPositionProps extends Character {
   onUpdatedMap?: (map: string) => void
 }
 
-const cities = ['magirita', 'mekrita', 'herseba', 'rudis', 'purmai'] as const
+const cities = ['FBZ'] as const
 
 export default function ResetPosition({
   resetPosition,
