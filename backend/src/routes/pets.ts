@@ -62,10 +62,32 @@ export async function petRoutes(app: FastifyInstance) {
       if (!monster) return reply.code(404).send({ message: `s_monster type ${asNum} not found` })
 
       const hero_order = item.characterOrder
-
       const position = item.in_party ? 0 : 1
-      const existing = await henchModel.count({ where: { id_idx, hero_order, position } }).catch(() => 0)
-      const hench_order = existing ?? 0
+      let hench_order = 0
+      if (position === 1) {
+        const existingHenches = await henchModel.findMany({ 
+          where: { id_idx, hero_order, position: 1 },
+          orderBy: { hench_order: 'asc' }
+        }).catch(() => [])
+        for (let i = 0; i < existingHenches.length; i++) {
+          if (existingHenches[i].hench_order !== i) {
+            await henchModel.update({
+              where: { 
+                id_idx_hero_order: {
+                  id_idx,
+                  hero_order
+                },
+                serial: existingHenches[i].serial 
+              },
+              data: { hench_order: i }
+            })
+          }
+        }
+        hench_order = existingHenches.length
+      } else {
+        const existing = await henchModel.count({ where: { id_idx, hero_order, position } }).catch(() => 0)
+        hench_order = existing ?? 0
+      }
       const serial = genSerial()
       const name = item.nickname ?? monster.name ?? `Draco`
 
@@ -86,6 +108,7 @@ export async function petRoutes(app: FastifyInstance) {
           name: monster.name || 'Draco',
           level: 272,
           exp: 0,
+          hench_order,
           characterId: item.characterId,
           henchId: String(asNum),
           in_party: item.in_party ?? false,

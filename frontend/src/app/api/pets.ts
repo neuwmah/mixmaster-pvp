@@ -17,7 +17,7 @@ export async function createPetsBulk(
     const api = createApiClient(baseEnv)
     const { data, status } = await api.post('/pets/bulk', list)
     if (status !== 201 || !Array.isArray(data)) return { error: 'Bulk create failed' }
-    return { data: data as Pet[] }
+    return { data: (data as Pet[]).sort((a: any, b: any) => a.hench_order - b.hench_order) }
   } catch (e: any) {
     const msg = e?.response?.data?.message
     return { error: msg || 'Bulk create failed' }

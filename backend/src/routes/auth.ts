@@ -60,7 +60,8 @@ export async function authRoutes(app: FastifyInstance) {
             characterId: String(h.hero_order ?? 0),
             henchId: String(h.monster_type ?? 1),
             in_party: h.position == 0 ? true : false,
-            order: h.hero_order
+            order: h.hero_order,
+            hench_order: h.hench_order
           }
           try {
             const mtype = Number(h.monster_type ?? 0)
@@ -72,7 +73,9 @@ export async function authRoutes(app: FastifyInstance) {
 
         const chars = Array.isArray(user.characters) ? user.characters : []
         const charactersWithPets = chars.map((c: any, index: number) => {
-          const cPets = pets.filter(p => Number(p.order) === index)
+          const cPets = pets
+            .filter(p => Number(p.order) === index)
+            .sort((a: any, b: any) => a.hench_order - b.hench_order)
           return { ...c, pets: cPets }
         })
 
