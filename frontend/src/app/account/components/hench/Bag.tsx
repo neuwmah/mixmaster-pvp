@@ -27,6 +27,7 @@ export default function Bag({ character, setPetsList }: BagProps) {
         <div className="flex flex-col gap-[1px] w-full">
           {character.pets
             .slice()
+            .sort((a, b) => (Number(b.in_party) - Number(a.in_party)))
             .map((pet, i) => <PetInline pet={pet} hench={pet.hench} key={`bag${i}`} character={character} setPetsList={setPetsList} />)}
         </div>
       ) : null}

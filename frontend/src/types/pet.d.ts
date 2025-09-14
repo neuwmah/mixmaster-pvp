@@ -12,4 +12,5 @@ export interface Pet {
   hench?: Hench
   in_party: boolean
   character?: Character
+  hench_order?: number
 }

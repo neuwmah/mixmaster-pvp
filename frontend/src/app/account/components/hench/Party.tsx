@@ -26,7 +26,6 @@ export default function Party({ character }: PartyProps) {
     "> 
       <div className="grid gap-[1.6rem] sm:grid-cols-3 xl:grid-cols-3 w-full">
         {partyPets
-          .sort((a, b) => b.level - a.level)
           .map(pet => (
             <PetCard key={pet.id} pet={pet} hench={pet.hench} />
           ))}

@@ -50,7 +50,7 @@ export default function Router({ user }: RouterProps) {
         ? <HenchManage character={petsList} henches={henchList} setPetsList={setPetsList} setHenchList={setHenchList} setHenchListDisplay={setHenchListDisplay} />
         : 
         <>
-          <Details user={user} />
           <Characters user={user} setPetsList={setPetsList} handleSetCreate={handleSetCreate} />
+          <Details user={user} />
         </>
 }
