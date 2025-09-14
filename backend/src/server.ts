@@ -16,6 +16,9 @@ import { henchRoutes } from './routes/hench.js'
 import { petRoutes } from './routes/pets.js'
 import { itemsRoutes } from './routes/items.js'
 
+import dotenv from 'dotenv'
+dotenv.config()
+
 const app = Fastify({ logger: false })
 
 await app.register(cors, {
