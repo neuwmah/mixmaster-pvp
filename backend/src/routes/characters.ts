@@ -10,7 +10,7 @@ const bodySchema = z.object({
   agility: z.number().int().min(10).max(2500).default(0),
   accuracy: z.number().int().min(10).max(2500).default(0),
   luck: z.number().int().min(10).max(2500).default(0),
-  map: z.string().min(1).default('magirita')
+  map: z.string().min(1).default('FBZ')
 })
 
 const transferInitSchema = z.object({
@@ -141,10 +141,20 @@ export async function characterRoutes(app: FastifyInstance) {
         try {
           const lastDigit = Math.abs(Number(id_idx)) % 10
           const henchTableName = `u_hench_${lastDigit}`
-          const henchModel = (myGamePrisma as any)[henchTableName]
-          
+          const henchModel = (myGamePrisma as any)[henchTableName]          
           if (henchModel && typeof henchModel.deleteMany === 'function') {
             await henchModel.deleteMany({ 
+              where: { 
+                id_idx,
+                hero_order
+              } 
+            })
+          }
+          
+          const itemsTableName = `u_item`
+          const itemsModel = (myGamePrisma as any)[itemsTableName]          
+          if (itemsModel && typeof itemsModel.deleteMany === 'function') {
+            await itemsModel.deleteMany({ 
               where: { 
                 id_idx,
                 hero_order

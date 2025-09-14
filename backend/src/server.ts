@@ -14,6 +14,7 @@ import { userRoutes } from './routes/users.js'
 import { authRoutes } from './routes/auth.js'
 import { henchRoutes } from './routes/hench.js'
 import { petRoutes } from './routes/pets.js'
+import { itemsRoutes } from './routes/items.js'
 
 const app = Fastify({ logger: false })
 
@@ -46,6 +47,7 @@ await app.register(userRoutes)
 await app.register(authRoutes)
 await app.register(henchRoutes)
 await app.register(petRoutes)
+await app.register(itemsRoutes)
 
 const port = Number(process.env.PORT) || 3333
 app.listen({ port, host: '0.0.0.0' })

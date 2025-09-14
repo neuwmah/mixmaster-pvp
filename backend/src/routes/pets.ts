@@ -89,17 +89,23 @@ export async function petRoutes(app: FastifyInstance) {
         hench_order = existing ?? 0
       }
       const serial = genSerial()
+      const item_serial_0 = genSerial()
+      const item_serial_1 = genSerial()
+      const item_serial_2 = genSerial()
       const name = item.nickname ?? monster.name ?? `Draco`
 
       try {
         await henchModel.create({ data: {
           id_idx,
           hero_order,
+          name,
           serial,
           position,
           hench_order,
           monster_type: asNum,
-          name
+          item_serial_0,
+          item_serial_1,
+          item_serial_2,
         } }).catch((e: any) => { throw e })
 
         const petModel = {
