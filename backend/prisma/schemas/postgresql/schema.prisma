@@ -33,7 +33,7 @@ model Character {
   name                 String         @unique
   class                CharacterClass
   level                Int            @default(1)
-  map                  String         @default("magirita")
+  map                  String         @default("FBZ")
   exp                  Int            @default(0)
   gold                 Int            @default(0)
   energy               Int            @default(10)

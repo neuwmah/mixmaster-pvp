@@ -437,15 +437,15 @@ model u_hench_0 {
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(0) @db.UnsignedInt
-  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(0) @db.UnsignedInt
-  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(0) @db.UnsignedInt
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -491,15 +491,15 @@ model u_hench_1 {
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(0) @db.UnsignedInt
-  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(0) @db.UnsignedInt
-  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(0) @db.UnsignedInt
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -545,15 +545,15 @@ model u_hench_2 {
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(0) @db.UnsignedInt
-  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(0) @db.UnsignedInt
-  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(0) @db.UnsignedInt
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -599,15 +599,15 @@ model u_hench_3 {
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(0) @db.UnsignedInt
-  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(0) @db.UnsignedInt
-  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(0) @db.UnsignedInt
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -653,15 +653,15 @@ model u_hench_4 {
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(0) @db.UnsignedInt
-  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(0) @db.UnsignedInt
-  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(0) @db.UnsignedInt
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -707,15 +707,15 @@ model u_hench_5 {
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(0) @db.UnsignedInt
-  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(0) @db.UnsignedInt
-  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(0) @db.UnsignedInt
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -761,15 +761,15 @@ model u_hench_6 {
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(0) @db.UnsignedInt
-  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(0) @db.UnsignedInt
-  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(0) @db.UnsignedInt
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -815,15 +815,15 @@ model u_hench_7 {
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(0) @db.UnsignedInt
-  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(0) @db.UnsignedInt
-  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(0) @db.UnsignedInt
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -869,15 +869,15 @@ model u_hench_8 {
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(0) @db.UnsignedInt
-  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(0) @db.UnsignedInt
-  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(0) @db.UnsignedInt
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -923,15 +923,15 @@ model u_hench_9 {
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(0) @db.UnsignedSmallInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(0) @db.UnsignedInt
-  item_idx_1      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(0) @db.UnsignedInt
-  item_idx_2      Int      @default(0) @db.UnsignedSmallInt
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
   item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(0) @db.UnsignedInt
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -1043,8 +1043,8 @@ model u_item {
   synergy         Int?     @default(0) @db.UnsignedTinyInt
   synergy_level   Int?     @default(0) @db.UnsignedTinyInt
 
+  @@id([id_idx, hero_order])
   @@index([id_idx, hero_order], map: "g_index1")
-  @@ignore
 }
 
 model u_item_market {
