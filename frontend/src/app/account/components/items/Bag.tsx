@@ -24,7 +24,7 @@ export default function Bag({ character, setItems }: BagProps) {
       )}
 
       {character.items?.length ? (
-        <div className="flex flex-col gap-[1px] w-full">
+        <div className="flex flex-col w-full">
           {character.items
             .slice()
             .sort((a, b) => {

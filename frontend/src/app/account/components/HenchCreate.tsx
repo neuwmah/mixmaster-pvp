@@ -31,7 +31,6 @@ export default function HenchCreate({ user, henches, character, isFirstTime = fa
     try {
       const result = await createPetsBulk(selectedHench.map(
         (hid) => ({ 
-          characterOrder: character ? user?.characters?.findIndex(c => c.id === character.id) : 0,
           characterId: character ? character.id : '',
           henchId: hid,
           in_party: isFirstTime
@@ -62,11 +61,11 @@ export default function HenchCreate({ user, henches, character, isFirstTime = fa
     ">
       <div className="container flex-col items-center z-1 relative">
         <h2 className="title">
-          Pets 🐍
+          New Pet 🐍
         </h2>
 
         <p className={`text-big text-center mt-6`}>
-          {isFirstTime ? 'Select up to 3 pets to create below.' : 'Select new pets to create below.'}
+          {isFirstTime ? 'Select 3 initial pets to create below.' : 'Select new pets to create below.'}
         </p>
 
         <div className="hench-create mt-12 w-full flex flex-col items-center">
@@ -88,7 +87,7 @@ export default function HenchCreate({ user, henches, character, isFirstTime = fa
               type="button"
               aria-label="Add New Pet"
               onClick={handleCreate}
-              disabled={!selectedHench?.length || sending}
+              disabled={(!selectedHench?.length || sending) || (isFirstTime && selectedHench.length < 3)}
             >
               {sending ? '...' : 'Create 🐍'}
             </button>

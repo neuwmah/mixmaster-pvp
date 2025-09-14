@@ -42,9 +42,18 @@ export async function characterRoutes(app: FastifyInstance) {
             if (player) id_idx = player.id_idx ?? null
           }
 
-          const chars = await prisma.character.findMany({ where: { userId: parsed.data.userId }, select: { id: true } })
-          const existing = chars.length - 1
-          let heroOrder = Math.min(existing, 2)
+          let heroOrder = 0
+          if (id_idx !== null) {
+            const heroTableName = `u_hero`
+            const heroModel = (myGamePrisma as any)[heroTableName]
+            if (heroModel && typeof heroModel.findMany === 'function') {
+              const heroes = await heroModel.findMany({ where: { id_idx } }).catch(() => [])
+              const usedHeroOrders = heroes.map((h: any) => h.hero_order)
+              const available = [0, 1, 2].find(order => !usedHeroOrders.includes(order))
+              if (available !== undefined) heroOrder = available
+              else return reply.code(400).send({ message: 'No available hero_order for player' })
+            }
+          }
  
           if (id_idx !== null) {
             const genSerial = () => {

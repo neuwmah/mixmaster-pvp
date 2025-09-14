@@ -8,11 +8,6 @@ datasource db {
   url      = env("DATABASE_GAME_URL")
 }
 
-model player_peak {
-  id         Int  @id @default(autoincrement())
-  peak_count Int?
-}
-
 model rank_target_idx {
   idx Int? @unique(map: "idx") @db.UnsignedInt
 
@@ -402,7 +397,7 @@ model u_guildmember {
 model u_hench_0 {
   id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
   hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
-  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  serial          BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
   position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
   hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
   monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
@@ -431,21 +426,21 @@ model u_hench_0 {
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble
   race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(1000000) @db.UnsignedInt
-  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(1000000) @db.UnsignedInt
-  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(1000000) @db.UnsignedInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt // 11 days
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -456,7 +451,7 @@ model u_hench_0 {
 model u_hench_1 {
   id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
   hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
-  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  serial          BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
   position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
   hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
   monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
@@ -485,21 +480,21 @@ model u_hench_1 {
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble
   race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(1000000) @db.UnsignedInt
-  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(1000000) @db.UnsignedInt
-  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(1000000) @db.UnsignedInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt // 11 days
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -510,7 +505,7 @@ model u_hench_1 {
 model u_hench_2 {
   id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
   hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
-  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  serial          BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
   position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
   hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
   monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
@@ -539,21 +534,21 @@ model u_hench_2 {
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble
   race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(1000000) @db.UnsignedInt
-  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(1000000) @db.UnsignedInt
-  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(1000000) @db.UnsignedInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt // 11 days
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -564,7 +559,7 @@ model u_hench_2 {
 model u_hench_3 {
   id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
   hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
-  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  serial          BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
   position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
   hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
   monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
@@ -593,21 +588,21 @@ model u_hench_3 {
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble
   race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(1000000) @db.UnsignedInt
-  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(1000000) @db.UnsignedInt
-  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(1000000) @db.UnsignedInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt // 11 days
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -618,7 +613,7 @@ model u_hench_3 {
 model u_hench_4 {
   id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
   hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
-  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  serial          BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
   position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
   hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
   monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
@@ -647,21 +642,21 @@ model u_hench_4 {
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble
   race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(1000000) @db.UnsignedInt
-  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(1000000) @db.UnsignedInt
-  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(1000000) @db.UnsignedInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt // 11 days
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -672,7 +667,7 @@ model u_hench_4 {
 model u_hench_5 {
   id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
   hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
-  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  serial          BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
   position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
   hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
   monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
@@ -701,21 +696,21 @@ model u_hench_5 {
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble
   race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(1000000) @db.UnsignedInt
-  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(1000000) @db.UnsignedInt
-  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(1000000) @db.UnsignedInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt // 11 days
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -726,7 +721,7 @@ model u_hench_5 {
 model u_hench_6 {
   id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
   hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
-  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  serial          BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
   position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
   hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
   monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
@@ -755,21 +750,21 @@ model u_hench_6 {
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble
   race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(1000000) @db.UnsignedInt
-  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(1000000) @db.UnsignedInt
-  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(1000000) @db.UnsignedInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt // 11 days
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -780,7 +775,7 @@ model u_hench_6 {
 model u_hench_7 {
   id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
   hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
-  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  serial          BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
   position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
   hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
   monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
@@ -809,21 +804,21 @@ model u_hench_7 {
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble
   race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(1000000) @db.UnsignedInt
-  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(1000000) @db.UnsignedInt
-  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(1000000) @db.UnsignedInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt // 11 days
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -834,7 +829,7 @@ model u_hench_7 {
 model u_hench_8 {
   id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
   hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
-  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  serial          BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
   position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
   hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
   monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
@@ -863,21 +858,21 @@ model u_hench_8 {
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble
   race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(1000000) @db.UnsignedInt
-  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(1000000) @db.UnsignedInt
-  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(1000000) @db.UnsignedInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt // 11 days
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 
@@ -888,7 +883,7 @@ model u_hench_8 {
 model u_hench_9 {
   id_idx          Int      @default(0) @db.UnsignedInt // player type id_idx
   hero_order      Int      @default(0) @db.UnsignedTinyInt // user character index
-  serial          BigInt   @default(0) @db.UnsignedBigInt // random unique by js
+  serial          BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
   position        Int      @default(0) @db.UnsignedTinyInt // 0:party 1:bag
   hench_order     Int      @default(0) @db.UnsignedTinyInt // party:0,1,2 bag:0,2,3,4,+
   monster_type    Int      @default(0) @db.UnsignedSmallInt // s_monster type field
@@ -917,21 +912,21 @@ model u_hench_9 {
   item0           Int      @default(0) @db.UnsignedInt
   item1           Int      @default(0) @db.UnsignedInt
   item2           Int      @default(0) @db.UnsignedInt
-  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble?
+  growthtype      Int      @default(2) @db.UnsignedTinyInt // nimble
   race_val        Int      @default(588) @db.UnsignedSmallInt // no idea
   ign_att_cnt     Int?     @default(0) @db.UnsignedTinyInt
   add_defense_cnt Int      @default(0) @db.UnsignedTinyInt
   enchant_grade   Int?     @default(0) @db.TinyInt
   item_slot_total Int      @default(3) @db.UnsignedTinyInt // items available
-  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_0 Int      @default(1000000) @db.UnsignedInt
-  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_1 Int      @default(1000000) @db.UnsignedInt
-  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt
-  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt
-  item_duration_2 Int      @default(1000000) @db.UnsignedInt
+  item_idx_0      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_0   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_0 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_1      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_1   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_1 Int      @default(1000000) @db.UnsignedInt // 11 days
+  item_idx_2      Int      @default(1323) @db.UnsignedSmallInt // barrier stg 3
+  item_serial_2   BigInt   @default(0) @db.UnsignedBigInt @unique // random unique by js
+  item_duration_2 Int      @default(1000000) @db.UnsignedInt // 11 days
   duration        Int?     @default(0) @db.UnsignedInt
   last_check_time DateTime @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
 

@@ -42,7 +42,7 @@ export default function ItemsCreate({ items, setItems, setItemsList }: ItemCreat
     ">
       <div className="container flex-col items-center z-1 relative">
         <h2 className="title">
-          Items 🛡️
+          New Item 🛡️
         </h2>
 
         <p className={`text-big text-center mt-6`}>

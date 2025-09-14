@@ -2,8 +2,8 @@ import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import { prisma, myServerPrisma, myGamePrisma, myMemberPrisma } from '../db.js'
 
+
 const createSchema = z.object({
-  characterOrder: z.number().int().min(0),
   characterId: z.string(),
   henchId: z.union([z.string(), z.number()]),
   nickname: z.string().optional(),
@@ -37,6 +37,7 @@ export async function petRoutes(app: FastifyInstance) {
       return ts * 1000000n + rand
     }
 
+
     for (const item of data) {
       const char = chars.find(c => c.id === item.characterId)
       if (!char) return reply.code(404).send({ message: 'character not found' })
@@ -50,6 +51,14 @@ export async function petRoutes(app: FastifyInstance) {
         return reply.code(400).send({ message: 'character has no linked user' })
       }
 
+      const heroTableName = `u_hero`
+      const heroModel = (myGamePrisma as any)[heroTableName]
+      if (!heroModel || typeof heroModel.findMany !== 'function') return reply.code(500).send({ message: 'game hero table not available' })
+
+      const hero = await heroModel.findFirst({ where: { id_idx, name: char.name } }).catch(() => null)
+      if (!hero) return reply.code(404).send({ message: 'hero not found in u_hero for character' })
+      const hero_order = hero.hero_order
+
       const lastDigit = Math.abs(Number(id_idx)) % 10
       const henchTableName = `u_hench_${lastDigit}`
       const henchModel = (myGamePrisma as any)[henchTableName]
@@ -61,7 +70,6 @@ export async function petRoutes(app: FastifyInstance) {
       const monster = await myServerPrisma.s_monster.findUnique({ where: { type: asNum } }).catch(() => null)
       if (!monster) return reply.code(404).send({ message: `s_monster type ${asNum} not found` })
 
-      const hero_order = item.characterOrder
       const position = item.in_party ? 0 : 1
       let hench_order = 0
       if (position === 1) {
