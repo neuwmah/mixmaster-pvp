@@ -40,8 +40,6 @@ export default function EditableText({ tag = 'div', field, postId, initialValue,
   if (!isAdmin)
     return <Tag className={className} >{value}</Tag>
 
-  if (editing)
-    console.log('h', h)
   if (editing) {
     const multiline = field !== 'title' && (draft.length > 120 || draft.includes('\n'))
     const Input: any = multiline ? 'textarea' : 'input'

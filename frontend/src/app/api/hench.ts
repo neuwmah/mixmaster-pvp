@@ -7,7 +7,7 @@ export async function getHenchs(): Promise<Hench[]> {
   if (!baseEnv) return [];
   const api = createApiClient(baseEnv);
   try {
-    const { data, status } = await api.get('/hench?active=true');
+    const { data, status } = await api.get('/hench');
     if (status !== 200 || !Array.isArray(data)) return [];
     return data as Hench[];
   } catch (error: any) {
