@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import Logo from '@/components/header/Logo'
 import BackgroundMix from '@/components/BackgroundMix'
@@ -33,6 +34,29 @@ const Fullbanner: React.FC = () => {
             Sign Up 👤
           </Link>
         </div>
+
+        <Image
+          width={200}
+          height={200}
+          src={'/assets/images/bombergun.gif'}
+          alt={'bombergun'}
+          className={`
+            object-contain z-1 hidden sm:flex
+            absolute top-[50%] left-[5vw] translate-y-[-50%]
+          `}
+          title={'Mutant Gun (Metal)'}
+        />
+        <Image
+          width={200}
+          height={200}
+          src={'/assets/images/sunflower.gif'}
+          alt={'sunflower'}
+          className={`
+            object-contain z-1 hidden sm:flex
+            absolute top-[50%] right-[5vw] translate-y-[-50%]
+          `}
+          title={'Mutant Flower (Plant)'}
+        />
 
       </div>
 
