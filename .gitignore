@@ -49,4 +49,5 @@ next-env.d.ts
 /frontend/.env
 /frontend/.next
 /frontend/public/assets/images/hench
-/frontend/public/assets/images/items
+/frontend/public/assets/images/items/game
+/frontend/public/assets/images/items/icons
