@@ -3,9 +3,14 @@ import { myServerPrisma } from '../db.js'
 
 export async function henchRoutes(app: FastifyInstance) {
   app.get('/hench', async () => {
-    const where: any = {}
-    where.start_base_level = { gt: 250 }
-    const list = await myServerPrisma.s_monster.findMany({ where })
+    const list = await myServerPrisma.s_monster.findMany({
+      where: {
+        OR: [
+          { start_base_level: { gt: 250 } },
+          { name: { contains: 'CyberHare' } }
+        ]
+      }
+    })
     return list
   })
 }

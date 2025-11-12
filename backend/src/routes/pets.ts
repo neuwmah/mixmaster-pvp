@@ -37,7 +37,6 @@ export async function petRoutes(app: FastifyInstance) {
       return ts * 1000000n + rand
     }
 
-
     for (const item of data) {
       const char = chars.find(c => c.id === item.characterId)
       if (!char) return reply.code(404).send({ message: 'character not found' })
