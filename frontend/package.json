@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -28,6 +28,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.21",
+    "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
     "tailwindcss": "^4.1.12",

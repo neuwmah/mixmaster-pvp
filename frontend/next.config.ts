@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  webpack: (config) => {
+    config.ignoreWarnings = [
+      { module: /node_modules\/node-fetch\/lib\/index\.js/ },
+      { file: /node_modules\/node-fetch\/lib\/index\.js/ },
+    ];
+    return config;
+  },
   async headers() {
     return [
       {
