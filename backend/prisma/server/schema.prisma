@@ -770,7 +770,7 @@ model s_mix {
   subgrade  Int @default(0) @db.TinyInt
   result    Int @default(0) @db.UnsignedSmallInt
 
-  @@ignore
+  @@id([mode, mainnum, maingrade, subnum, subgrade])
 }
 
 model s_mix_quest {

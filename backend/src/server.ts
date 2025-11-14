@@ -15,6 +15,7 @@ import { authRoutes } from './routes/auth.js'
 import { henchRoutes } from './routes/hench.js'
 import { petRoutes } from './routes/pets.js'
 import { itemsRoutes } from './routes/items.js'
+import { mixRoutes } from './routes/mix.js'
 
 import dotenv from 'dotenv'
 dotenv.config()
@@ -51,6 +52,7 @@ await app.register(authRoutes)
 await app.register(henchRoutes)
 await app.register(petRoutes)
 await app.register(itemsRoutes)
+await app.register(mixRoutes)
 
 const port = Number(process.env.PORT) || 3333
 app.listen({ port, host: '0.0.0.0' })
