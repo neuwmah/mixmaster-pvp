@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import TopBar from '@/components/TopBar'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import BackgroundSource from '@/components/BackgroundSource'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,10 +26,11 @@ export default function RootLayout({
   return (
     <html className="text-[62.5%] h-[100%] min-h-[100%]" lang="en">
       <body className={`${inter.className} flex flex-col min-h-[100%] text-white bg-black`}>
-        <TopBar />
+        {/* <TopBar /> */}
         <Header />
         {children}
         <Footer />
+        {/* <BackgroundSource /> */}
       </body>
     </html>
   );

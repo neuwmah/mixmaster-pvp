@@ -12,7 +12,7 @@ export default async function DownloadPage() {
       <div className="relative">
         <Download />
         <Bugs />
-        <BackgroundMix char1="penril" char2="ditt" />
+        {/* <BackgroundMix char1="penril" char2="ditt" /> */}
       </div>
       <FAQ />
     </main>

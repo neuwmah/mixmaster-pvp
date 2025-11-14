@@ -17,7 +17,7 @@ const Bugs: React.FC = () => {
             </h2>
     
             <p className="text-base text-white text-center mt-6">
-              <Link 
+              Contact us by <Link 
                 className="text-(--discord) hover:underline" 
                 href={_discordUrl} 
                 onClick={_discordRedirect}
