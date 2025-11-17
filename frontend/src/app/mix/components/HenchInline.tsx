@@ -181,7 +181,7 @@ export default function HenchInline({ hench, isExpanded = false, onToggle }: Hen
               {habitat.length > 0 && (
                 <div className="mt-4 space-y-[1px]">
                   <h4 className="text-sm font-semibold text-white mb-2">Locations:</h4>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-[1px]">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px]">
                     {habitat.map((zone, index) => {
                       const zoneIdPadded = zone.zone_idx.toString().padStart(3, '0')
                       const mapImageUrl = `https://gamedata.joyplegames.com/mixmaster/data/img/spr/map/mm${zoneIdPadded}.webp`

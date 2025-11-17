@@ -14,7 +14,7 @@ export default function HenchGallery({ henches }: HenchGalleryProps) {
   const types = [0,1,2,3,4,5,6,7]
   const [selectedType, setSelectedType] = useState<number | null>(0)
   const [searchTerm, setSearchTerm] = useState('')
-  const [displayCount, setDisplayCount] = useState(24)
+  const [displayCount, setDisplayCount] = useState(500)
   const [isLoading, setIsLoading] = useState(false)
   const [expandedHenchId, setExpandedHenchId] = useState<string | null>(null)
   const observer = useRef<IntersectionObserver | null>(null)
@@ -54,7 +54,7 @@ export default function HenchGallery({ henches }: HenchGalleryProps) {
   const handleTypeChange = (type: number | null) => {
     setSelectedType(type)
     setSearchTerm('') // Clear search when selecting race
-    setDisplayCount(24)
+    setDisplayCount(500)
   }
 
   // Reset display count and clear race filter when search changes
@@ -67,7 +67,7 @@ export default function HenchGallery({ henches }: HenchGalleryProps) {
     } else {
       setSelectedType(0) // Back to dragon when clearing search
     }
-    setDisplayCount(24)
+    setDisplayCount(500)
   }
 
   // Load more function
