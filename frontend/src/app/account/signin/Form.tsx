@@ -25,7 +25,7 @@ export default function Form() {
         setTimeout(() => {
           setErrorMessage('');
           setSending(false);
-        }, 3000);
+        }, 1500);
       } else {
         await new Promise(r => setTimeout(r, 120));
         router.replace('/account');
