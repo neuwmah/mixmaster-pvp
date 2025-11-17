@@ -1,6 +1,11 @@
 import React from 'react';
+import type { Metadata } from 'next';
 
 import BackgroundMix from '@/components/BackgroundMix';
+
+export const metadata: Metadata = {
+  title: 'Siege Affair | MixMaster PVP ⚔️',
+};
 
 export default function SiegeAffairPage() {
   return (
