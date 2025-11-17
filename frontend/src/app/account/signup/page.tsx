@@ -21,7 +21,7 @@ export default async function SignUpPage() {
         <div className="container flex-col items-center">
 
           <h1 className="title">
-            Sign Up
+            Register
           </h1>
           
           <p className="text-base text-center mt-6">

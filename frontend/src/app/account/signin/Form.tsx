@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 
 import { loginUser } from '@/app/api/account';
 
+import { CheckIcon } from '@heroicons/react/24/outline';
+
 export default function Form() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +22,10 @@ export default function Form() {
       if (!('ok' in response) || !response.ok) {
         console.log('handleSignin response error', response);
         setErrorMessage('User not found.');
-        setTimeout(() => setErrorMessage(''), 3000);
+        setTimeout(() => {
+          setErrorMessage('');
+          setSending(false);
+        }, 3000);
       } else {
         await new Promise(r => setTimeout(r, 120));
         router.replace('/account');
@@ -29,15 +34,13 @@ export default function Form() {
     } catch (error) {
       console.error('handleSignin token error', error);
     }
-
-    setSending(false);
   };
 
   return (
-    <form onSubmit={handleSignin} className={`form flex flex-col items-center w-full mt-12 max-w-[320px] duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}>
+    <form onSubmit={handleSignin} className={`form flex flex-col items-center w-full mt-12 max-w-[320px]`}>
       <div className="fields w-full grid grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(1,1fr)]">
         <input
-          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0)"
+          className={`bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0) duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}
           id="username"
           name="username"
           type="text"
@@ -47,7 +50,7 @@ export default function Form() {
           required
         />
         <input
-          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0)"
+          className={`bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0) duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}
           id="password"
           name="password"
           type="password"
@@ -59,11 +62,11 @@ export default function Form() {
       </div>
 
       <button className={`button-orange mt-12 ${sending && 'pointer-events-none'}`} type="submit" aria-label="Click to Login">
-        Login
+        Confirm
       </button>
 
       {errorMessage && (
-        <p className="text-base text-white mt-12">
+        <p className="text-sm text-white mt-12">
           {errorMessage}
         </p>
       )}

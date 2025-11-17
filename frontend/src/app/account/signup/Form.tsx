@@ -22,21 +22,30 @@ export default function Form() {
       const existing = await getUserByUsername(username);
       if (existing) {
         setErrorMessage('Username unavailable.');
-        setTimeout(() => setErrorMessage(''), 3000);
+        setTimeout(() => {
+          setErrorMessage('');
+          setSending(false);
+        }, 3000);
         setSending(false);
         return;
       }
       const created = await createUser({ username, password, email, phone });
       if (!created) {
         setErrorMessage('Create failed');
-        setTimeout(() => setErrorMessage(''), 3000);
+        setTimeout(() => {
+          setErrorMessage('');
+          setSending(false);
+        }, 3000);
         setSending(false);
         return;
       }
       const response = await loginUser(username, password) as Response;
       if (!('ok' in response) || !response.ok) {
         setErrorMessage('Auto-login failed');
-        setTimeout(() => setErrorMessage(''), 3000);
+        setTimeout(() => {
+          setErrorMessage('');
+          setSending(false);
+        }, 3000);
       } else {
         await new Promise(r => setTimeout(r, 120));
         router.replace('/account');
@@ -45,15 +54,13 @@ export default function Form() {
     } catch (error) {
       console.log('handleSignup API getUserByUsername error', error)
     }
-
-    setSending(false);
   };
 
   return (
-    <form onSubmit={handleSignup} className={`form flex flex-col items-center w-full mt-12 max-w-[320px] duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}>
+    <form onSubmit={handleSignup} className={`form flex flex-col items-center w-full mt-12 max-w-[320px]`}>
       <div className="fields w-full grid grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(1,1fr)]">
         <input
-          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0)"
+          className={`bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0) duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}
           id="username"
           name="username"
           type="text"
@@ -63,7 +70,7 @@ export default function Form() {
           required
         />
         <input
-          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0)"
+          className={`bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0) duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}
           id="password"
           name="password"
           type="password"
@@ -73,7 +80,7 @@ export default function Form() {
           required
         />
         <input
-          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0)"
+          className={`bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0) duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}
           id="email"
           name="email"
           type="email"
@@ -83,7 +90,7 @@ export default function Form() {
           required
         />
         <input
-          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0)"
+          className={`bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0) duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}
           id="phone"
           name="phone"
           type="text"
@@ -94,11 +101,11 @@ export default function Form() {
       </div>
 
       <button className="button-orange mt-12" type="submit" aria-label="Click to Sign Up">
-        Register
+        Confirm
       </button>
 
       {errorMessage && (
-        <p className="text-base text-white mt-12">
+        <p className="text-sm text-white mt-12">
           {errorMessage}
         </p>
       )}

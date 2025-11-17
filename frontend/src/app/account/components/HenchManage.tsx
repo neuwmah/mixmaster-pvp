@@ -32,7 +32,7 @@ export default function HenchManage({ character, henches, setPetsList, setHenchL
           Pets 🐍
         </h2>
 
-        <p className={`text-big text-center mt-6`}>
+        <p className={`text-base text-center mt-6`}>
           Check your character pets below.
         </p>
 

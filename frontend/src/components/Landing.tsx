@@ -17,11 +17,11 @@ const Landing: React.FC = () => {
             MixMaster PVP ⚔️
           </h1>
 
-          <p className="text-big text-white text-center max-w-120">
+          <p className="text-base text-white text-center max-w-120">
             No grind. Log in and go fight.
           </p>
 
-          <p className="text-big text-white text-center font-bold max-w-120 mt-8">
+          <p className="text-base text-white text-center font-bold max-w-120 mt-8">
             Coming soon!
           </p>
 

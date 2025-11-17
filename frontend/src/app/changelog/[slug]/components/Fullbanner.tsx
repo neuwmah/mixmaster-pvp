@@ -31,7 +31,7 @@ export default function Fullbanner({ isAdmin, postId, postActive, postSlug, post
             isAdmin={isAdmin}
           />
 
-          <p className="text-base text-center mt-4 text-(--gray-4)">
+          <p className="text-base text-center mt-6 text-(--gray-4)">
             {postCreatedAt ? new Date(postCreatedAt).toLocaleDateString() : 'N/A'}
           </p>
 

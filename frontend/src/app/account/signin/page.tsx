@@ -21,7 +21,7 @@ export default async function SignInPage() {
         <div className="container flex-col items-center">
 
           <h1 className="title">
-            Sign In
+            Login
           </h1>
 
           <p className="text-base text-center mt-6">

@@ -22,7 +22,7 @@ export default function Characters({ user, setItems, setPetsList, handleSetCreat
           Characters 👥
         </h2>
 
-        <p className={`text-big text-center mt-6`}>
+        <p className={`text-base text-center mt-6`}>
           Check your account characters below.
         </p>
 

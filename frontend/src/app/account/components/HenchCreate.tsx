@@ -64,7 +64,7 @@ export default function HenchCreate({ user, henches, character, isFirstTime = fa
           New Pet 🐍
         </h2>
 
-        <p className={`text-big text-center mt-6`}>
+        <p className={`text-base text-center mt-6`}>
           {isFirstTime ? 'Select 3 initial pets to create below.' : 'Select new pets to create below.'}
         </p>
 

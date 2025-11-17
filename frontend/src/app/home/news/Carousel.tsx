@@ -47,7 +47,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, account = false }) => {
     `}>
       <Swiper
         className="swiper-static swiper-fade-4"
-        spaceBetween={mobile ? 16 : 24}
+        spaceBetween={1}
         slidesPerView={mobile ? 1 : 4}
         watchSlidesProgress
         modules={[Navigation, Pagination]}
@@ -79,7 +79,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, account = false }) => {
                 )}
 
                 <div className={`
-                  w-full p-8 pb-12
+                  w-full p-6 pb-8
                   flex flex-col items-start 
                   duration-250 
                   border-1
@@ -88,10 +88,10 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, account = false }) => {
                   <p className="text-base font-medium">
                     {item.title}
                   </p>
-                  <span className="text-sm no-underline mt-2 text-(--gray-4) group-hover:underline">
+                  <span className="text-xs no-underline mt-2 text-(--gray-4) group-hover:underline">
                     {new Date(item.created_at).toLocaleDateString()}
                   </span>
-                  <span className="text-base no-underline mt-6 text-(--white) line-clamp-3 overflow-hidden">
+                  <span className="text-sm no-underline mt-4 text-(--white) line-clamp-3 overflow-hidden">
                     {item.content1}
                   </span>
                 </div>

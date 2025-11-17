@@ -45,7 +45,7 @@ export default function ItemsCreate({ items, setItems, setItemsList }: ItemCreat
           New Item 🛡️
         </h2>
 
-        <p className={`text-big text-center mt-6`}>
+        <p className={`text-base text-center mt-6`}>
           Select new items to create below.
         </p>
 

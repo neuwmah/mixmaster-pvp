@@ -29,7 +29,7 @@ export default function ItemsManage({ character, setItems, setItemsList }: Items
           Items 🛡️
         </h2>
 
-        <p className={`text-big text-center mt-6`}>
+        <p className={`text-base text-center mt-6`}>
           Check your character items below.
         </p>
 

@@ -36,7 +36,7 @@ export default function Details({ user }: DetailsProps) {
           Account 👤
         </h1>
 
-        <p className="text-big text-center mt-6">
+        <p className="text-base text-center mt-6">
           Check your account details below.
         </p>
 

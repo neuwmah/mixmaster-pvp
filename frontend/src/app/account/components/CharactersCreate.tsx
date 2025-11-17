@@ -87,7 +87,7 @@ export default function CharactersCreate({ user, create, setCreate, setHenchList
           Characters 👥
         </h2>
 
-        <p className={`text-big text-center mt-6 max-w-[24rem] sm:max-w-[100%]`}>
+        <p className={`text-base text-center mt-6 max-w-[24rem] sm:max-w-[100%]`}>
           Create a new character below.
         </p>
         
