@@ -4,12 +4,12 @@ import { getItems } from '@/app/api/item'
 
 import Bag from '@/app/account/components/items/Bag'
 
-import { Character } from '@/types/character'
+import { Hero } from '@/types/user'
 import { Item } from '@/types/item'
 
 interface ItemsManageProps {
-  character: Character
-  setItems: (value: Character | undefined) => void
+  character: Hero
+  setItems: (value: Hero | undefined) => void
   setItemsList: (value: Item[]) => void
 }
 
@@ -45,13 +45,13 @@ export default function ItemsManage({ character, setItems, setItemsList }: Items
             >
               Save
             </button>
-            {!character.items || (character.items && character.items?.length < 100) ?
+            {true ?
               <button
                 className="w-auto button-orange"
                 type="button"
                 aria-label="Add New Item"
                 onClick={async () => {
-                  const currentItems = await getItems(character.class)
+                  const currentItems = await getItems(character.class.toString())
                   setItemsList(currentItems)
                 }}
               >

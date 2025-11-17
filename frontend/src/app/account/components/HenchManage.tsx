@@ -5,13 +5,13 @@ import { getHenchs } from '@/app/api/hench'
 import Party from '@/app/account/components/hench/Party'
 import Bag from '@/app/account/components/hench/Bag'
 
-import { Character } from '@/types/character'
+import { Hero } from '@/types/user'
 import { Hench } from '@/types/hench'
 
 interface HenchManageProps {
-  character: Character
+  character: Hero
   henches: Hench[]
-  setPetsList: (value: Character | undefined) => void
+  setPetsList: (value: Hero | undefined) => void
   setHenchList: (value: Hench[]) => void
   setHenchListDisplay: (value: boolean) => void
 }
@@ -49,7 +49,7 @@ export default function HenchManage({ character, henches, setPetsList, setHenchL
             >
               Save
             </button>
-            {!character.pets || (character.pets && character.pets?.length < 20) ?
+            {true ?
               <button
                 className="w-auto button-orange"
                 type="button"

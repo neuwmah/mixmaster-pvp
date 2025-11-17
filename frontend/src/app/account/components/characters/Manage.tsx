@@ -3,19 +3,19 @@ import React, { useState } from 'react'
 
 import Card from '@/app/account/components/characters/manage/Card'
 
-import { Character } from '@/types/character'
+import { Hero } from '@/types/user'
 
 interface ManageProps {
-  characters: Character[] | undefined
+  heroes: Hero[] | undefined
   setCreate: (value: boolean) => void
-  setItems: (value: Character | undefined) => void
-  setPetsList: (value: Character | undefined) => void
+  setItems: (value: Hero | undefined) => void
+  setPetsList: (value: Hero | undefined) => void
 }
 
-export default function Manage({ characters, setCreate, setItems, setPetsList }: ManageProps) {
+export default function Manage({ heroes, setCreate, setItems, setPetsList }: ManageProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
 
-  return characters != undefined && (
+  return heroes != undefined && (
     <div className="manage w-full flex flex-col items-center">
       <div
         className={`
@@ -24,13 +24,13 @@ export default function Manage({ characters, setCreate, setItems, setPetsList }:
           w-full
           grid gap-[1.6rem] grid-cols-[repeat(1,1fr)]
           sm:flex sm:justify-center
-          ${characters.length >= 3 && 'pb-[1.6rem]'}
+          ${heroes.length >= 3 && 'pb-[1.6rem]'}
         `}
       >
-        {characters.map(character => (
+        {heroes.map(hero => (
           <Card
-            key={character.id}
-            {...character}
+            key={hero.id_idx + '-' + hero.hero_order}
+            {...hero}
             hoveredId={hoveredId}
             setHoveredId={setHoveredId}
             setItems={setItems}
@@ -38,7 +38,7 @@ export default function Manage({ characters, setCreate, setItems, setPetsList }:
           />
         ))}
       </div>
-      {characters.length < 3 && (
+      {heroes.length < 3 && (
         <button
           className="w-auto button-orange mt-16"
           type="button"

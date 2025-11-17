@@ -2,23 +2,21 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
-import { deletePetsBulk } from '@/app/api/pets'
 import { getIcon } from '@/app/account/components/hench/pets/image/index'
 
 import { TrashIcon } from '@heroicons/react/24/outline'
 
-import { Pet } from '@/types/pet'
 import { Hench } from '@/types/hench'
-import { Character } from '@/types/character'
+import { Hero } from '@/types/user'
 
 interface PetInlineProps {
-  pet?: Pet
+  pet?: any
   hench: Hench | undefined
-  character?: Character
+  character?: Hero
   maxSelection?: number
   selectedHench?: Array<string> | false
   setSelectedHench?: (value: Array<string>) => void
-  setPetsList?: (value: Character | undefined) => void
+  setPetsList?: (value: Hero | undefined) => void
 }
 
 export default function PetInline({ pet, hench, character, maxSelection, selectedHench = false, setSelectedHench, setPetsList }: PetInlineProps) {
@@ -46,11 +44,7 @@ export default function PetInline({ pet, hench, character, maxSelection, selecte
 
     setDeleting(true)
 
-    const { error } = await deletePetsBulk(character.id, [pet.id])
-    if (error) alert(error)
-
-    if (!error && setPetsList)
-      setPetsList({ ...character, pets: character.pets?.filter(p => p.id !== pet.id) })
+    alert('Pet deletion not yet implemented for MySQL')
 
     setDeleting(false)
     router.refresh()

@@ -2,20 +2,17 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { createPetsBulk } from '@/app/api/pets'
-
 import General from '@/app/account/components/hench/General'
 
-import { Character } from '@/types/character'
 import { Hench } from '@/types/hench'
-import { User } from '@/types/user'
+import { User, Hero } from '@/types/user'
 
 interface HenchCreateProps {
   user: User
   henches: Hench[]
-  character: Character | undefined
+  character: Hero | undefined
   isFirstTime?: boolean
-  setPetsList: (value: Character | undefined) => void
+  setPetsList: (value: Hero | undefined) => void
   setHenchListDisplay: (value: boolean) => void
 }
 
@@ -29,18 +26,8 @@ export default function HenchCreate({ user, henches, character, isFirstTime = fa
     setSending(true)
 
     try {
-      const result = await createPetsBulk(selectedHench.map(
-        (hid) => ({ 
-          characterId: character ? character.id : '',
-          henchId: hid,
-          in_party: isFirstTime
-        })
-      ))
-
-      if (character && result.data)
-        setPetsList({ ...character, pets: [...character.pets || [], ...result.data] })
+      alert('Pets functionality not yet implemented for MySQL')
       setHenchListDisplay(false)
-      
       router.refresh()
     } catch {
       alert('Unexpected error.')

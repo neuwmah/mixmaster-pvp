@@ -1,10 +1,9 @@
 "use client"
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Character } from '@/types/character'
-import { initTransfer, cancelTransfer } from '@/app/api/character'
+import { Hero } from '@/types/user'
 
-interface TransferCharacterProps extends Character {
+interface TransferCharacterProps extends Hero {
   transferCharacter: boolean;
   setTransferCharacter: (value: boolean) => void;
 }
@@ -18,40 +17,15 @@ export default function TransferCharacter({
   const [targetUserId, setTargetUserId] = useState('')
   const [sending, setSending] = useState(false)
   const [error, setError] = useState('')
-  const pending = !!character.transferPending
+  const pending = false
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (sending || pending) return
-    if (!targetUserId.trim()) {
-      setError('Target user ID required')
-      return
-    }
-    setSending(true)
-    setError('')
-    const res = await initTransfer(character.id, targetUserId.trim())
-    if (res.error) {
-      setError('User not found.')
-      setSending(false)
-      router.refresh()
-      return
-    }
-    setTransferCharacter(false)
-    router.refresh()
+    alert('Character transfer not yet implemented for MySQL')
   }
 
   async function onCancel() {
-    if (sending || !pending) return
-    if (!window.confirm('Cancel this transfer?')) return
-    setSending(true)
-    setError('')
-    const res = await cancelTransfer(character.id)
-    if (res.error) {
-      router.refresh()
-      return
-    }
-    setTransferCharacter(false)
-    router.refresh()
+    alert('Character transfer not yet implemented for MySQL')
   }
 
   return <div className="transfer-character w-full min-w-0">
@@ -65,8 +39,8 @@ export default function TransferCharacter({
     </button>
 
     <p className="text-base mt-8">
-      Current user ID:<br/>
-      <strong className="text-ellipsis block overflow-hidden w-full relative text-nowrap">{character.userId}</strong>
+      Character ID:<br/>
+      <strong className="text-ellipsis block overflow-hidden w-full relative text-nowrap">{character.id_idx}</strong>
     </p>
 
     <p className="text-base mt-4">
@@ -107,8 +81,7 @@ export default function TransferCharacter({
       {pending && (
         <div className="flex flex-col mt-4">
           <div className="text-base">
-            Target user ID:<br/>
-            <strong className="text-ellipsis block overflow-hidden w-full relative text-nowrap">{character.transferTargetUserId}</strong>
+            Transfer pending...
           </div>
 
           <button

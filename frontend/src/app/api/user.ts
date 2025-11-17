@@ -1,68 +1,40 @@
 import createApiClient from '@/hooks/axios'
-import { User, UserCreate, UserUpdate } from '@/types/user'
+import { User, UserCreate, UserLogin } from '@/types/user'
 
 const baseEnv = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL || ''
 
 function api() { return createApiClient(baseEnv) }
 
-export async function getUsers(): Promise<User[]> {
-  try {
-    const { data } = await api().get('/users')
-    return Array.isArray(data) ? data as User[] : []
-  } catch { return [] }
-}
-
-export async function getUser(id: string): Promise<User | null> {
-  try {
-    const { data } = await api().get(`/users/${id}`)
-    return data as User
-  } catch { return null }
-}
-
-export async function getUserByUsername(username: string): Promise<User | null> {
-  try {
-    const { data } = await api().get(`/users/exists/${username}`)
-    if (!data?.exists) return null
-    const users = await getUsers()
-    return users.find(u => u.username === username) || null
-  } catch { return null }
-}
-
-export async function verifyCredentials(username: string, password: string): Promise<{ id: string; username: string } | null> {
-  try {
-    const { data } = await api().post('/users/check', { username, password })
-    return data
-  } catch { return null }
-}
-
-export async function createUser(payload: UserCreate): Promise<User | null> {
+export async function createUser(payload: UserCreate): Promise<{ data?: User; error?: string }> {
   try {
     const { data } = await api().post('/users', payload)
-    return data as User
-  } catch (e) { console.log(e); console.error('createUser error', e); return null }
+    return { data: data as User }
+  } catch (e: any) {
+    console.error('createUser error', e)
+    const message = e?.response?.data?.message || 'Create user failed'
+    return { error: message }
+  }
 }
 
-export async function updateUser(id: string, payload: UserUpdate & { currentPassword?: string }): Promise<{ data?: User; error?: string }> {
+export async function loginUser(payload: UserLogin): Promise<{ token?: string; error?: string }> {
   try {
-    const body: any = {}
-    ;(['email','phone','password'] as (keyof UserUpdate)[]).forEach(k => {
-      if (payload[k] !== undefined) body[k] = payload[k]
-    })
-    if (payload.currentPassword) body.currentPassword = payload.currentPassword
-    if (!Object.keys(body).length) return { error: 'nothing to update' }
-    const res = await fetch(`/api/user/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    })
-    if (!res.ok) {
-      const json = await res.json().catch(() => ({}))
-      return { error: json?.message || 'updateUser error' }
-    }
-    const data = await res.json()
-    return { data }
+    const { data } = await api().post('/auth/login', payload)
+    return { token: data.token }
   } catch (e: any) {
-    console.log(e)
-    return { error: 'updateUser error' }
+    console.error('loginUser error', e)
+    const message = e?.response?.data?.message || 'Login failed'
+    return { error: message }
+  }
+}
+
+export async function getMe(token: string): Promise<{ data?: User; error?: string }> {
+  try {
+    const { data } = await api().get('/auth/me', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    return { data: data as User }
+  } catch (e: any) {
+    console.error('getMe error', e)
+    return { error: 'Failed to get user data' }
   }
 }

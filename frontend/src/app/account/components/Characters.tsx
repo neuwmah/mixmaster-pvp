@@ -1,16 +1,12 @@
 "use client"
 import React from 'react'
 
-import PendingTransfers from '@/app/account/components/characters/PendingTransfers'
-import Manage from '@/app/account/components/characters/Manage'
-
-import { User } from '@/types/user'
-import { Character } from '@/types/character'
+import { User, Hero } from '@/types/user'
 
 interface CharactersProps {
   user: User
-  setItems: (value: Character | undefined) => void
-  setPetsList: (value: Character | undefined) => void
+  setItems: (value: Hero | undefined) => void
+  setPetsList: (value: Hero | undefined) => void
   handleSetCreate: (value: boolean) => void
 }
 
@@ -25,9 +21,6 @@ export default function Characters({ user, setItems, setPetsList, handleSetCreat
         <p className={`text-base text-center mt-6`}>
           Check your account characters below.
         </p>
-
-        <PendingTransfers userId={user.id} />
-        <Manage characters={user.characters} setCreate={handleSetCreate} setItems={setItems} setPetsList={setPetsList} />
       </div>
 
       <svg className="absolute top-0 left-0 w-full pointer-events-none z-1 rotate-[180deg]" viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg">

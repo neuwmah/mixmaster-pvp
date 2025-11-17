@@ -3,15 +3,11 @@ import React, { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Swiper as SwiperType } from 'swiper'
 
-import { createCharacter } from '@/app/api/character'
-import { getHenchs } from '@/app/api/hench'
-
 import Background from '@/app/account/components/characters/Background'
 import Fields from '@/app/account/components/charactersCreate/Fields'
 import Jobs from '@/app/account/components/charactersCreate/Jobs'
 
-import { User } from '@/types/user'
-import { Character } from '@/types/character'
+import { User, Hero } from '@/types/user'
 import { Hench } from '@/types/hench'
 
 interface CharactersCreateProps {
@@ -20,7 +16,7 @@ interface CharactersCreateProps {
   setCreate: (value: boolean) => void
   setHenchList: (value: Hench[]) => void
   setHenchListDisplay: (value: boolean) => void
-  setPetsList: (value: Character | undefined) => void
+  setPetsList: (value: Hero | undefined) => void
 }
 
 export default function CharactersCreate({ user, create, setCreate, setHenchList, setHenchListDisplay, setPetsList }: CharactersCreateProps) {
@@ -38,28 +34,9 @@ export default function CharactersCreate({ user, create, setCreate, setHenchList
     setErrorMessage('')
 
     try {
-      const partialCharacter = {
-        userId: user.id,
-        name,
-        class: job,
-        energy: attributes.energy,
-        agility: attributes.agility,
-        accuracy: attributes.accuracy,
-        luck: attributes.luck
-      }
-
-      const result = await createCharacter(partialCharacter)
-      if (result.error || !result.data) {
-        alert(result.error || 'Create error.')
-        setTimeout(() => setErrorMessage(''), 2500)
-      } else {
-        const currentHenches = await getHenchs()
-        setPetsList(result.data)
-        setCreate(false)
-        setHenchList(currentHenches)
-        setHenchListDisplay(true)
-        router.refresh()
-      }
+      alert('Character creation not yet implemented for MySQL')
+      setCreate(false)
+      router.refresh()
     } catch {
       alert('Unexpected error.')
       setTimeout(() => setErrorMessage(''), 2500)
@@ -78,7 +55,7 @@ export default function CharactersCreate({ user, create, setCreate, setHenchList
       sm:min-h-[calc(100vh-8.8rem-3.2rem-4.2rem)]
       sm:flex sm:items-center
     ">
-      {(!user.characters?.length || create) &&
+      {(!user.heroes?.length || create) &&
         <Background backgroundRef={backgroundRef} />
       }
 

@@ -1,4 +1,4 @@
-export async function loginUser(username: string, password: string): Promise<object> {
+export async function loginUser(username: string, password: string): Promise<Response> {
   try {
     const response = await fetch('/api/auth/login', {
       method: 'POST',
@@ -9,7 +9,7 @@ export async function loginUser(username: string, password: string): Promise<obj
     return response
   } catch (error) {
     console.error('loginUser error', error);
-    return {}
+    throw error
   }
 }
 
@@ -19,7 +19,7 @@ export async function logoutUser(): Promise<boolean> {
       method: 'POST',
     });
 
-    return response.ok ? true : false
+    return response.ok
   } catch (error) {
     console.error('logoutUser error', error);
     return false

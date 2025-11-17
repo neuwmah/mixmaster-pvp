@@ -19,9 +19,8 @@ export default function Details({ user }: DetailsProps) {
   `
   
   const changeableData = [
-    { key: 'e-mail', data: user.email ?? null },
-    { key: 'password', data: null },
-    { key: 'phone', data: user.phone ?? null }
+    { key: 'e-mail', data: user.Email ?? null },
+    { key: 'password', data: null }
   ]
 
   return (
@@ -43,27 +42,21 @@ export default function Details({ user }: DetailsProps) {
         <div className="text-sm grid mt-12 w-full max-w-[1000px] gap-4 grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(3,1fr)] items-start">
           <div className={cardsClass}>
             <p>ID</p>
-            <strong>{user.id}</strong>
+            <strong>{user.id_idx}</strong>
           </div>
           <div className={cardsClass}>
             <p>USERNAME</p>
-            <strong>{user.username}</strong>
+            <strong>{user.PlayerID}</strong>
           </div>
           <div className={cardsClass}>
-            <p>STATUS</p>
-            <strong className={
-              user.online_status
-                ? 'text-[#00ce00]' 
-                : 'text-[#ff4f4f]'
-            }>
-              {user.online_status ? 'Online' : 'Offline'}
-            </strong>
+            <p>NAME</p>
+            <strong>{user.Name}</strong>
           </div>
 
           {changeableData.map((field: { key: string; data: string | null }) => {
             return <ChangeableField
-              userId={user.id}
-              username={user.username}
+              userId={user.id_idx.toString()}
+              username={user.PlayerID}
               key={field.key}
               field={field}
               cardsClass={cardsClass}

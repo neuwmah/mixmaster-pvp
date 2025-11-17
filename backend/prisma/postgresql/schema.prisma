@@ -8,81 +8,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id                         String      @id @default(cuid())
-  created_at                 DateTime    @default(now())
-  username                   String      @unique
-  password                   String
-  email                      String      @unique
-  phone                      String?
-  online_points              Int         @default(0)
-  online_status              Boolean     @default(false)
-  online_time                Int         @default(0)
-  last_connection_date       DateTime?   @db.Timestamptz(6)
-  last_connection_ip         String?     @db.VarChar(64)
-  is_admin                   Boolean     @default(false)
-  transferIncomingCharacters Character[] @relation("CharacterTransferTarget")
-  characters                 Character[]
-}
-
-model Character {
-  id                   String         @id @default(cuid())
-  created_at           DateTime       @default(now())
-  userId               String?
-  guildId              String?
-  name                 String         @unique
-  class                CharacterClass
-  level                Int            @default(1)
-  map                  String         @default("FBZ")
-  exp                  Int            @default(0)
-  gold                 Int            @default(0)
-  energy               Int            @default(10)
-  agility              Int            @default(10)
-  accuracy             Int            @default(10)
-  luck                 Int            @default(10)
-  kills_count          Int            @default(0)
-  castles_count        Int            @default(0)
-  online_status        Boolean        @default(false)
-  online_time          Int            @default(0)
-  last_connection_date DateTime?      @db.Timestamptz(6)
-  last_connection_ip   String?        @db.VarChar(64)
-  transferPending      Boolean        @default(false)
-  transferRequestedAt  DateTime?
-  transferTargetUserId String?
-  guild                Guild?         @relation("GuildMembers", fields: [guildId], references: [id])
-  transferTargetUser   User?          @relation("CharacterTransferTarget", fields: [transferTargetUserId], references: [id])
-  user                 User?          @relation(fields: [userId], references: [id])
-  masterOf             Guild?         @relation("GuildMaster")
-
-  @@index([userId])
-  @@index([guildId])
-  @@index([transferTargetUserId])
-}
-
-model Guild {
-  id            String      @id @default(cuid())
-  created_at    DateTime    @default(now())
-  name          String      @unique
-  masterId      String?     @unique
-  castles_count Int         @default(0)
-  icon          String?
-  castles       Castle[]
-  members       Character[] @relation("GuildMembers")
-  master        Character?  @relation("GuildMaster", fields: [masterId], references: [id])
-}
-
-model Castle {
-  id         String   @id @default(cuid())
-  created_at DateTime @default(now())
-  ownerId    String
-  city       String   @unique
-  time       DateTime @db.Time(6)
-  weekday    String
-  owner      Guild    @relation(fields: [ownerId], references: [id])
-
-  @@index([ownerId])
-}
-
 model Changelog {
   id         String   @id @default(cuid())
   created_at DateTime @default(now())
@@ -99,17 +24,4 @@ model Menu {
   created_at DateTime @default(now())
   title      String
   url        String
-}
-
-model Download {
-  id         String   @id @default(cuid())
-  created_at DateTime @default(now())
-  url        String
-}
-
-enum CharacterClass {
-  ditt
-  jin
-  penril
-  phoy
 }

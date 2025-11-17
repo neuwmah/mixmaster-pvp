@@ -1,27 +1,43 @@
-import type { Character } from './character'
-
 export interface User {
-  id: string
-  username: string
-  email?: string | null
-  phone?: string | null
-  is_admin?: boolean
-  online_status?: boolean
-  characters?: Character[]
-  created_at?: string
-  updated_at?: string
+  id_idx: number
+  PlayerID: string
+  Name: string
+  Email?: string
+  Block: string
+  Access: number
+  RegDate: string
+  LastLoginDate?: string
+  heroes?: Hero[]
+}
+
+export interface Hero {
+  id_idx: number
+  hero_order: number
+  serial: string
+  name: string
+  hero_type: number
+  class: number
+  baselevel: number
+  exp: string
+  str: number
+  dex: number
+  aim: number
+  luck: number
+  gold: number
+  abil_freepoint: number
+  now_zone_idx: number
+  login: boolean
+  resets: number
 }
 
 export interface UserCreate {
   username: string
-  email: string
   password: string
-  phone?: string | null
+  name: string
+  email: string
 }
 
-export interface UserUpdate {
-  email?: string
-  phone?: string | null
-  password?: string
-  currentPassword?: string
+export interface UserLogin {
+  username: string
+  password: string
 }

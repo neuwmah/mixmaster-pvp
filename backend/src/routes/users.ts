@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify'
-import { prisma, myMemberPrisma } from '../db.js'
+import { myMemberPrisma, myGamePrisma } from '../db.js'
 import { z } from 'zod'
 import crypto from 'node:crypto'
 import jwt from '@fastify/jwt'
@@ -7,8 +7,8 @@ import jwt from '@fastify/jwt'
 const userCreateSchema = z.object({
   username: z.string().min(3),
   password: z.string().min(3),
-  email: z.string().email(),
-  phone: z.string().optional()
+  name: z.string().min(3),
+  email: z.string().email()
 })
 
 const userLoginSchema = z.object({
@@ -16,18 +16,10 @@ const userLoginSchema = z.object({
   password: z.string()
 })
 
-const userUpdateSchema = z.object({
-  email: z.string().email().optional(),
-  phone: z.string().optional(),
-  password: z.string().min(3).optional(),
-  currentPassword: z.string().optional()
-}).refine(d => {
-  const keys = Object.keys(d).filter(k => k !== 'currentPassword')
-  return keys.length > 0
-}, { message: 'empty body' })
-
-function hash(pw: string) {
-  return crypto.createHash('sha256').update(pw).digest('hex')
+function hashPassword(password: string): string {
+  const hash1 = crypto.createHash('sha1').update(password).digest()
+  const hash2 = crypto.createHash('sha1').update(hash1).digest('hex')
+  return '*' + hash2.toUpperCase()
 }
 
 export async function userRoutes(app: FastifyInstance) {
@@ -36,124 +28,139 @@ export async function userRoutes(app: FastifyInstance) {
     await app.register(jwt, { secret: process.env.JWT_SECRET })
   }
 
-  app.get('/users', async () => {
-    const users = await prisma.user.findMany({
-      include: {
-        characters: true
-      }
-    })
-    return users.map((u: any) => ({ ...u, password: undefined }))
-  })
-
-  app.get('/users/exists/:username', async (req) => {
-    const { username } = req.params as { username: string }
-    const user = await prisma.user.findUnique({ where: { username } })
-    return { exists: !!user }
-  })
-
-  app.get('/users/:id', async (req, reply) => {
-    const { id } = req.params as { id: string }
-    const user = await prisma.user.findUnique({
-      where: { id },
-      include: {
-        characters: true
-      }
-    })
-    if (!user) return reply.code(404).send({ message: 'not found' })
-    return { ...user, password: undefined }
-  })
-
   app.post('/users', async (req, reply) => {
-    const parse = userCreateSchema.safeParse(req.body)
-    if (!parse.success) return reply.code(400).send({ errors: parse.error.flatten() })
-    const data = parse.data
-    const phone = data.phone?.trim() === '' ? undefined : data.phone?.trim()
+    const parsed = userCreateSchema.safeParse(req.body)
+    if (!parsed.success) return reply.code(400).send({ errors: parsed.error.flatten() })
+    
+    const { username, password, name, email } = parsed.data
+
     try {
-      const user = await prisma.user.create({ data: { username: data.username, email: data.email, phone, password: hash(data.password) } })
+      const existing = await myMemberPrisma.player.findUnique({ 
+        where: { PlayerID: username } 
+      })
+      if (existing) {
+        return reply.code(409).send({ message: 'Username already exists' })
+      }
 
-      try {
-        await myMemberPrisma.player.create({ data: { PlayerID: data.username, Passwd: data.password, Email: data.email, RegDate: new Date() } })
-      } catch (e: any) {
-        if (e.code != 'P2032') {
-          try {
-            await prisma.user.delete({ where: { id: user.id } })
-          } catch (delErr) {
-            console.error('failed to rollback user after mysql player create error', delErr)
-          }
-          if (e?.code === 'P2002') {
-            return reply.code(409).send({ message: 'mysql player unique constraint' })
-          }
-          console.error('mysql player create error', e)
-          return reply.code(500).send({ message: 'internal error' })
+      const user = await myMemberPrisma.player.create({
+        data: {
+          PlayerID: username,
+          Passwd: hashPassword(password),
+          Name: name,
+          Email: email,
+          RegDate: new Date(),
+          Access: 21,
+          Block: 'ALLOW'
         }
-      }
+      })
 
-      return reply.code(201).send({ ...user, password: undefined })
+      return reply.code(201).send({
+        id_idx: user.id_idx,
+        PlayerID: user.PlayerID,
+        Name: user.Name,
+        Email: user.Email
+      })
     } catch (e: any) {
-      if (e?.code === 'P2002') {
-        return reply.code(409).send({ message: 'unique constraint', target: (e.meta as any)?.target })
-      }
-      console.error('create user error', e)
-      return reply.code(500).send({ message: 'internal error' })
+      console.error('Create user error:', e)
+      return reply.code(500).send({ message: 'Internal error' })
     }
   })
 
-  app.post('/users/check', async (req, reply) => {
-    const parse = userLoginSchema.safeParse(req.body)
-    if (!parse.success) return reply.code(400).send({ errors: parse.error.flatten() })
-    const { username, password } = parse.data
-    const user = await prisma.user.findUnique({ where: { username } })
-    if (!user) return reply.code(401).send({ message: 'invalid credentials' })
-    if (user.password !== hash(password)) return reply.code(401).send({ message: 'invalid credentials' })
-    return { id: user.id, username: user.username }
+  app.post('/users/login', async (req, reply) => {
+    const parsed = userLoginSchema.safeParse(req.body)
+    if (!parsed.success) return reply.code(400).send({ errors: parsed.error.flatten() })
+
+    const { username, password } = parsed.data
+
+    try {
+      const user = await myMemberPrisma.player.findUnique({
+        where: { PlayerID: username }
+      })
+
+      if (!user) {
+        return reply.code(401).send({ message: 'Invalid credentials' })
+      }
+
+      if (user.Block !== 'ALLOW') {
+        return reply.code(403).send({ message: 'Account blocked' })
+      }
+
+      const hashedPassword = hashPassword(password)
+      if (user.Passwd !== hashedPassword) {
+        return reply.code(401).send({ message: 'Invalid credentials' })
+      }
+
+      const token = app.jwt.sign({ 
+        userId: user.id_idx, 
+        username: user.PlayerID 
+      }, { expiresIn: '24h' })
+
+      return { 
+        token,
+        user: {
+          id_idx: user.id_idx,
+          PlayerID: user.PlayerID,
+          Name: user.Name,
+          Email: user.Email
+        }
+      }
+    } catch (e: any) {
+      console.error('Login error:', e)
+      return reply.code(500).send({ message: 'Internal error' })
+    }
   })
 
-  app.put('/users/:id', async (req, reply) => {
+  app.get('/users/me', async (req, reply) => {
     try {
       const auth = req.headers.authorization
-      if (!auth) return reply.code(401).send({ message: 'unauthorized' })
+      if (!auth) return reply.code(401).send({ message: 'No token' })
+      
       const token = auth.split(' ')[1]
-      let payload: any
-      try {
-        payload = (app as any).jwt.verify(token)
-      } catch (err) {
-        return reply.code(401).send({ message: 'invalid token' })
+      const payload = app.jwt.verify<{ userId: number }>(token)
+
+      const user = await myMemberPrisma.player.findFirst({
+        where: { id_idx: payload.userId }
+      })
+
+      if (!user) return reply.code(404).send({ message: 'User not found' })
+
+      const heroes = await myGamePrisma.u_hero.findMany({
+        where: { id_idx: user.id_idx },
+        orderBy: { hero_order: 'asc' }
+      })
+
+      return {
+        id_idx: user.id_idx,
+        PlayerID: user.PlayerID,
+        Name: user.Name,
+        Email: user.Email,
+        Block: user.Block,
+        Access: user.Access,
+        RegDate: user.RegDate,
+        LastLoginDate: user.LastLoginDate,
+        heroes: heroes.map(h => ({
+          id_idx: h.id_idx,
+          hero_order: h.hero_order,
+          serial: h.serial.toString(),
+          name: h.name,
+          hero_type: h.hero_type,
+          class: h.class,
+          baselevel: h.baselevel,
+          exp: h.exp,
+          str: h.str,
+          dex: h.dex,
+          aim: h.aim,
+          luck: h.luck,
+          gold: h.gold,
+          abil_freepoint: h.abil_freepoint,
+          now_zone_idx: h.now_zone_idx,
+          login: h.login,
+          resets: h.resets
+        }))
       }
-
-      const { id } = req.params as { id: string }
-      if (payload.userId !== id && !payload.is_admin) return reply.code(403).send({ message: 'forbidden' })
-
-      const parsed = userUpdateSchema.safeParse(req.body)
-      if (!parsed.success) return reply.code(400).send({ message: 'invalid data', errors: parsed.error.flatten() })
-
-      const targetUser = await prisma.user.findUnique({ where: { id } })
-      if (!targetUser) return reply.code(404).send({ message: 'not found' })
-
-      const wantsSensitiveChange = ['email','phone','password'].some(f => (parsed.data as any)[f] !== undefined)
-      const isAdmin = !!payload.is_admin
-      if (wantsSensitiveChange && !isAdmin) {
-        const provided = parsed.data.currentPassword
-        if (!provided) return reply.code(400).send({ message: 'current password required' })
-        if (targetUser.password !== hash(provided)) return reply.code(401).send({ message: 'invalid current password' })
-      }
-
-      const data: any = {}
-      if (parsed.data.email !== undefined) data.email = parsed.data.email
-      if (parsed.data.phone !== undefined) data.phone = parsed.data.phone?.trim() === '' ? null : parsed.data.phone
-      if (parsed.data.password !== undefined) data.password = hash(parsed.data.password)
-
-      try {
-        const updated = await prisma.user.update({ where: { id }, data })
-        return { ...updated, password: undefined }
-      } catch (e: any) {
-        if (e?.code === 'P2002') {
-          return reply.code(409).send({ message: 'unique constraint', target: (e.meta as any)?.target })
-        }
-        return reply.code(404).send({ message: 'not found' })
-      }
-    } catch (e) {
-      console.error('update user error', (e as any)?.message)
-      return reply.code(500).send({ message: 'internal error' })
+    } catch (e: any) {
+      console.error('Get me error:', e)
+      return reply.code(401).send({ message: 'Invalid token' })
     }
   })
 }

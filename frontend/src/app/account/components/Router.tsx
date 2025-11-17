@@ -9,8 +9,7 @@ import ItemsCreate from '@/app/account/components/ItemsCreate'
 import Details from '@/app/account/components/Details'
 import Characters from '@/app/account/components/Characters'
 
-import { User } from '@/types/user'
-import { Character } from '@/types/character'
+import { User, Hero } from '@/types/user'
 import { Hench } from '@/types/hench'
 import { Item } from '@/types/item'
 
@@ -21,8 +20,8 @@ interface RouterProps {
 export default function Router({ user }: RouterProps) {
   const [create, setCreate] = useState(false)
 
-  const [items, setItems] = useState<Character | undefined>(undefined)
-  const [petsList, setPetsList] = useState<Character | undefined>(undefined)
+  const [items, setItems] = useState<Hero | undefined>(undefined)
+  const [petsList, setPetsList] = useState<Hero | undefined>(undefined)
 
   const [itemsList, setItemsList] = useState<Item[]>([])
   const [henchList, setHenchList] = useState<Hench[]>([])
@@ -51,10 +50,10 @@ export default function Router({ user }: RouterProps) {
     userActionRef.current = false
   }, [create])
 
-  return !user.characters?.length || create
+  return !user.heroes?.length || create
     ? <CharactersCreate user={user} create={create} setCreate={handleSetCreate} setHenchList={setHenchList} setHenchListDisplay={setHenchListDisplay} setPetsList={setPetsList} />
     : henchList.length > 0 && henchListDisplay
-      ? <HenchCreate user={user} character={petsList} henches={henchList} setPetsList={setPetsList} setHenchListDisplay={setHenchListDisplay} isFirstTime={!petsList?.pets?.length} />
+      ? <HenchCreate user={user} character={petsList} henches={henchList} setPetsList={setPetsList} setHenchListDisplay={setHenchListDisplay} isFirstTime={true} />
       : petsList != undefined
         ? <HenchManage character={petsList} henches={henchList} setPetsList={setPetsList} setHenchList={setHenchList} setHenchListDisplay={setHenchListDisplay} />
         : itemsList.length > 0

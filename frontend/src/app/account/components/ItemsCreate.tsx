@@ -4,11 +4,11 @@ import { useRouter } from 'next/navigation'
 import Store from '@/app/account/components/items/Store'
 
 import { Item } from '@/types/item'
-import { Character } from '@/types/character'
+import { Hero } from '@/types/user'
 
 interface ItemCreateProps {
   items: Item[]
-  setItems: (value: Character | undefined) => void
+  setItems: (value: Hero | undefined) => void
   setItemsList: (value: Item[]) => void
 }
 
