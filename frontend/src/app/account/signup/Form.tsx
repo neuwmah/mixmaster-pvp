@@ -51,9 +51,9 @@ export default function Form() {
 
   return (
     <form onSubmit={handleSignup} className={`form flex flex-col items-center w-full mt-12 max-w-[320px] duration-[.25s] ${sending && 'pointer-events-none opacity-[.7]'}`}>
-      <div className="fields w-full grid gap-[1px] grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(1,1fr)]">
+      <div className="fields w-full grid grid-cols-[repeat(1,1fr)] sm:grid-cols-[repeat(1,1fr)]">
         <input
-          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem]"
+          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0)"
           id="username"
           name="username"
           type="text"
@@ -63,7 +63,7 @@ export default function Form() {
           required
         />
         <input
-          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem]"
+          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0)"
           id="password"
           name="password"
           type="password"
@@ -73,7 +73,7 @@ export default function Form() {
           required
         />
         <input
-          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem]"
+          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0)"
           id="email"
           name="email"
           type="email"
@@ -83,7 +83,7 @@ export default function Form() {
           required
         />
         <input
-          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem]"
+          className="bg-white text-sm text-(--gray-0) outline-none h-[4.8rem] px-[1.6rem] border-b-1 border-(--gray-0)"
           id="phone"
           name="phone"
           type="text"

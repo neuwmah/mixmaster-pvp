@@ -35,7 +35,7 @@ const FAQ: React.FC = () => {
                 type="button"
                 onClick={() => setActive(i)}
               >
-                <p className="text-big font-bold">{item.title}</p>
+                <p className="text-base text-left font-bold">{item.title}</p>
                 <span className="text-big !font-normal">{active == i ? '-' : '+'}</span>
               </button>
 
