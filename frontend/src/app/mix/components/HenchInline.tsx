@@ -66,6 +66,20 @@ export default function HenchInline({ hench, isExpanded = false, onToggle }: Hen
     }
   }
 
+  const getRaceColor = (race: number) => {
+    switch (race) {
+      case 0: return 'bg-[#AD2729]'
+      case 1: return 'bg-[#121212]'
+      case 2: return 'bg-[#BE6C33]'
+      case 3: return 'bg-[#6A85B5]'
+      case 4: return 'bg-[#F13A08]'
+      case 5: return 'bg-[#23561C]'
+      case 6: return 'bg-[#A98B2D]'
+      case 7: return 'bg-[#6F6F8A]'
+      default: return 'bg-[#313131]'
+    }
+  }
+
   return (
     <div
       className={`
@@ -87,15 +101,18 @@ export default function HenchInline({ hench, isExpanded = false, onToggle }: Hen
           loading="lazy"
         />
 
-        <div className="flex items-center flex-1">
+        <div className="flex items-center flex-1 gap-4">
           <h3 className="text-sm font-semibold text-white">
             {hench.name}
           </h3>
-          <span className="text-xs font-normal text-white ml-4">
+          <span className="text-xs font-normal text-white ml-[-4px]">
             Lv. {hench.start_base_level || hench.base_level}
           </span>
           {hench.race !== null && hench.race !== undefined && (
-            <span className="text-xs font-normal text-(--gray-4) ml-4">
+            <span className={`
+              text-xs font-semibold text-(--gray-4) px-2.5 py-1 rounded
+              ${getRaceColor(hench.race)}
+            `}>
               {getRaceName(hench.race)}
             </span>
           )}
@@ -145,10 +162,10 @@ export default function HenchInline({ hench, isExpanded = false, onToggle }: Hen
                           loading="lazy"
                         />
                         <span className="text-sm font-medium">{formula.main_name}</span>
-                        <span className="text-xs text-(--gray-4)">
+                        <span className="text-xs text-(--gray-4) ml-[-4px]">
                           Lv. {formula.main_level}
                         </span>
-                        <span className="text-xs text-(--gray-4)">
+                        <span className={`text-xs text-(--gray-4) font-semibold rounded px-2.5 py-1 ${getRaceColor(formula.main_race)}`}>
                           {getRaceName(formula.main_race)}
                         </span>
                       </div>
@@ -164,10 +181,10 @@ export default function HenchInline({ hench, isExpanded = false, onToggle }: Hen
                           loading="lazy"
                         />
                         <span className="text-sm font-medium">{formula.sub_name}</span>
-                        <span className="text-xs text-(--gray-4)">
+                        <span className="text-xs text-(--gray-4) ml-[-4px]">
                           Lv. {formula.sub_level}
                         </span>
-                        <span className="text-xs text-(--gray-4)">
+                        <span className={`text-xs text-(--gray-4) font-semibold rounded px-2.5 py-1 ${getRaceColor(formula.sub_race)}`}>
                           {getRaceName(formula.sub_race)}
                         </span>
                       </div>
