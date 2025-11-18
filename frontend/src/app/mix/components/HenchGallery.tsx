@@ -185,7 +185,7 @@ export default function HenchGallery({ henches }: HenchGalleryProps) {
 
       {/* Henches List */}
       {Array.isArray(displayedHenches) && displayedHenches.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-1 gap-[1px] w-full max-w-[700px] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-1 gap-[4px] w-full max-w-[700px] mx-auto">
           {displayedHenches.map((h, i) => {
             const isLast = i === displayedHenches.length - 1
             const uniqueId = `${h.type}-${i}`

@@ -14,4 +14,6 @@ export interface Hench {
   pets?: Pet[]
   race?: number | null
   start_base_level?: number | null
+  mix_restrict?: number | null
+  is_droppable?: boolean
 }

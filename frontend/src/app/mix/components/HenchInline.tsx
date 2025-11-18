@@ -90,33 +90,42 @@ export default function HenchInline({ hench, isExpanded = false, onToggle }: Hen
       onClick={!isExpanded ? toggleExpanded : undefined}
     >
       {/* Main inline content */}
-      <div className="flex items-center min-h-[4.8rem] px-8 cursor-pointer bg-(--gray-0) duration-[.25s] hover:bg-(--gray-a)" onClick={toggleExpanded}>
+      <div
+        className="flex items-center min-h-[4.8rem] px-8 cursor-pointer bg-(--gray-0) duration-[.25s] hover:bg-(--gray-a) gap-6 whitespace-nowrap"
+        onClick={toggleExpanded}
+      >
         <Image
           unoptimized
           width={40}
           height={40}
           src={getIcon(hench.type ?? '')}
           alt={hench.name}
-          className="object-contain w-[3.2rem] h-[3.2rem] mr-4 rounded-full"
+          className="object-contain w-[3.2rem] h-[3.2rem] rounded-full"
           loading="lazy"
         />
 
-        <div className="flex items-center flex-1 gap-4">
-          <h3 className="text-sm font-semibold text-white">
-            {hench.name}
-          </h3>
-          <span className="text-xs font-normal text-white ml-[-4px]">
-            Lv. {hench.start_base_level || hench.base_level}
+        <h3 className="text-sm font-semibold text-white">
+          {hench.name}
+        </h3>
+
+        <span className="text-xs font-normal text-white ml-[-8px]">
+          Lv. {hench.start_base_level || hench.base_level}
+        </span>
+        
+        {hench.race !== null && hench.race !== undefined && (
+          <span className={`
+            text-xs font-semibold text-(--gray-4) px-2.5 py-1 rounded
+            ${getRaceColor(hench.race)}
+          `}>
+            {getRaceName(hench.race)}
           </span>
-          {hench.race !== null && hench.race !== undefined && (
-            <span className={`
-              text-xs font-semibold text-(--gray-4) px-2.5 py-1 rounded
-              ${getRaceColor(hench.race)}
-            `}>
-              {getRaceName(hench.race)}
-            </span>
-          )}
-        </div>
+        )}
+
+        {hench.is_droppable && (
+          <span className="text-xs font-semibold px-2.5 py-1 border-dashed border-1 border-(--gray-3) text-white">
+            Droppable
+          </span>
+        )}
       </div>
 
       {/* Expanded content */}
@@ -149,9 +158,9 @@ export default function HenchInline({ hench, isExpanded = false, onToggle }: Hen
                   {formulas.map((formula, index) => (
                     <div 
                       key={index}
-                      className="flex flex-wrap items-center justify-center gap-4 text-sm text-white bg-(--gray-a) p-4 rounded"
+                      className="flex flex-wrap items-center justify-center gap-6 text-sm text-white bg-(--gray-a) p-4 rounded"
                     >
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-6">
                         <Image
                           unoptimized
                           width={32}
@@ -162,7 +171,7 @@ export default function HenchInline({ hench, isExpanded = false, onToggle }: Hen
                           loading="lazy"
                         />
                         <span className="text-sm font-medium">{formula.main_name}</span>
-                        <span className="text-xs text-(--gray-4) ml-[-4px]">
+                        <span className="text-xs text-(--gray-4) ml-[-8px]">
                           Lv. {formula.main_level}
                         </span>
                         <span className={`text-xs text-(--gray-4) font-semibold rounded px-2.5 py-1 ${getRaceColor(formula.main_race)}`}>
@@ -170,7 +179,7 @@ export default function HenchInline({ hench, isExpanded = false, onToggle }: Hen
                         </span>
                       </div>
                       <span className="text-(--primary-orange-1) font-bold">+</span>
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-6">
                         <Image
                           unoptimized
                           width={32}
@@ -181,7 +190,7 @@ export default function HenchInline({ hench, isExpanded = false, onToggle }: Hen
                           loading="lazy"
                         />
                         <span className="text-sm font-medium">{formula.sub_name}</span>
-                        <span className="text-xs text-(--gray-4) ml-[-4px]">
+                        <span className="text-xs text-(--gray-4) ml-[-8px]">
                           Lv. {formula.sub_level}
                         </span>
                         <span className={`text-xs text-(--gray-4) font-semibold rounded px-2.5 py-1 ${getRaceColor(formula.sub_race)}`}>

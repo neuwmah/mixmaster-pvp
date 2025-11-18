@@ -7,7 +7,7 @@ const Hench: React.FC = async () => {
   const henches = await getHenchs();
 
   return (
-    <section className="section-hench section">
+    <section className="section-hench section !mt-12">
       <div className="container flex flex-col items-center">
         <HenchGallery henches={henches} />
       </div>
