@@ -1,0 +1,270 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../_generated/mysql/web"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_WEB_URL")
+}
+
+model mall_item {
+  id                     Int     @id @default(autoincrement())
+  name                   String? @db.VarChar(70)
+  desc                   String? @db.VarChar(1000)
+  qty                    Int?
+  id_item                Int?
+  serverID               String? @db.VarChar(20)
+  price                  Int?
+  categ                  Int?
+  img                    String? @db.VarChar(70)
+  GM_recomend            Int?
+  promotion              String? @db.VarChar(32)
+  real_money             Int?    @default(0) @db.TinyInt
+  callback               String? @db.Text
+  is_combo               Int?    @default(0) @db.TinyInt
+  disable_another_combos Int?    @default(-1)
+
+  @@map("mall_item")
+}
+
+model GameTail {
+  SubType      GameTail_SubType @default(ITEM)
+  GiftPlayerID String           @default("") @db.VarChar(20)
+  GiftIdIdx    Int              @default(0) @db.UnsignedInt
+  IdIdx        Int              @default(0) @db.UnsignedInt
+  nKey         Int              @id @default(autoincrement())
+  ItemIdx      Int              @default(0) @db.UnsignedSmallInt
+  Opt          Int              @default(0) @db.UnsignedTinyInt
+  OptLevel     Int              @default(0) @db.UnsignedTinyInt
+  Qty          Int              @default(0) @db.UnsignedSmallInt
+  ServerID     Int              @default(21) @db.UnsignedTinyInt
+  Flag         GameTail_Flag    @default(NEW)
+  RegDate      DateTime         @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  ReceiptDate  DateTime         @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  CartID       String           @default("") @db.VarChar(25)
+  uKey         Int              @default(0) @db.UnsignedTinyInt
+
+  @@index([CartID], map: "CartID")
+  @@index([IdIdx, ServerID, GiftPlayerID, ItemIdx], map: "game_idx")
+}
+
+model GameTail_Event {
+  num         Int                       @default(0)
+  SubType     GameTail_Event_SubType    @default(ITEM)
+  PlayerID    String                    @default("") @db.VarChar(16)
+  IdIdx       Int                       @default(0) @db.UnsignedInt
+  nKey        Int                       @id @default(autoincrement())
+  ObjectIdx   Int                       @default(0) @db.UnsignedSmallInt
+  Qty         Int                       @default(0) @db.UnsignedSmallInt
+  ServerFlag  GameTail_Event_ServerFlag @default(define)
+  ServerID    Int                       @default(0) @db.UnsignedTinyInt
+  Flag        GameTail_Event_Flag       @default(NEW)
+  RegDate     DateTime                  @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  ReceiptDate DateTime                  @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  Info        String                    @default("") @db.VarChar(255)
+  GroupTxt    String                    @default("") @db.VarChar(255)
+  StartDate   DateTime                  @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+  EndDate     DateTime                  @default(dbgenerated("'0001-01-01 01:01:01'")) @db.DateTime(0)
+
+  @@index([IdIdx], map: "IdIdx")
+  @@index([PlayerID], map: "PlayerID")
+  @@index([GroupTxt], map: "index_group")
+}
+
+model ItemEvent {
+  nKey        Int                  @id @default(autoincrement())
+  SubType     ItemEvent_SubType    @default(ITEM)
+  PlayerID    String               @default("") @db.VarChar(15)
+  IdIdx       Int                  @default(0)
+  ObjectIdx   Int                  @default(0) @db.SmallInt
+  Qty         Int                  @default(0) @db.SmallInt
+  ServerFlag  ItemEvent_ServerFlag @default(define)
+  ServerID    Int                  @default(0) @db.TinyInt
+  Flag        ItemEvent_Flag       @default(NEW)
+  RegDate     DateTime             @default(dbgenerated("'0000-00-00 00:00:00'")) @db.DateTime(0)
+  ReceiptDate DateTime             @default(dbgenerated("'0000-00-00 00:00:00'")) @db.DateTime(0)
+  Info        String               @default("") @db.VarChar(255)
+  GroupTxt    String               @default("") @db.VarChar(10)
+  StartDate   DateTime             @default(dbgenerated("'0000-00-00 00:00:00'")) @db.DateTime(0)
+  EndDate     DateTime             @default(dbgenerated("'0000-00-00 00:00:00'")) @db.DateTime(0)
+
+  @@index([IdIdx, PlayerID], map: "index_id")
+  @@index([IdIdx], map: "index_ididx")
+}
+
+model User_Count {
+  SEQ          Int       @id @default(autoincrement()) @db.UnsignedInt
+  LGS          Int?
+  GMS          Int?
+  zone1        Int?
+  zone2        Int?
+  Server_total Int?
+  checkTime    DateTime? @db.DateTime(0)
+
+  @@index([checkTime], map: "checkTime")
+}
+
+model avis {
+  id          Int     @id
+  note        Int
+  commentaire String? @db.VarChar(255)
+  date        String? @db.VarChar(255)
+  accept      Int
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model code_promo {
+  code      String? @db.VarChar(255)
+  pts_bonus String? @db.VarChar(255)
+  id_use    String? @db.VarChar(255)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model forgetPassword {
+  account String? @db.VarChar(255)
+  token   String? @db.VarChar(255)
+
+  @@ignore
+}
+
+model mall_item2 {
+  id           Int     @id
+  name         String? @db.VarChar(70)
+  desc         String? @db.VarChar(300)
+  qty          Int?
+  id_item      Int?
+  serverID     String? @db.VarChar(20)
+  price        Int?
+  categ        Int?
+  img          String? @db.VarChar(70)
+  GM_recomend  Int?
+  promotion    String? @db.VarChar(32)
+  limited      Int?
+  limitedquant Int?
+}
+
+model mall_item_block {
+  id   Int     @id @default(autoincrement())
+  name String? @db.Text
+}
+
+model mall_item_blocked_items {
+  id                 Int @id @default(autoincrement())
+  mall_item_block_id Int
+  mall_item_id       Int
+}
+
+model mall_item_combo {
+  id             Int  @id @default(autoincrement())
+  parent_mall_id Int?
+  item_idx       Int?
+  quantity       Int?
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model mobilekhan {
+  idx     Int             @id @default(autoincrement()) @db.UnsignedMediumInt
+  ididx   Int             @default(0) @db.UnsignedInt
+  userid  String          @default("") @db.VarChar(16)
+  flag    mobilekhan_flag @default(N)
+  result  String          @default("") @db.VarChar(50)
+  regdate DateTime        @default(dbgenerated("'0000-00-00 00:00:00'")) @db.DateTime(0)
+}
+
+model news {
+  id           Int     @id @default(autoincrement())
+  contenu      String? @db.VarChar(255)
+  timestamp    Int
+  title        String? @db.VarChar(255)
+  img          String? @db.VarChar(255)
+  contenu_full String? @db.VarChar(50000)
+  main_news    Int
+  category     String? @default("news") @db.VarChar(255)
+}
+
+model slider {
+  id          Int     @id @default(0)
+  titre       String? @db.VarChar(255)
+  description String? @db.VarChar(255)
+  image       String? @db.VarChar(255)
+}
+
+model support {
+  id_ticket       Int     @default(autoincrement())
+  id_user         Int?
+  isopen          Int
+  message_id      Int
+  message_by      String? @db.VarChar(255)
+  message_contain String? @db.VarChar(2000)
+  message_date    Int?
+  ticket_title    String? @db.VarChar(255)
+  name            String? @db.VarChar(255)
+
+  @@id([id_ticket, message_id])
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model unify_account {
+  id_idx      Int?
+  move_server Int? @db.TinyInt
+
+  @@index([id_idx], map: "id_idx")
+  @@ignore
+}
+
+enum GameTail_SubType {
+  TNULL
+  HENCH
+  ITEM
+}
+
+enum GameTail_Event_SubType {
+  TNULL
+  HENCH
+  ITEM
+}
+
+enum ItemEvent_SubType {
+  TNULL
+  HENCH
+  ITEM
+}
+
+enum mobilekhan_flag {
+  N
+  Y
+}
+
+enum ItemEvent_ServerFlag {
+  define
+  undefine
+}
+
+enum GameTail_Event_ServerFlag {
+  define
+  undefine
+}
+
+enum ItemEvent_Flag {
+  NEW
+  LOCK
+  SPEND
+  TIME_OVER
+}
+
+enum GameTail_Event_Flag {
+  NEW
+  LOCK
+  SPEND
+  TIME_OVER
+}
+
+enum GameTail_Flag {
+  NEW
+  LOCK
+  SPEND
+  BACK
+}
