@@ -47,7 +47,7 @@ const Carousel: React.FC<CarouselProps> = ({ changelogs, account = false }) => {
     `}>
       <Swiper
         className="swiper-static swiper-fade-4"
-        spaceBetween={1}
+        spaceBetween={4}
         slidesPerView={mobile ? 1 : 4}
         watchSlidesProgress
         modules={[Navigation, Pagination]}

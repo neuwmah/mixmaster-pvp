@@ -32,7 +32,7 @@ const Ranking: React.FC = async () => {
       <div className="container flex-col items-center relative z-[2!important]">
         
         <div className="flex w-full gap-x-[24px] gap-y-16 sm:px-[64px] flex-col sm:flex-row justify-center overflow-x-auto border-(--gray-0) border-x-1 sm:border-x-0">
-          <table className="min-w-[700px] w-full border-collapse border border-black bg-black text-left text-white text-sm whitespace-nowrap">
+          <table className="min-w-[700px] max-w-[700px] w-full border-collapse border border-black bg-black text-left text-white text-sm whitespace-nowrap">
             <thead>
               <tr>
                 <th className={`${rankImage} ${rankTop}`}>

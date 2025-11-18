@@ -24,7 +24,7 @@ const Fullbanner: React.FC = () => {
           No grind. Log in and go fight.
         </p>
 
-        <div className="flex gap-1 mt-12">
+        <div className="flex gap-[4px] mt-12">
           {_environment.current == 'staging' &&
             <Link className="button-orange" href="/download">
               Download 🎮

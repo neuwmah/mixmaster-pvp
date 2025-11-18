@@ -31,7 +31,7 @@ const HeroRank: React.FC<HeroRankProps> = ({ heroes }) => {
     <section className="section relative !z-5">
       <div className="container flex justify-center">
         <div className="w-full max-w-[700px] overflow-x-auto border-(--gray-0) border-x-1 sm:border-x-0">
-          <table className="min-w-[600px] w-full border-collapse border border-black bg-black text-left text-white text-sm whitespace-nowrap">
+          <table className="min-w-[700px] w-full border-collapse border border-black bg-black text-left text-white text-sm whitespace-nowrap">
           <thead>
             <tr>
               <th className={`${rankImage} ${rankTop}`}>
