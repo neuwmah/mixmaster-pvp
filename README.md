@@ -1,4 +1,4 @@
-# Recreational MixMaster Website
+# MixMaster PVP
 
 Recreational website for MixMaster PvP game server.
 
